@@ -72,6 +72,11 @@ namespace RestaurantChain.ViewModel
             }
         }
 
+        public LoginViewModel()
+        {
+            StartTimer(100);
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
