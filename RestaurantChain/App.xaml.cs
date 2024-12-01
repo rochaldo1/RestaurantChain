@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using RestaurantChain.Model;
+using System.Configuration;
 using System.Data;
 using System.Windows;
 
@@ -14,8 +15,8 @@ namespace RestaurantChain
         {
             App app = new App();
 
-            //LogInWindow window = new LogInWindow();
-            //app.Run(window);
+
+            app.Run();
         }
     }
 
