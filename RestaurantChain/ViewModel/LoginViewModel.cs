@@ -127,5 +127,19 @@ namespace RestaurantChain.ViewModel
             _windowTimer.Start();
             _windowTimer.Tick += Timer_Tick;
         }
+
+        public void Enter()
+        {
+            if (_logInService.TryLogIn(Login, Password))
+            {
+                OnLogInSuccess?.Invoke();
+            }
+        }
+
+        public void Cancel()
+        {
+            Login = "";
+            Password = "";
+        }
     }
 }

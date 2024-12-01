@@ -1,4 +1,5 @@
 ﻿using RestaurantChain.Model;
+using RestaurantChain.View;
 using System.Configuration;
 using System.Data;
 using System.Windows;
@@ -14,9 +15,9 @@ namespace RestaurantChain
         static void Main()
         {
             App app = new App();
-
-
-            app.Run();
+            // TODO: Инжекция репозиториев через DataManager (как только репы появятся)
+            LoginWindow window = new LoginWindow();
+            app.Run(window);
         }
     }
 
