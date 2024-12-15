@@ -1,10 +1,4 @@
-﻿using RestaurantChain.DataBase.Entity.User;
-using RestaurantChain.Model.Convertors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RestaurantChain.Model.Convertors;
 
 namespace RestaurantChain.Model.Services.LogIn
 {
@@ -29,14 +23,14 @@ namespace RestaurantChain.Model.Services.LogIn
         /// False - обратная ситуация.</returns>
         public bool TryLogIn(string login, string password)
         {
-            foreach (IUserData userData in DataManager.GetInstance().UserRepository.Read())
-            {
-                if(userData.User.Login == login && userData.User.Password == _convertor.Convert(password))
-                {
-                    DataManager.GetInstance().CurrentUser = userData;
-                    return true;
-                }
-            }
+            //foreach (IUserData userData in DataManager.GetInstance().UserRepository.Read())
+            //{
+            //    if(userData.User.Login == login && userData.User.Password == _convertor.Convert(password))
+            //    {
+            //        DataManager.GetInstance().CurrentUser = userData;
+            //        return true;
+            //    }
+            //}
             return false;
         }
     }

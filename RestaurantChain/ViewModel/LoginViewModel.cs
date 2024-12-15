@@ -141,5 +141,21 @@ namespace RestaurantChain.ViewModel
             Login = "";
             Password = "";
         }
+
+        public ICommand CancelCommand
+        {
+            get
+            {
+                return new DelegateCommand(() => Cancel());
+            }
+        }
+
+        public ICommand EnterCommand
+        {
+            get
+            {
+                return new DelegateCommand(() => Enter());
+            }
+        }
     }
 }

@@ -1,27 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RestaurantChain.Model.Users
+namespace RestaurantChain.Storage.Entities
 {
     /// <summary>
-    /// Интерфейс пользователя.
+    /// Класс пользователя.
     /// </summary>
-    public interface IUser
+    public class Users : IdentityBase
     {
         /// <summary>
         /// Логин пользователя.
         /// </summary>
-        [DisplayName("Логин")]
-        string Login { get; }
+        public string Login { get; set; }
 
         /// <summary>
         /// Пароль пользователя.
         /// </summary>
-        [DisplayName("Пароль")]
-        string Password { get; }
+        public string Password { get; set; }
     }
 }

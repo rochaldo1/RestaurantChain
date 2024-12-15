@@ -44,7 +44,7 @@
             <Label x:Name="Form__text_Login" Grid.Row="0" Grid.Column="0">Логин пользователя</Label>
             <TextBox x:Name="Form__input_Login" Grid.Row="0" Grid.Column="1" Text="{Binding Login}"></TextBox>
             <Label x:Name="Form__text_Password" Grid.Column="0" Grid.Row="1">Пароль</Label>
-            <PasswordBox x:Name="Form__input_Password" Grid.Row="1" Grid.Column="1" PasswordChanged="Form__input_Password_PasswordChanged"></PasswordBox>
+            <!--<PasswordBox x:Name="Form__input_Password" Grid.Row="1" Grid.Column="1" PasswordChanged="Form__input_Password_PasswordChanged"></PasswordBox>-->
             <Button x:Name="Form__button_SignUp" Grid.Row="2" Grid.Column="0" Command="{Binding GoToMain}">Вход</Button>
         </Grid>
 

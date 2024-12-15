@@ -1,28 +1,25 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using RestaurantChain.Model;
 using RestaurantChain.Storage;
-using RestaurantChain.View;
-using System.Configuration;
-using System.Data;
-using System.Windows;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace RestaurantChain
+namespace RestaurantChainWPF
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    public class Program
     {
         [STAThread]
-        static void Main()
+        public static void Main()
         {
             var host = Host.CreateDefaultBuilder()
             // внедряем сервисы
             .ConfigureServices((context, services) =>
             {
-                string connectionString = "server=localhost;database=restaurant_chain;uid=root;password=228420;";
+                string connectionString = "server=localhost;database=restaurant_chain;userid=postgres;password=228420;";
+                //string connectionString = "Server=127.0.0.1;Port=5432;Userid=postgres;Password=228420;Protocol=3;SSL=false;Pooling=false;MinPoolSize=1;MaxPoolSize=20;Timeout=15;SslMode=Disable;Database=restaurant_chain";
                 services.UseStorage(connectionString);
                 services.AddSingleton<App>();
                 services.AddSingleton<MainWindow>();
@@ -32,11 +29,6 @@ namespace RestaurantChain
             var app = host.Services.GetService<App>();
             // запускаем приложения
             app?.Run();
-
-            //App app = new App();
-            //LoginWindow window = new LoginWindow();
-            //app.Run(window);
         }
     }
-
 }
