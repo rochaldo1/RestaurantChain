@@ -31,6 +31,10 @@
   <ItemGroup>
     <Folder Include="Styles\" />
     <Folder Include="View\Resources\" />
+    <Folder Include="View\StreetsView\" />
+    <Folder Include="View\BanksView\" />
+    <Folder Include="View\UnitsView\" />
+    <Folder Include="View\GroupsOfDishesView\" />
   </ItemGroup>
 
 </Project>
