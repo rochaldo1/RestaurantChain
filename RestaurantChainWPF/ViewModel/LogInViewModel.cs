@@ -1,8 +1,12 @@
-﻿using System;
+﻿using RestaurantChain.Storage;
+using RestaurantChainWPF.Commands;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -13,11 +17,13 @@ namespace RestaurantChainWPF.ViewModel
     public class LogInViewModel : INotifyPropertyChanged
     {
         private string _login;
-        private string _password;
+        private SecureString _password;
         private string _keyboardLayout;
         private string _capsLockStatus;
+        private readonly IUnitOfWork _unitOfWork;
 
         private DispatcherTimer _timerForWindow = new();
+        public Action OnLogInSuccess;
 
         public string Login
         {
@@ -29,7 +35,7 @@ namespace RestaurantChainWPF.ViewModel
             }
         }
 
-        public string Password
+        public SecureString Password
         {
             get => _password;
             set
@@ -59,8 +65,11 @@ namespace RestaurantChainWPF.ViewModel
             }
         }
 
-        public LogInViewModel()
+        public LogInViewModel(IUnitOfWork unitOfWork)
         {
+            _unitOfWork = unitOfWork;
+            EnterCommand = new RelayCommand(Enter);
+            CancelCommand = new RelayCommand(Cancel);
             StartTimer(100);
         }
 
@@ -98,5 +107,20 @@ namespace RestaurantChainWPF.ViewModel
             _timerForWindow.Start();
             _timerForWindow.Tick += TimerTick;
         }
+
+        private void Cancel(object sender)
+        {
+            Login = "";
+            Password = "";
+        }
+
+        private void Enter(object sender)
+        {
+            
+        }
+
+        public ICommand EnterCommand { get; set; }
+
+        public ICommand CancelCommand { get; set; }
     }
 }

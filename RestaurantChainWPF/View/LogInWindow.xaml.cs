@@ -1,4 +1,5 @@
 ﻿using RestaurantChain.Storage;
+using RestaurantChainWPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,24 +20,14 @@ namespace RestaurantChainWPF.View
     /// Логика взаимодействия для LogInWindow.xaml
     /// </summary>
     public partial class LogInWindow : Window
-    {
-        private readonly IUnitOfWork _unitOfWork;
+    {        
         public LogInWindow(IUnitOfWork unitOfWork)
         {
-            _unitOfWork = unitOfWork;
             InitializeComponent();
+
+            DataContext = new LogInViewModel(unitOfWork);
         }
-
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
-        private void Enter_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
+        
         public void LogInSuccess()
         {
             
