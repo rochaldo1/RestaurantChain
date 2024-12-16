@@ -1,18 +1,19 @@
 ﻿using RestaurantChainWPF;
+using RestaurantChainWPF.View;
 using System.Windows;
 
 public class App : Application
 {
-    readonly MainWindow mainWindow;
+    readonly LogInWindow logInWindow;
 
     // через систему внедрения зависимостей получаем объект главного окна
-    public App(MainWindow mainWindow)
+    public App(LogInWindow logInWindow)
     {
-        this.mainWindow = mainWindow;
+        this.logInWindow = logInWindow;
     }
     protected override void OnStartup(StartupEventArgs e)
     {
-        mainWindow.Show();  // отображаем главное окно на экране
+        logInWindow.Show();  // отображаем главное окно на экране
         base.OnStartup(e);
     }
 }

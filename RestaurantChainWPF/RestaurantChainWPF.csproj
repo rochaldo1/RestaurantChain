@@ -16,4 +16,21 @@
     <ProjectReference Include="..\RestaurantChain.Storage\RestaurantChain.Storage.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="MainWindow.xaml.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Styles\" />
+    <Folder Include="View\Resources\" />
+  </ItemGroup>
+
 </Project>
