@@ -7,12 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.1.35" />
-    <PackageReference Include="Npgsql" Version="8.0.6" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\RestaurantChain.Common\RestaurantChain.Common.csproj" />
+    <ProjectReference Include="..\RestaurantChain.Storage\RestaurantChain.Storage.csproj" />
   </ItemGroup>
 
 </Project>

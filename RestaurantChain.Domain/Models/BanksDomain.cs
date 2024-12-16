@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RestaurantChain.Storage.Entities
+namespace RestaurantChain.Domain.Models
 {
     /// <summary>
     /// Класс справочника банков.
     /// </summary>
-    public sealed class Banks : IdentityBase
+    public sealed class BanksDomain : IdentityBaseDomain
     {
         /// <summary>
         /// Название банка.

@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Npgsql;
+using RestaurantChain.Common.Helpers;
 using RestaurantChain.Storage.Entities;
 using RestaurantChain.Storage.Repositories.Contracts;
 using System;
@@ -35,7 +36,26 @@ namespace RestaurantChain.Storage.Repositories
 
         public int Create(Users entity)
         {
-            throw new NotImplementedException();
+            var query = "insert into users(login, password) values(@login, @password)";
+            var hashPassword = PasswordHelper.GetPasswordHash(entity.Password);
+            var id = Connection.ExecuteScalar<int>(query, new
+            {
+                Login = entity.Login,
+                Password = hashPassword
+            });
+            return id;
+        }
+
+        public Users Get(string login, string password)
+        {
+            var query = "select * from users where login = @login and password = @password";
+            var hashPassword = PasswordHelper.GetPasswordHash(password);
+            var user = Connection.QueryFirstOrDefault<Users>(query, new
+            {
+                Login = login,
+                Password = hashPassword
+            });
+            return user;
         }
     }
 }
