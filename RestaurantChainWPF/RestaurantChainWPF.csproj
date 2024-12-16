@@ -13,13 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RestaurantChain.Domain.Services\RestaurantChain.Domain.Services.csproj" />
+    <ProjectReference Include="..\RestaurantChain.Domain\RestaurantChain.Domain.csproj" />
     <ProjectReference Include="..\RestaurantChain.Storage\RestaurantChain.Storage.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="MainWindow.xaml.cs">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>

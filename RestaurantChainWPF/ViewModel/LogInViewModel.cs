@@ -1,4 +1,5 @@
-﻿using RestaurantChain.Storage;
+﻿using RestaurantChain.Domain.Services;
+using RestaurantChain.Storage;
 using RestaurantChainWPF.Commands;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Security;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 
@@ -20,10 +22,12 @@ namespace RestaurantChainWPF.ViewModel
         private SecureString _password;
         private string _keyboardLayout;
         private string _capsLockStatus;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUsersService _userService;
 
         private DispatcherTimer _timerForWindow = new();
         public Action OnLogInSuccess;
+
+        public SecureString SecurePassword { private get; set; }
 
         public string Login
         {
@@ -45,7 +49,7 @@ namespace RestaurantChainWPF.ViewModel
             }
         }
 
-        public string KeyboardLayout
+        public string KeyboardLayoutText
         {
             get => _keyboardLayout;
             set
@@ -55,7 +59,7 @@ namespace RestaurantChainWPF.ViewModel
             }
         }
 
-        public string CapsLockStatus
+        public string CapsLockStatusText
         {
             get => _capsLockStatus;
             set
@@ -65,11 +69,10 @@ namespace RestaurantChainWPF.ViewModel
             }
         }
 
-        public LogInViewModel(IUnitOfWork unitOfWork)
+        public LogInViewModel(IUsersService userService)
         {
-            _unitOfWork = unitOfWork;
+            _userService = userService;
             EnterCommand = new RelayCommand(Enter);
-            CancelCommand = new RelayCommand(Cancel);
             StartTimer(100);
         }
 
@@ -93,11 +96,11 @@ namespace RestaurantChainWPF.ViewModel
         private void TimerTick(object sender, EventArgs e)
         {
             if (Console.CapsLock)
-                CapsLockStatus = "Клавиша CapsLock нажата";
+                CapsLockStatusText = "Клавиша CapsLock нажата";
             else
-                CapsLockStatus = "";
+                CapsLockStatusText = "";
 
-            KeyboardLayout = "Язык ввода " + ParseLanguage(InputLanguageManager.Current.CurrentInputLanguage.DisplayName);
+            KeyboardLayoutText = "Язык ввода " + ParseLanguage(InputLanguageManager.Current.CurrentInputLanguage.DisplayName);
         }
 
         private void StartTimer(long interval)
@@ -107,20 +110,18 @@ namespace RestaurantChainWPF.ViewModel
             _timerForWindow.Start();
             _timerForWindow.Tick += TimerTick;
         }
-
-        private void Cancel(object sender)
-        {
-            Login = "";
-            Password = "";
-        }
-
         private void Enter(object sender)
         {
-            
+            string password = new System.Net.NetworkCredential(string.Empty, _password).Password;
+            var user = _userService.Get(Login, password);
+            if (user is null)
+            {
+                MessageBox.Show("Неправильный логин или пароль!", "Ошибка авторизации", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            OnLogInSuccess?.Invoke();
         }
 
         public ICommand EnterCommand { get; set; }
-
-        public ICommand CancelCommand { get; set; }
     }
 }

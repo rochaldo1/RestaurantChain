@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantChainWPF", "Resta
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantChain.Common", "RestaurantChain.Common\RestaurantChain.Common.csproj", "{8167C009-C069-454E-92D1-237C1DE43B15}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantChain.Domain", "RestaurantChain.Domain\RestaurantChain.Domain.csproj", "{58C93310-2291-47D2-BA41-3A34CE27A87D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantChain.Domain.Services", "RestaurantChain.Domain.Services\RestaurantChain.Domain.Services.csproj", "{275A128F-22A2-4531-A98D-24CB7A760AAD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{8167C009-C069-454E-92D1-237C1DE43B15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8167C009-C069-454E-92D1-237C1DE43B15}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8167C009-C069-454E-92D1-237C1DE43B15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58C93310-2291-47D2-BA41-3A34CE27A87D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58C93310-2291-47D2-BA41-3A34CE27A87D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58C93310-2291-47D2-BA41-3A34CE27A87D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58C93310-2291-47D2-BA41-3A34CE27A87D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{275A128F-22A2-4531-A98D-24CB7A760AAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{275A128F-22A2-4531-A98D-24CB7A760AAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{275A128F-22A2-4531-A98D-24CB7A760AAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{275A128F-22A2-4531-A98D-24CB7A760AAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
