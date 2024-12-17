@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\RestaurantChain.Storage\RestaurantChain.Storage.csproj" />
-  </ItemGroup>
-
 </Project>
