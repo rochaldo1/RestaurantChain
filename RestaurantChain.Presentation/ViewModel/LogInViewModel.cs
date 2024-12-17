@@ -12,7 +12,7 @@ using RestaurantChain.Presentation.Classes;
 
 namespace RestaurantChain.Presentation.ViewModel
 {
-    public class LogInViewModel : INotifyPropertyChanged
+    public class LogInViewModel : ViewModelBase, INotifyPropertyChanged
     {
         private string _login;
         private SecureString _password;
@@ -83,14 +83,6 @@ namespace RestaurantChain.Presentation.ViewModel
             StartTimer(100);
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
-
         private string ParseLanguage(string language)
         {
             int startIndex = language.IndexOf('(');
@@ -113,7 +105,7 @@ namespace RestaurantChain.Presentation.ViewModel
         private void StartTimer(long interval)
         {
             _timerForWindow.Interval = new TimeSpan(interval);
-            // TODO: добавить смену версии из assembly
+            //textBlockVersion.Text = "Версия" + assembly.GetName().Version.ToString();
             _timerForWindow.Start();
             _timerForWindow.Tick += TimerTick;
         }

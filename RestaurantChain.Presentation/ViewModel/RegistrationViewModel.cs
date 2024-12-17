@@ -16,7 +16,7 @@ using RestaurantChain.Domain.Models;
 
 namespace RestaurantChain.Presentation.ViewModel
 {
-    public class RegistrationViewModel : INotifyPropertyChanged
+    public class RegistrationViewModel : ViewModelBase, INotifyPropertyChanged
     {
         private string _login;
         private SecureString _password;
@@ -85,14 +85,6 @@ namespace RestaurantChain.Presentation.ViewModel
             _userService = userService;
             EnterCommand = new RelayCommand(Enter);
             StartTimer(100);
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
 
         private string ParseLanguage(string language)
