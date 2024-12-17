@@ -9,6 +9,7 @@ using System.Windows.Threading;
 
 using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.Classes;
+using System.Reflection;
 
 namespace RestaurantChain.Presentation.ViewModel
 {
@@ -105,7 +106,6 @@ namespace RestaurantChain.Presentation.ViewModel
         private void StartTimer(long interval)
         {
             _timerForWindow.Interval = new TimeSpan(interval);
-            //textBlockVersion.Text = "Версия" + assembly.GetName().Version.ToString();
             _timerForWindow.Start();
             _timerForWindow.Tick += TimerTick;
         }

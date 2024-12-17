@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 
 using RestaurantChain.DomainServices.Contracts;
+using System.Reflection;
 
 namespace RestaurantChain.Presentation.View
 {
@@ -31,6 +32,11 @@ namespace RestaurantChain.Presentation.View
             MainWindow window = new(_usersService);
             window.Show();
             Close();
+        }
+
+        private void WindowLoaded(object sender, RoutedEventArgs e)
+        {
+            TextBoxVersion.Text = "Версия " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
 
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
