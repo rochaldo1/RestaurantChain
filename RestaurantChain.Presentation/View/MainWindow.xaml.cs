@@ -27,5 +27,40 @@ namespace RestaurantChain.Presentation.View
             ChangePasswordWindow changePasswordWindow = new(_usersService);
             changePasswordWindow.ShowDialog();
         }
+
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Streets_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void GroupsOfDishes_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Banks_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Catalogues_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Units_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Content_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

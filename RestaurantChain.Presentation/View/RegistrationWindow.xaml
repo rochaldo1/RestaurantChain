@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:RestaurantChain.Presentation.View"
         mc:Ignorable="d"
         Title="Регистрация" Height="320" Width="400"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.3*"/>

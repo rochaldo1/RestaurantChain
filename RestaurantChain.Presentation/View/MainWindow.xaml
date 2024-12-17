@@ -5,15 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RestaurantChain.Presentation.View"
         mc:Ignorable="d"
-        Title="Сеть ресторанов" Height="450" Width="800">
+        Title="Сеть ресторанов" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Menu Height="25" VerticalAlignment="Top">
-            <MenuItem Header="Разное" x:Name="File">
-                <MenuItem Header="Изменить пароль" x:Name="ChangePassword" Click="ChangePassword_Click"/>
+            <MenuItem Header="Разное" x:Name="File" FontFamily="Segoe UI Variable Display Light" FontSize="16">
+                <MenuItem Header="Изменить пароль" x:Name="ChangePassword" Click="ChangePassword_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
+                <MenuItem Header="Настройка" x:Name="Settings" Click="Settings_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
             </MenuItem>
-            <MenuItem Header="Справка" x:Name="Help">
-                <MenuItem Header="Содержание" x:Name="Content"/>
-                <MenuItem Header="О программе" x:Name="AboutProgram" Click="AboutProgram_Click"/>
+            <MenuItem Header="Справочники" x:Name="Catalogues" Click="Catalogues_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16">
+                <MenuItem Header="Банки" x:Name="Banks" Click="Banks_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
+                <MenuItem Header="Группы блюд" x:Name="GroupsOfDishes" Click="GroupsOfDishes_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
+                <MenuItem Header="Единицы измерения" x:Name="Units" Click="Units_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
+                <MenuItem Header="Улицы" x:Name="Streets" Click="Streets_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
+            </MenuItem>
+            <MenuItem Header="Справка" x:Name="Help" FontFamily="Segoe UI Variable Display Light" FontSize="16">
+                <MenuItem Header="Содержание" x:Name="Content" Click="Content_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
+                <MenuItem Header="О программе" x:Name="AboutProgram" Click="AboutProgram_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
             </MenuItem>
         </Menu>
     </Grid>
