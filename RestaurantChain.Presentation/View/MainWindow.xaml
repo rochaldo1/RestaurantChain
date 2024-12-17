@@ -7,6 +7,17 @@
         mc:Ignorable="d"
         Title="Сеть ресторанов" Height="450" Width="800">
     <Grid>
-        
+        <Menu Height="25" VerticalAlignment="Top">
+            <MenuItem Header="File">
+                <Button Content="Exit" />
+            </MenuItem>
+            <MenuItem Header="Настройки" x:Name="Settings">
+                <Button Content="Изменить пароль" x:Name="ChangePassword" Click="ChangePassword_Click"/>
+            </MenuItem>
+            <MenuItem Header="Справка" x:Name="Help">
+                <Button Content="Содержание" x:Name="Content"/>
+                <Button Content="О программе" x:Name="AboutProgram" Click="AboutProgram_Click"/>
+            </MenuItem>
+        </Menu>
     </Grid>
 </Window>

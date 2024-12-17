@@ -13,10 +13,31 @@ internal sealed class UsersService : IUsersService
         _unitOfWork = unitOfWork;
     }
 
+    public bool ChangePassword(Users user)
+    {
+        var userExist = _unitOfWork.UsersRepository.Get(user.Id);
+        if (userExist == null)
+        {
+            return false;
+        }
+        _unitOfWork.UsersRepository.Update(user);
+        return true;
+    }
+
     public Users Get(string login, string password)
     {
         var user = _unitOfWork.UsersRepository.Get(login, password);
 
         return user;
+    }
+
+    public int Registration(Users user)
+    {
+        var userExist = _unitOfWork.UsersRepository.Get(user.Login);
+        if (userExist != null)
+        {
+            return 0;
+        }
+        return _unitOfWork.UsersRepository.Create(user);
     }
 }

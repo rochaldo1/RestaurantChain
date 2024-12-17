@@ -11,9 +11,29 @@
 
   <ItemGroup>
     <Compile Remove="Styles\**" />
+    <Compile Remove="View\BanksView\**" />
+    <Compile Remove="View\GroupsOfDishesView\**" />
+    <Compile Remove="View\Resources\**" />
+    <Compile Remove="View\StreetsView\**" />
+    <Compile Remove="View\UnitsView\**" />
     <EmbeddedResource Remove="Styles\**" />
+    <EmbeddedResource Remove="View\BanksView\**" />
+    <EmbeddedResource Remove="View\GroupsOfDishesView\**" />
+    <EmbeddedResource Remove="View\Resources\**" />
+    <EmbeddedResource Remove="View\StreetsView\**" />
+    <EmbeddedResource Remove="View\UnitsView\**" />
     <None Remove="Styles\**" />
+    <None Remove="View\BanksView\**" />
+    <None Remove="View\GroupsOfDishesView\**" />
+    <None Remove="View\Resources\**" />
+    <None Remove="View\StreetsView\**" />
+    <None Remove="View\UnitsView\**" />
     <Page Remove="Styles\**" />
+    <Page Remove="View\BanksView\**" />
+    <Page Remove="View\GroupsOfDishesView\**" />
+    <Page Remove="View\Resources\**" />
+    <Page Remove="View\StreetsView\**" />
+    <Page Remove="View\UnitsView\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,14 +50,6 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="View\Resources\" />
-    <Folder Include="View\StreetsView\" />
-    <Folder Include="View\BanksView\" />
-    <Folder Include="View\UnitsView\" />
-    <Folder Include="View\GroupsOfDishesView\" />
   </ItemGroup>
 
 </Project>

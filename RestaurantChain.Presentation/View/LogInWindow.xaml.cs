@@ -11,10 +11,13 @@ namespace RestaurantChain.Presentation.View
     /// Логика взаимодействия для LogInWindow.xaml
     /// </summary>
     public partial class LogInWindow : Window
-    {        
+    {
+        private readonly IUsersService _usersService;
+
         public LogInWindow(IUsersService usersService)
         {
             InitializeComponent();
+            _usersService = usersService;
 
             DataContext = new LogInViewModel(usersService);
             if (DataContext is LogInViewModel loginViewModel)
@@ -25,7 +28,7 @@ namespace RestaurantChain.Presentation.View
         
         public void LogInSuccess()
         {
-            MainWindow window = new();
+            MainWindow window = new(_usersService);
             window.Show();
             Close();
         }
@@ -42,6 +45,13 @@ namespace RestaurantChain.Presentation.View
         {
             Login.Text = "";
             Password.Password = "";
+        }
+
+        private void Registration_Click(object sender, RoutedEventArgs e)
+        {
+            RegistrationWindow registrationWindow = new(_usersService);
+            registrationWindow.Owner = this;
+            registrationWindow.ShowDialog();
         }
     }
 }

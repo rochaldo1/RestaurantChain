@@ -8,6 +8,7 @@ using System.Windows.Input;
 using System.Windows.Threading;
 
 using RestaurantChain.DomainServices.Contracts;
+using RestaurantChain.Presentation.Classes;
 
 namespace RestaurantChain.Presentation.ViewModel
 {
@@ -15,6 +16,7 @@ namespace RestaurantChain.Presentation.ViewModel
     {
         private string _login;
         private SecureString _password;
+        private SecureString _verificationPassword;
         private string _keyboardLayout;
         private string _capsLockStatus;
         private readonly IUsersService _userService;
@@ -41,6 +43,16 @@ namespace RestaurantChain.Presentation.ViewModel
             {
                 _password = value;
                 OnPropertyChanged("Password");
+            }
+        }
+
+        public SecureString VerificationPassword
+        {
+            get => _verificationPassword;
+            set
+            {
+                _verificationPassword = value;
+                OnPropertyChanged("VerificationPassword");
             }
         }
 
@@ -108,12 +120,26 @@ namespace RestaurantChain.Presentation.ViewModel
         private void Enter(object sender)
         {
             string password = new System.Net.NetworkCredential(string.Empty, _password).Password;
+
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                MessageBox.Show("Введите пароль!", "Ошибка авторизации", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(Login))
+            {
+                MessageBox.Show("Введите логин!", "Ошибка авторизации", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             var user = _userService.Get(Login, password);
             if (user is null)
             {
                 MessageBox.Show("Неправильный логин или пароль!", "Ошибка авторизации", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            CurrentState.CurrentUser = user;
             OnLogInSuccess?.Invoke();
         }
 

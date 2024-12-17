@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using RestaurantChain.DomainServices.Contracts;
+using System.Windows;
 
 namespace RestaurantChain.Presentation.View
 {
@@ -7,9 +8,24 @@ namespace RestaurantChain.Presentation.View
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private readonly IUsersService _usersService;
+
+        public MainWindow(IUsersService usersService)
         {
+            _usersService = usersService;
             InitializeComponent();
+        }
+
+        private void AboutProgram_Click(object sender, RoutedEventArgs e)
+        {
+            AboutProgramWindow aboutProgramWindow = new();
+            aboutProgramWindow.ShowDialog();
+        }
+
+        private void ChangePassword_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePasswordWindow changePasswordWindow = new(_usersService);
+            changePasswordWindow.ShowDialog();
         }
     }
 }

@@ -1,46 +1,52 @@
 ﻿using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.Commands;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
-using System.Windows;
 using System.Windows.Threading;
+using System.Windows;
 using System.Text.RegularExpressions;
-using RestaurantChain.Presentation.Classes;
+using RestaurantChain.Domain.Models;
 
 namespace RestaurantChain.Presentation.ViewModel
 {
-    public class ChangePasswordViewModel : INotifyPropertyChanged
+    public class RegistrationViewModel : INotifyPropertyChanged
     {
-        private SecureString _newPassword;
-        private SecureString _oldPassword;
+        private string _login;
+        private SecureString _password;
         private SecureString _verificationPassword;
         private string _keyboardLayout;
         private string _capsLockStatus;
-
-        private DispatcherTimer _timerForWindow = new();
         private readonly IUsersService _userService;
 
-        public Action OnChangePasswordSuccess;
+        private DispatcherTimer _timerForWindow = new();
+        public Action OnRegistrationSuccess;
 
-        public SecureString NewPassword
+        public SecureString SecurePassword { private get; set; }
+
+        public string Login
         {
-            get => _newPassword;
+            get => _login;
             set
             {
-                _newPassword = value;
-                OnPropertyChanged("NewPassword");
+                _login = value;
+                OnPropertyChanged("Login");
             }
         }
 
-        public SecureString OldPassword
+        public SecureString Password
         {
-            get => _oldPassword;
+            get => _password;
             set
             {
-                _oldPassword = value;
-                OnPropertyChanged("OldPassword");
+                _password = value;
+                OnPropertyChanged("Password");
             }
         }
 
@@ -74,7 +80,7 @@ namespace RestaurantChain.Presentation.ViewModel
             }
         }
 
-        public ChangePasswordViewModel(IUsersService userService)
+        public RegistrationViewModel(IUsersService userService)
         {
             _userService = userService;
             EnterCommand = new RelayCommand(Enter);
@@ -117,26 +123,18 @@ namespace RestaurantChain.Presentation.ViewModel
         }
         private void Enter(object sender)
         {
-            string oldPassword = new System.Net.NetworkCredential(string.Empty, _oldPassword).Password;
+            string password = new System.Net.NetworkCredential(string.Empty, _password).Password;
 
-            if (string.IsNullOrWhiteSpace(oldPassword))
+            if (string.IsNullOrWhiteSpace(password))
             {
-                MessageBox.Show("Введите старый пароль!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            string newPassword = new System.Net.NetworkCredential(string.Empty, _newPassword).Password;
-
-            if (string.IsNullOrWhiteSpace(newPassword))
-            {
-                MessageBox.Show("Введите новый пароль!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Введите пароль!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
             var pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{4,15}$";
             var r = new Regex(pattern);
 
-            if (!r.IsMatch(newPassword))
+            if (!r.IsMatch(password))
             {
                 MessageBox.Show("Пароль должен быть от 4 до 15 символов, содержать цифры, прописные и заглавные буквы латинского алфавита!",
                     "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -151,31 +149,29 @@ namespace RestaurantChain.Presentation.ViewModel
                 return;
             }
 
-            if (newPassword != verificationPassword)
+            if (string.IsNullOrWhiteSpace(Login))
+            {
+                MessageBox.Show("Введите логин!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if(password != verificationPassword)
             {
                 MessageBox.Show("Пароли не совпадают!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            if (newPassword == oldPassword)
-            {
-                MessageBox.Show("Старый и новый пароли совпадают!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+            var user = new Users();
+            user.Password = password;
+            user.Login = Login;
 
-            var user = _userService.Get(CurrentState.CurrentUser.Login, oldPassword);
-            if (user is null)
+            int userId = _userService.Registration(user);
+            if (userId == 0)
             {
-                MessageBox.Show("Неправильный старый пароль!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Такой пользователь уже существует!", "Ошибка регистрации", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            user.Password = newPassword;
-            if (!_userService.ChangePassword(user))
-            {
-                MessageBox.Show("ОШИБКА!", "Ошибка авторизации", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            OnChangePasswordSuccess?.Invoke();
+            OnRegistrationSuccess?.Invoke();
         }
 
         public ICommand EnterCommand { get; set; }
