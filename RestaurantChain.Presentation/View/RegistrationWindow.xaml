@@ -29,9 +29,9 @@
                 <ColumnDefinition Width="7*"/>
                 <ColumnDefinition Width="9*"/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="Login" Grid.Column="1" Grid.Row="0" Background="White" Canvas.Top="10" Text="{Binding Login}" FontSize="16" Margin="32,18,10,18" FontFamily="Segoe UI Variable Display Light"/>
-            <PasswordBox x:Name="Password" Grid.Column="1" PasswordChanged="PasswordBox_PasswordChanged" Grid.Row="1" Background="White" Canvas.Bottom="10" FontSize="16" Margin="32,18,10,18" FontFamily="Segoe UI Variable Display Light"/>
-            <PasswordBox x:Name="VerificationPassword" Grid.Column="1" PasswordChanged="PasswordBox_VerificationPasswordChanged" Grid.Row="2" Background="White" Canvas.Bottom="10" FontSize="16" Margin="32,18,10,18" FontFamily="Segoe UI Variable Display Light"/>
+            <TextBox x:Name="Login" Grid.Column="1" Grid.Row="0" Background="White" Canvas.Top="10" Text="{Binding Login}" FontSize="16" Margin="32,15,10,15" FontFamily="Segoe UI Variable Display Light"/>
+            <PasswordBox x:Name="Password" Grid.Column="1" PasswordChanged="PasswordBox_PasswordChanged" Grid.Row="1" Background="White" Canvas.Bottom="10" FontSize="16" Margin="32,15,10,15" FontFamily="Segoe UI Variable Display Light"/>
+            <PasswordBox x:Name="VerificationPassword" Grid.Column="1" PasswordChanged="PasswordBox_VerificationPasswordChanged" Grid.Row="2" Background="White" Canvas.Bottom="10" FontSize="16" Margin="32,15,10,15" FontFamily="Segoe UI Variable Display Light"/>
             <TextBlock Grid.Column="0" FontSize="16" VerticalAlignment="Center" Margin="10,0,10,0" FontFamily="Segoe UI Variable Display Light" Height="21"><Run Language="ru-ru" Text="Логин"/></TextBlock>
             <TextBlock Grid.Column="0" Grid.Row="1" FontSize="16" VerticalAlignment="Center" Margin="10,0,10,0" FontFamily="Segoe UI Variable Display Light" Height="21"><Run Language="ru-ru" Text="Пароль"/></TextBlock>
             <TextBlock Text="Подтвердите пароль" Grid.Column="0" Grid.Row="2" FontSize="16" VerticalAlignment="Center" Margin="10,0,10,0" FontFamily="Segoe UI Variable Display Light" Height="22"/>
@@ -51,8 +51,8 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <TextBlock x:Name="Language" Grid.Column="0" Text="{Binding KeyboardLayoutText}" FontSize="14"/>
-            <TextBlock x:Name="CapsStatus" HorizontalAlignment="Right" Grid.Column="1" Text="{Binding CapsLockStatusText}" FontSize="14"/>
+            <TextBlock x:Name="Language" Grid.Column="0" Text="{Binding KeyboardLayoutText}" FontSize="14" FontFamily="Segoe UI Variable Display Light" Margin="10,0,0,0"/>
+            <TextBlock x:Name="CapsStatus" Grid.Column="1" Text="{Binding CapsLockStatusText}" FontSize="14" FontFamily="Segoe UI Variable Display Light" Width="0" HorizontalAlignment="Right" Margin="0,0,10,0"/>
         </Grid>
     </Grid>
 </Window>

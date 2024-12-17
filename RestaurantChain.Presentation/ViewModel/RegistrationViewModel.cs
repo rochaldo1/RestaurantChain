@@ -117,7 +117,6 @@ namespace RestaurantChain.Presentation.ViewModel
         private void StartTimer(long interval)
         {
             _timerForWindow.Interval = new TimeSpan(interval);
-            // TODO: добавить смену версии из assembly
             _timerForWindow.Start();
             _timerForWindow.Tick += TimerTick;
         }
