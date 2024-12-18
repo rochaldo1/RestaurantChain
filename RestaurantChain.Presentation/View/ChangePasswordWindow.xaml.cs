@@ -34,7 +34,7 @@ namespace RestaurantChain.Presentation.View
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-
+            Close();
         }
 
         private void PasswordBox_NewPasswordChanged(object sender, RoutedEventArgs e)

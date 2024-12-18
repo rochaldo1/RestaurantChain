@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:RestaurantChain.Presentation.View"
         mc:Ignorable="d"
         Title="Сеть ресторанов" Height="450" Width="800"
+        Icon="C:\Users\Artur\source\repos\RestaurantChain\RestaurantChain.Presentation\Resources\main.png"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Menu Height="25" VerticalAlignment="Top">

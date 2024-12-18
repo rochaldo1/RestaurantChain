@@ -6,10 +6,15 @@
         xmlns:local="clr-namespace:RestaurantChain.Presentation.View" xmlns:viewmodel="clr-namespace:RestaurantChain.Presentation.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:LogInViewModel}"
         mc:Ignorable="d"
         Title="Вход" Height="320" Width="500"
+        Icon="C:\Users\Artur\source\repos\RestaurantChain\RestaurantChain.Presentation\Resources\login.png"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Loaded="WindowLoaded">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -31,7 +36,7 @@
         </Grid>
 
 
-        <Grid Grid.Row="1">
+        <Grid Margin="0,92,0,0" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.7*"/>
                 <ColumnDefinition/>
@@ -40,13 +45,13 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBox x:Name="Login" Grid.Column="1" Grid.Row="0" Background="White" Canvas.Top="10" Text="{Binding Login}" FontSize="16" Margin="32,10,10,10" FontFamily="Segoe UI Variable Display Light"/>
-            <PasswordBox x:Name="Password" Grid.Column="1" PasswordChanged="PasswordBox_PasswordChanged" Grid.Row="1" Background="White" Canvas.Bottom="10" FontSize="16" Margin="32,10,10,10" FontFamily="Segoe UI Variable Display Light"/>
+            <TextBox x:Name="Login" Grid.Column="1" Grid.Row="0" Background="White" Canvas.Top="10" Text="{Binding Login}" FontSize="16" Margin="32,7,10,7" FontFamily="Segoe UI Variable Display Light"/>
+            <PasswordBox x:Name="Password" Grid.Column="1" PasswordChanged="PasswordBox_PasswordChanged" Grid.Row="1" Background="White" Canvas.Bottom="10" FontSize="16" Margin="32,7,10,7" FontFamily="Segoe UI Variable Display Light"/>
             <TextBlock Text="Имя пользователя" Grid.Column="0" Grid.Row="0" FontSize="16" VerticalAlignment="Center" Margin="10,0,10,0" FontFamily="Segoe UI Variable Display Light"/>
             <TextBlock Text="Пароль" Grid.Column="0" Grid.Row="1" FontSize="16" VerticalAlignment="Center" Margin="10,0,10,0" FontFamily="Segoe UI Variable Display Light"/>
         </Grid>
 
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="1" Margin="0,92,0,0" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -56,8 +61,8 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Button x:Name="Enter" Grid.Column="0" Content="Вход" Command="{Binding EnterCommand}" FontFamily="Segoe UI Variable Display Light" FontSize="14" Margin="55,0,55,0" Height="26" VerticalAlignment="Center"/>
-            <Button x:Name="Cancel" Grid.Row="0" Grid.Column="1" Content="Отмена" FontFamily="Segoe UI Variable Display Light" Margin="55,10,55,10" FontSize="14" Click="Cancel_Click"/>
-            <Button x:Name="Registration" Grid.Row="1" Grid.Column="0" Content="Регистрация" Click="Registration_Click" FontFamily="Segoe UI Variable Display Light" FontSize="14" Margin="180,0,180,0" Height="26" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+            <Button x:Name="Cancel" Grid.Column="1" Content="Отмена" FontFamily="Segoe UI Variable Display Light" Margin="55,0,55,0" FontSize="14" Click="Cancel_Click" VerticalAlignment="Center" Height="26"/>
+            <Button x:Name="Registration" Grid.Row="1" Grid.Column="0" Content="Регистрация" Click="Registration_Click" FontFamily="Segoe UI Variable Display Light" FontSize="14" Margin="180,5,180,5" Height="26" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
         </Grid>
 
         <Grid Grid.Row="2" Margin="0,92,10,0" Grid.RowSpan="2">
