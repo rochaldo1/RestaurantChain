@@ -20,6 +20,7 @@ namespace RestaurantChain.Presentation.ViewModel.UnitsViewModel
         private readonly int? _currentUnitId;
 
         public Action OnSaveSuccess;
+        public Action OnCancel;
 
         public ICommand EnterCommand { get; set; }
 
@@ -33,10 +34,28 @@ namespace RestaurantChain.Presentation.ViewModel.UnitsViewModel
             }
         }
 
+        private bool ValidateUnit()
+        {
+            if (_currentUnitId.HasValue)
+            {
+                var unit = _unitsService.Get(_currentUnitId.Value);
+                if (unit == null)
+                {
+                    MessageBox.Show("Такой единицы измерения не существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return false;
+                }
+                UnitName = unit.UnitName;
+                return true;
+            }
+            return true;
+        }
+
         public UnitViewModel(IUnitsService unitsService, int? currentUnitId)
         {
             _unitsService = unitsService;
             _currentUnitId = currentUnitId;
+            if (!ValidateUnit())
+                OnCancel?.Invoke();
             EnterCommand = new RelayCommand(Enter);
         }
 

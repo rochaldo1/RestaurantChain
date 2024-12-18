@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="RestaurantChain.Presentation.View.GroupsOfDishesViews.GroupOfDishesWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RestaurantChain.Presentation.View.GroupsOfDishesViews"
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="300">
+    <Grid>
+        <Button Content="ОК" HorizontalAlignment="Left" Margin="51,196,0,0" VerticalAlignment="Top" Name="OkBtn" Command="{Binding EnterCommand}"/>
+        <Button Content="Отмена" HorizontalAlignment="Left" Margin="119,196,0,0" VerticalAlignment="Top" Name="CancelBtn" Click="CancelBtn_OnClick"/>
+        <TextBox HorizontalAlignment="Left" Margin="71,74,0,0" TextWrapping="Wrap" Text="{Binding GroupName}" VerticalAlignment="Top" Width="120" Name="txtName"/>
+
+    </Grid>
+</UserControl>

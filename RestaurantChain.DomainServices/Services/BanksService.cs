@@ -29,6 +29,11 @@ namespace RestaurantChain.DomainServices.Services
             return _unitOfWork.BanksRepository.Create(bank);
         }
 
+        public Banks Get(int id)
+        {
+            return _unitOfWork.BanksRepository.Get(id);
+        }
+
         public void Update(Banks bank)
         {
             var existBank = _unitOfWork.BanksRepository.Get(bank.Id);

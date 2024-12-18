@@ -29,6 +29,11 @@ namespace RestaurantChain.DomainServices.Services
             return _unitOfWork.StreetsRepository.Create(street);
         }
 
+        public Streets Get(int id)
+        {
+            return _unitOfWork.StreetsRepository.Get(id);
+        }
+
         public void Update(Streets street)
         {
             var existStreet = _unitOfWork.StreetsRepository.Get(street.Id);

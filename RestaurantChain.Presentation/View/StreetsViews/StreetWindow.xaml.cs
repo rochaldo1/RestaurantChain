@@ -7,12 +7,12 @@ using RestaurantChain.Presentation.ViewModel.StreetsViewModel;
 namespace RestaurantChain.Presentation.View.StreetsViews
 {
     /// <summary>
-    /// Interaction logic for StreetWindow.xaml
+    /// Логика взаимодействия для StreetWindow.xaml
     /// </summary>
     public partial class StreetWindow : UserControl
     {
         /// <summary>
-        /// Результат сохранения данных
+        /// Результат сохранения данных.
         /// </summary>
         public bool IsSuccess { private set; get; }
 
@@ -24,6 +24,7 @@ namespace RestaurantChain.Presentation.View.StreetsViews
             if (DataContext is StreetViewModel loginViewModel)
             {
                 loginViewModel.OnSaveSuccess += SaveSuccess;
+                loginViewModel.OnCancel += SaveError;
             }
         }
 
@@ -35,6 +36,12 @@ namespace RestaurantChain.Presentation.View.StreetsViews
         public void SaveSuccess()
         {
             IsSuccess = true;
+            ((Window)Parent).Close();
+        }
+
+        public void SaveError()
+        {
+            IsSuccess = false;
             ((Window)Parent).Close();
         }
     }

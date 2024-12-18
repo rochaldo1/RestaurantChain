@@ -9,6 +9,7 @@ namespace RestaurantChain.DomainServices.Contracts
 {
     public interface IBanksService
     {
+        Banks Get(int id);
         int Create(Banks bank);
         void Update(Banks bank);
     }

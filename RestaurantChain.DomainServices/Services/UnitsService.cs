@@ -30,6 +30,11 @@ namespace RestaurantChain.DomainServices.Services
             return _unitOfWork.UnitsRepository.Create(unit);
         }
 
+        public Units Get(int id)
+        {
+            return _unitOfWork.UnitsRepository.Get(id);
+        }
+
         public void Update(Units unit)
         {
             var existUnit = _unitOfWork.UnitsRepository.Get(unit.Id);

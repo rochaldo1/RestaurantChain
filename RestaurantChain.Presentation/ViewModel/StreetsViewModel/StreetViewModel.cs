@@ -10,6 +10,7 @@ using RestaurantChain.Domain.Models;
 using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.Classes;
 using RestaurantChain.Presentation.Commands;
+using RestaurantChain.Presentation.View.StreetsViews;
 
 namespace RestaurantChain.Presentation.ViewModel.StreetsViewModel
 {
@@ -20,6 +21,7 @@ namespace RestaurantChain.Presentation.ViewModel.StreetsViewModel
         private readonly int? _currentStreetId;
 
         public Action OnSaveSuccess;
+        public Action OnCancel;
         
         public ICommand EnterCommand { get; set; }
 
@@ -33,10 +35,28 @@ namespace RestaurantChain.Presentation.ViewModel.StreetsViewModel
             }
         }
 
+        private bool ValidateStreet()
+        {
+            if (_currentStreetId.HasValue)
+            {
+                var street = _streetsService.Get(_currentStreetId.Value);
+                if (street == null)
+                {
+                    MessageBox.Show("Такой улицы не существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return false;
+                }
+                StreetName = street.StreetName;
+                return true;
+            }
+            return true;
+        }
+
         public StreetViewModel(IStreetsService streetsService, int? currentStreetId)
         {
             _currentStreetId = currentStreetId;
             _streetsService = streetsService;
+            if (!ValidateStreet())
+                OnCancel?.Invoke();
             EnterCommand = new RelayCommand(Enter);
         }
 

@@ -3,7 +3,7 @@
 namespace RestaurantChain.Presentation.View.StreetsViews
 {
     /// <summary>
-    /// Interaction logic for StreetsListWindow.xaml
+    /// Логика взаимодействия для StreetsListWindow.xaml
     /// </summary>
     public partial class StreetsListWindow : UserControl
     {

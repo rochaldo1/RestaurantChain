@@ -50,22 +50,44 @@ namespace RestaurantChain.Presentation.View
 
         private void GroupsOfDishes_Click(object sender, RoutedEventArgs e)
         {
-
+            var view = new GroupsOfDishesViews.GroupOfDishesWindow(_serviceProvider, null);
+            var window = new Window
+            {
+                Content = view
+            };
+            window.ShowDialog();
+            if (view.IsSuccess)
+            {
+                MessageBox.Show("Группа добавлена");
+            }
         }
 
         private void Banks_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void Catalogues_Click(object sender, RoutedEventArgs e)
-        {
-
+            var view = new BanksViews.BankWindow(_serviceProvider, null);
+            var window = new Window
+            {
+                Content = view
+            };
+            window.ShowDialog();
+            if (view.IsSuccess)
+            {
+                MessageBox.Show("Банк добавлен");
+            }
         }
 
         private void Units_Click(object sender, RoutedEventArgs e)
         {
-
+            var view = new UnitsViews.UnitWindow(_serviceProvider, null);
+            var window = new Window
+            {
+                Content = view
+            };
+            window.ShowDialog();
+            if (view.IsSuccess)
+            {
+                MessageBox.Show("Единица измерения добавлена");
+            }
         }
 
         private void Content_Click(object sender, RoutedEventArgs e)

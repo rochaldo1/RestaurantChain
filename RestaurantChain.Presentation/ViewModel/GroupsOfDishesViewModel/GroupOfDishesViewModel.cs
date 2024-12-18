@@ -19,6 +19,7 @@ namespace RestaurantChain.Presentation.ViewModel.GroupsOfDishesViewModel
         private readonly int? _currentGroupId;
 
         public Action OnSaveSuccess;
+        public Action OnCancel;
 
         public ICommand EnterCommand { get; set; }
 
@@ -32,10 +33,28 @@ namespace RestaurantChain.Presentation.ViewModel.GroupsOfDishesViewModel
             }
         }
 
+        private bool ValidateGroup()
+        {
+            if (_currentGroupId.HasValue)
+            {
+                var group = _groupsOfDishesService.Get(_currentGroupId.Value);
+                if (group == null)
+                {
+                    MessageBox.Show("Такой группы не существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return false;
+                }
+                GroupName = group.GroupName;
+                return true;
+            }
+            return true;
+        }
+
         public GroupOfDishesViewModel(IGroupsOfDishesService groupsOfDishes, int? currentGroupId)
         {
             _groupsOfDishesService = groupsOfDishes;
             _currentGroupId = currentGroupId;
+            if (!ValidateGroup())
+                OnCancel?.Invoke();
             EnterCommand = new RelayCommand(Enter);
         }
 

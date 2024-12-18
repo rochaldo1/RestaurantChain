@@ -19,6 +19,7 @@ namespace RestaurantChain.Presentation.ViewModel.BanksViewModel
         private readonly int? _currentBankId;
 
         public Action OnSaveSuccess;
+        public Action OnCancel;
 
         public ICommand EnterCommand { get; set; }
 
@@ -32,10 +33,28 @@ namespace RestaurantChain.Presentation.ViewModel.BanksViewModel
             }
         }
 
+        private bool ValidateBank()
+        {
+            if (_currentBankId.HasValue)
+            {
+                var bank = _banksService.Get(_currentBankId.Value);
+                if (bank == null)
+                {
+                    MessageBox.Show("Такого банка не существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return false;
+                }
+                BankName = bank.BankName;
+                return true;
+            }
+            return true;
+        }
+
         public BankViewModel(IBanksService banksService, int? currentBankId)
         {
             _banksService = banksService;
             _currentBankId = currentBankId;
+            if (!ValidateBank())
+                OnCancel?.Invoke();
             EnterCommand = new RelayCommand(Enter);
         }
 

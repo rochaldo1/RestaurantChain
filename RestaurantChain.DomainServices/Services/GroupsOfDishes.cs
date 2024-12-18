@@ -27,6 +27,11 @@ namespace RestaurantChain.DomainServices.Services
             return _unitOfWork.GroupsOfDishesRepository.Create(group);
         }
 
+        public Domain.Models.GroupsOfDishes Get(int id)
+        {
+            return _unitOfWork.GroupsOfDishesRepository.Get(id);
+        }
+
         public void Update(Domain.Models.GroupsOfDishes group)
         {
             var existGroup = _unitOfWork.GroupsOfDishesRepository.Get(group.Id);
