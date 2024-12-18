@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace RestaurantChain.Presentation.View
 {
@@ -21,10 +22,14 @@ namespace RestaurantChain.Presentation.View
     /// </summary>
     public partial class RegistrationWindow : Window
     {
-        public RegistrationWindow(IUsersService usersService)
+        private readonly IServiceProvider _serviceProvider;
+        
+        public RegistrationWindow(IServiceProvider serviceProvider)
         {
+            _serviceProvider = serviceProvider;
+            
             InitializeComponent();
-
+            var usersService = serviceProvider.GetRequiredService<IUsersService>();
             DataContext = new RegistrationViewModel(usersService);
             if (DataContext is RegistrationViewModel registrationViewModel)
             {

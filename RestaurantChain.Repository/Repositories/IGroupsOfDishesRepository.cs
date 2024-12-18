@@ -1,6 +1,9 @@
-﻿namespace RestaurantChain.Repository.Repositories
+﻿using RestaurantChain.Domain.Models;
+
+namespace RestaurantChain.Repository.Repositories
 {
-    public interface IGroupsOfDishesRepository
+    public interface IGroupsOfDishesRepository : IRepositoryBase<GroupsOfDishes>
     {
+        GroupsOfDishes Get(string groupName);
     }
 }

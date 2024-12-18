@@ -24,5 +24,6 @@
                 <MenuItem Header="О программе" x:Name="AboutProgram" Click="AboutProgram_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
             </MenuItem>
         </Menu>
+        <StackPanel />
     </Grid>
 </Window>

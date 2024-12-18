@@ -1,5 +1,6 @@
 ﻿using RestaurantChain.DomainServices.Contracts;
 using System.Windows;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace RestaurantChain.Presentation.View
 {
@@ -8,11 +9,11 @@ namespace RestaurantChain.Presentation.View
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly IUsersService _usersService;
+        private readonly IServiceProvider _serviceProvider;
 
-        public MainWindow(IUsersService usersService)
+        public MainWindow(IServiceProvider serviceProvider)
         {
-            _usersService = usersService;
+            _serviceProvider = serviceProvider;
             InitializeComponent();
         }
 
@@ -24,7 +25,7 @@ namespace RestaurantChain.Presentation.View
 
         private void ChangePassword_Click(object sender, RoutedEventArgs e)
         {
-            ChangePasswordWindow changePasswordWindow = new(_usersService);
+            ChangePasswordWindow changePasswordWindow = new(_serviceProvider);
             changePasswordWindow.ShowDialog();
         }
 
@@ -35,7 +36,16 @@ namespace RestaurantChain.Presentation.View
 
         private void Streets_Click(object sender, RoutedEventArgs e)
         {
-
+            var view = new StreetsViews.StreetWindow(_serviceProvider, null);
+            var window = new Window
+            {
+                Content = view
+            };
+            window.ShowDialog();
+            if (view.IsSuccess)
+            {
+                MessageBox.Show("Улица добавлена");
+            }
         }
 
         private void GroupsOfDishes_Click(object sender, RoutedEventArgs e)

@@ -5,6 +5,7 @@ using System.Windows.Controls;
 
 using RestaurantChain.DomainServices.Contracts;
 using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace RestaurantChain.Presentation.View
 {
@@ -13,12 +14,13 @@ namespace RestaurantChain.Presentation.View
     /// </summary>
     public partial class LogInWindow : Window
     {
-        private readonly IUsersService _usersService;
+        private readonly IServiceProvider _serviceProvider;
 
-        public LogInWindow(IUsersService usersService)
+        public LogInWindow(IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            _usersService = usersService;
+            _serviceProvider = serviceProvider;
+            var usersService = serviceProvider.GetRequiredService<IUsersService>();
 
             DataContext = new LogInViewModel(usersService);
             if (DataContext is LogInViewModel loginViewModel)
@@ -29,7 +31,7 @@ namespace RestaurantChain.Presentation.View
         
         public void LogInSuccess()
         {
-            MainWindow window = new(_usersService);
+            MainWindow window = new(_serviceProvider);
             window.Show();
             Close();
         }
@@ -55,7 +57,7 @@ namespace RestaurantChain.Presentation.View
 
         private void Registration_Click(object sender, RoutedEventArgs e)
         {
-            RegistrationWindow registrationWindow = new(_usersService);
+            RegistrationWindow registrationWindow = new(_serviceProvider);
             registrationWindow.Owner = this;
             registrationWindow.ShowDialog();
         }

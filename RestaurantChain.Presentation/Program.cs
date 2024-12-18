@@ -28,10 +28,7 @@ namespace RestaurantChain.Presentation
                 services.UseStorage(connectionString);
 
                 services.UseDomainServices();
-
                 services.AddSingleton<App>();
-                services.AddSingleton<MainWindow>();
-                services.AddSingleton<LogInWindow>();
             })
             .Build();
             // получаем сервис - объект класса App

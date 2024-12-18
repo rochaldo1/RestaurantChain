@@ -10,6 +10,10 @@ namespace RestaurantChain.DomainServices
         public static void UseDomainServices(this IServiceCollection services)
         {
             services.AddSingleton<IUsersService, UsersService>();
+            services.AddSingleton<IStreetsService, StreetsService>();
+            services.AddSingleton<IBanksService, BanksService>();
+            services.AddSingleton<IGroupsOfDishesService, GroupsOfDishes>();
+            services.AddSingleton<IUnitsService, UnitsService>();
         }
     }
 }

@@ -1,6 +1,8 @@
-﻿namespace RestaurantChain.Repository.Repositories
+﻿using RestaurantChain.Domain.Models;
+
+namespace RestaurantChain.Repository.Repositories
 {
-    public interface ISuppliersRepository
+    public interface ISuppliersRepository : IRepositoryBase<Suppliers>
     {
     }
 }

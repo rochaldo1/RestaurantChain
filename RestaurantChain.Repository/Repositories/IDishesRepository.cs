@@ -1,6 +1,8 @@
-﻿namespace RestaurantChain.Repository.Repositories
+﻿using RestaurantChain.Domain.Models;
+
+namespace RestaurantChain.Repository.Repositories
 {
-    public interface IDishesRepository
+    public interface IDishesRepository : IRepositoryBase<Dishes>
     {
     }
 }

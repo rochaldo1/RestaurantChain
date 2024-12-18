@@ -1,6 +1,9 @@
-﻿namespace RestaurantChain.Repository.Repositories
+﻿using RestaurantChain.Domain.Models;
+
+namespace RestaurantChain.Repository.Repositories
 {
-    public interface IStreetsRepository
+    public interface IStreetsRepository : IRepositoryBase<Streets>
     {
+        Streets Get(string streetName);
     }
 }
