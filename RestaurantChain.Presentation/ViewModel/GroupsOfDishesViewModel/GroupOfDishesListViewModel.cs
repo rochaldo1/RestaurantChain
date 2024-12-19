@@ -42,7 +42,17 @@ namespace RestaurantChain.Presentation.ViewModel.GroupsOfDishesViewModel
         private void CreateEntity(object sender)
         {
             var view = new GroupOfDishesWindow(ServiceProvider, groupId: null);
-            ShowDialog(view);
+            var window = new Window
+            {
+                Content = view,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                ResizeMode = ResizeMode.NoResize,
+                Height = 200,
+                Width = 300,
+                Title = "Создание записи"
+                // TODO: Найти какую-нибудь иконку и добавить её тут
+            };
+            window.ShowDialog();
             RefreshData(sender);
         }
 
@@ -54,7 +64,17 @@ namespace RestaurantChain.Presentation.ViewModel.GroupsOfDishesViewModel
             }
             int groupId = ((GroupsOfDishes)DataGrid.SelectedItem).Id;
             var view = new GroupOfDishesWindow(ServiceProvider, groupId);
-            ShowDialog(view);
+            var window = new Window
+            {
+                Content = view,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                ResizeMode = ResizeMode.NoResize,
+                Height = 200,
+                Width = 300,
+                Title = "Редактирование записи"
+                // TODO: Найти какую-нибудь иконку и добавить её тут
+            };
+            window.ShowDialog();
             RefreshData(sender);
         }
 

@@ -1,6 +1,7 @@
 ﻿using RestaurantChain.DomainServices.Contracts;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
+using System.Windows.Media;
 
 namespace RestaurantChain.Presentation.View
 {
@@ -39,7 +40,10 @@ namespace RestaurantChain.Presentation.View
             var view = new StreetsViews.StreetsListWindow(_serviceProvider);
             var window = new Window
             {
-                Content = view
+                Content = view,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                Title = "Улицы",
+                // TODO: Сделать добавление иконки database.png
             };
             window.ShowDialog();
         }
@@ -49,7 +53,10 @@ namespace RestaurantChain.Presentation.View
             var view = new GroupsOfDishesViews.GroupsOfDishesListWindow(_serviceProvider);
             var window = new Window
             {
-                Content = view
+                Content = view,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                Title = "Группы блюд",
+                // TODO: Сделать добавление иконки database.png
             };
             window.ShowDialog();
         }
@@ -59,7 +66,10 @@ namespace RestaurantChain.Presentation.View
             var view = new BanksViews.BanksListWindow(_serviceProvider);
             var window = new Window
             {
-                Content = view
+                Content = view,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                Title = "Банки",
+                // TODO: Сделать добавление иконки database.png
             };
             window.ShowDialog();
         }
@@ -69,7 +79,10 @@ namespace RestaurantChain.Presentation.View
             var view = new UnitsViews.UnitsListWindow(_serviceProvider);
             var window = new Window
             {
-                Content = view
+                Content = view,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                Title = "Банки",
+                // TODO: Сделать добавление иконки database.png
             };
             window.ShowDialog();
         }
