@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,11 +11,11 @@ using RestaurantChain.Presentation.ViewModel.Base;
 
 namespace RestaurantChain.Presentation.ViewModel.StreetsViewModel;
 
-internal class StreetListViewModel : ListViewModelBase<Streets>
+public class StreetListViewModel : ListViewModelBase<Streets>
 {
     private readonly IStreetsService _streetsService;
 
-    public StreetListViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+    public StreetListViewModel(IServiceProvider serviceProvider, DataGrid grid) : base(serviceProvider, grid)
     {
         _streetsService = serviceProvider.GetRequiredService<IStreetsService>();
         DataBind();
@@ -37,47 +38,38 @@ internal class StreetListViewModel : ListViewModelBase<Streets>
     private void CreateEntity(object sender)
     {
         var view = new StreetWindow(ServiceProvider, streetId: null);
-        var window = new Window
-        {
-            Content = view
-        };
-        window.ShowDialog();
-
-        if (view.IsSuccess)
-        {
-            MessageBox.Show("Улица добавлена");
-        }
-
+        ShowDialog(view);
         RefreshData(sender);
     }
 
     private void EditEntity(object sender)
     {
-        //ТУТ ВЗЯТЬ ID выделенной строки как то
-        var streetId = 1;
-        var view = new StreetWindow(ServiceProvider, streetId);
-        var window = new Window
+        if (DataGrid.SelectedItem == null)
         {
-            Content = view
-        };
-        window.ShowDialog();
-
-        if (view.IsSuccess)
-        {
-            MessageBox.Show("Улица обновлена");
+            return;
         }
-
+        int streetId = ((Streets)DataGrid.SelectedItem).Id;
+        var view = new StreetWindow(ServiceProvider, streetId);
+        ShowDialog(view);
         RefreshData(sender);
     }
 
     private void DeleteEntity(object sender)
     {
-        //ТУТ ВЗЯТЬ ID выделенной строки как то
-        var streetId = 1;
+        if (DataGrid.SelectedItem == null)
+        {
+            return;
+        }
+        int streetId = ((Streets)DataGrid.SelectedItem).Id;
+        Streets street = _streetsService.Get(streetId);
 
-        if (MessageBox.Show("Удалить улицу?", "Удаление записи", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+        if (MessageBox.Show($"Удалить улицу '{street.StreetName}'?", "Удаление записи", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
         {
             _streetsService.Delete(streetId);
+        }
+        else
+        {
+            return;
         }
 
         RefreshData(sender);

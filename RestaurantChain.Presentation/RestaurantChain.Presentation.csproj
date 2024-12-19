@@ -50,12 +50,33 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\aboutProgram.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\login.png">
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\aboutProgram.png" />
+    <Resource Include="Resources\aboutProgram.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Resource>
+    <None Remove="Resources\changePassword.png" />
+    <Resource Include="Resources\changePassword.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <None Remove="Resources\database.png" />
+    <Resource Include="Resources\database.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <None Remove="Resources\login.png" />
+    <Resource Include="Resources\login.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <None Remove="Resources\main.png" />
+    <Resource Include="Resources\main.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <None Remove="Resources\registration.png" />
+    <Resource Include="Resources\registration.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

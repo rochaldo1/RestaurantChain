@@ -21,13 +21,19 @@ namespace RestaurantChain.DomainServices.Services
 
         public int Create(Units unit)
         {
-            var existUnit = _unitOfWork.UnitsRepository.Get(unit.UnitName);
+            Units? existUnit = _unitOfWork.UnitsRepository.Get(unit.UnitName);
+
             if (existUnit != null)
             {
                 return 0;
             }
-            
+
             return _unitOfWork.UnitsRepository.Create(unit);
+        }
+
+        public void Delete(int id)
+        {
+            _unitOfWork.UnitsRepository.Delete(id);
         }
 
         public Units Get(int id)
@@ -35,13 +41,20 @@ namespace RestaurantChain.DomainServices.Services
             return _unitOfWork.UnitsRepository.Get(id);
         }
 
+        public IReadOnlyCollection<Units> List()
+        {
+            return _unitOfWork.UnitsRepository.List();
+        }
+
         public void Update(Units unit)
         {
-            var existUnit = _unitOfWork.UnitsRepository.Get(unit.Id);
+            Units? existUnit = _unitOfWork.UnitsRepository.Get(unit.Id);
+
             if (existUnit == null)
             {
                 throw new Exception($"Единицы измерения с Id {unit.Id} не найдено");
             }
+
             _unitOfWork.UnitsRepository.Update(unit);
         }
     }

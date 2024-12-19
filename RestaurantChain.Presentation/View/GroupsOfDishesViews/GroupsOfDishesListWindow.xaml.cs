@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestaurantChain.Presentation.ViewModel.GroupsOfDishesViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,10 @@ namespace RestaurantChain.Presentation.View.GroupsOfDishesViews
     /// </summary>
     public partial class GroupsOfDishesListWindow : UserControl
     {
-        public GroupsOfDishesListWindow()
+        public GroupsOfDishesListWindow(IServiceProvider serviceProvider)
         {
             InitializeComponent();
+            DataContext = new GroupOfDishesListViewModel(serviceProvider, Grid);
         }
     }
 }

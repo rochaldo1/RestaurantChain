@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:RestaurantChain.Presentation.View" xmlns:viewmodel="clr-namespace:RestaurantChain.Presentation.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:LogInViewModel}"
         mc:Ignorable="d"
         Title="Вход" Height="320" Width="500"
-        Icon="C:\Users\Artur\source\repos\RestaurantChain\RestaurantChain.Presentation\Resources\login.png"
+        Icon="../Resources/login.png"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Loaded="WindowLoaded">

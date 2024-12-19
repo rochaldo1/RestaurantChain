@@ -12,7 +12,7 @@ namespace RestaurantChain.DomainServices
             services.AddSingleton<IUsersService, UsersService>();
             services.AddSingleton<IStreetsService, StreetsService>();
             services.AddSingleton<IBanksService, BanksService>();
-            services.AddSingleton<IGroupsOfDishesService, GroupsOfDishes>();
+            services.AddSingleton<IGroupsOfDishesService, GroupsOfDishesService>();
             services.AddSingleton<IUnitsService, UnitsService>();
         }
     }

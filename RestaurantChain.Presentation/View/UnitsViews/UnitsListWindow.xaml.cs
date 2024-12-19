@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestaurantChain.Presentation.ViewModel.UnitsViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,10 @@ namespace RestaurantChain.Presentation.View.UnitsViews
     /// </summary>
     public partial class UnitsListWindow : UserControl
     {
-        public UnitsListWindow()
+        public UnitsListWindow(IServiceProvider serviceProvider)
         {
             InitializeComponent();
+            DataContext = new UnitListViewModel(serviceProvider, Grid);
         }
     }
 }

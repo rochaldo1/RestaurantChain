@@ -33,7 +33,7 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public Streets Get(int id)
         {
-            const string query = "select * from streets where id = @id";
+            const string query = "select Id, street_name as StreetName from streets where id = @id";
             var streetsDb = Connection.QueryFirstOrDefault<StreetsDb>(query, new
             {
                 Id = id
@@ -51,7 +51,7 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public Streets Get(string streetName)
         {
-            const string query = "select * from streets where street_name = @name";
+            const string query = "select Id, street_name as StreetName from streets where street_name = @name";
             var streetsDb = Connection.QueryFirstOrDefault<StreetsDb>(query, new
             {
                 Name = streetName
@@ -62,7 +62,7 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public IReadOnlyCollection<Streets> List()
         {
-            const string query = "select * from streets";
+            const string query = "select Id, street_name as StreetName from streets order by street_name";
             IEnumerable<StreetsDb> entities = Connection.Query<StreetsDb>(query);
 
             return entities.Select(x => x.ToDomain()).ToArray();

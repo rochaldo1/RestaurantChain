@@ -33,27 +33,29 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public Banks Get(int id)
         {
-            const string query = "select * from banks where id = @id";
+            const string query = "select Id, bank_name as BankName from banks where id = @id";
             var banksDb = Connection.QueryFirstOrDefault<BanksDb>(query, new
             {
                 Id = id
             });
+
             return banksDb?.ToDomain();
         }
 
         public Banks Get(string bankName)
         {
-            const string query = "select * from banks where bank_name = @name";
+            const string query = "select Id, bank_name as BankName from banks where bank_name = @name";
             var banksDb = Connection.QueryFirstOrDefault<BanksDb>(query, new
             {
                 Name = bankName
             });
+
             return banksDb?.ToDomain();
         }
 
         public IReadOnlyCollection<Banks> List()
         {
-            const string query = "select * from banks";
+            const string query = "select Id, bank_name as BankName from banks order by bank_name";
             IEnumerable<BanksDb> entities = Connection.Query<BanksDb>(query);
 
             return entities.Select(x => x.ToDomain()).ToArray();

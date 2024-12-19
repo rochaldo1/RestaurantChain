@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestaurantChain.Presentation.ViewModel.BanksViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,10 @@ namespace RestaurantChain.Presentation.View.BanksViews
     /// </summary>
     public partial class BanksListWindow : UserControl
     {
-        public BanksListWindow()
+        public BanksListWindow(IServiceProvider serviceProvider)
         {
             InitializeComponent();
+            DataContext = new BankListViewModel(serviceProvider, Grid);
         }
     }
 }

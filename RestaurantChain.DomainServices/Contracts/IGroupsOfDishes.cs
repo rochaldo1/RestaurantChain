@@ -12,5 +12,7 @@ namespace RestaurantChain.DomainServices.Contracts
         GroupsOfDishes Get(int id);
         int Create(GroupsOfDishes group);
         void Update(GroupsOfDishes group);
+        void Delete(int id);
+        IReadOnlyCollection<GroupsOfDishes> List();
     }
 }

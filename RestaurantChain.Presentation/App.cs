@@ -8,7 +8,7 @@ public class App : Application
     // через систему внедрения зависимостей получаем объект главного окна
     public App(IServiceProvider serviceProvider)
     {
-        this.logInWindow = new LogInWindow(serviceProvider);
+        logInWindow = new LogInWindow(serviceProvider);
     }
     protected override void OnStartup(StartupEventArgs e)
     {

@@ -33,7 +33,7 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public Units Get(int id)
         {
-            const string query = "select * from units where id = @id";
+            const string query = "select Id, unit_name as UnitName from units where id = @id";
             var unitsDb = Connection.QueryFirstOrDefault<UnitsDb>(query, new
             {
                 Id = id
@@ -44,7 +44,7 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public Units Get(string unitName)
         {
-            const string query = "select * from untis where unit_name = @name";
+            const string query = "select Id, unit_name as UnitName from untis where unit_name = @name";
             var unitsDb = Connection.QueryFirstOrDefault<UnitsDb>(query, new
             {
                 Name = unitName
@@ -55,7 +55,7 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public IReadOnlyCollection<Units> List()
         {
-            const string query = "select * from untis";
+            const string query = "select Id, unit_name as UnitName from units order by unit_name";
             IEnumerable<UnitsDb> entities = Connection.Query<UnitsDb>(query);
 
             return entities.Select(x => x.ToDomain()).ToArray();

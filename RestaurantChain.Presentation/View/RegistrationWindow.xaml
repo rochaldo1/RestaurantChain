@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:RestaurantChain.Presentation.View"
         mc:Ignorable="d"
         Title="Регистрация" Height="320" Width="400"
-        Icon="C:\Users\Artur\source\repos\RestaurantChain\RestaurantChain.Presentation\Resources\registration.png"
+        Icon="../Resources/registration.png"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
     <Grid>
