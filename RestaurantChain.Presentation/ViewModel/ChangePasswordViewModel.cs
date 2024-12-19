@@ -8,10 +8,11 @@ using System.Windows;
 using System.Windows.Threading;
 using System.Text.RegularExpressions;
 using RestaurantChain.Presentation.Classes;
+using RestaurantChain.Presentation.ViewModel.Base;
 
 namespace RestaurantChain.Presentation.ViewModel
 {
-    public class ChangePasswordViewModel : ViewModelBase, INotifyPropertyChanged
+    public class ChangePasswordViewModel : ViewModelBase
     {
         private SecureString _newPassword;
         private SecureString _oldPassword;

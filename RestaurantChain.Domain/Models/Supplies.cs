@@ -5,7 +5,7 @@ namespace RestaurantChain.Domain.Models
     /// <summary>
     /// Класс поставок.
     /// </summary>
-    public sealed class Supplies : IdentityBase
+    public class Supplies : IdentityBase
     {
         /// <summary>
         /// Идентификатор поставщика.

@@ -5,7 +5,7 @@ namespace RestaurantChain.Domain.Models
     /// <summary>
     /// Класс доступности продуктов в определённом ресторане (их остаток).
     /// </summary>
-    public sealed class AvailibilityInRestaurant : IdentityBase
+    public class AvailibilityInRestaurant : IdentityBase
     {
         /// <summary>
         /// Идентификатор ресторана, который подал заявку на распределение.

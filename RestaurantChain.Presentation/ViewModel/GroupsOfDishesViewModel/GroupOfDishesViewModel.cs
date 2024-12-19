@@ -1,111 +1,117 @@
-﻿using RestaurantChain.Domain.Models;
+﻿using System.ComponentModel;
+using System.Windows;
+
+using RestaurantChain.Domain.Models;
 using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.Commands;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
+using RestaurantChain.Presentation.ViewModel.Base;
 
-namespace RestaurantChain.Presentation.ViewModel.GroupsOfDishesViewModel
+namespace RestaurantChain.Presentation.ViewModel.GroupsOfDishesViewModel;
+
+internal class GroupOfDishesViewModel : EditViewModelBase
 {
-    internal class GroupOfDishesViewModel : ViewModelBase, INotifyPropertyChanged
+    private readonly IGroupsOfDishesService _groupsOfDishesService;
+
+    private string _groupName;
+
+    public string GroupName
     {
-        private string _groupName;
-        private readonly IGroupsOfDishesService _groupsOfDishesService;
-        private readonly int? _currentGroupId;
-
-        public Action OnSaveSuccess;
-        public Action OnCancel;
-
-        public ICommand EnterCommand { get; set; }
-
-        public string GroupName
+        get => _groupName;
+        set
         {
-            get => _groupName;
-            set
-            {
-                _groupName = value;
-                OnPropertyChanged("GroupName");
-            }
+            _groupName = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public GroupOfDishesViewModel(IGroupsOfDishesService groupsOfDishes, int? currentId) : base(currentId)
+    {
+        _groupsOfDishesService = groupsOfDishes;
+
+        if (!Validate())
+        {
+            OnCancel?.Invoke();
         }
 
-        private bool ValidateGroup()
+        EnterCommand = new RelayCommand(Enter);
+    }
+
+    private void Enter(object sender)
+    {
+        if (string.IsNullOrWhiteSpace(_groupName))
         {
-            if (_currentGroupId.HasValue)
-            {
-                var group = _groupsOfDishesService.Get(_currentGroupId.Value);
-                if (group == null)
-                {
-                    MessageBox.Show("Такой группы не существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return false;
-                }
-                GroupName = group.GroupName;
-                return true;
-            }
-            return true;
+            MessageBox.Show("Введите название группы!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            return;
         }
 
-        public GroupOfDishesViewModel(IGroupsOfDishesService groupsOfDishes, int? currentGroupId)
+        bool result = CurrentId.HasValue ? Update() : Create();
+
+        if (result)
         {
-            _groupsOfDishesService = groupsOfDishes;
-            _currentGroupId = currentGroupId;
-            if (!ValidateGroup())
-                OnCancel?.Invoke();
-            EnterCommand = new RelayCommand(Enter);
+            OnSaveSuccess?.Invoke();
+        }
+    }
+
+    private bool Update()
+    {
+        var group = new GroupsOfDishes
+        {
+            Id = CurrentId.Value,
+            GroupName = _groupName
+        };
+
+        try
+        {
+            _groupsOfDishesService.Update(group);
+        }
+        catch (Exception e)
+        {
+            MessageBox.Show(e.Message, "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            return false;
         }
 
-        private void Enter(object sender)
-        {
-            if (string.IsNullOrWhiteSpace(_groupName))
-            {
-                MessageBox.Show("Введите название группы!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+        return true;
+    }
 
-            var result = _currentGroupId.HasValue ? Update() : Create();
-            if (result)
-                OnSaveSuccess?.Invoke();
+    private bool Create()
+    {
+        var group = new GroupsOfDishes
+        {
+            GroupName = _groupName
+        };
+
+        int id = _groupsOfDishesService.Create(group);
+
+        if (id == 0)
+        {
+            MessageBox.Show("Такая группа уже существует!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            return false;
         }
 
-        private bool Update()
+        return true;
+    }
+
+    public override bool Validate()
+    {
+        if (CurrentId.HasValue)
         {
-            var group = new GroupsOfDishes
+            GroupsOfDishes? group = _groupsOfDishesService.Get(CurrentId.Value);
+
+            if (group == null)
             {
-                Id = _currentGroupId.Value,
-                GroupName = _groupName
-            };
-            try
-            {
-                _groupsOfDishesService.Update(group);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Такой группы не существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+
                 return false;
             }
 
-            return true;
-        }
-
-        private bool Create()
-        {
-            var group = new GroupsOfDishes
-            {
-                GroupName = _groupName
-            };
-            
-            var id = _groupsOfDishesService.Create(group);
-            if(id == 0)
-            {
-                MessageBox.Show("Такая группа уже существует!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
+            GroupName = group.GroupName;
 
             return true;
         }
+
+        return true;
     }
 }

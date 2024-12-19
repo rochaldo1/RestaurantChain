@@ -5,9 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using RestaurantChain.Presentation.ViewModel.Base;
+
 namespace RestaurantChain.Presentation.ViewModel.BanksViewModel
 {
-    internal class BankListViewModel : ViewModelBase, INotifyPropertyChanged
+    internal class BankListViewModel : ViewModelBase
     {
     }
 }

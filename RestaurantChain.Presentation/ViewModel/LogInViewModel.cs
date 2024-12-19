@@ -11,9 +11,11 @@ using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.Classes;
 using System.Reflection;
 
+using RestaurantChain.Presentation.ViewModel.Base;
+
 namespace RestaurantChain.Presentation.ViewModel
 {
-    public class LogInViewModel : ViewModelBase, INotifyPropertyChanged
+    public class LogInViewModel : ViewModelBase
     {
         private string _login;
         private SecureString _password;

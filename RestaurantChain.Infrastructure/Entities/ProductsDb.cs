@@ -3,7 +3,7 @@
     /// <summary>
     /// Класс продуктов.
     /// </summary>
-    internal sealed class ProductsDb : IdentityBaseDb
+    internal class ProductsDb : IdentityBaseDb
     {
         /// <summary>
         /// Идентификатор единицы измерения.

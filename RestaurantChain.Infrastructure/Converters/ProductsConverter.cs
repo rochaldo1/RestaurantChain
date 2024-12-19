@@ -1,5 +1,7 @@
 ﻿using RestaurantChain.Domain.Models;
+using RestaurantChain.Domain.Models.View;
 using RestaurantChain.Infrastructure.Entities;
+using RestaurantChain.Infrastructure.Entities.Views;
 
 namespace RestaurantChain.Infrastructure.Converters
 {
@@ -26,6 +28,19 @@ namespace RestaurantChain.Infrastructure.Converters
                 ProductName = product.ProductName,
                 Quantity = product.Quantity,
                 Price = product.Price
+            };
+        }
+
+        public static ProductsView ToDomain(this ProductsDbView product)
+        {
+            return new ProductsView
+            {
+                Id = product.Id,
+                UnitId = product.UnitId,
+                ProductName = product.ProductName,
+                Quantity = product.Quantity,
+                Price = product.Price,
+                UnitName = product.UnitName
             };
         }
     }

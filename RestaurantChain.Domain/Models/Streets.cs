@@ -5,7 +5,7 @@ namespace RestaurantChain.Domain.Models
     /// <summary>
     /// Класс справочника улиц.
     /// </summary>
-    public sealed class Streets : IdentityBase
+    public class Streets : IdentityBase
     {
         /// <summary>
         /// Название улицы.

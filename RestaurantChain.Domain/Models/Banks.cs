@@ -5,7 +5,7 @@ namespace RestaurantChain.Domain.Models
     /// <summary>
     /// Класс справочника банков.
     /// </summary>
-    public sealed class Banks : IdentityBase
+    public class Banks : IdentityBase
     {
         /// <summary>
         /// Название банка.

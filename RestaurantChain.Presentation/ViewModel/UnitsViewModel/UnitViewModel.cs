@@ -1,112 +1,117 @@
-﻿using Npgsql.Replication.PgOutput.Messages;
+﻿using System.ComponentModel;
+using System.Windows;
+
 using RestaurantChain.Domain.Models;
 using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.Commands;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
+using RestaurantChain.Presentation.ViewModel.Base;
 
-namespace RestaurantChain.Presentation.ViewModel.UnitsViewModel
+namespace RestaurantChain.Presentation.ViewModel.UnitsViewModel;
+
+internal class UnitViewModel : EditViewModelBase
 {
-    internal class UnitViewModel : ViewModelBase, INotifyPropertyChanged
+    private readonly IUnitsService _unitsService;
+
+    private string _unitName;
+
+    public string UnitName
     {
-        private string _unitName;
-        private readonly IUnitsService _unitsService;
-        private readonly int? _currentUnitId;
-
-        public Action OnSaveSuccess;
-        public Action OnCancel;
-
-        public ICommand EnterCommand { get; set; }
-
-        public string UnitName
+        get => _unitName;
+        set
         {
-            get => _unitName;
-            set
-            {
-                _unitName = value;
-                OnPropertyChanged("UnitName");
-            }
+            _unitName = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public UnitViewModel(IUnitsService unitsService, int? currentId) : base(currentId)
+    {
+        _unitsService = unitsService;
+
+        if (!Validate())
+        {
+            OnCancel?.Invoke();
         }
 
-        private bool ValidateUnit()
+        EnterCommand = new RelayCommand(Enter);
+    }
+
+    private void Enter(object sender)
+    {
+        if (string.IsNullOrWhiteSpace(_unitName))
         {
-            if (_currentUnitId.HasValue)
-            {
-                var unit = _unitsService.Get(_currentUnitId.Value);
-                if (unit == null)
-                {
-                    MessageBox.Show("Такой единицы измерения не существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return false;
-                }
-                UnitName = unit.UnitName;
-                return true;
-            }
-            return true;
+            MessageBox.Show("Введите название единицы измерения!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            return;
         }
 
-        public UnitViewModel(IUnitsService unitsService, int? currentUnitId)
+        bool result = CurrentId.HasValue ? Update() : Create();
+
+        if (result)
         {
-            _unitsService = unitsService;
-            _currentUnitId = currentUnitId;
-            if (!ValidateUnit())
-                OnCancel?.Invoke();
-            EnterCommand = new RelayCommand(Enter);
+            OnSaveSuccess?.Invoke();
+        }
+    }
+
+    private bool Update()
+    {
+        var unit = new Units
+        {
+            Id = CurrentId.Value,
+            UnitName = _unitName
+        };
+
+        try
+        {
+            _unitsService.Update(unit);
+        }
+        catch (Exception e)
+        {
+            MessageBox.Show(e.Message, "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            return false;
         }
 
-        private void Enter(object sender)
-        {
-            if (string.IsNullOrWhiteSpace(_unitName))
-            {
-                MessageBox.Show("Введите название единицы измерения!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+        return true;
+    }
 
-            var result = _currentUnitId.HasValue ? Update() : Create();
-            if (result)
-                OnSaveSuccess?.Invoke();
+    private bool Create()
+    {
+        var unit = new Units
+        {
+            UnitName = _unitName
+        };
+
+        int id = _unitsService.Create(unit);
+
+        if (id == 0)
+        {
+            MessageBox.Show("Такая единица измерения уже существует!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            return false;
         }
 
-        private bool Update()
+        return true;
+    }
+
+    public override bool Validate()
+    {
+        if (CurrentId.HasValue)
         {
-            var unit = new Units
+            Units? unit = _unitsService.Get(CurrentId.Value);
+
+            if (unit == null)
             {
-                Id = _currentUnitId.Value,
-                UnitName = _unitName
-            };
-            try
-            {
-                _unitsService.Update(unit);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Такой единицы измерения не существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+
                 return false;
             }
 
-            return true;
-        }
-
-        private bool Create()
-        {
-            var unit = new Units
-            {
-                UnitName = _unitName
-            };
-
-            var id = _unitsService.Create(unit);
-            if (id == 0)
-            {
-                MessageBox.Show("Такая единица измерения уже существует!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
+            UnitName = unit.UnitName;
 
             return true;
         }
+
+        return true;
     }
 }

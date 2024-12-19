@@ -5,7 +5,7 @@ namespace RestaurantChain.Domain.Models
     /// <summary>
     /// Класс справочника единиц измерения.
     /// </summary>
-    public sealed class Units : IdentityBase
+    public class Units : IdentityBase
     {
         /// <summary>
         /// Единица измерения.

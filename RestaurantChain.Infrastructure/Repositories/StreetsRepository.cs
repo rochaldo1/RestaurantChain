@@ -59,5 +59,13 @@ namespace RestaurantChain.Infrastructure.Repositories
 
             return streetsDb?.ToDomain();
         }
+
+        public IReadOnlyCollection<Streets> List()
+        {
+            const string query = "select * from streets";
+            IEnumerable<StreetsDb> entities = Connection.Query<StreetsDb>(query);
+
+            return entities.Select(x => x.ToDomain()).ToArray();
+        }
     }
 }

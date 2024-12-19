@@ -5,7 +5,7 @@ namespace RestaurantChain.Domain.Models
     /// <summary>
     /// Класс номенклатуры в ресторане.
     /// </summary>
-    public sealed class Nomenclature : IdentityBase
+    public class Nomenclature : IdentityBase
     {
         /// <summary>
         /// Идентификатор ресторана.

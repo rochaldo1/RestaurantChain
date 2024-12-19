@@ -3,7 +3,7 @@
     /// <summary>
     /// Класс поставщиков.
     /// </summary>
-    internal sealed class SuppliersDb : IdentityBaseDb
+    internal class SuppliersDb : IdentityBaseDb
     {
         /// <summary>
         /// Идентификатор улицы, на которой находится поставщик.

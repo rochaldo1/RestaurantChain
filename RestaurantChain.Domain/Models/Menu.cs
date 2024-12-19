@@ -5,7 +5,7 @@ namespace RestaurantChain.Domain.Models
     /// <summary>
     /// Класс меню приложения.
     /// </summary>
-    public sealed class Menu : IdentityBase
+    public class Menu : IdentityBase
     {
         /// <summary>
         /// Идентификатор родительского пункта.

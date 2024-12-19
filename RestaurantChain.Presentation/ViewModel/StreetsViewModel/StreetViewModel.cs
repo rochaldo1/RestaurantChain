@@ -1,122 +1,126 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
-using System.Windows.Input;
+
 using RestaurantChain.Domain.Models;
 using RestaurantChain.DomainServices.Contracts;
-using RestaurantChain.Presentation.Classes;
 using RestaurantChain.Presentation.Commands;
-using RestaurantChain.Presentation.View.StreetsViews;
+using RestaurantChain.Presentation.ViewModel.Base;
 
-namespace RestaurantChain.Presentation.ViewModel.StreetsViewModel
+namespace RestaurantChain.Presentation.ViewModel.StreetsViewModel;
+
+internal class StreetViewModel : EditViewModelBase
 {
-    internal class StreetViewModel : ViewModelBase, INotifyPropertyChanged
+    private readonly IStreetsService _streetsService;
+
+    private string _streetName;
+
+    public string StreetName
     {
-        private string _streetName;
-        private readonly IStreetsService _streetsService;
-        private readonly int? _currentStreetId;
-
-        public Action OnSaveSuccess;
-        public Action OnCancel;
-        
-        public ICommand EnterCommand { get; set; }
-
-        public string StreetName
+        get => _streetName;
+        set
         {
-            get => _streetName;
-            set
-            {
-                _streetName = value;
-                OnPropertyChanged("StreetName");
-            }
+            _streetName = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public StreetViewModel(IStreetsService streetsService, int? currentId) : base(currentId)
+    {
+        _streetsService = streetsService;
+
+        if (!Validate())
+        {
+            OnCancel?.Invoke();
         }
 
-        private bool ValidateStreet()
+        EnterCommand = new RelayCommand(Enter);
+    }
+
+    private void Enter(object sender)
+    {
+        if (string.IsNullOrWhiteSpace(_streetName))
         {
-            if (_currentStreetId.HasValue)
-            {
-                var street = _streetsService.Get(_currentStreetId.Value);
-                if (street == null)
-                {
-                    MessageBox.Show("Такой улицы не существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return false;
-                }
-                StreetName = street.StreetName;
-                return true;
-            }
-            return true;
+            MessageBox.Show("Введите название улицы!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            return;
         }
 
-        public StreetViewModel(IStreetsService streetsService, int? currentStreetId)
+        // Сохранить или обновить.
+        bool result = CurrentId.HasValue ? Update() : Create();
+
+        if (result) // Если успех - закрыть окно.
         {
-            _currentStreetId = currentStreetId;
-            _streetsService = streetsService;
-            if (!ValidateStreet())
-                OnCancel?.Invoke();
-            EnterCommand = new RelayCommand(Enter);
+            OnSaveSuccess?.Invoke();
+        }
+    }
+
+    /// <summary>
+    /// Действие обновить.
+    /// </summary>
+    /// <returns>Успех операции.</returns>
+    private bool Update()
+    {
+        var street = new Streets
+        {
+            Id = CurrentId.Value,
+            StreetName = _streetName
+        };
+
+        try
+        {
+            _streetsService.Update(street);
+        }
+        catch (Exception e)
+        {
+            MessageBox.Show(e.Message, "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            return false;
         }
 
-        private void Enter(object sender)
-        {
-            if (string.IsNullOrWhiteSpace(_streetName))
-            {
-                MessageBox.Show("Введите название улицы!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+        return true;
+    }
 
-            // Сохранить или обновить.
-            var result = _currentStreetId.HasValue ? Update() : Create();
-            if (result) // Если успех - закрыть окно.
-                OnSaveSuccess?.Invoke();
+    /// <summary>
+    /// Действие создать.
+    /// </summary>
+    /// <returns>Успех операции.</returns>
+    private bool Create()
+    {
+        var street = new Streets
+        {
+            StreetName = _streetName
+        };
+
+        int id = _streetsService.Create(street);
+
+        if (id == 0)
+        {
+            MessageBox.Show("Такая улица уже существует!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            return false;
         }
 
-        /// <summary>
-        /// Действие обновить.
-        /// </summary>
-        /// <returns>Успех операции.</returns>
-        private bool Update()
+        return true;
+    }
+
+    public override bool Validate()
+    {
+        if (CurrentId.HasValue)
         {
-            var street = new Streets
+            Streets? street = _streetsService.Get(CurrentId.Value);
+
+            if (street == null)
             {
-                Id = _currentStreetId.Value,
-                StreetName = _streetName,
-            };
-            try
-            {
-                _streetsService.Update(street);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Такой улицы не существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+
                 return false;
             }
 
-            return true;
-        }
-
-        /// <summary>
-        /// Действие создать.
-        /// </summary>
-        /// <returns>Успех операции.</returns>
-        private bool Create()
-        {
-            var street = new Streets
-            {
-                StreetName = _streetName,
-            };
-            
-            var id = _streetsService.Create(street);
-            if (id == 0)
-            {
-                MessageBox.Show("Такая улица уже существует!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
+            StreetName = street.StreetName;
 
             return true;
         }
+
+        return true;
     }
 }

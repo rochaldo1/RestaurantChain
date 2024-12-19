@@ -51,6 +51,14 @@ namespace RestaurantChain.Infrastructure.Repositories
             return banksDb?.ToDomain();
         }
 
+        public IReadOnlyCollection<Banks> List()
+        {
+            const string query = "select * from banks";
+            IEnumerable<BanksDb> entities = Connection.Query<BanksDb>(query);
+
+            return entities.Select(x => x.ToDomain()).ToArray();
+        }
+
         public void Update(Banks entity)
         {
             const string query = "update banks set bank_name = @BankName where Id = @id";

@@ -5,7 +5,7 @@ namespace RestaurantChain.Domain.Models
     /// <summary>
     /// Класс прав пользователей.
     /// </summary>
-    public sealed class UserRights : IdentityBase
+    public class UserRights : IdentityBase
     {
         /// <summary>
         /// Идентификатор пользователя.

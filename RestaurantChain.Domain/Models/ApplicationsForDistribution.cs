@@ -5,7 +5,7 @@ namespace RestaurantChain.Domain.Models
     /// <summary>
     /// Класс заявок на распределение продуктов.
     /// </summary>
-    public sealed class ApplicationsForDistribution : IdentityBase
+    public class ApplicationsForDistribution : IdentityBase
     {
         /// <summary>
         /// Идентификатор ресторана, который подал заявку на распределение.

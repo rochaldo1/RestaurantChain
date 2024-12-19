@@ -53,6 +53,14 @@ namespace RestaurantChain.Infrastructure.Repositories
             return unitsDb?.ToDomain();
         }
 
+        public IReadOnlyCollection<Units> List()
+        {
+            const string query = "select * from untis";
+            IEnumerable<UnitsDb> entities = Connection.Query<UnitsDb>(query);
+
+            return entities.Select(x => x.ToDomain()).ToArray();
+        }
+
         public void Update(Units entity)
         {
             const string query = "update units set unit_name = @UnitName where Id = @Id";

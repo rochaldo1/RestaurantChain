@@ -13,10 +13,11 @@ using System.Windows.Threading;
 using System.Windows;
 using System.Text.RegularExpressions;
 using RestaurantChain.Domain.Models;
+using RestaurantChain.Presentation.ViewModel.Base;
 
 namespace RestaurantChain.Presentation.ViewModel
 {
-    public class RegistrationViewModel : ViewModelBase, INotifyPropertyChanged
+    public class RegistrationViewModel : ViewModelBase
     {
         private string _login;
         private SecureString _password;

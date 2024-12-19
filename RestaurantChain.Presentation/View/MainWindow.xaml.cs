@@ -36,16 +36,12 @@ namespace RestaurantChain.Presentation.View
 
         private void Streets_Click(object sender, RoutedEventArgs e)
         {
-            var view = new StreetsViews.StreetWindow(_serviceProvider, null);
+            var view = new StreetsViews.StreetsListWindow(_serviceProvider);
             var window = new Window
             {
                 Content = view
             };
             window.ShowDialog();
-            if (view.IsSuccess)
-            {
-                MessageBox.Show("Улица добавлена");
-            }
         }
 
         private void GroupsOfDishes_Click(object sender, RoutedEventArgs e)

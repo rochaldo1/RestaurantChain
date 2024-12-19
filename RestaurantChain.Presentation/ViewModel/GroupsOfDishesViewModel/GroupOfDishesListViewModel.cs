@@ -6,9 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using RestaurantChain.Presentation.ViewModel.Base;
+
 namespace RestaurantChain.Presentation.ViewModel.GroupsOfDishesViewModel
 {
-    internal class GroupOfDishesListViewModel : ViewModelBase, INotifyPropertyChanged
+    internal class GroupOfDishesListViewModel : ViewModelBase
     {
     }
 }

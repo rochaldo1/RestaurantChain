@@ -1,110 +1,117 @@
-﻿using RestaurantChain.Domain.Models;
+﻿using System.ComponentModel;
+using System.Windows;
+
+using RestaurantChain.Domain.Models;
 using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.Commands;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
+using RestaurantChain.Presentation.ViewModel.Base;
 
-namespace RestaurantChain.Presentation.ViewModel.BanksViewModel
+namespace RestaurantChain.Presentation.ViewModel.BanksViewModel;
+
+internal class BankViewModel : EditViewModelBase
 {
-    internal class BankViewModel : ViewModelBase, INotifyPropertyChanged
+    private readonly IBanksService _banksService;
+
+    private string _bankName;
+
+    public string BankName
     {
-        private string _bankName;
-        private readonly IBanksService _banksService;
-        private readonly int? _currentBankId;
-
-        public Action OnSaveSuccess;
-        public Action OnCancel;
-
-        public ICommand EnterCommand { get; set; }
-
-        public string BankName
+        get => _bankName;
+        set
         {
-            get => _bankName;
-            set
-            {
-                _bankName = value;
-                OnPropertyChanged("BankName");
-            }
+            _bankName = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public BankViewModel(IBanksService banksService, int? currentId) : base(currentId)
+    {
+        _banksService = banksService;
+
+        if (!Validate())
+        {
+            OnCancel?.Invoke();
         }
 
-        private bool ValidateBank()
+        EnterCommand = new RelayCommand(Enter);
+    }
+
+    private void Enter(object sender)
+    {
+        if (string.IsNullOrWhiteSpace(BankName))
         {
-            if (_currentBankId.HasValue)
-            {
-                var bank = _banksService.Get(_currentBankId.Value);
-                if (bank == null)
-                {
-                    MessageBox.Show("Такого банка не существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return false;
-                }
-                BankName = bank.BankName;
-                return true;
-            }
-            return true;
+            MessageBox.Show("Введите название банка!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            return;
         }
 
-        public BankViewModel(IBanksService banksService, int? currentBankId)
+        bool result = CurrentId.HasValue ? Update() : Create();
+
+        if (result)
         {
-            _banksService = banksService;
-            _currentBankId = currentBankId;
-            if (!ValidateBank())
-                OnCancel?.Invoke();
-            EnterCommand = new RelayCommand(Enter);
+            OnSaveSuccess?.Invoke();
+        }
+    }
+
+    private bool Create()
+    {
+        var bank = new Banks
+        {
+            BankName = _bankName
+        };
+
+        int id = _banksService.Create(bank);
+
+        if (id == 0)
+        {
+            MessageBox.Show("Такой банк уже существует!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            return false;
         }
 
-        private void Enter(object sender)
+        return true;
+    }
+
+    private bool Update()
+    {
+        var bank = new Banks
         {
-            if (string.IsNullOrWhiteSpace(BankName))
-            {
-                MessageBox.Show("Введите название банка!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            var result = _currentBankId.HasValue ? Update() : Create();
-            if (result)
-                OnSaveSuccess?.Invoke();
+            Id = CurrentId.Value,
+            BankName = _bankName
+        };
+
+        try
+        {
+            _banksService.Update(bank);
+        }
+        catch (Exception e)
+        {
+            MessageBox.Show(e.Message, "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            return false;
         }
 
-        private bool Create()
-        {
-            var bank = new Banks
-            {
-                BankName = _bankName,
-            };
+        return true;
+    }
 
-            var id = _banksService.Create(bank);
-            if(id == 0)
+    public override bool Validate()
+    {
+        if (CurrentId.HasValue)
+        {
+            Banks? bank = _banksService.Get(CurrentId.Value);
+
+            if (bank == null)
             {
-                MessageBox.Show("Такой банк уже существует!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Такого банка не существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+
                 return false;
             }
 
-            return true;
-        }
-
-        private bool Update()
-        {
-            var bank = new Banks
-            {
-                Id = _currentBankId.Value,
-                BankName = _bankName,
-            };
-            try
-            {
-                _banksService.Update(bank);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
+            BankName = bank.BankName;
 
             return true;
         }
+
+        return true;
     }
 }

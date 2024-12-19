@@ -5,9 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using RestaurantChain.Presentation.ViewModel.Base;
+
 namespace RestaurantChain.Presentation.ViewModel.UnitsViewModel
 {
-    internal class UnitListViewModel : ViewModelBase, INotifyPropertyChanged
+    internal class UnitListViewModel : ViewModelBase
     {
     }
 }

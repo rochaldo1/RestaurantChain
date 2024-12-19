@@ -5,7 +5,7 @@ namespace RestaurantChain.Domain.Models
     /// <summary>
     /// Класс продаж в ресторане (чеки).
     /// </summary>
-    public sealed class Sales : IdentityBase
+    public class Sales : IdentityBase
     {
         /// <summary>
         /// Идентификатор ресторана.

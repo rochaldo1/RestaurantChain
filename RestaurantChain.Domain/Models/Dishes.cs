@@ -5,7 +5,7 @@ namespace RestaurantChain.Domain.Models
     /// <summary>
     /// Класс блюд.
     /// </summary>
-    public sealed class Dishes : IdentityBase
+    public class Dishes : IdentityBase
     {
         /// <summary>
         /// Идентификатор группы блюда.

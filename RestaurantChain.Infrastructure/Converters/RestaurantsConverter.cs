@@ -5,7 +5,7 @@ namespace RestaurantChain.Infrastructure.Converters
 {
     internal static class RestaurantsConverter
     {
-        public static Restaurants ToDomain(this Restaurants restaurant)
+        public static Restaurants ToDomain(this RestaurantsDb restaurant)
         {
             return new Restaurants
             {

@@ -5,7 +5,7 @@ namespace RestaurantChain.Domain.Models
     /// <summary>
     /// Класс продуктов.
     /// </summary>
-    public sealed class Products : IdentityBase
+    public class Products : IdentityBase
     {
         /// <summary>
         /// Идентификатор единицы измерения.

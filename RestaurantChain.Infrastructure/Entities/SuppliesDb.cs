@@ -3,7 +3,7 @@
     /// <summary>
     /// Класс поставок.
     /// </summary>
-    internal sealed class SuppliesDb : IdentityBaseDb
+    internal class SuppliesDb : IdentityBaseDb
     {
         /// <summary>
         /// Идентификатор поставщика.
