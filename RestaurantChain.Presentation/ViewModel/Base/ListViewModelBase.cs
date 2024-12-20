@@ -34,13 +34,17 @@ public abstract class ListViewModelBase<TEntity> : ViewModelBase
     protected abstract void DataBind();
     protected abstract void SetCommands();
 
-    protected static void ShowDialog(UserControl control, int width = 200, int height = 200)
+    protected static void ShowDialog(UserControl control, string title ,int width = 300, int height = 200)
     {
         var window = new Window
         {
             Content = control,
+            WindowStartupLocation = WindowStartupLocation.CenterScreen,
+            ResizeMode = ResizeMode.NoResize,
             Width = width,
-            Height = height
+            Height = height,
+            Title = title,
+            // TODO: Найти какую-нибудь иконку и добавить её тут.
         };
         window.ShowDialog();
     }

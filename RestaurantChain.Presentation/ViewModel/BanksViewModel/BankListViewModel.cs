@@ -42,17 +42,7 @@ namespace RestaurantChain.Presentation.ViewModel.BanksViewModel
         private void CreateEntity(object sender)
         {
             var view = new BankWindow(ServiceProvider, bankId: null);
-            var window = new Window
-            {
-                Content = view,
-                WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                ResizeMode = ResizeMode.NoResize,
-                Height = 200,
-                Width = 300,
-                Title = "Создание записи"
-                // TODO: Найти какую-нибудь иконку и добавить её тут
-            };
-            window.ShowDialog();
+            ShowDialog(view, "Создание записи");
             RefreshData(sender);
         }
 
@@ -64,17 +54,7 @@ namespace RestaurantChain.Presentation.ViewModel.BanksViewModel
             }
             int bankId = ((Banks)DataGrid.SelectedItem).Id;
             var view = new BankWindow(ServiceProvider, bankId);
-            var window = new Window
-            {
-                Content = view,
-                WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                ResizeMode = ResizeMode.NoResize,
-                Height = 200,
-                Width = 300,
-                Title = "Редактирование записи"
-                // TODO: Найти какую-нибудь иконку и добавить её тут
-            };
-            window.ShowDialog();
+            ShowDialog(view, "Редактирование записи");
             RefreshData(sender);
         }
 
