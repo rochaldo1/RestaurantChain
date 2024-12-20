@@ -241,7 +241,7 @@ namespace RestaurantChain.Presentation.ViewModel.SuppliersViewModel
                 SupplierName = supplier.SupplierName;
                 StreetsList = _streetsService.List();
                 SelectedStreet = StreetsList.First(x => x.Id == supplier.StreetId).Id;
-                SupervisorName = supplier.SupplierName;
+                SupervisorName = supplier.SupervisorName;
                 SupervisorLastName = supplier.SupervisorLastName;
                 SupervisorSurname = supplier.SupervisorSurname;
                 PhoneNumber = supplier.PhoneNumber;

@@ -39,7 +39,7 @@ namespace RestaurantChain.Presentation.ViewModel.SuppliersViewModel
         private void CreateEntity(object sender)
         {
             var view = new SupplierWindow(ServiceProvider, supplierId: null);
-            ShowDialog(view, "Создание записи", 450, 600);
+            ShowDialog(view, "Создание записи", 500, 500);
             RefreshData(sender);
         }
 
@@ -51,7 +51,7 @@ namespace RestaurantChain.Presentation.ViewModel.SuppliersViewModel
             }
 
             var view = new SupplierWindow(ServiceProvider, SelectedItem.Id);
-            ShowDialog(view, "Редактирование записи", 450, 600);
+            ShowDialog(view, "Редактирование записи", 500, 500);
             RefreshData(sender);
         }
 
