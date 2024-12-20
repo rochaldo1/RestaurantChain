@@ -36,7 +36,18 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public Suppliers Get(int id)
         {
-            const string query = "select * from  where id = @id";
+            const string query = @"
+    select  Id,
+            street_id               as StreetId,
+            bank_id                 as BankId,
+            supervisor_name         as SupervisorName,
+            supervisor_last_name    as SupervisorLastName,
+            supervisor_surname      as SupervisorSurname,
+            supplier_name           as SupplierName,
+            current_account         as CurrentAccount, 
+            tin                     as TIN 
+    from suppliers 
+    where id = @id";
             var entityDb = Connection.QueryFirstOrDefault<SuppliersDb>(query, new
             {
                 Id = id
@@ -47,14 +58,25 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public void Update(Suppliers entity)
         {
-            const string query = "update  set  where Id = @Id;";
+            const string query = @"update  set  where Id = @Id;";
             var entityDb = entity.ToStorage();
             Connection.ExecuteScalar(query, entityDb);
         }
 
         public Suppliers Get(string name)
         {
-            const string query = "select * from  where  = @name";
+            const string query = @"
+    select  Id,
+            street_id               as StreetId,
+            bank_id                 as BankId,
+            supervisor_name         as SupervisorName,
+            supervisor_last_name    as SupervisorLastName,
+            supervisor_surname      as SupervisorSurname,
+            supplier_name           as SupplierName,
+            current_account         as CurrentAccount,
+            tin                     as TIN 
+    from suppliers 
+    where supplier_name = @name";
             var entityDb = Connection.QueryFirstOrDefault<SuppliersDb>(query, new
             {
                 Name = name
