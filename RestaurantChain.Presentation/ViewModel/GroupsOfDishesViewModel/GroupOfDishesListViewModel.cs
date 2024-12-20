@@ -19,7 +19,7 @@ namespace RestaurantChain.Presentation.ViewModel.GroupsOfDishesViewModel
     internal class GroupOfDishesListViewModel : ListViewModelBase<GroupsOfDishes>
     {
         private readonly IGroupsOfDishesService _groupsOfDishesService;
-        public GroupOfDishesListViewModel(IServiceProvider serviceProvider, DataGrid _dataGrid) : base(serviceProvider, _dataGrid)
+        public GroupOfDishesListViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
             _groupsOfDishesService = serviceProvider.GetRequiredService<IGroupsOfDishesService>();
             DataBind();
@@ -36,7 +36,6 @@ namespace RestaurantChain.Presentation.ViewModel.GroupsOfDishesViewModel
             CreateCommand = new RelayCommand(CreateEntity);
             EditCommand = new RelayCommand(EditEntity);
             DeleteCommand = new RelayCommand(DeleteEntity);
-            RefreshCommand = new RelayCommand(RefreshData);
         }
 
         private void CreateEntity(object sender)
@@ -48,28 +47,28 @@ namespace RestaurantChain.Presentation.ViewModel.GroupsOfDishesViewModel
 
         private void EditEntity(object sender)
         {
-            if (DataGrid.SelectedItem == null)
+            if (!HasSelectedItem())
             {
                 return;
             }
-            int groupId = ((GroupsOfDishes)DataGrid.SelectedItem).Id;
-            var view = new GroupOfDishesWindow(ServiceProvider, groupId);
+            
+            var view = new GroupOfDishesWindow(ServiceProvider, SelectedItem.Id);
             ShowDialog(view, "Редактирование записи");
             RefreshData(sender);
         }
 
         private void DeleteEntity(object sender)
         {
-            if (DataGrid.SelectedItem == null)
+            if (!HasSelectedItem())
             {
                 return;
             }
-            int groupId = ((GroupsOfDishes)DataGrid.SelectedItem).Id;
-            GroupsOfDishes group = _groupsOfDishesService.Get(groupId);
+            
+            GroupsOfDishes group = _groupsOfDishesService.Get(SelectedItem.Id);
 
             if (MessageBox.Show($"Удалить группу блюд '{group.GroupName}'?", "Удаление записи", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                _groupsOfDishesService.Delete(groupId);
+                _groupsOfDishesService.Delete(SelectedItem.Id);
             }
             else
             {

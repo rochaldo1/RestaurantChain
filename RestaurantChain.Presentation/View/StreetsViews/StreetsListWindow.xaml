@@ -14,10 +14,9 @@
             <MenuItem Header="Создать" x:Name="CreateMenuItem" Command="{Binding CreateCommand}" />
             <MenuItem Header="Редактировать" x:Name="EditMenuItem" Command="{Binding EditCommand}" />
             <MenuItem Header="Удалить" x:Name="DeleteMenuItem" Command="{Binding DeleteCommand}" />
-            <MenuItem Header="Обновить" x:Name="UpdateMenuItem" Command="{Binding RefreshCommand}" />
         </Menu>
 
-        <DataGrid Grid.Row="1" Grid.Column="0" x:Name="Grid" AutoGenerateColumns="False" ItemsSource="{Binding DataSource}"
+        <DataGrid Grid.Row="1" Grid.Column="0" x:Name="Grid" AutoGenerateColumns="False" ItemsSource="{Binding DataSource}" SelectedItem="{Binding SelectedItem}"
                   HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" SelectionMode="Single"
                   IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserReorderColumns="False"
                   CanUserDeleteRows="False" RowBackground="White" AlternatingRowBackground="#E6E6E6" FontSize="16"

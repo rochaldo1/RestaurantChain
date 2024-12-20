@@ -19,7 +19,7 @@ namespace RestaurantChain.Presentation.ViewModel.BanksViewModel
     {
         private readonly IBanksService _banksService;
 
-        public BankListViewModel(IServiceProvider serviceProvider, DataGrid _dataGrid) : base(serviceProvider, _dataGrid)
+        public BankListViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
             _banksService = serviceProvider.GetRequiredService<IBanksService>();
             DataBind();
@@ -36,7 +36,6 @@ namespace RestaurantChain.Presentation.ViewModel.BanksViewModel
             CreateCommand = new RelayCommand(CreateEntity);
             EditCommand = new RelayCommand(EditEntity);
             DeleteCommand = new RelayCommand(DeleteEntity);
-            RefreshCommand = new RelayCommand(RefreshData);
         }
 
         private void CreateEntity(object sender)
@@ -48,28 +47,28 @@ namespace RestaurantChain.Presentation.ViewModel.BanksViewModel
 
         private void EditEntity(object sender)
         {
-            if (DataGrid.SelectedItem == null)
+            if (!HasSelectedItem())
             {
                 return;
             }
-            int bankId = ((Banks)DataGrid.SelectedItem).Id;
-            var view = new BankWindow(ServiceProvider, bankId);
+            
+            var view = new BankWindow(ServiceProvider, SelectedItem.Id);
             ShowDialog(view, "Редактирование записи");
             RefreshData(sender);
         }
 
         private void DeleteEntity(object sender)
         {
-            if (DataGrid.SelectedItem == null)
+            if (!HasSelectedItem())
             {
                 return;
             }
-            int bankId = ((Banks)DataGrid.SelectedItem).Id;
-            Banks bank = _banksService.Get(bankId);
+            
+            Banks bank = _banksService.Get(SelectedItem.Id);
 
             if (MessageBox.Show($"Удалить банк '{bank.BankName}'?", "Удаление записи", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                _banksService.Delete(bankId);
+                _banksService.Delete(SelectedItem.Id);
             }
             else
             {

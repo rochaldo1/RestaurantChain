@@ -24,7 +24,7 @@ namespace RestaurantChain.Presentation.View.UnitsViews
         public UnitsListWindow(IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            DataContext = new UnitListViewModel(serviceProvider, Grid);
+            DataContext = new UnitListViewModel(serviceProvider);
         }
     }
 }

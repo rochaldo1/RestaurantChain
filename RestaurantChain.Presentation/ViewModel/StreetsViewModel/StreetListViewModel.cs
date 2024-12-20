@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,7 +14,7 @@ public class StreetListViewModel : ListViewModelBase<Streets>
 {
     private readonly IStreetsService _streetsService;
 
-    public StreetListViewModel(IServiceProvider serviceProvider, DataGrid grid) : base(serviceProvider, grid)
+    public StreetListViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
     {
         _streetsService = serviceProvider.GetRequiredService<IStreetsService>();
         DataBind();
@@ -32,7 +31,6 @@ public class StreetListViewModel : ListViewModelBase<Streets>
         CreateCommand = new RelayCommand(CreateEntity);
         EditCommand = new RelayCommand(EditEntity);
         DeleteCommand = new RelayCommand(DeleteEntity);
-        RefreshCommand = new RelayCommand(RefreshData);
     }
 
     private void CreateEntity(object sender)
@@ -44,28 +42,28 @@ public class StreetListViewModel : ListViewModelBase<Streets>
 
     private void EditEntity(object sender)
     {
-        if (DataGrid.SelectedItem == null)
+        if (!HasSelectedItem())
         {
             return;
         }
-        int streetId = ((Streets)DataGrid.SelectedItem).Id;
-        var view = new StreetWindow(ServiceProvider, streetId);
+
+        var view = new StreetWindow(ServiceProvider, SelectedItem.Id);
         ShowDialog(view, "Редактирование записи");
         RefreshData(sender);
     }
 
     private void DeleteEntity(object sender)
     {
-        if (DataGrid.SelectedItem == null)
+        if (!HasSelectedItem())
         {
             return;
         }
-        int streetId = ((Streets)DataGrid.SelectedItem).Id;
-        Streets street = _streetsService.Get(streetId);
+        
+        Streets street = _streetsService.Get(SelectedItem.Id);
 
         if (MessageBox.Show($"Удалить улицу '{street.StreetName}'?", "Удаление записи", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
         {
-            _streetsService.Delete(streetId);
+            _streetsService.Delete(SelectedItem.Id);
         }
         else
         {

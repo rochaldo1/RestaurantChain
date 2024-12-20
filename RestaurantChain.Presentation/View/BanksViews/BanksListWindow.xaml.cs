@@ -24,7 +24,7 @@ namespace RestaurantChain.Presentation.View.BanksViews
         public BanksListWindow(IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            DataContext = new BankListViewModel(serviceProvider, Grid);
+            DataContext = new BankListViewModel(serviceProvider);
         }
     }
 }

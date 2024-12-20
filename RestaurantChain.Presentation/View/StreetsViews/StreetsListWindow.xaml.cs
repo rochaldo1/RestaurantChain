@@ -16,6 +16,6 @@ public partial class StreetsListWindow : UserControl
     public StreetsListWindow(IServiceProvider serviceProvider)
     {
         InitializeComponent();
-        DataContext = new StreetListViewModel(serviceProvider, Grid);
+        DataContext = new StreetListViewModel(serviceProvider);
     }
 }

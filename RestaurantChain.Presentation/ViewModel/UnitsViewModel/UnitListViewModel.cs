@@ -19,7 +19,7 @@ namespace RestaurantChain.Presentation.ViewModel.UnitsViewModel
     {
         private readonly IUnitsService _unitsService;
 
-        public UnitListViewModel(IServiceProvider serviceProvider, DataGrid _dataGrid) : base(serviceProvider, _dataGrid)
+        public UnitListViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
         {
             _unitsService = serviceProvider.GetRequiredService<IUnitsService>();
             DataBind();
@@ -36,7 +36,6 @@ namespace RestaurantChain.Presentation.ViewModel.UnitsViewModel
             CreateCommand = new RelayCommand(CreateEntity);
             EditCommand = new RelayCommand(EditEntity);
             DeleteCommand = new RelayCommand(DeleteEntity);
-            RefreshCommand = new RelayCommand(RefreshData);
         }
 
         private void CreateEntity(object sender)
@@ -48,28 +47,28 @@ namespace RestaurantChain.Presentation.ViewModel.UnitsViewModel
 
         private void EditEntity(object sender)
         {
-            if (DataGrid.SelectedItem == null)
+            if (!HasSelectedItem())
             {
                 return;
             }
-            int unitId = ((Units)DataGrid.SelectedItem).Id;
-            var view = new UnitWindow(ServiceProvider, unitId);
+            
+            var view = new UnitWindow(ServiceProvider, SelectedItem.Id);
             ShowDialog(view, "Редактирование записи");
             RefreshData(sender);
         }
 
         private void DeleteEntity(object sender)
         {
-            if (DataGrid.SelectedItem == null)
+            if (!HasSelectedItem())
             {
                 return;
             }
-            int unitId = ((Units)DataGrid.SelectedItem).Id;
-            Units unit = _unitsService.Get(unitId);
+            
+            Units unit = _unitsService.Get(SelectedItem.Id);
 
             if (MessageBox.Show($"Удалить единицу измерения '{unit.UnitName}'?", "Удаление записи", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                _unitsService.Delete(unitId);
+                _unitsService.Delete(SelectedItem.Id);
             }
             else
             {

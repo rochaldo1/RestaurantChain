@@ -24,7 +24,7 @@ namespace RestaurantChain.Presentation.View.GroupsOfDishesViews
         public GroupsOfDishesListWindow(IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            DataContext = new GroupOfDishesListViewModel(serviceProvider, Grid);
+            DataContext = new GroupOfDishesListViewModel(serviceProvider);
         }
     }
 }
