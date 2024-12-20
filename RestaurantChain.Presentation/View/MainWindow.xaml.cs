@@ -91,5 +91,18 @@ namespace RestaurantChain.Presentation.View
         {
 
         }
+
+        private void Suppliers_Click(object sender, RoutedEventArgs e)
+        {
+            var view = new SuppliersViews.SuppliersListWindow(_serviceProvider);
+            var window = new Window
+            {
+                Content = view,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                Title = "Поставщики",
+                // TODO: Сделать добавление иконки database.png
+            };
+            window.ShowDialog();
+        }
     }
 }

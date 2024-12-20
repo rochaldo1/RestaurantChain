@@ -18,6 +18,7 @@
                 <MenuItem Header="Банки" x:Name="Banks" Click="Banks_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
                 <MenuItem Header="Группы блюд" x:Name="GroupsOfDishes" Click="GroupsOfDishes_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
                 <MenuItem Header="Единицы измерения" x:Name="Units" Click="Units_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
+                <MenuItem Header="Поставщики" x:Name="Suppliers" Click="Suppliers_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
                 <MenuItem Header="Улицы" x:Name="Streets" Click="Streets_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
             </MenuItem>
             <MenuItem Header="Справка" x:Name="Help" FontFamily="Segoe UI Variable Display Light" FontSize="16">

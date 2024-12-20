@@ -15,7 +15,15 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public int Create(GroupsOfDishes entity)
         {
-            const string query = "insert into groups_of_dishes (group_name) values(@GroupName) returning Id";
+            const string query = @"
+    insert into groups_of_dishes (
+                                    group_name
+                                 ) 
+                values(
+                        @GroupName
+                      ) 
+    returning Id;
+    ";
             var entityDb = entity.ToStorage();
             var groupId = Connection.ExecuteScalar<int>(query, entityDb);
 
@@ -24,7 +32,11 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public void Delete(int id)
         {
-            const string query = "delete from groups_of_dishes where Id = @Id";
+            const string query = @"
+    delete 
+    from groups_of_dishes 
+    where Id = @Id;
+    ";
             Connection.ExecuteScalar<int>(query, new
             {
                 Id = id
@@ -33,7 +45,12 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public GroupsOfDishes Get(int id)
         {
-            const string query = "select Id, group_name as GroupName from groups_of_dishes where id = @id";
+            const string query = @"
+    select  Id, 
+            group_name as GroupName 
+    from groups_of_dishes 
+    where id = @id;
+    ";
             var groupsDb = Connection.QueryFirstOrDefault<GroupsOfDishesDb>(query, new
             {
                 Id = id
@@ -44,7 +61,12 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public GroupsOfDishes Get(string groupName)
         {
-            const string query = "select Id, group_name as GroupName from groups_of_dishes where group_name = @name";
+            const string query = @"
+    select  Id, 
+            group_name as GroupName 
+    from groups_of_dishes 
+    where group_name = @name;
+    ";
             var groupsDb = Connection.QueryFirstOrDefault<GroupsOfDishesDb>(query, new
             {
                 Name = groupName
@@ -54,7 +76,12 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public IReadOnlyCollection<GroupsOfDishes> List()
         {
-            const string query = "select Id, group_name as GroupName from groups_of_dishes order by group_name";
+            const string query = @"
+    select  Id, 
+            group_name as GroupName 
+    from groups_of_dishes 
+    order by group_name;
+    ";
             IEnumerable<GroupsOfDishesDb> entities = Connection.Query<GroupsOfDishesDb>(query);
 
             return entities.Select(x => x.ToDomain()).ToArray();
@@ -62,7 +89,11 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public void Update(GroupsOfDishes entity)
         {
-            const string query = "update groups_of_dishes set group_name = @GroupName where Id = @Id";
+            const string query = @"
+    update groups_of_dishes 
+        set group_name = @GroupName 
+    where Id = @Id;
+    ";
             var entityDb = entity.ToStorage();
             Connection.ExecuteScalar(query, entityDb);
         }

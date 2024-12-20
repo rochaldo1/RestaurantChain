@@ -22,14 +22,22 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public Users Get(int id)
         {
-            var query = "select * from users where id = @id";
+            var query = @"
+    select * 
+    from users 
+    where id = @id;
+    ";
             var user = Connection.QueryFirstOrDefault<UsersDb>(query, new { Id = id });
             return user?.ToDomain();
         }
 
         public void Update(Users entity)
         {
-            const string query = "update users set password = @password where id = @id";
+            const string query = @"
+    update users 
+        set password = @password 
+    where id = @id;
+    ";
             var hashPassword = GetPasswordHash(entity.Password);
             Connection.ExecuteScalar(query, new
             {
@@ -40,7 +48,17 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public int Create(Users entity)
         {
-            const string query = "insert into users(login, password) values(@login, @password) returning Id";
+            const string query = @"
+    insert into users(
+                        login, 
+                        password
+                     ) 
+                values(
+                        @login, 
+                        @password
+                      ) 
+    returning Id;
+    ";
             var hashPassword = GetPasswordHash(entity.Password);
             var id = Connection.ExecuteScalar<int>(query, new
             {
@@ -52,7 +70,11 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public Users Get(string login, string password)
         {
-            const string query = "select * from users where login = @login and password = @password";
+            const string query = @"
+    select * 
+    from users 
+    where login = @login and password = @password;
+    ";
             var hashPassword = GetPasswordHash(password);
             var user = Connection.QueryFirstOrDefault<UsersDb>(query, new
             {
@@ -64,7 +86,11 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public Users Get(string login)
         {
-            const string query = "select * from users where login = @login";
+            const string query = @"
+    select * 
+    from users 
+    where login = @login;
+    ";
             var user = Connection.QueryFirstOrDefault<UsersDb>(query, new
             {
                 Login = login

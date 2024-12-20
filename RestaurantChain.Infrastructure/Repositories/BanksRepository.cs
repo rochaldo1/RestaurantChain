@@ -15,7 +15,15 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public int Create(Banks entity)
         {
-            const string query = "insert into banks (bank_name) values(@BankName) returning Id";
+            const string query = @"
+    insert into banks (
+                        bank_name
+                      ) 
+                values(
+                        @BankName
+                      ) 
+    returning Id;
+    ";
             var entityDb = entity.ToStorage();
             var bankId = Connection.ExecuteScalar<int>(query, entityDb);
 
@@ -24,7 +32,11 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public void Delete(int id)
         {
-            const string query = "delete from banks where Id = @id";
+            const string query = @"
+    delete 
+    from banks 
+    where Id = @id;
+    ";
             Connection.ExecuteScalar<int>(query, new
             {
                 Id = id
@@ -33,7 +45,12 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public Banks Get(int id)
         {
-            const string query = "select Id, bank_name as BankName from banks where id = @id";
+            const string query = @"
+    select  Id, 
+            bank_name as BankName 
+    from banks 
+    where id = @id;
+    ";
             var banksDb = Connection.QueryFirstOrDefault<BanksDb>(query, new
             {
                 Id = id
@@ -44,7 +61,12 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public Banks Get(string bankName)
         {
-            const string query = "select Id, bank_name as BankName from banks where bank_name = @name";
+            const string query = @"
+    select  Id, 
+            bank_name as BankName 
+    from banks 
+    where bank_name = @name;
+    ";
             var banksDb = Connection.QueryFirstOrDefault<BanksDb>(query, new
             {
                 Name = bankName
@@ -55,7 +77,12 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public IReadOnlyCollection<Banks> List()
         {
-            const string query = "select Id, bank_name as BankName from banks order by bank_name";
+            const string query = @"
+    select  Id, 
+            bank_name as BankName 
+    from banks 
+    order by bank_name;
+    ";
             IEnumerable<BanksDb> entities = Connection.Query<BanksDb>(query);
 
             return entities.Select(x => x.ToDomain()).ToArray();
@@ -63,7 +90,11 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public void Update(Banks entity)
         {
-            const string query = "update banks set bank_name = @BankName where Id = @id";
+            const string query = @"
+    update banks 
+        set bank_name = @BankName 
+    where Id = @id;
+    ";
             var entityDb = entity.ToStorage();
             Connection.ExecuteScalar(query, entityDb);
         }

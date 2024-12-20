@@ -15,7 +15,15 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public int Create(Streets entity)
         {
-            const string query = "insert into streets (street_name) values(@StreetName) returning Id;";
+            const string query = @"
+    insert into streets (
+                            street_name
+                        )
+                values(
+                        @StreetName
+                      ) 
+    returning Id;
+    ";
             var entityDb = entity.ToStorage();
             var streetId = Connection.ExecuteScalar<int>(query, entityDb);
 
@@ -24,7 +32,11 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public void Delete(int id)
         {
-            const string query = "delete from streets where Id = @Id;";
+            const string query = @"
+    delete 
+    from streets 
+    where Id = @Id;
+    ";
             Connection.ExecuteScalar(query, new
             {
                 Id = id,
@@ -33,7 +45,12 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public Streets Get(int id)
         {
-            const string query = "select Id, street_name as StreetName from streets where id = @id";
+            const string query = @"
+    select  Id,
+            street_name as StreetName 
+    from streets 
+    where id = @id
+    ";
             var streetsDb = Connection.QueryFirstOrDefault<StreetsDb>(query, new
             {
                 Id = id
@@ -44,14 +61,23 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public void Update(Streets entity)
         {
-            const string query = "update streets set street_name = @StreetName where Id = @Id;";
+            const string query = @"
+    update streets 
+        set street_name = @StreetName 
+    where Id = @Id;
+    ";
             var entityDb = entity.ToStorage();
             Connection.ExecuteScalar(query, entityDb);
         }
 
         public Streets Get(string streetName)
         {
-            const string query = "select Id, street_name as StreetName from streets where street_name = @name";
+            const string query = @"
+    select  Id, 
+            street_name as StreetName 
+    from streets 
+    where street_name = @name;
+    ";
             var streetsDb = Connection.QueryFirstOrDefault<StreetsDb>(query, new
             {
                 Name = streetName
@@ -62,7 +88,12 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public IReadOnlyCollection<Streets> List()
         {
-            const string query = "select Id, street_name as StreetName from streets order by street_name";
+            const string query = @"
+    select  Id, 
+            street_name as StreetName 
+    from streets 
+    order by street_name;
+    ";
             IEnumerable<StreetsDb> entities = Connection.Query<StreetsDb>(query);
 
             return entities.Select(x => x.ToDomain()).ToArray();

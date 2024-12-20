@@ -15,7 +15,15 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public int Create(Units entity)
         {
-            const string query = "insert into units (unit_name) values(@UnitName) returning Id";
+            const string query = @"
+    insert into units (
+                        unit_name
+                      ) 
+                values(
+                        @UnitName
+                      ) 
+    returning Id;
+    ";
             var entityDb = entity.ToStorage();
             var unitId = Connection.ExecuteScalar<int>(query, entityDb);
 
@@ -24,7 +32,11 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public void Delete(int id)
         {
-            const string query = "delete from units where Id = @Id";
+            const string query = @"
+    delete 
+    from units 
+    where Id = @Id;
+    ";
             Connection.ExecuteScalar<int>(query, new
             {
                 Id = id
@@ -33,7 +45,12 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public Units Get(int id)
         {
-            const string query = "select Id, unit_name as UnitName from units where id = @id";
+            const string query = @"
+    select  Id, 
+            unit_name as UnitName 
+    from units 
+    where id = @id;
+    ";
             var unitsDb = Connection.QueryFirstOrDefault<UnitsDb>(query, new
             {
                 Id = id
@@ -44,7 +61,12 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public Units Get(string unitName)
         {
-            const string query = "select Id, unit_name as UnitName from untis where unit_name = @name";
+            const string query = @"
+    select  Id, 
+            unit_name as UnitName 
+    from untis 
+    where unit_name = @name;
+    ";
             var unitsDb = Connection.QueryFirstOrDefault<UnitsDb>(query, new
             {
                 Name = unitName
@@ -55,7 +77,12 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public IReadOnlyCollection<Units> List()
         {
-            const string query = "select Id, unit_name as UnitName from units order by unit_name";
+            const string query = @"
+    select  Id, 
+            unit_name as UnitName 
+    from units 
+    order by unit_name;
+    ";
             IEnumerable<UnitsDb> entities = Connection.Query<UnitsDb>(query);
 
             return entities.Select(x => x.ToDomain()).ToArray();
@@ -63,7 +90,11 @@ namespace RestaurantChain.Infrastructure.Repositories
 
         public void Update(Units entity)
         {
-            const string query = "update units set unit_name = @UnitName where Id = @Id";
+            const string query = @"
+    update units 
+        set unit_name = @UnitName 
+    where Id = @Id;
+    ";
             var entityDb = entity.ToStorage();
             Connection.ExecuteScalar(query, entityDb);
         }

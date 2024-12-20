@@ -1,15 +1,10 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-
-using Microsoft.Extensions.DependencyInjection;
-
-using RestaurantChain.DomainServices.Contracts;
+﻿using System.Windows.Controls;
 using RestaurantChain.Presentation.ViewModel.StreetsViewModel;
 
 namespace RestaurantChain.Presentation.View.StreetsViews;
 
 /// <summary>
-///     Логика взаимодействия для StreetsListWindow.xaml
+/// Логика взаимодействия для StreetsListWindow.xaml
 /// </summary>
 public partial class StreetsListWindow : UserControl
 {

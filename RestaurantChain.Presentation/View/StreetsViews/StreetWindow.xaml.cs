@@ -21,10 +21,10 @@ namespace RestaurantChain.Presentation.View.StreetsViews
             var streetsService = serviceProvider.GetRequiredService<IStreetsService>();
             InitializeComponent();
             DataContext = new StreetViewModel(streetsService, streetId);
-            if (DataContext is StreetViewModel loginViewModel)
+            if (DataContext is StreetViewModel streetViewModel)
             {
-                loginViewModel.OnSaveSuccess += SaveSuccess;
-                loginViewModel.OnCancel += SaveError;
+                streetViewModel.OnSaveSuccess += SaveSuccess;
+                streetViewModel.OnCancel += SaveError;
             }
         }
 
