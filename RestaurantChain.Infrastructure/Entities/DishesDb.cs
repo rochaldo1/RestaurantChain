@@ -3,7 +3,7 @@
     /// <summary>
     /// Класс блюд.
     /// </summary>
-    internal sealed class DishesDb : IdentityBaseDb
+    internal class DishesDb : IdentityBaseDb
     {
         /// <summary>
         /// Идентификатор группы блюда.

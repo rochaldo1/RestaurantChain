@@ -107,12 +107,12 @@ namespace RestaurantChain.Infrastructure.Repositories
         public IReadOnlyCollection<ProductsView> List()
         {
             const string query = @"
-    select  p.id as id,
-		    p.unit_id as UnitId,
-		    p.product_name as ProductName,
-		    p.quantity as Quantity,
-		    p.price as Price,
-		    u.unit_name as UnitName
+    select  p.id            as id,
+		    p.unit_id       as UnitId,
+		    p.product_name  as ProductName,
+		    p.quantity      as Quantity,
+		    p.price         as Price,
+		    u.unit_name     as UnitName
     from public.products p
     join public.units u on p.unit_id = u.id
     order by product_name;

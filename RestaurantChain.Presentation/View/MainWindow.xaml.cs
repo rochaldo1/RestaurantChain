@@ -40,53 +40,25 @@ namespace RestaurantChain.Presentation.View
         private void Streets_Click(object sender, RoutedEventArgs e)
         {
             var view = new StreetsViews.StreetsListWindow(_serviceProvider);
-            var window = new Window
-            {
-                Content = view,
-                WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                Title = "Улицы",
-                Icon = IconHelper.GetListIcon()
-            };
-            window.ShowDialog();
+            mainView.Content = view;
         }
 
         private void GroupsOfDishes_Click(object sender, RoutedEventArgs e)
         {
             var view = new GroupsOfDishesViews.GroupsOfDishesListWindow(_serviceProvider);
-            var window = new Window
-            {
-                Content = view,
-                WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                Title = "Группы блюд",
-                Icon = IconHelper.GetListIcon()
-            };
-            window.ShowDialog();
+            mainView.Content = view;
         }
 
         private void Banks_Click(object sender, RoutedEventArgs e)
         {
             var view = new BanksViews.BanksListWindow(_serviceProvider);
-            var window = new Window
-            {
-                Content = view,
-                WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                Title = "Банки",
-                Icon = IconHelper.GetListIcon()
-            };
-            window.ShowDialog();
+            mainView.Content = view;
         }
 
         private void Units_Click(object sender, RoutedEventArgs e)
         {
             var view = new UnitsViews.UnitsListWindow(_serviceProvider);
-            var window = new Window
-            {
-                Content = view,
-                WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                Title = "Банки",
-                Icon = IconHelper.GetListIcon()
-            };
-            window.ShowDialog();
+            mainView.Content = view;
         }
 
         private void Content_Click(object sender, RoutedEventArgs e)
@@ -97,27 +69,19 @@ namespace RestaurantChain.Presentation.View
         private void Suppliers_Click(object sender, RoutedEventArgs e)
         {
             var view = new SuppliersViews.SuppliersListWindow(_serviceProvider);
-            var window = new Window
-            {
-                Content = view,
-                WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                Title = "Поставщики",
-                Icon = IconHelper.GetListIcon()
-            };
-            window.ShowDialog();
+            mainView.Content = view;
         }
 
         private void Products_Click(object sender, RoutedEventArgs e)
         {
             var view = new ProductsViews.ProductsListWindow(_serviceProvider);
-            var window = new Window
-            {
-                Content = view,
-                WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                Title = "Продукты",
-                Icon = IconHelper.GetListIcon()
-            };
-            window.ShowDialog();
+            mainView.Content = view;
+        }
+
+        private void Dishes_Click(object sender, RoutedEventArgs e)
+        {
+            var view = new DishesViews.DishesListWindow(_serviceProvider);
+            mainView.Content = view;
         }
     }
 }

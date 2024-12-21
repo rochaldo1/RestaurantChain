@@ -17,6 +17,7 @@
             <MenuItem Header="Продукты" x:Name="Products" Click="Products_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
             <MenuItem Header="Справочники" x:Name="Catalogues" FontFamily="Segoe UI Variable Display Light" FontSize="16">
                 <MenuItem Header="Банки" x:Name="Banks" Click="Banks_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
+                <MenuItem Header="Блюда" x:Name="Dishes" Click="Dishes_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
                 <MenuItem Header="Группы блюд" x:Name="GroupsOfDishes" Click="GroupsOfDishes_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
                 <MenuItem Header="Единицы измерения" x:Name="Units" Click="Units_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
                 <MenuItem Header="Поставщики" x:Name="Suppliers" Click="Suppliers_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
@@ -27,6 +28,7 @@
                 <MenuItem Header="О программе" x:Name="AboutProgram" Click="AboutProgram_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
             </MenuItem>
         </Menu>
-        <StackPanel Margin="0,74,0,-74"/>
+        
+        <ContentControl x:Name="mainView" Margin="0,25,0,0" />
     </Grid>
 </Window>

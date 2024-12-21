@@ -62,7 +62,6 @@ public partial class BankWindow : UserControl
 
                 break;
             case Key.Enter:
-                btnOk.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
                 btnOk.Command.Execute(null);
 
                 break;

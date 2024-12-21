@@ -16,6 +16,7 @@ namespace RestaurantChain.DomainServices
             services.AddSingleton<IUnitsService, UnitsService>();
             services.AddSingleton<ISuppliersService, SuppliersService>();
             services.AddSingleton<IProductsService, ProductsService>();
+            services.AddSingleton<IDishesService, DishesService>();
         }
     }
 }
