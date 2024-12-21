@@ -158,7 +158,13 @@ namespace RestaurantChain.Presentation.ViewModel.SuppliersViewModel
 
         private void Enter(object sender)
         {
-            // TODO: Написать проверки на все поля
+            if (string.IsNullOrEmpty(_supplierName))
+            {
+                MessageBox.Show("Введите название поставщика!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                return;
+            }
+
 
             bool result = CurrentId.HasValue ? Update() : Create();
 

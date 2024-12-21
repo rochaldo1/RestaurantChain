@@ -104,5 +104,18 @@ namespace RestaurantChain.Presentation.View
             };
             window.ShowDialog();
         }
+
+        private void Products_Click(object sender, RoutedEventArgs e)
+        {
+            var view = new ProductsViews.ProductsListWindow(_serviceProvider);
+            var window = new Window
+            {
+                Content = view,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                Title = "Продукты",
+                // TODO: Сделать добавление иконки database.png
+            };
+            window.ShowDialog();
+        }
     }
 }

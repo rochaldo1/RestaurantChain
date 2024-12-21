@@ -14,6 +14,7 @@
                 <MenuItem Header="Изменить пароль" x:Name="ChangePassword" Click="ChangePassword_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
                 <MenuItem Header="Настройка" x:Name="Settings" Click="Settings_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
             </MenuItem>
+            <MenuItem Header="Продукты" x:Name="Products" Click="Products_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
             <MenuItem Header="Справочники" x:Name="Catalogues" FontFamily="Segoe UI Variable Display Light" FontSize="16">
                 <MenuItem Header="Банки" x:Name="Banks" Click="Banks_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
                 <MenuItem Header="Группы блюд" x:Name="GroupsOfDishes" Click="GroupsOfDishes_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
@@ -26,6 +27,6 @@
                 <MenuItem Header="О программе" x:Name="AboutProgram" Click="AboutProgram_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
             </MenuItem>
         </Menu>
-        <StackPanel />
+        <StackPanel Margin="0,74,0,-74"/>
     </Grid>
 </Window>
