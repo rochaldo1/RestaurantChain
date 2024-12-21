@@ -58,49 +58,5 @@ namespace RestaurantChain.Presentation.View.ProductsViews
             IsSuccess = false;
             ((Window)Parent).Close();
         }
-
-        private void Txt_OnPreviewTextInputInt(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !TextHelpers.IsTextAllowed(e.Text);
-        }
-
-        private void TextBoxPastingInt(object sender, DataObjectPastingEventArgs e)
-        {
-            if (e.DataObject.GetDataPresent(typeof(string)))
-            {
-                var text = (string)e.DataObject.GetData(typeof(string));
-
-                if (!TextHelpers.IsTextAllowed(text))
-                {
-                    e.CancelCommand();
-                }
-            }
-            else
-            {
-                e.CancelCommand();
-            }
-        }
-
-        private void Txt_OnPreviewTextInputDecimal(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !TextHelpers.IsDecimalAllowed(e.Text);
-        }
-
-        private void TextBoxPastingDecimal(object sender, DataObjectPastingEventArgs e)
-        {
-            if (e.DataObject.GetDataPresent(typeof(string)))
-            {
-                var text = (string)e.DataObject.GetData(typeof(string));
-
-                if (!TextHelpers.IsDecimalAllowed(text))
-                {
-                    e.CancelCommand();
-                }
-            }
-            else
-            {
-                e.CancelCommand();
-            }
-        }
     }
 }

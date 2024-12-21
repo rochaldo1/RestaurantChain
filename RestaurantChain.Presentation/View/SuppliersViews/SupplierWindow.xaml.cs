@@ -56,28 +56,6 @@ public partial class SupplierWindow : UserControl
         ((Window)Parent).Close();
     }
 
-    private void Txt_OnPreviewTextInput(object sender, TextCompositionEventArgs e)
-    {
-        e.Handled = !TextHelpers.IsTextAllowed(e.Text);
-    }
-
-    private void TextBoxPasting(object sender, DataObjectPastingEventArgs e)
-    {
-        if (e.DataObject.GetDataPresent(typeof(string)))
-        {
-            var text = (string)e.DataObject.GetData(typeof(string));
-
-            if (!TextHelpers.IsTextAllowed(text))
-            {
-                e.CancelCommand();
-            }
-        }
-        else
-        {
-            e.CancelCommand();
-        }
-    }
-
     private void PreviewKeyDownHandle(object sender, KeyEventArgs e)
     {
         switch (e.Key)
