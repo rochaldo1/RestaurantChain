@@ -12,6 +12,12 @@ public class App : Application
     }
     protected override void OnStartup(StartupEventArgs e)
     {
+        var rsrc = "Resources/StyleResources.xaml";
+        var currentRsrc = new Uri(rsrc, UriKind.RelativeOrAbsolute);
+        Current.Resources.MergedDictionaries.Add(new ResourceDictionary
+        {
+            Source = currentRsrc
+        });
         logInWindow.Show();  // отображаем главное окно на экране
         base.OnStartup(e);
     }

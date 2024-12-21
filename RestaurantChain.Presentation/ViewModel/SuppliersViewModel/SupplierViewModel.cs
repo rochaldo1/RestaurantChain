@@ -22,13 +22,13 @@ namespace RestaurantChain.Presentation.ViewModel.SuppliersViewModel
 
         private string _supplierName;
         private IReadOnlyCollection<Streets> _streetsList;
-        private int _selectedStreet;
+        private int _selectedStreetId;
         private string _supervisorName;
         private string _supervisorLastName;
         private string _supervisorSurname;
         private string _phoneNumber;
         private IReadOnlyCollection<Banks> _banksList;
-        private int _selectedBank;
+        private int _selectedBankId;
         private string _currentAccount;
         private string _tin;
 
@@ -52,12 +52,12 @@ namespace RestaurantChain.Presentation.ViewModel.SuppliersViewModel
             }
         }
 
-        public int SelectedStreet
+        public int SelectedStreetId
         {
-            get => _selectedStreet;
+            get => _selectedStreetId;
             set
             {
-                _selectedStreet = value;
+                _selectedStreetId = value;
                 OnPropertyChanged();
             }
         }
@@ -112,12 +112,12 @@ namespace RestaurantChain.Presentation.ViewModel.SuppliersViewModel
             }
         }
 
-        public int SelectedBank
+        public int SelectedBankId
         {
-            get => _selectedBank;
+            get => _selectedBankId;
             set
             {
-                _selectedBank = value;
+                _selectedBankId = value;
                 OnPropertyChanged();
             }
         }
@@ -174,12 +174,12 @@ namespace RestaurantChain.Presentation.ViewModel.SuppliersViewModel
             {
                 Id = CurrentId.Value,
                 SupplierName = _supplierName,
-                StreetId = _selectedStreet,
+                StreetId = _selectedStreetId,
                 SupervisorName = _supervisorName,
                 SupervisorLastName = _supervisorLastName,
                 SupervisorSurname = _supervisorSurname,
                 PhoneNumber = _phoneNumber,
-                BankId = _selectedBank,
+                BankId = _selectedBankId,
                 CurrentAccount = _currentAccount,
                 TIN = _tin
             };
@@ -203,12 +203,12 @@ namespace RestaurantChain.Presentation.ViewModel.SuppliersViewModel
             var supplier = new Suppliers
             {
                 SupplierName = _supplierName,
-                StreetId = _selectedStreet,
+                StreetId = _selectedStreetId,
                 SupervisorName = _supervisorName,
                 SupervisorLastName = _supervisorLastName,
                 SupervisorSurname = _supervisorSurname,
                 PhoneNumber = _phoneNumber,
-                BankId = _selectedBank,
+                BankId = _selectedBankId,
                 CurrentAccount = _currentAccount,
                 TIN = _tin
             };
@@ -240,13 +240,13 @@ namespace RestaurantChain.Presentation.ViewModel.SuppliersViewModel
 
                 SupplierName = supplier.SupplierName;
                 StreetsList = _streetsService.List();
-                SelectedStreet = StreetsList.First(x => x.Id == supplier.StreetId).Id;
+                SelectedStreetId = StreetsList.First(x => x.Id == supplier.StreetId).Id;
                 SupervisorName = supplier.SupervisorName;
                 SupervisorLastName = supplier.SupervisorLastName;
                 SupervisorSurname = supplier.SupervisorSurname;
                 PhoneNumber = supplier.PhoneNumber;
                 BanksList = _banksService.List();
-                SelectedBank = BanksList.First(x => x.Id == supplier.BankId).Id;
+                SelectedBankId = BanksList.First(x => x.Id == supplier.BankId).Id;
                 CurrentAccount = supplier.CurrentAccount;
                 TIN = supplier.TIN;
 

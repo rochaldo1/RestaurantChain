@@ -6,6 +6,13 @@
              xmlns:local="clr-namespace:RestaurantChain.Presentation.View.SuppliersViews"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="500">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/StyleResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.2*"/>
@@ -14,7 +21,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <TextBlock Background="#E6E6E6" Height="32" TextAlignment="Center" FontSize="16" Margin="10,6,10,6" FontFamily="Segoe UI Variable Display Light"><Run Language="ru-ru" Text="Введите необходимые данные"/></TextBlock>
+            <TextBlock Style="{StaticResource LblHeaderStyle}" Text="Введите необходимые данные"></TextBlock>
         </Grid>
 
         <Grid Grid.Row="1">
@@ -33,25 +40,25 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBlock Text="Название" Grid.Column="0" Grid.Row="0" FontSize="16" FontFamily="Segoe UI Variable Display Light" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <TextBlock Text="Улица" Grid.Column="0" Grid.Row="1" FontSize="16" FontFamily="Segoe UI Variable Display Light" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <TextBlock Text="Имя руководителя" Grid.Column="0" Grid.Row="2" FontSize="16" FontFamily="Segoe UI Variable Display Light" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <TextBlock Text="Фамилия руководителя" Grid.Column="0" Grid.Row="3" FontSize="16" FontFamily="Segoe UI Variable Display Light" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <TextBlock Text="Отчество рукводителя" Grid.Column="0" Grid.Row="4" FontSize="16" FontFamily="Segoe UI Variable Display Light" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <TextBlock Text="Телефон руководителя" Grid.Column="0" Grid.Row="5" FontSize="16" FontFamily="Segoe UI Variable Display Light" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <TextBlock Text="Банк" Grid.Column="0" Grid.Row="6" FontSize="16" FontFamily="Segoe UI Variable Display Light" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <TextBlock Text="Расчётный счёт" Grid.Column="0" Grid.Row="7" FontSize="16" FontFamily="Segoe UI Variable Display Light" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <TextBlock Text="ИНН" Grid.Column="0" Grid.Row="8" FontSize="16" FontFamily="Segoe UI Variable Display Light" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            <TextBlock Text="Название" Grid.Column="0" Grid.Row="0" Style="{StaticResource LblStyle}"/>
+            <TextBlock Text="Улица" Grid.Column="0" Grid.Row="1"  Style="{StaticResource LblStyle}"/>
+            <TextBlock Text="Имя руководителя" Grid.Column="0" Grid.Row="2"  Style="{StaticResource LblStyle}"/>
+            <TextBlock Text="Фамилия руководителя" Grid.Column="0" Grid.Row="3"  Style="{StaticResource LblStyle}"/>
+            <TextBlock Text="Отчество рукводителя" Grid.Column="0" Grid.Row="4"  Style="{StaticResource LblStyle}"/>
+            <TextBlock Text="Телефон руководителя" Grid.Column="0" Grid.Row="5"  Style="{StaticResource LblStyle}"/>
+            <TextBlock Text="Банк" Grid.Column="0" Grid.Row="6"  Style="{StaticResource LblStyle}"/>
+            <TextBlock Text="Расчётный счёт" Grid.Column="0" Grid.Row="7"  Style="{StaticResource LblStyle}"/>
+            <TextBlock Text="ИНН" Grid.Column="0" Grid.Row="8"  Style="{StaticResource LblStyle}"/>
 
-            <TextBox Grid.Column="1" Grid.Row="0" TextWrapping="NoWrap" Text="{Binding SupplierName}" FontSize="16" Name="txtSupplierName" FontFamily="Segoe UI Variable Display Light" Margin="10,0,10,0" VerticalAlignment="Center"/>
-            <ComboBox Grid.Column="1" Grid.Row="1" IsEditable="False" ItemsSource="{Binding StreetsList}" SelectedItem="{Binding SelectedStreet}" Height="24"  FontSize="16" FontFamily="Segoe UI Variable Display Light" Margin="10,0,10,0"/>
-            <TextBox Grid.Column="1" Grid.Row="2" TextWrapping="NoWrap" Text="{Binding SupervisorName}" FontSize="16" Name="txtSupervisorName" FontFamily="Segoe UI Variable Display Light" Margin="10,0,10,0" VerticalAlignment="Center"/>
-            <TextBox Grid.Column="1" Grid.Row="3" TextWrapping="NoWrap" Text="{Binding SupervisorLastName}" FontSize="16" Name="txtSupervisorLastName" FontFamily="Segoe UI Variable Display Light" Margin="10,0,10,0" VerticalAlignment="Center"/>
-            <TextBox Grid.Column="1" Grid.Row="4" TextWrapping="NoWrap" Text="{Binding SupervisorSurname}" FontSize="16" Name="txtSupervisorSurname" FontFamily="Segoe UI Variable Display Light" Margin="10,0,10,0" VerticalAlignment="Center"/>
-            <TextBox Grid.Column="1" Grid.Row="5" TextWrapping="NoWrap" Text="{Binding PhoneNumber}" FontSize="16" Name="txtPhoneNumber" FontFamily="Segoe UI Variable Display Light" Margin="10,0,10,0" VerticalAlignment="Center"/>
-            <ComboBox Grid.Column="1" Grid.Row="6" IsEditable="False" ItemsSource="{Binding BanksList}" SelectedItem="{Binding SelectedBank}" Height="24"  FontSize="16" FontFamily="Segoe UI Variable Display Light" Margin="10,0,10,0"/>
-            <TextBox Grid.Column="1" Grid.Row="7" TextWrapping="NoWrap" Text="{Binding CurrentAccount}" FontSize="16" Name="txtCurrentAccount" FontFamily="Segoe UI Variable Display Light" Margin="10,0,10,0" VerticalAlignment="Center"/>
-            <TextBox Grid.Column="1" Grid.Row="8" TextWrapping="NoWrap" Text="{Binding TIN}" FontSize="16" Name="txtTIN" FontFamily="Segoe UI Variable Display Light" Margin="10,0,10,0" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding SupplierName}" Style="{StaticResource TbStyle}" />
+            <ComboBox Grid.Column="1" Grid.Row="1" DisplayMemberPath="StreetName" SelectedValuePath="Id" SelectedValue="{Binding SelectedStreetId}" ItemsSource="{Binding StreetsList}" Style="{StaticResource CmbStyle}" />
+            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding SupervisorName}"   Style="{StaticResource TbStyle}"/>
+            <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding SupervisorLastName}" Style="{StaticResource TbStyle}"/>
+            <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding SupervisorSurname}" Style="{StaticResource TbStyle}" />
+            <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding PhoneNumber}" Style="{StaticResource TbStyle}"/>
+            <ComboBox Grid.Column="1" Grid.Row="6" DisplayMemberPath="BankName" SelectedValuePath="Id" SelectedValue="{Binding SelectedBankId}" ItemsSource="{Binding BanksList}" SelectedItem="{Binding SelectedBank}" Style="{StaticResource CmbStyle}"  />
+            <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding CurrentAccount}" Style="{StaticResource TbStyle}"/>
+            <TextBox Grid.Column="1" Grid.Row="8" Text="{Binding TIN}" Style="{StaticResource TbStyle}"/>
         </Grid>
 
         <Grid Grid.Row="2">
@@ -59,8 +66,8 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Content="Продолжить" HorizontalAlignment="Center" VerticalAlignment="Center" Name="OkBtn" Command="{Binding EnterCommand}" FontFamily="Segoe UI Variable Display Light" FontSize="16" Width="100"/>
-            <Button Content="Отмена" HorizontalAlignment="Center"  VerticalAlignment="Center" Name="CancelBtn" Click="CancelBtn_OnClick" FontFamily="Segoe UI Variable Display Light" FontSize="16" Width="100" Grid.Column="1"/>
+            <Button Content="Продолжить" Command="{Binding EnterCommand}" Style="{StaticResource BtnStyle}" />
+            <Button Content="Отмена" Click="CancelBtn_OnClick" Grid.Column="1" Style="{StaticResource BtnStyle}"/>
         </Grid>
     </Grid>
 </UserControl>

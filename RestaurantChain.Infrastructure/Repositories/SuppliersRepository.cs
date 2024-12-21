@@ -37,7 +37,7 @@ namespace RestaurantChain.Infrastructure.Repositories
                             @SupervisorLastName,
                             @SupervisorSurname,
                             @SupplierName,
-                            @PhoneNumber
+                            @PhoneNumber,
                             @CurrentAccount,
                             @TIN
                       ) 
@@ -96,7 +96,7 @@ namespace RestaurantChain.Infrastructure.Repositories
         set supervisor_last_name    = @SupervisorLastName,
         set supervisor_surname      = @SupervisorSurname,
         set supplier_name           = @SupplierName,
-        set phone_number            = @PhoneNumber
+        set phone_number            = @PhoneNumber,
         set current_account         = @CurrentAccount,
         set tin                     = @TIN
     where Id = @Id;
@@ -115,7 +115,7 @@ namespace RestaurantChain.Infrastructure.Repositories
             supervisor_last_name    as SupervisorLastName,
             supervisor_surname      as SupervisorSurname,
             supplier_name           as SupplierName,
-            phone_number            as PhoneNumber
+            phone_number            as PhoneNumber,
             current_account         as CurrentAccount,
             tin                     as TIN 
     from suppliers 
