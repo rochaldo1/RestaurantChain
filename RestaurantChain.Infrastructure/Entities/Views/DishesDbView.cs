@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RestaurantChain.Infrastructure.Entities.Views
 {
-    internal class DishesDbView : DishesDb
+    internal sealed class DishesDbView : DishesDb
     {
         public string GroupName { get; set; }
     }

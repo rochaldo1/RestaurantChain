@@ -110,6 +110,8 @@ namespace RestaurantChain.Infrastructure.Repositories
             price = @Price
     where Id = @Id;
     ";
+            var entityDb = entity.ToStorage();
+            Connection.ExecuteScalar(query, entityDb);
         }
     }
 }
