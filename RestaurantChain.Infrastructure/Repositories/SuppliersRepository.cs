@@ -89,16 +89,16 @@ namespace RestaurantChain.Infrastructure.Repositories
         public void Update(Suppliers entity)
         {
             const string query = @"
-    update suppliers 
-        set street_id               = @StreetId,
-        set bank_id                 = @BankId,
-        set supervisor_name         = @SupervisorName,
-        set supervisor_last_name    = @SupervisorLastName,
-        set supervisor_surname      = @SupervisorSurname,
-        set supplier_name           = @SupplierName,
-        set phone_number            = @PhoneNumber,
-        set current_account         = @CurrentAccount,
-        set tin                     = @TIN
+    update suppliers set 
+            street_id               = @StreetId,
+            bank_id                 = @BankId,
+            supervisor_name         = @SupervisorName,
+            supervisor_last_name    = @SupervisorLastName,
+            supervisor_surname      = @SupervisorSurname,
+            supplier_name           = @SupplierName,
+            phone_number            = @PhoneNumber,
+            current_account         = @CurrentAccount,
+            tin                     = @TIN
     where Id = @Id;
     ";
             var entityDb = entity.ToStorage();

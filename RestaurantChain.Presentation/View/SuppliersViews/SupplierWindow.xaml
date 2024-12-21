@@ -15,7 +15,7 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.1*"/>
             <RowDefinition/>
             <RowDefinition Height="0.1*"/>
         </Grid.RowDefinitions>
@@ -56,7 +56,7 @@
             <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding SupervisorLastName}" Style="{StaticResource TbStyle}"/>
             <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding SupervisorSurname}" Style="{StaticResource TbStyle}" />
             <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding PhoneNumber}" Style="{StaticResource TbStyle}"/>
-            <ComboBox Grid.Column="1" Grid.Row="6" DisplayMemberPath="BankName" SelectedValuePath="Id" SelectedValue="{Binding SelectedBankId}" ItemsSource="{Binding BanksList}" SelectedItem="{Binding SelectedBank}" Style="{StaticResource CmbStyle}"  />
+            <ComboBox Grid.Column="1" Grid.Row="6" DisplayMemberPath="BankName" SelectedValuePath="Id" SelectedValue="{Binding SelectedBankId}" ItemsSource="{Binding BanksList}" Style="{StaticResource CmbStyle}"  />
             <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding CurrentAccount}" Style="{StaticResource TbStyle}"/>
             <TextBox Grid.Column="1" Grid.Row="8" Text="{Binding TIN}" Style="{StaticResource TbStyle}"/>
         </Grid>
