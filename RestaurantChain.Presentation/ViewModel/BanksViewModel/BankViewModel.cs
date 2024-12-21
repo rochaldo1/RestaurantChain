@@ -36,8 +36,9 @@ internal class BankViewModel : EditViewModelBase
         EnterCommand = new RelayCommand(Enter);
     }
 
-    private void Enter(object sender)
+    public void Enter(object sender)
     {
+        OnPropertyChanged();
         if (string.IsNullOrWhiteSpace(BankName))
         {
             MessageBox.Show("Введите название банка!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);

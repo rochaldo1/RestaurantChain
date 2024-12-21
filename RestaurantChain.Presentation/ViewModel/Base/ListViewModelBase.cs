@@ -1,7 +1,8 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
+
+using RestaurantChain.Presentation.Classes.Helpers;
 
 namespace RestaurantChain.Presentation.ViewModel.Base;
 
@@ -59,12 +60,13 @@ public abstract class ListViewModelBase<TEntity> : ViewModelBase
             ResizeMode = ResizeMode.NoResize,
             Width = width,
             Height = height,
-            Title = title
+            Title = title,
+            Icon = IconHelper.GetEditIcon()
         };
         window.ShowDialog();
     }
 
-    public bool HasSelectedItem()
+    protected bool HasSelectedItem()
     {
         return _selectedItem != null;
     }

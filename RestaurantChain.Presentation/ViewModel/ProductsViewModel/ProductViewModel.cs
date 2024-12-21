@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace RestaurantChain.Presentation.ViewModel.ProductsViewModel
 {
@@ -85,12 +86,118 @@ namespace RestaurantChain.Presentation.ViewModel.ProductsViewModel
 
         private void Enter(object sender)
         {
+            Products product = ValidateAndGetModelOnSave();
+
+            if (product == null)
+            {
+                return;
+            }
+
+            bool result = CurrentId.HasValue ? Update(product) : Create(product);
+
+            if (result)
+            {
+                OnSaveSuccess?.Invoke();
+            }
+        }
+
+        private bool Update(Products product)
+        {
+            try
+            {
+                _productsService.Update(product);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool Create(Products product)
+        {
+            int id = _productsService.Create(product);
+
+            if (id == 0)
+            {
+                MessageBox.Show("Такой продукт уже существует!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                return false;
+            }
+
+            return true;
+        }
+
+        private Products ValidateAndGetModelOnSave()
+        {
+            var product = new Products
+            {
+                Id = CurrentId ?? 0,
+                ProductName = _productName,
+                UnitId = _selectedUnitId,
+                Quantity = _quantity,
+                Price = _price,
+            };
+
+            var errors = new List<string>();
+
+            if (string.IsNullOrEmpty(product.ProductName))
+            {
+                errors.Add("Название продукта");
+            }
             
+            if (product.UnitId <= 0)
+            {
+                errors.Add("Единица измерения");
+            }
+
+            if (product.Quantity < 0)
+            {
+                errors.Add("Количество на складе");
+            }
+
+            if (product.Price <= 0)
+            {
+                errors.Add("Стоимость за единицу, руб.");
+            }
+
+            if (errors.Count > 0)
+            {
+                MessageBox.Show($"Поля не заполнены: {string.Join(",", errors)}", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                return null;
+            }
+
+            return product;
         }
 
         public override bool Validate()
         {
-            throw new NotImplementedException();
+            if (CurrentId.HasValue)
+            {
+                Products? product = _productsService.Get(CurrentId.Value);
+
+                if (product == null)
+                {
+                    MessageBox.Show("Такого продукта не существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                    return false;
+                }
+
+                ProductName = product.ProductName;
+                UnitsList = _unitsService.List();
+                SelectedUnitId = UnitsList.First(x => x.Id == product.UnitId).Id;
+                Quantity = product.Quantity;
+                Price = product.Price;
+
+                return true;
+            }
+
+            UnitsList = _unitsService.List();
+            return true;
         }
     }
 }

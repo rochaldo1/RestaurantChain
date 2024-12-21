@@ -1,8 +1,12 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
+
 using Microsoft.Extensions.DependencyInjection;
 using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.ViewModel.StreetsViewModel;
+using RestaurantChain.Presentation.ViewModel.UnitsViewModel;
 
 namespace RestaurantChain.Presentation.View.StreetsViews
 {
@@ -26,6 +30,8 @@ namespace RestaurantChain.Presentation.View.StreetsViews
                 streetViewModel.OnSaveSuccess += SaveSuccess;
                 streetViewModel.OnCancel += SaveError;
             }
+            PreviewKeyDown += PreviewKeyDownHandle;
+            Loaded += (sender, args) => { txtBox.Focus(); };
         }
 
         private void CancelBtn_OnClick(object sender, RoutedEventArgs e)
@@ -44,5 +50,21 @@ namespace RestaurantChain.Presentation.View.StreetsViews
             IsSuccess = false;
             ((Window)Parent).Close();
         }
+        
+        private void PreviewKeyDownHandle(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Escape:
+                    ((Window)Parent).Close();
+
+                    break;
+                case Key.Enter:
+                    btnOk.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+
+                    break;
+            }
+        }
+
     }
 }

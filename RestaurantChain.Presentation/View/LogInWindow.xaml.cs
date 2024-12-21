@@ -5,7 +5,11 @@ using System.Windows.Controls;
 
 using RestaurantChain.DomainServices.Contracts;
 using System.Reflection;
+using System.Windows.Input;
+
 using Microsoft.Extensions.DependencyInjection;
+
+using RestaurantChain.Presentation.ViewModel.UnitsViewModel;
 
 namespace RestaurantChain.Presentation.View
 {
@@ -27,6 +31,7 @@ namespace RestaurantChain.Presentation.View
             {
                 loginViewModel.OnLogInSuccess += LogInSuccess;
             }
+            PreviewKeyDown += PreviewKeyDownHandle;
         }
         
         public void LogInSuccess()
@@ -60,6 +65,21 @@ namespace RestaurantChain.Presentation.View
             RegistrationWindow registrationWindow = new(_serviceProvider);
             registrationWindow.Owner = this;
             registrationWindow.ShowDialog();
+        }
+        
+        private void PreviewKeyDownHandle(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Escape:
+                    Close();
+
+                    break;
+                case Key.Enter:
+                    (DataContext as LogInViewModel)?.Enter(this);
+
+                    break;
+            }
         }
     }
 }

@@ -107,7 +107,7 @@ namespace RestaurantChain.Presentation.ViewModel
             _timerForWindow.Start();
             _timerForWindow.Tick += TimerTick;
         }
-        private void Enter(object sender)
+        public void Enter(object sender)
         {
             string oldPassword = new System.Net.NetworkCredential(string.Empty, _oldPassword).Password;
 

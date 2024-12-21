@@ -1,266 +1,326 @@
-﻿using RestaurantChain.Domain.Models;
-using RestaurantChain.Domain.Models.View;
+﻿using System.Windows;
+
+using RestaurantChain.Domain.Models;
 using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.Commands;
 using RestaurantChain.Presentation.ViewModel.Base;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 
-namespace RestaurantChain.Presentation.ViewModel.SuppliersViewModel
+namespace RestaurantChain.Presentation.ViewModel.SuppliersViewModel;
+
+internal class SupplierViewModel : EditViewModelBase
 {
-    internal class SupplierViewModel : EditViewModelBase
+    private readonly ISuppliersService _suppliersService;
+    private readonly IStreetsService _streetsService;
+    private readonly IBanksService _banksService;
+
+    private string _supplierName;
+    private IReadOnlyCollection<Streets> _streetsList;
+    private int _selectedStreetId;
+    private string _supervisorName;
+    private string _supervisorLastName;
+    private string _supervisorSurname;
+    private string _phoneNumber;
+    private IReadOnlyCollection<Banks> _banksList;
+    private int _selectedBankId;
+    private string _currentAccount;
+    private string _tin;
+
+    public string SupplierName
     {
-        private readonly ISuppliersService _suppliersService;
-        private readonly IStreetsService _streetsService;
-        private readonly IBanksService _banksService;
-
-        private string _supplierName;
-        private IReadOnlyCollection<Streets> _streetsList;
-        private int _selectedStreetId;
-        private string _supervisorName;
-        private string _supervisorLastName;
-        private string _supervisorSurname;
-        private string _phoneNumber;
-        private IReadOnlyCollection<Banks> _banksList;
-        private int _selectedBankId;
-        private string _currentAccount;
-        private string _tin;
-
-        public string SupplierName
+        get => _supplierName;
+        set
         {
-            get => _supplierName;
-            set
-            {
-                _supplierName = value;
-                OnPropertyChanged();
-            }
+            _supplierName = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public IReadOnlyCollection<Streets> StreetsList
+    {
+        get => _streetsList;
+        set
+        {
+            _streetsList = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public int SelectedStreetId
+    {
+        get => _selectedStreetId;
+        set
+        {
+            _selectedStreetId = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public string SupervisorName
+    {
+        get => _supervisorName;
+        set
+        {
+            _supervisorName = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public string SupervisorLastName
+    {
+        get => _supervisorLastName;
+        set
+        {
+            _supervisorLastName = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public string SupervisorSurname
+    {
+        get => _supervisorSurname;
+        set
+        {
+            _supervisorSurname = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public string PhoneNumber
+    {
+        get => _phoneNumber;
+        set
+        {
+            _phoneNumber = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public IReadOnlyCollection<Banks> BanksList
+    {
+        get => _banksList;
+        set
+        {
+            _banksList = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public int SelectedBankId
+    {
+        get => _selectedBankId;
+        set
+        {
+            _selectedBankId = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public string CurrentAccount
+    {
+        get => _currentAccount;
+        set
+        {
+            _currentAccount = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public string TIN
+    {
+        get => _tin;
+        set
+        {
+            _tin = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public SupplierViewModel(ISuppliersService suppliersService, IStreetsService streetsService, IBanksService banksService, int? currentId) : base(currentId)
+    {
+        _suppliersService = suppliersService;
+        _streetsService = streetsService;
+        _banksService = banksService;
+
+        if (!Validate())
+        {
+            OnCancel?.Invoke();
         }
 
-        public IReadOnlyCollection<Streets> StreetsList
+        EnterCommand = new RelayCommand(Enter);
+    }
+
+    public void Enter(object sender)
+    {
+        Suppliers supplier = ValidateAndGetModelOnSave();
+
+        if (supplier == null)
         {
-            get => _streetsList;
-            set
-            {
-                _streetsList = value;
-                OnPropertyChanged();
-            }
+            return;
         }
 
-        public int SelectedStreetId
+        bool result = CurrentId.HasValue ? Update(supplier) : Create(supplier);
+
+        if (result)
         {
-            get => _selectedStreetId;
-            set
-            {
-                _selectedStreetId = value;
-                OnPropertyChanged();
-            }
+            OnSaveSuccess?.Invoke();
+        }
+    }
+
+    private bool Update(Suppliers supplier)
+    {
+        try
+        {
+            _suppliersService.Update(supplier);
+        }
+        catch (Exception e)
+        {
+            MessageBox.Show(e.Message, "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            return false;
         }
 
-        public string SupervisorName
+        return true;
+    }
+
+    private bool Create(Suppliers supplier)
+    {
+        int id = _suppliersService.Create(supplier);
+
+        if (id == 0)
         {
-            get => _supervisorName;
-            set
-            {
-                _supervisorName = value;
-                OnPropertyChanged();
-            }
+            MessageBox.Show("Такой поставщик уже существует!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            return false;
         }
 
-        public string SupervisorLastName
+        return true;
+    }
+
+    private Suppliers ValidateAndGetModelOnSave()
+    {
+        var supplier = new Suppliers
         {
-            get => _supervisorLastName;
-            set
-            {
-                _supervisorLastName = value;
-                OnPropertyChanged();
-            }
+            Id = CurrentId ?? 0,
+            SupplierName = _supplierName,
+            StreetId = _selectedStreetId,
+            SupervisorName = _supervisorName,
+            SupervisorLastName = _supervisorLastName,
+            SupervisorSurname = _supervisorSurname,
+            PhoneNumber = _phoneNumber,
+            BankId = _selectedBankId,
+            CurrentAccount = _currentAccount,
+            TIN = _tin
+        };
+
+        var errors = new List<string>();
+
+        if (string.IsNullOrEmpty(supplier.SupplierName))
+        {
+            errors.Add("Название поставщика");
         }
 
-        public string SupervisorSurname
+        if (string.IsNullOrEmpty(supplier.SupervisorLastName))
         {
-            get => _supervisorSurname;
-            set
-            {
-                _supervisorSurname = value;
-                OnPropertyChanged();
-            }
+            errors.Add("Фамилия поставщика");
         }
 
-        public string PhoneNumber
+        if (string.IsNullOrEmpty(supplier.SupervisorSurname))
         {
-            get => _phoneNumber;
-            set
-            {
-                _phoneNumber = value;
-                OnPropertyChanged();
-            }
+            errors.Add("Отчество поставщика");
         }
 
-        public IReadOnlyCollection<Banks> BanksList
+        if (string.IsNullOrEmpty(supplier.SupervisorName))
         {
-            get => _banksList;
-            set
-            {
-                _banksList = value;
-                OnPropertyChanged();
-            }
+            errors.Add("Имя поставщика");
         }
 
-        public int SelectedBankId
+        if (string.IsNullOrEmpty(supplier.CurrentAccount))
         {
-            get => _selectedBankId;
-            set
-            {
-                _selectedBankId = value;
-                OnPropertyChanged();
-            }
+            errors.Add("Номер счета");
         }
 
-        public string CurrentAccount
+        if (string.IsNullOrEmpty(supplier.PhoneNumber))
         {
-            get => _currentAccount;
-            set
-            {
-                _currentAccount = value;
-                OnPropertyChanged();
-            }
+            errors.Add("Телефон");
         }
 
-        public string TIN
+        if (string.IsNullOrEmpty(supplier.TIN))
         {
-            get => _tin;
-            set
-            {
-                _tin = value;
-                OnPropertyChanged();
-            }
+            errors.Add("ИНН");
         }
 
-        public SupplierViewModel(ISuppliersService suppliersService, IStreetsService streetsService, IBanksService banksService, int? currentId) : base(currentId)
+        if (supplier.BankId <= 0)
         {
-            _suppliersService = suppliersService;
-            _streetsService = streetsService;
-            _banksService = banksService;
-
-            if (!Validate())
-            {
-                OnCancel?.Invoke();
-            }
-
-            EnterCommand = new RelayCommand(Enter);
+            errors.Add("Банк");
         }
 
-        private void Enter(object sender)
+        if (supplier.StreetId <= 0)
         {
-            if (string.IsNullOrEmpty(_supplierName))
-            {
-                MessageBox.Show("Введите название поставщика!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
-
-                return;
-            }
-
-
-            bool result = CurrentId.HasValue ? Update() : Create();
-
-            if (result)
-            {
-                OnSaveSuccess?.Invoke();
-            }
+            errors.Add("Улица");
         }
 
-        private bool Update()
+        if (errors.Count > 0)
         {
-            var supplier = new Suppliers
-            {
-                Id = CurrentId.Value,
-                SupplierName = _supplierName,
-                StreetId = _selectedStreetId,
-                SupervisorName = _supervisorName,
-                SupervisorLastName = _supervisorLastName,
-                SupervisorSurname = _supervisorSurname,
-                PhoneNumber = _phoneNumber,
-                BankId = _selectedBankId,
-                CurrentAccount = _currentAccount,
-                TIN = _tin
-            };
+            MessageBox.Show($"Поля не заполнены: {string.Join(",", errors)}", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
 
-            try
+            return null;
+        }
+
+        if (supplier.TIN.Length < 10)
+        {
+            MessageBox.Show("ИНН не может быть меньше 10 цифр", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            return null;
+        }
+
+        if (supplier.PhoneNumber.Length < 11)
+        {
+            MessageBox.Show("Телефон не может быть меньше 11 цифр", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            return null;
+        }
+
+        if (supplier.CurrentAccount.Length < 20)
+        {
+            MessageBox.Show("Номер счета не может быть меньше 10 цифр", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            return null;
+        }
+
+        return supplier;
+    }
+
+    public override bool Validate()
+    {
+        if (CurrentId.HasValue)
+        {
+            Suppliers? supplier = _suppliersService.Get(CurrentId.Value);
+
+            if (supplier == null)
             {
-                _suppliersService.Update(supplier);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Такого поставщика не существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
 
                 return false;
             }
 
-            return true;
-        }
-
-        private bool Create()
-        {
-            var supplier = new Suppliers
-            {
-                SupplierName = _supplierName,
-                StreetId = _selectedStreetId,
-                SupervisorName = _supervisorName,
-                SupervisorLastName = _supervisorLastName,
-                SupervisorSurname = _supervisorSurname,
-                PhoneNumber = _phoneNumber,
-                BankId = _selectedBankId,
-                CurrentAccount = _currentAccount,
-                TIN = _tin
-            };
-
-            int id = _suppliersService.Create(supplier);
-
-            if (id == 0)
-            {
-                MessageBox.Show("Такой поставщик уже существует!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
-
-                return false;
-            }
-
-            return true;
-        }
-
-        public override bool Validate()
-        {
-            if (CurrentId.HasValue)
-            {
-                Suppliers? supplier = _suppliersService.Get(CurrentId.Value);
-
-                if (supplier == null)
-                {
-                    MessageBox.Show("Такого поставщика не существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-
-                    return false;
-                }
-
-                SupplierName = supplier.SupplierName;
-                StreetsList = _streetsService.List();
-                SelectedStreetId = StreetsList.First(x => x.Id == supplier.StreetId).Id;
-                SupervisorName = supplier.SupervisorName;
-                SupervisorLastName = supplier.SupervisorLastName;
-                SupervisorSurname = supplier.SupervisorSurname;
-                PhoneNumber = supplier.PhoneNumber;
-                BanksList = _banksService.List();
-                SelectedBankId = BanksList.First(x => x.Id == supplier.BankId).Id;
-                CurrentAccount = supplier.CurrentAccount;
-                TIN = supplier.TIN;
-
-                return true;
-            }
+            SupplierName = supplier.SupplierName;
             StreetsList = _streetsService.List();
+            SelectedStreetId = StreetsList.First(x => x.Id == supplier.StreetId).Id;
+            SupervisorName = supplier.SupervisorName;
+            SupervisorLastName = supplier.SupervisorLastName;
+            SupervisorSurname = supplier.SupervisorSurname;
+            PhoneNumber = supplier.PhoneNumber;
             BanksList = _banksService.List();
+            SelectedBankId = BanksList.First(x => x.Id == supplier.BankId).Id;
+            CurrentAccount = supplier.CurrentAccount;
+            TIN = supplier.TIN;
+
             return true;
         }
+
+        StreetsList = _streetsService.List();
+        BanksList = _banksService.List();
+
+        return true;
     }
 }

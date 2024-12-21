@@ -1,60 +1,76 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
+
+using Microsoft.Extensions.DependencyInjection;
+
 using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.ViewModel.BanksViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace RestaurantChain.Presentation.View.BanksViews
+namespace RestaurantChain.Presentation.View.BanksViews;
+
+/// <summary>
+///     Логика взаимодействия для BankWindow.xaml
+/// </summary>
+public partial class BankWindow : UserControl
 {
     /// <summary>
-    /// Логика взаимодействия для BankWindow.xaml
+    ///     Результат сохранения данных.
     /// </summary>
-    public partial class BankWindow : UserControl
+    public bool IsSuccess { private set; get; }
+
+    public BankWindow(IServiceProvider serviceProvider, int? bankId)
     {
-        /// <summary>
-        /// Результат сохранения данных.
-        /// </summary>
-        public bool IsSuccess { private set; get; }
+        var banksService = serviceProvider.GetRequiredService<IBanksService>();
+        InitializeComponent();
+        DataContext = new BankViewModel(banksService, bankId);
 
-        public BankWindow(IServiceProvider serviceProvider, int? bankId)
+        if (DataContext is BankViewModel bankViewModel)
         {
-            var banksService = serviceProvider.GetRequiredService<IBanksService>();
-            InitializeComponent();
-            DataContext = new BankViewModel(banksService, bankId);
-            if (DataContext is BankViewModel bankViewModel)
-            {
-                bankViewModel.OnSaveSuccess += SaveSuccess;
-                bankViewModel.OnCancel += SaveError;
-            }
+            bankViewModel.OnSaveSuccess += SaveSuccess;
+            bankViewModel.OnCancel += SaveError;
         }
 
-        private void CancelBtn_OnClick(object sender, RoutedEventArgs e)
-        {
-            ((Window)Parent).Close();
-        }
+        PreviewKeyDown += PreviewKeyDownHandle;
+        Loaded += (sender, args) => { txtBox.Focus(); };
+    }
 
-        public void SaveSuccess()
-        {
-            IsSuccess = true;
-            ((Window)Parent).Close();
-        }
+    private void CancelBtn_OnClick(object sender, RoutedEventArgs e)
+    {
+        ((Window)Parent).Close();
+    }
 
-        public void SaveError()
+    public void SaveSuccess()
+    {
+        IsSuccess = true;
+        ((Window)Parent).Close();
+    }
+
+    public void SaveError()
+    {
+        IsSuccess = false;
+        ((Window)Parent).Close();
+    }
+
+    private void PreviewKeyDownHandle(object sender, KeyEventArgs e)
+    {
+        switch (e.Key)
         {
-            IsSuccess = false;
-            ((Window)Parent).Close();
+            case Key.Escape:
+                ((Window)Parent).Close();
+
+                break;
+            case Key.Enter:
+                btnOk.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                btnOk.Command.Execute(null);
+
+                break;
         }
+    }
+
+    private void BtnOk_OnClick(object sender, RoutedEventArgs e)
+    {
+        (DataContext as BankViewModel).EnterCommand.Execute(sender);
     }
 }

@@ -35,6 +35,7 @@ namespace RestaurantChain.Presentation.View
             {
                 registrationViewModel.OnRegistrationSuccess += RegistrationSuccess;
             }
+            PreviewKeyDown += PreviewKeyDownHandle;
         }
 
         public void RegistrationSuccess()
@@ -61,6 +62,21 @@ namespace RestaurantChain.Presentation.View
             if (this.DataContext != null)
             {
                 ((RegistrationViewModel)this.DataContext).VerificationPassword = ((PasswordBox)sender).SecurePassword;
+            }
+        }
+        
+        private void PreviewKeyDownHandle(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Escape:
+                    Close();
+
+                    break;
+                case Key.Enter:
+                    (DataContext as RegistrationViewModel)?.Enter(this);
+
+                    break;
             }
         }
     }

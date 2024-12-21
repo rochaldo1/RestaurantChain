@@ -3,6 +3,8 @@ using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows.Media;
 
+using RestaurantChain.Presentation.Classes.Helpers;
+
 namespace RestaurantChain.Presentation.View
 {
     /// <summary>
@@ -43,7 +45,7 @@ namespace RestaurantChain.Presentation.View
                 Content = view,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen,
                 Title = "Улицы",
-                // TODO: Сделать добавление иконки database.png
+                Icon = IconHelper.GetListIcon()
             };
             window.ShowDialog();
         }
@@ -56,7 +58,7 @@ namespace RestaurantChain.Presentation.View
                 Content = view,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen,
                 Title = "Группы блюд",
-                // TODO: Сделать добавление иконки database.png
+                Icon = IconHelper.GetListIcon()
             };
             window.ShowDialog();
         }
@@ -69,7 +71,7 @@ namespace RestaurantChain.Presentation.View
                 Content = view,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen,
                 Title = "Банки",
-                // TODO: Сделать добавление иконки database.png
+                Icon = IconHelper.GetListIcon()
             };
             window.ShowDialog();
         }
@@ -82,7 +84,7 @@ namespace RestaurantChain.Presentation.View
                 Content = view,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen,
                 Title = "Банки",
-                // TODO: Сделать добавление иконки database.png
+                Icon = IconHelper.GetListIcon()
             };
             window.ShowDialog();
         }
@@ -100,7 +102,7 @@ namespace RestaurantChain.Presentation.View
                 Content = view,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen,
                 Title = "Поставщики",
-                // TODO: Сделать добавление иконки database.png
+                Icon = IconHelper.GetListIcon()
             };
             window.ShowDialog();
         }
@@ -113,7 +115,7 @@ namespace RestaurantChain.Presentation.View
                 Content = view,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen,
                 Title = "Продукты",
-                // TODO: Сделать добавление иконки database.png
+                Icon = IconHelper.GetListIcon()
             };
             window.ShowDialog();
         }

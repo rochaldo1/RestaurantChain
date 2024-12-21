@@ -2,7 +2,11 @@
 using RestaurantChain.Presentation.ViewModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+
 using Microsoft.Extensions.DependencyInjection;
+
+using RestaurantChain.Presentation.ViewModel.UnitsViewModel;
 
 namespace RestaurantChain.Presentation.View
 {
@@ -24,6 +28,7 @@ namespace RestaurantChain.Presentation.View
             {
                 changePasswordViewModel.OnChangePasswordSuccess += ChangePasswordSuccess;
             }
+            PreviewKeyDown += PreviewKeyDownHandle;
         }
 
         public void ChangePasswordSuccess()
@@ -58,6 +63,21 @@ namespace RestaurantChain.Presentation.View
             if (this.DataContext != null)
             {
                 ((ChangePasswordViewModel)this.DataContext).VerificationPassword = ((PasswordBox)sender).SecurePassword;
+            }
+        }
+        
+        private void PreviewKeyDownHandle(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Escape:
+                    Close();
+
+                    break;
+                case Key.Enter:
+                    (DataContext as ChangePasswordViewModel)?.Enter(this);
+
+                    break;
             }
         }
     }

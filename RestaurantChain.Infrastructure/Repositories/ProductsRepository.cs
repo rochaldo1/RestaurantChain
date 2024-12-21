@@ -75,7 +75,7 @@ namespace RestaurantChain.Infrastructure.Repositories
         {
             const string query = @"
     update products set 
-            unit_name       = @UnitName,
+            unit_id         = @UnitId,
             product_name    = @ProductName,
             quantity        = @Quantity,
             price           = @Price

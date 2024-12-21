@@ -36,7 +36,7 @@ internal class GroupOfDishesViewModel : EditViewModelBase
         EnterCommand = new RelayCommand(Enter);
     }
 
-    private void Enter(object sender)
+    public void Enter(object sender)
     {
         if (string.IsNullOrWhiteSpace(_groupName))
         {

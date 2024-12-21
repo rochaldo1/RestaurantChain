@@ -3,6 +3,8 @@ using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.ViewModel.GroupsOfDishesViewModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 
 namespace RestaurantChain.Presentation.View.GroupsOfDishesViews
 {
@@ -26,6 +28,8 @@ namespace RestaurantChain.Presentation.View.GroupsOfDishesViews
                 groupOfDishesViewModel.OnSaveSuccess += SaveSuccess;
                 groupOfDishesViewModel.OnCancel += SaveError;
             }
+            PreviewKeyDown += PreviewKeyDownHandle;
+            Loaded += (sender, args) => { txtBox.Focus(); };
         }
 
         private void CancelBtn_OnClick(object sender, RoutedEventArgs e)
@@ -43,6 +47,21 @@ namespace RestaurantChain.Presentation.View.GroupsOfDishesViews
         {
             IsSuccess = false;
             ((Window)Parent).Close();
+        }
+        
+        private void PreviewKeyDownHandle(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Escape:
+                    ((Window)Parent).Close();
+
+                    break;
+                case Key.Enter:
+                    btnOk.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+
+                    break;
+            }
         }
     }
 }

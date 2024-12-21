@@ -39,10 +39,10 @@
             <TextBlock Text="Единица изммерения" Grid.Column="0" Grid.Row="1" Style="{StaticResource LblStyle}" Height="21" Margin="10,0,0,0" Width="145"/>
             <TextBlock Text="Количество на складе" Grid.Column="0" Grid.Row="2" Style="{StaticResource LblStyle}" Height="22" Margin="10,0,0,0" Width="148"/>
             <TextBlock Text="Стоимость за единицу, руб." Grid.Column="0" Grid.Row="3" Style="{StaticResource LblStyle}" Height="21" Margin="10,0,0,0" Width="188"/>
-            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding ProductName}" Style="{StaticResource TbStyle}" />
+            <TextBox Grid.Column="1" Grid.Row="0" MaxLength="32" Text="{Binding ProductName}" Style="{StaticResource TbStyle}" />
             <ComboBox Grid.Column="1" Grid.Row="1" DisplayMemberPath="UnitName" SelectedValuePath="Id" SelectedValue="{Binding SelectedUnitId}" ItemsSource="{Binding UnitsList}" Style="{StaticResource CmbStyle}" />
-            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Quantity}"   Style="{StaticResource TbStyle}"/>
-            <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Price}" Style="{StaticResource TbStyle}"/>
+            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Quantity}" DataObject.Pasting="TextBoxPastingInt" PreviewTextInput="Txt_OnPreviewTextInputInt" Style="{StaticResource TbStyle}"/>
+            <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Price}" DataObject.Pasting="TextBoxPastingDecimal" PreviewTextInput="Txt_OnPreviewTextInputDecimal" Style="{StaticResource TbStyle}"/>
         </Grid>
 
         <Grid Grid.Row="2">

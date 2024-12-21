@@ -54,29 +54,33 @@
 
   <ItemGroup>
     <None Remove="Resources\aboutProgram.png" />
-    <Resource Include="Resources\aboutProgram.png">
+    <Content Include="Resources\aboutProgram.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </Content>
     <None Remove="Resources\changePassword.png" />
-    <Resource Include="Resources\changePassword.png">
+    <Content Include="Resources\changePassword.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </Content>
     <None Remove="Resources\database.png" />
-    <Resource Include="Resources\database.png">
+    <Content Include="Resources\database.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </Content>
     <None Remove="Resources\login.png" />
-    <Resource Include="Resources\login.png">
+    <Content Include="Resources\login.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </Content>
     <None Remove="Resources\main.png" />
-    <Resource Include="Resources\main.png">
+    <Content Include="Resources\main.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </Content>
     <None Remove="Resources\registration.png" />
-    <Resource Include="Resources\registration.png">
+    <Content Include="Resources\registration.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </Content>
+    <None Remove="Resources\edit.png" />
+    <Content Include="Resources\edit.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
