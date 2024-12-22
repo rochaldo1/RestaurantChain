@@ -75,8 +75,8 @@ public partial class MainWindow : Window
 
     private void Dishes_Click(object sender, RoutedEventArgs e)
     {
-        //var view = new DishesViews.DishesListWindow(_serviceProvider);
-        //mainView.Content = view;
+        var view = new DishesViews.DishesListWindow(_serviceProvider);
+        mainView.Content = view;
     }
 
     private void Queries_OnClick(object sender, RoutedEventArgs e)

@@ -11,12 +11,12 @@ using RestaurantChain.Presentation.ViewModel.SuppliersViewModel;
 namespace RestaurantChain.Presentation.View.SuppliersViews;
 
 /// <summary>
-///     Логика взаимодействия для SupplierWindow.xaml
+/// Логика взаимодействия для SupplierWindow.xaml
 /// </summary>
 public partial class SupplierWindow : UserControl
 {
     /// <summary>
-    ///     Результат сохранения данных.
+    /// Результат сохранения данных.
     /// </summary>
     public bool IsSuccess { private set; get; }
 

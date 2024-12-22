@@ -5,9 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RestaurantChain.Presentation.View"
         mc:Ignorable="d"
-        Title="Сеть ресторанов" Height="450" Width="800"
+        Title="Сеть ресторанов" Height="720" Width="1280"
         Icon="../Resources/main.png"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        MinHeight="720"
+        MinWidth="1280">
     <Grid>
         <Menu Height="25" VerticalAlignment="Top">
             <MenuItem Header="Разное" x:Name="File" FontFamily="Segoe UI Variable Display Light" FontSize="16">
@@ -16,10 +18,10 @@
                 <MenuItem Header="Запросы" x:Name="Queries" Click="Queries_OnClick" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
             </MenuItem>
             <MenuItem Header="Продукты" x:Name="Products" Click="Products_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
+            <MenuItem Header="Блюда" x:Name="Dishes" Click="Dishes_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
             <MenuItem Header="Поставки" x:Name="Supplies" Click="Supplies_OnClick" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
             <MenuItem Header="Справочники" x:Name="Catalogues" FontFamily="Segoe UI Variable Display Light" FontSize="16">
                 <MenuItem Header="Банки" x:Name="Banks" Click="Banks_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
-                <MenuItem Header="Блюда" x:Name="Dishes" Click="Dishes_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
                 <MenuItem Header="Группы блюд" x:Name="GroupsOfDishes" Click="GroupsOfDishes_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
                 <MenuItem Header="Единицы измерения" x:Name="Units" Click="Units_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
                 <MenuItem Header="Поставщики" x:Name="Suppliers" Click="Suppliers_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
