@@ -55,6 +55,7 @@
 
   <ItemGroup>
     <None Remove="Resources\aboutProgram.png" />
+    <None Remove="Resources\help.htm" />
     <Content Include="Resources\aboutProgram.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -67,6 +68,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Remove="Resources\login.png" />
+    <Content Include="Resources\help.htm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\login.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

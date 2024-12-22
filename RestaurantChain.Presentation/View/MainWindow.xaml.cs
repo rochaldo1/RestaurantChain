@@ -94,6 +94,10 @@ public partial class MainWindow : Window
                 }
                 break;
             case "Restaurants":
+                {
+                    var view = new RestaurantsViews.RestaurantsListWindow(_serviceProvider);
+                    mainView.Content = view;
+                }
                 break;
             case "Sales":
                 break;
@@ -102,6 +106,12 @@ public partial class MainWindow : Window
             case "Doc":
                 break;
             case "Help":
+                {
+                    var webBrowser = new WebBrowser();
+                    string helpPath = "C:\\Users\\Artur\\source\\repos\\RestaurantChain\\RestaurantChain.Presentation\\Resources\\help.htm";
+                    webBrowser.Source = new Uri(helpPath, UriKind.RelativeOrAbsolute);
+                    mainView.Content = webBrowser;
+                }
                 break;
             case "ChangePassword":
                 {
