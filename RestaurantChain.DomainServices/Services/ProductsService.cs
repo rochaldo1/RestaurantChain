@@ -56,7 +56,7 @@ internal class ProductsService : IProductsService
     {
         var suppliesCount = _unitOfWork.SuppliesRepository.CountByProduct(productId);
         var applicationsForDistributionCount = _unitOfWork.ApplicationsForDistributionRepository.CountByProduct(productId);
-        var count = applicationsForDistributionCount + suppliesCount;
+        var count = suppliesCount - applicationsForDistributionCount;
         _unitOfWork.ProductsRepository.UpdateQuantity(productId, count);
     }
 }
