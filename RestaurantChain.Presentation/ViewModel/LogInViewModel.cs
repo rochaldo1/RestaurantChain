@@ -6,7 +6,6 @@ using System.Windows.Threading;
 
 using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.Classes;
-using RestaurantChain.Presentation.ViewModel.Base;
 
 namespace RestaurantChain.Presentation.ViewModel;
 

@@ -26,10 +26,7 @@ internal sealed class UsersRepository : RepositoryBase, IUsersRepository
 
     public Users Get(int id)
     {
-        var query = @"
-    select * 
-    from users 
-    where id = @id;
+        const string query = @"select * from users where id = @id;
     ";
         var user = Connection.QueryFirstOrDefault<UsersDb>(query, new { Id = id });
         return user?.ToDomain();
@@ -38,15 +35,17 @@ internal sealed class UsersRepository : RepositoryBase, IUsersRepository
     public void Update(Users entity)
     {
         const string query = @"
-    update users 
-        set password = @password 
+    update users set 
+        password =  COALESCE(@password, password),
+        login = @Login
     where id = @id;
     ";
-        var hashPassword = GetPasswordHash(entity.Password);
+        var hashPassword = string.IsNullOrWhiteSpace(entity.Password) ? null : GetPasswordHash(entity.Password);
         Connection.ExecuteScalar(query, new
         {
             Id = entity.Id,
-            Password = hashPassword
+            Password = hashPassword,
+            login = entity.Login,
         });
     }
 
@@ -112,5 +111,12 @@ internal sealed class UsersRepository : RepositoryBase, IUsersRepository
         var messageBytes = Encoding.UTF8.GetBytes(value);
         var hashValue = MD5.HashData(messageBytes);
         return Convert.ToHexString(hashValue);
+    }
+
+    public IReadOnlyCollection<Users> List()
+    {
+        var query = "select * from users;";
+        var users = Connection.Query<UsersDb>(query);
+        return users.Select(x => x.ToDomain()).ToArray();
     }
 }

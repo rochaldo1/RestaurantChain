@@ -6,4 +6,5 @@ public interface IUsersRepository : IRepositoryBase<Users>
 {
     Users Get(string login, string password);
     Users Get(string login);
+    IReadOnlyCollection<Users> List();
 }

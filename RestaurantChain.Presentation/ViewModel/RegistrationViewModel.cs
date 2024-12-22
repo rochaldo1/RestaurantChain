@@ -8,7 +8,6 @@ using System.Windows.Threading;
 using RestaurantChain.Domain.Models;
 using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.Commands;
-using RestaurantChain.Presentation.ViewModel.Base;
 
 namespace RestaurantChain.Presentation.ViewModel;
 
