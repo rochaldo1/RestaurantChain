@@ -6,7 +6,48 @@
              xmlns:local="clr-namespace:RestaurantChain.Presentation.View.Users"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/StyleResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.2*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <TextBlock Background="#E6E6E6" Height="24" TextAlignment="Center" FontSize="14" Margin="10,4,10,3" FontFamily="Segoe UI Variable Display Light" Text="Редактирование прав пользователя"></TextBlock>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <CheckBox IsChecked="{Binding W}">Создание</CheckBox>
+        </Grid>
+        <Grid Grid.Row="2">
+            <CheckBox IsChecked="{Binding E}">Редактирование</CheckBox>
+        </Grid>
+        <Grid Grid.Row="3">
+            <CheckBox IsChecked="{Binding R}">Чтение</CheckBox>
+        </Grid>
+        <Grid Grid.Row="4">
+            <CheckBox IsChecked="{Binding D}">Удаление</CheckBox>
+        </Grid>
+
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnOk" Content="Продолжить" Command="{Binding EnterCommand}" Style="{StaticResource BtnStyle}" />
+            <Button Content="Отмена" Click="CancelBtn_OnClick" Grid.Column="1" Style="{StaticResource BtnStyle}"/>
+        </Grid>
+
     </Grid>
 </UserControl>

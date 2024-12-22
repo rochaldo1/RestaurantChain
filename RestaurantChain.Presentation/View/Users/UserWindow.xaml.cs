@@ -4,70 +4,86 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using RestaurantChain.Presentation.ViewModel.UsersViewModels.Users;
+using RestaurantChain.Presentation.ViewModel;
 
-namespace RestaurantChain.Presentation.View.Users
+namespace RestaurantChain.Presentation.View.Users;
+
+/// <summary>
+/// Interaction logic for UserWindow.xaml
+/// </summary>
+public partial class UserWindow : UserControl
 {
     /// <summary>
-    /// Interaction logic for UserWindow.xaml
+    ///     Результат сохранения данных.
     /// </summary>
-    public partial class UserWindow : UserControl
+    public bool IsSuccess { private set; get; }
+
+    public UserWindow(IServiceProvider serviceProvider, int? userId)
     {
-        /// <summary>
-        ///     Результат сохранения данных.
-        /// </summary>
-        public bool IsSuccess { private set; get; }
+        var usersService = serviceProvider.GetRequiredService<IUsersService>();
+        InitializeComponent();
+        DataContext = new UserViewModel(usersService, userId);
 
-        public UserWindow(IServiceProvider serviceProvider, int? userId)
+        if (DataContext is UserViewModel vm)
         {
-            var usersService = serviceProvider.GetRequiredService<IUsersService>();
-            InitializeComponent();
-            DataContext = new UserViewModel(usersService, userId);
-
-            if (DataContext is UserViewModel vm)
-            {
-                vm.OnSaveSuccess += SaveSuccess;
-                vm.OnCancel += SaveError;
-            }
-
-            PreviewKeyDown += PreviewKeyDownHandle;
-            //Loaded += (sender, args) => { txtBox.Focus(); };
+            vm.OnSaveSuccess += SaveSuccess;
+            vm.OnCancel += SaveError;
         }
 
-        private void CancelBtn_OnClick(object sender, RoutedEventArgs e)
+        PreviewKeyDown += PreviewKeyDownHandle;
+        //Loaded += (sender, args) => { txtBox.Focus(); };
+    }
+
+    private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+    {
+        if (this.DataContext != null)
         {
-            ((Window) Parent).Close();
+            ((UserViewModel)this.DataContext).Password = ((PasswordBox)sender).SecurePassword;
         }
+    }
 
-        public void SaveSuccess()
+    private void PasswordBox_VerificationPasswordChanged(object sender, RoutedEventArgs e)
+    {
+        if (this.DataContext != null)
         {
-            IsSuccess = true;
-            ((Window) Parent).Close();
+            ((UserViewModel)this.DataContext).VerificationPassword = ((PasswordBox)sender).SecurePassword;
         }
+    }
 
-        public void SaveError()
+    private void CancelBtn_OnClick(object sender, RoutedEventArgs e)
+    {
+        ((Window) Parent).Close();
+    }
+
+    public void SaveSuccess()
+    {
+        IsSuccess = true;
+        ((Window) Parent).Close();
+    }
+
+    public void SaveError()
+    {
+        IsSuccess = false;
+        ((Window) Parent).Close();
+    }
+
+    private void PreviewKeyDownHandle(object sender, KeyEventArgs e)
+    {
+        switch (e.Key)
         {
-            IsSuccess = false;
-            ((Window) Parent).Close();
+            case Key.Escape:
+                ((Window) Parent).Close();
+
+                break;
+            case Key.Enter:
+                //btnOk.Command.Execute(null);
+
+                break;
         }
+    }
 
-        private void PreviewKeyDownHandle(object sender, KeyEventArgs e)
-        {
-            switch (e.Key)
-            {
-                case Key.Escape:
-                    ((Window) Parent).Close();
-
-                    break;
-                case Key.Enter:
-                    //btnOk.Command.Execute(null);
-
-                    break;
-            }
-        }
-
-        private void BtnOk_OnClick(object sender, RoutedEventArgs e)
-        {
-            (DataContext as UserViewModel).EnterCommand.Execute(sender);
-        }
+    private void BtnOk_OnClick(object sender, RoutedEventArgs e)
+    {
+        (DataContext as UserViewModel).EnterCommand.Execute(sender);
     }
 }

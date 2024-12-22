@@ -3,6 +3,7 @@ using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.Commands;
 using RestaurantChain.Presentation.ViewModel.Base;
 using System.Windows;
+using RestaurantChain.Presentation.Classes;
 using RestaurantChain.Presentation.View.Users;
 
 namespace RestaurantChain.Presentation.ViewModel.UsersViewModels.Users;
@@ -33,7 +34,7 @@ internal class UsersListViewModel : ListViewModelBase<Domain.Models.Users>
     private void CreateEntity(object sender)
     {
         var view = new UserWindow(ServiceProvider, userId: null);
-        ShowDialog(view, "Создание записи");
+        ShowDialog(view, "Создание записи", 400, 320);
         DataBind();
     }
 
@@ -53,6 +54,12 @@ internal class UsersListViewModel : ListViewModelBase<Domain.Models.Users>
     {
         if (!HasSelectedItem())
         {
+            return;
+        }
+
+        if (SelectedItem.Id == CurrentState.CurrentUser.Id)
+        {
+            MessageBox.Show("Нельзя себя удалить", "Удаление записи", MessageBoxButton.OK, MessageBoxImage.Warning);
             return;
         }
 

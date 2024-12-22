@@ -42,6 +42,15 @@ returning Id;
         return Connection.ExecuteScalar<int>(query, entityDb);
     }
 
+    public void DeleteByUserId(int userId)
+    {
+        const string query = "delete from user_rights where user_id = @UserId;";
+        Connection.ExecuteScalar(query, new
+        {
+            UserId = userId,
+        });
+    }
+
     public void Delete(int id)
     {
         const string query = "delete from user_rights where Id = @Id;";

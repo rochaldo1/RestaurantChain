@@ -3,6 +3,8 @@ using System.Windows.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.Classes;
+using RestaurantChain.Presentation.Classes.Helpers;
+using RestaurantChain.Presentation.View.Users;
 
 namespace RestaurantChain.Presentation.View;
 
@@ -76,28 +78,28 @@ public partial class MainWindow : Window
 
     private void MenuItem_Click(object sender, RoutedEventArgs e)
     {
-        var tag = ((MenuItem)sender).Tag;
+        var tag = ((MenuItem) sender).Tag;
         switch (tag)
         {
             case "Other":
                 break;
             case "Products":
-                {
-                    var view = new ProductsViews.ProductsListWindow(_serviceProvider);
-                    mainView.Content = view;
-                }
+            {
+                var view = new ProductsViews.ProductsListWindow(_serviceProvider);
+                mainView.Content = view;
+            }
                 break;
             case "Supplies":
-                {
-                    var view = new SuppliesViews.SuppliesWindow(_serviceProvider);
-                    mainView.Content = view;
-                }
+            {
+                var view = new SuppliesViews.SuppliesWindow(_serviceProvider);
+                mainView.Content = view;
+            }
                 break;
             case "Restaurants":
-                {
-                    var view = new RestaurantsViews.RestaurantsListWindow(_serviceProvider);
-                    mainView.Content = view;
-                }
+            {
+                var view = new RestaurantsViews.RestaurantsListWindow(_serviceProvider);
+                mainView.Content = view;
+            }
                 break;
             case "Sales":
                 break;
@@ -106,66 +108,73 @@ public partial class MainWindow : Window
             case "Doc":
                 break;
             case "Help":
-                {
-                    var webBrowser = new WebBrowser();
-                    string helpPath = "C:\\Users\\Artur\\source\\repos\\RestaurantChain\\RestaurantChain.Presentation\\Resources\\help.htm";
-                    webBrowser.Source = new Uri(helpPath, UriKind.RelativeOrAbsolute);
-                    mainView.Content = webBrowser;
-                }
+            {
+                var webBrowser = new WebBrowser();
+                webBrowser.Source = IconHelper.GetHelpUri();
+                mainView.Content = webBrowser;
+            }
                 break;
             case "ChangePassword":
-                {
-                    ChangePasswordWindow changePasswordWindow = new(_serviceProvider);
-                    changePasswordWindow.ShowDialog();
-                }
+            {
+                ChangePasswordWindow changePasswordWindow = new(_serviceProvider);
+                changePasswordWindow.ShowDialog();
+            }
                 break;
             case "Setings":
                 break;
             case "Users":
+            {
+                var view = new UserListWindow(_serviceProvider);
+                mainView.Content = view;
+            }
                 break;
             case "UserRights":
+            {
+                var view = new UserRightsListWindow(_serviceProvider);
+                mainView.Content = view;
+            }
                 break;
             case "Queries":
-                {
-                    var view = new QueriesWindow(_serviceProvider);
-                    mainView.Content = view;
-                }
+            {
+                var view = new QueriesWindow(_serviceProvider);
+                mainView.Content = view;
+            }
                 break;
             case "Dishes":
-                {
-                    var view = new DishesViews.DishesListWindow(_serviceProvider);
-                    mainView.Content = view;
-                }
+            {
+                var view = new DishesViews.DishesListWindow(_serviceProvider);
+                mainView.Content = view;
+            }
                 break;
             case "Streets":
-                {
-                    var view = new StreetsViews.StreetsListWindow(_serviceProvider);
-                    mainView.Content = view;
-                }
+            {
+                var view = new StreetsViews.StreetsListWindow(_serviceProvider);
+                mainView.Content = view;
+            }
                 break;
             case "Banks":
-                {
-                    var view = new BanksViews.BanksListWindow(_serviceProvider);
-                    mainView.Content = view;
-                }
+            {
+                var view = new BanksViews.BanksListWindow(_serviceProvider);
+                mainView.Content = view;
+            }
                 break;
             case "DishesGroups":
-                {
-                    var view = new GroupsOfDishesViews.GroupsOfDishesListWindow(_serviceProvider);
-                    mainView.Content = view;
-                }
+            {
+                var view = new GroupsOfDishesViews.GroupsOfDishesListWindow(_serviceProvider);
+                mainView.Content = view;
+            }
                 break;
             case "Suppliers":
-                {
-                    var view = new SuppliersViews.SuppliersListWindow(_serviceProvider);
-                    mainView.Content = view;
-                }
+            {
+                var view = new SuppliersViews.SuppliersListWindow(_serviceProvider);
+                mainView.Content = view;
+            }
                 break;
             case "Units":
-                {
-                    var view = new UnitsViews.UnitsListWindow(_serviceProvider);
-                    mainView.Content = view;
-                }
+            {
+                var view = new UnitsViews.UnitsListWindow(_serviceProvider);
+                mainView.Content = view;
+            }
                 break;
             case "DocRevenue":
                 break;

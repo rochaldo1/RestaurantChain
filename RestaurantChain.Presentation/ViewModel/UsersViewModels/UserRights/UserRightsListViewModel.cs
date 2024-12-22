@@ -9,6 +9,19 @@ namespace RestaurantChain.Presentation.ViewModel.UsersViewModels.UserRights;
 internal class UserRightsListViewModel : ListViewModelBase<Domain.Models.View.UserRightsView>
 {
     private readonly IUsersService _usersService;
+
+    private IReadOnlyCollection<Domain.Models.Users> _usersDataSource;
+    public IReadOnlyCollection<Domain.Models.Users> UsersDataSource
+    {
+        get => _usersDataSource;
+        set
+        {
+            _usersDataSource = value;
+            OnPropertyChanged();
+            DataBind();
+        }
+    }
+
     private int _selectedUserId;
     public int SelectedUserId
     {
@@ -25,6 +38,7 @@ internal class UserRightsListViewModel : ListViewModelBase<Domain.Models.View.Us
     {
         _usersService = serviceProvider.GetRequiredService<IUsersService>();
         DataBind();
+        UsersDataSource = _usersService.List();
     }
 
     protected override void DataBind()

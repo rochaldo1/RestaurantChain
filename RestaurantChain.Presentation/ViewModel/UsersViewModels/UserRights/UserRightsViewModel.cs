@@ -1,6 +1,8 @@
 ﻿using RestaurantChain.DomainServices.Contracts;
+using RestaurantChain.Presentation.Classes;
 using RestaurantChain.Presentation.Commands;
 using RestaurantChain.Presentation.ViewModel.Base;
+using System.Windows;
 
 namespace RestaurantChain.Presentation.ViewModel.UsersViewModels.UserRights;
 
@@ -80,6 +82,13 @@ internal class UserRightsViewModel : EditViewModelBase
     private bool Update()
     {
         var userRights = _usersService.GetUserRights(CurrentId.Value);
+
+        if (userRights.UserID == CurrentState.CurrentUser.Id)
+        {
+            MessageBox.Show("Нельзя себе редактировать права", "Редактирование прав", MessageBoxButton.OK, MessageBoxImage.Warning);
+            return false;
+        }
+
         userRights.R = R;
         userRights.E = E;
         userRights.D = D;

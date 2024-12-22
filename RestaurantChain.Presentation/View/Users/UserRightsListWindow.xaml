@@ -7,6 +7,29 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="25" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Menu VerticalAlignment="Top" FontSize="16" FontFamily="Segoe UI Variable Display Light">
+            <MenuItem Header="Редактировать" x:Name="EditMenuItem" Command="{Binding EditCommand}" Visibility="{Binding HasE}" />
+        </Menu>
+
+        <Label Grid.Row="1" Content="Пользователь" Margin="0,0,703,0" />
+        <ComboBox DisplayMemberPath="Login" SelectedValuePath="Id" SelectedValue="{Binding SelectedUserId}" ItemsSource="{Binding UsersDataSource}" Margin="125,0,249,0" Grid.Row="1"  />
+        <DataGrid Grid.Row="2" Grid.Column="0" x:Name="Grid" AutoGenerateColumns="False" ItemsSource="{Binding DataSource}" SelectedItem="{Binding SelectedItem}"
+                  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" SelectionMode="Single"
+                  IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserReorderColumns="False"
+                  CanUserDeleteRows="False" RowBackground="White" AlternatingRowBackground="#E6E6E6" FontSize="16"
+                  FontFamily="Segoe UI Variable Display Light">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Меню" Binding="{Binding Path=ItemName}"/>
+                <DataGridCheckBoxColumn Header="Создание" Binding="{Binding Path=W}"/>
+                <DataGridCheckBoxColumn Header="Редактирование" Binding="{Binding Path=E}"/>
+                <DataGridCheckBoxColumn Header="Чтение" Binding="{Binding Path=R}"/>
+                <DataGridCheckBoxColumn Header="Удаление" Binding="{Binding Path=D}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

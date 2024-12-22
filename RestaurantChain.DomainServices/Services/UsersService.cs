@@ -74,6 +74,7 @@ internal sealed class UsersService : IUsersService
 
     public void Delete(int id)
     {
+        _unitOfWork.UserRightsRepository.DeleteByUserId(id);
         _unitOfWork.UsersRepository.Delete(id);
     }
 }

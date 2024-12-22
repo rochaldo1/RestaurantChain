@@ -20,6 +20,14 @@ internal static class IconHelper
         return GetImage(imageUrl);
     }
 
+    public static Uri GetHelpUri()
+    {
+        const string file = "/Resources/help.htm";
+
+        string? folder = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule?.FileName);
+        return new Uri($"{folder}{file}");
+    }
+
     private static BitmapImage GetImage(string image)
     {
         string? folder = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule?.FileName);
