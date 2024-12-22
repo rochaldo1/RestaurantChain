@@ -1,7 +1,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-
 using RestaurantChain.Presentation.Classes.Helpers;
 
 namespace RestaurantChain.Presentation.ViewModel.Base;

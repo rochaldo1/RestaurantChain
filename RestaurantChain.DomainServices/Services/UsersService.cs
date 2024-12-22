@@ -38,6 +38,8 @@ internal sealed class UsersService : IUsersService
         {
             return 0;
         }
-        return _unitOfWork.UsersRepository.Create(user);
+        var userId = _unitOfWork.UsersRepository.Create(user);
+        _unitOfWork.UserRightsRepository.CreateDefaultRights(userId);
+        return userId;
     }
 }

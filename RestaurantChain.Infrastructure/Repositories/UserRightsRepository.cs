@@ -147,4 +147,37 @@ WHERE
 
         return entityDb?.ToDomain();
     }
+
+    public void CreateDefaultRights(int userId)
+    {
+        const string query = @"
+INSERT INTO public.user_rights (user_id, item_id, r, w, e, d) 
+  values
+  (@UserId, 1, true, true, true, true),
+  (@UserId, 2, false, false, false, false),
+  (@UserId, 3, false, false, false, false),
+  (@UserId, 4, false, false, false, false),
+  (@UserId, 5, false, false, false, false),
+  (@UserId, 6, false, false, false, false),
+  (@UserId, 7, false, false, false, false),
+  (@UserId, 8, true, true, true, true),
+  (@UserId, 9, true, true, true, true),
+  (@UserId, 10, false, false, false, false),
+  (@UserId, 11, false, false, false, false),
+  (@UserId, 12, false, false, false, false),
+  (@UserId, 13, false, false, false, false),
+  (@UserId, 14, false, false, false, false),
+  (@UserId, 15, false, false, false, false),
+  (@UserId, 16, false, false, false, false),
+  (@UserId, 17, false, false, false, false),
+  (@UserId, 18, false, false, false, false),
+  (@UserId, 19, false, false, false, false),
+  (@UserId, 20, false, false, false, false),
+  (@UserId, 21, true, true, true, true),
+  (@UserId, 22, true, true, true, true)";
+        Connection.ExecuteScalar(query, new
+        {
+            UserId = userId,
+        });
+    }
 }

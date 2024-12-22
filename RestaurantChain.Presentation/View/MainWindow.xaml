@@ -7,30 +7,18 @@
         mc:Ignorable="d"
         Title="Сеть ресторанов" Height="720" Width="1280"
         Icon="../Resources/main.png"
-        WindowStartupLocation="CenterScreen"
         MinHeight="720"
-        MinWidth="1280">
+        MinWidth="1280"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/StyleResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
-        <Menu Height="25" VerticalAlignment="Top">
-            <MenuItem Header="Разное" x:Name="File" FontFamily="Segoe UI Variable Display Light" FontSize="16">
-                <MenuItem Header="Изменить пароль" x:Name="ChangePassword" Click="ChangePassword_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
-                <MenuItem Header="Настройка" x:Name="Settings" Click="Settings_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
-                <MenuItem Header="Запросы" x:Name="Queries" Click="Queries_OnClick" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
-            </MenuItem>
-            <MenuItem Header="Продукты" x:Name="Products" Click="Products_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
-            <MenuItem Header="Блюда" x:Name="Dishes" Click="Dishes_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
-            <MenuItem Header="Поставки" x:Name="Supplies" Click="Supplies_OnClick" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
-            <MenuItem Header="Справочники" x:Name="Catalogues" FontFamily="Segoe UI Variable Display Light" FontSize="16">
-                <MenuItem Header="Банки" x:Name="Banks" Click="Banks_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
-                <MenuItem Header="Группы блюд" x:Name="GroupsOfDishes" Click="GroupsOfDishes_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
-                <MenuItem Header="Единицы измерения" x:Name="Units" Click="Units_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
-                <MenuItem Header="Поставщики" x:Name="Suppliers" Click="Suppliers_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
-                <MenuItem Header="Улицы" x:Name="Streets" Click="Streets_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
-            </MenuItem>
-            <MenuItem Header="Справка" x:Name="Help" FontFamily="Segoe UI Variable Display Light" FontSize="16">
-                <MenuItem Header="Содержание" x:Name="Content" Click="Content_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
-                <MenuItem Header="О программе" x:Name="AboutProgram" Click="AboutProgram_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
-            </MenuItem>
+        <Menu Height="25" VerticalAlignment="Top" x:Name="menuControl">
         </Menu>
         
         <ContentControl x:Name="mainView" Margin="0,25,0,0" />

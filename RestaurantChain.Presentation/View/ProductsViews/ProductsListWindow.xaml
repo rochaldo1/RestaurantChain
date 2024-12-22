@@ -12,9 +12,9 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Menu VerticalAlignment="Top" FontSize="16" FontFamily="Segoe UI Variable Display Light">
-            <MenuItem Header="Создать" x:Name="CreateMenuItem" Command="{Binding CreateCommand}" />
-            <MenuItem Header="Редактировать" x:Name="EditMenuItem" Command="{Binding EditCommand}" />
-            <MenuItem Header="Удалить" x:Name="DeleteMenuItem" Command="{Binding DeleteCommand}" />
+            <MenuItem Header="Создать" x:Name="CreateMenuItem" Command="{Binding CreateCommand}" Visibility="{Binding HasW}" />
+            <MenuItem Header="Редактировать" x:Name="EditMenuItem" Command="{Binding EditCommand}" Visibility="{Binding HasE}" />
+            <MenuItem Header="Удалить" x:Name="DeleteMenuItem" Command="{Binding DeleteCommand}" Visibility="{Binding HasD}" />
         </Menu>
         <DataGrid Grid.Row="1" Grid.Column="0" x:Name="Grid" AutoGenerateColumns="False" ItemsSource="{Binding DataSource}" SelectedItem="{Binding SelectedItem}"
                   HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" SelectionMode="Single"

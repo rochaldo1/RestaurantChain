@@ -31,4 +31,14 @@ public class Menu : IdentityBase
     /// Порядок.
     /// </summary>
     public int OrderNum { get; set; }
+
+    /// <summary>
+    /// Дочернее меню
+    /// </summary>
+    public IReadOnlyCollection<Menu> Childrens { set; get; } = Array.Empty<Menu>();
+
+    public bool R { set; get; }
+    public bool W { set; get; }
+    public bool E { set; get; }
+    public bool D { set; get; }
 }

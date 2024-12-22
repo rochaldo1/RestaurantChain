@@ -7,4 +7,5 @@ public interface IUserRightsRepository : IRepositoryBase<UserRights>
 {
     IReadOnlyCollection<UserRightsView> List(int userId);
     UserRightsView GetView(int id);
+    void CreateDefaultRights(int userId);
 }
