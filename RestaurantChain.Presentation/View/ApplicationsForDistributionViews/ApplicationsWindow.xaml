@@ -4,9 +4,59 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RestaurantChain.Presentation.View.ApplicationsForDistributionViews"
+             xmlns:System="clr-namespace:System;assembly=System.Runtime"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="28" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Menu VerticalAlignment="Top" FontSize="16" FontFamily="Segoe UI Variable Display Light">
+            <MenuItem Header="Создать" x:Name="CreateMenuItem" Command="{Binding CreateCommand}" Visibility="{Binding HasW}"/>
+            <MenuItem Header="Редактировать" x:Name="EditMenuItem" Command="{Binding EditCommand}" Visibility="{Binding HasE}" />
+            <MenuItem Header="Удалить" x:Name="DeleteMenuItem" Command="{Binding DeleteCommand}" Visibility="{Binding HasD}" />
+        </Menu>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" Content="Ресторан" Margin="10,0,10,0" VerticalAlignment="Center" FontSize="14" FontFamily="Segoe UI Variable Display Light"/>
+            <ComboBox Grid.Column="1" Margin="10,0,10,0" VerticalAlignment="Center" FontSize="14" FontFamily="Segoe UI Variable Display Light" DisplayMemberPath="RestaurantName" SelectedValuePath="Id" SelectedValue="{Binding SelectedRestaurantId}" ItemsSource="{Binding RestaurantsDataSource}"/>
+            <Label Grid.Column="2" Content="Дата с:" Margin="10,0,10,0" VerticalAlignment="Center" FontSize="14" FontFamily="Segoe UI Variable Display Light"/>
+            <DatePicker Grid.Column="3" Margin="10,0,10,0" VerticalAlignment="Center" FontSize="14" FontFamily="Segoe UI Variable Display Light" SelectedDate="{Binding
+            Path=From,
+            Mode=TwoWay,
+            TargetNullValue={x:Static System:DateTime.Now}}"/>
+            <Label Grid.Column="4" Content="По:" Margin="10,0,10,0" VerticalAlignment="Center" FontSize="14" FontFamily="Segoe UI Variable Display Light"/>
+            <DatePicker Grid.Column="5" Margin="10,0,10,0" VerticalAlignment="Center" FontSize="14" FontFamily="Segoe UI Variable Display Light" SelectedDate="{Binding
+            Path=To,
+            Mode=TwoWay,
+            TargetNullValue={x:Static System:DateTime.Now}}"/>
+        </Grid>
+        <DataGrid Grid.Row="2" Grid.Column="0" x:Name="Grid" AutoGenerateColumns="False" ItemsSource="{Binding DataSource}" SelectedItem="{Binding SelectedItem}"
+                  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" SelectionMode="Single"
+                  IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserReorderColumns="False"
+                  CanUserDeleteRows="False" RowBackground="White" AlternatingRowBackground="#E6E6E6" FontSize="16"
+                  FontFamily="Segoe UI Variable Display Light">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Ресторан" Binding="{Binding Path=RestaurantName}"/>
+                <DataGridTextColumn Header="Продукт" Binding="{Binding Path=ProductName}"/>
+                <DataGridTextColumn Header="Дата" Binding="{Binding Path=ApplicationDate}"/>
+                <DataGridTextColumn Header="Количество" Binding="{Binding Path=Quantity}"/>
+                <DataGridTextColumn Header="Стоимость за единицу, руб." Binding="{Binding Path=Price}"/>
+                <DataGridTextColumn Header="Единица изм." Binding="{Binding Path=UnitName}"/>
+                <DataGridTextColumn Header="Сумма, руб." Binding="{Binding Path=SumPrice}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
     </Grid>
 </UserControl>

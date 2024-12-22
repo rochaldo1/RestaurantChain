@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using RestaurantChain.Presentation.ViewModel.ApplicationsForDistributionViewModel;
+using RestaurantChain.Presentation.ViewModel.SuppliesViewModel;
+using System.Windows.Controls;
 
 namespace RestaurantChain.Presentation.View.ApplicationsForDistributionViews;
 
@@ -7,8 +9,9 @@ namespace RestaurantChain.Presentation.View.ApplicationsForDistributionViews;
 /// </summary>
 public partial class ApplicationsWindow : UserControl
 {
-    public ApplicationsWindow()
+    public ApplicationsWindow(IServiceProvider serviceProvider)
     {
         InitializeComponent();
+        DataContext = new ApplicationsListViewModel(serviceProvider);
     }
 }

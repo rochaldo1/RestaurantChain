@@ -4,9 +4,70 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RestaurantChain.Presentation.View.ApplicationsForDistributionViews"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors" xmlns:Behaviors="clr-namespace:RestaurantChain.Presentation.Behaviors"
+             xmlns:System="clr-namespace:System;assembly=System.Runtime"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="550">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/StyleResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition/>
+            <RowDefinition Height="0.2*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <TextBlock Style="{StaticResource LblHeaderStyle}" Text="Данные заявки на распределение"></TextBlock>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="11*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
             
+            <TextBlock Text="Продукт" Grid.Column="0" Style="{StaticResource LblStyle}" />
+            <TextBlock Text="Количество" Grid.Column="0" Grid.Row="1" Style="{StaticResource LblStyle}"/>
+            <TextBlock Text="Ресторан" Grid.Column="0" Grid.Row="2" Style="{StaticResource LblStyle}"/>
+            <TextBlock Text="Дата поставки" Grid.Column="0" Grid.Row="3" Style="{StaticResource LblStyle}"/>
+
+            <TextBlock Text="Стоимость за единицу, руб." Grid.Column="0" Grid.Row="4" Style="{StaticResource LblStyle}"/>
+            <TextBlock Text="Единица измерения" Grid.Column="0" Grid.Row="5" Style="{StaticResource LblStyle}"/>
+
+            <ComboBox Grid.Column="1" Grid.Row="0" IsEnabled="{Binding Path=IsNew}" DisplayMemberPath="ProductName" SelectedValuePath="Id" SelectedValue="{Binding SelectedProductId}" ItemsSource="{Binding ProductsDataSource}" Style="{StaticResource CmbStyle}" />
+            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Quantity}" Style="{StaticResource TbStyle}">
+                <i:Interaction.Behaviors>
+                    <Behaviors:TextBoxInputBehavior InputMode="DigitInput"></Behaviors:TextBoxInputBehavior>
+                </i:Interaction.Behaviors>
+            </TextBox>
+            <ComboBox Grid.Column="1" Grid.Row="2" IsEnabled="{Binding Path=IsNew}" DisplayMemberPath="RestaurantName" SelectedValuePath="Id" SelectedValue="{Binding SelectedRestaurantId}" ItemsSource="{Binding RestaurantsDataSource}" Style="{StaticResource CmbStyle}" />
+            <DatePicker Grid.Column="1" Grid.Row="3" SelectedDate="{Binding Path=ApplicationDate, Mode=TwoWay, TargetNullValue={x:Static System:DateTime.Now}}" Style="{StaticResource DateStyle}" />
+            <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Price}" Style="{StaticResource TbStyle}" IsEnabled="False"></TextBox>
+            <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Unit}" Style="{StaticResource TbStyle}" IsEnabled="False"></TextBox>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Content="Продолжить" Command="{Binding EnterCommand}" Style="{StaticResource BtnStyle}" />
+            <Button Content="Отмена" Click="CancelBtn_OnClick" Grid.Column="1" Style="{StaticResource BtnStyle}"/>
+        </Grid>
+
     </Grid>
 </UserControl>
