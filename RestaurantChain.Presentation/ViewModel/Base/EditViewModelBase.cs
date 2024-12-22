@@ -37,4 +37,9 @@ internal abstract class EditViewModelBase : ViewModelBase
     /// </summary>
     /// <returns></returns>
     public abstract bool Validate();
+
+    /// <summary>
+    /// Форма открылась на создание, если true
+    /// </summary>
+    public bool IsNew => CurrentId == null;
 }

@@ -1,13 +1,12 @@
-﻿namespace RestaurantChain.Infrastructure.Entities
+﻿namespace RestaurantChain.Infrastructure.Entities;
+
+/// <summary>
+/// Базовый класс для идентификаторов.
+/// </summary>
+internal abstract class IdentityBaseDb
 {
     /// <summary>
-    /// Базовый класс для идентификаторов.
+    /// Идентификатор.
     /// </summary>
-    internal abstract class IdentityBaseDb
-    {
-        /// <summary>
-        /// Идентификатор.
-        /// </summary>
-        public int Id {  get; set; }
-    }
+    public int Id {  get; set; }
 }

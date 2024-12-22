@@ -8,17 +8,17 @@ using RestaurantChain.Infrastructure.Entities;
 using RestaurantChain.Infrastructure.Entities.Views;
 using RestaurantChain.Repository.Repositories;
 
-namespace RestaurantChain.Infrastructure.Repositories
-{
-    internal sealed class ProductsRepository : RepositoryBase, IProductsRepository
-    {
-        public ProductsRepository(NpgsqlConnection connection) : base(connection)
-        {
-        }
+namespace RestaurantChain.Infrastructure.Repositories;
 
-        public int Create(Products entity)
-        {
-            const string query = @"
+internal sealed class ProductsRepository : RepositoryBase, IProductsRepository
+{
+    public ProductsRepository(NpgsqlConnection connection) : base(connection)
+    {
+    }
+
+    public int Create(Products entity)
+    {
+        const string query = @"
     insert into products (
                             unit_id,
                             product_name,
@@ -28,33 +28,33 @@ namespace RestaurantChain.Infrastructure.Repositories
                 values(
                             @UnitId,
                             @ProductName,
-                            @Quantity,
+                            0,
                             @Price
                       )
     returning Id;
     ";
-            var entityDb = entity.ToStorage();
-            var entityId = Connection.ExecuteScalar<int>(query, entityDb);
+        var entityDb = entity.ToStorage();
+        var entityId = Connection.ExecuteScalar<int>(query, entityDb);
 
-            return entityId;
-        }
+        return entityId;
+    }
 
-        public void Delete(int id)
-        {
-            const string query = @"
+    public void Delete(int id)
+    {
+        const string query = @"
     delete
     from products
     where Id = @Id
     ";
-            Connection.ExecuteScalar(query, new
-            {
-                Id = id,
-            });
-        }
-
-        public Products Get(int id)
+        Connection.ExecuteScalar(query, new
         {
-            const string query = @"
+            Id = id,
+        });
+    }
+
+    public Products Get(int id)
+    {
+        const string query = @"
     select  Id,
             unit_id         as UnitId,
             product_name    as ProductName,
@@ -63,31 +63,30 @@ namespace RestaurantChain.Infrastructure.Repositories
     from products
     where id = @id
     ";
-            var entityDb = Connection.QueryFirstOrDefault<ProductsDb>(query, new
-            {
-                Id = id
-            });
-
-            return entityDb?.ToDomain();
-        }
-
-        public void Update(Products entity)
+        var entityDb = Connection.QueryFirstOrDefault<ProductsDb>(query, new
         {
-            const string query = @"
+            Id = id
+        });
+
+        return entityDb?.ToDomain();
+    }
+
+    public void Update(Products entity)
+    {
+        const string query = @"
     update products set 
             unit_id         = @UnitId,
             product_name    = @ProductName,
-            quantity        = @Quantity,
             price           = @Price
     where Id = @Id;
     ";
-            var entityDb = entity.ToStorage();
-            Connection.ExecuteScalar(query, entityDb);
-        }
+        var entityDb = entity.ToStorage();
+        Connection.ExecuteScalar(query, entityDb);
+    }
         
-        public Products Get(string name)
-        {
-            const string query = @"
+    public Products Get(string name)
+    {
+        const string query = @"
     select  Id,
             unit_id         as UnitId,
             product_name    as ProductName,
@@ -96,17 +95,17 @@ namespace RestaurantChain.Infrastructure.Repositories
     from products 
     where product_name = @name;
     ";
-            var entityDb = Connection.QueryFirstOrDefault<ProductsDb>(query, new
-            {
-                Name = name
-            });
-
-            return entityDb?.ToDomain();
-        }
-
-        public IReadOnlyCollection<ProductsView> List()
+        var entityDb = Connection.QueryFirstOrDefault<ProductsDb>(query, new
         {
-            const string query = @"
+            Name = name
+        });
+
+        return entityDb?.ToDomain();
+    }
+
+    public IReadOnlyCollection<ProductsView> List()
+    {
+        const string query = @"
     select  p.id            as id,
 		    p.unit_id       as UnitId,
 		    p.product_name  as ProductName,
@@ -117,9 +116,22 @@ namespace RestaurantChain.Infrastructure.Repositories
     join public.units u on p.unit_id = u.id
     order by product_name;
     ";
-            IEnumerable<ProductsDbView> entities = Connection.Query<ProductsDbView>(query);
+        IEnumerable<ProductsDbView> entities = Connection.Query<ProductsDbView>(query);
 
-            return entities.Select(x => x.ToDomain()).ToArray();
-        }
+        return entities.Select(x => x.ToDomain()).ToArray();
+    }
+
+    public void UpdateQuantity(int productId, int quantity)
+    {
+        const string query = @"
+    update products set 
+            quantity = @Quantity
+    where Id = @Id;
+    ";
+        Connection.ExecuteScalar(query, new
+        {
+            Id = productId,
+            Quantity = quantity
+        });
     }
 }

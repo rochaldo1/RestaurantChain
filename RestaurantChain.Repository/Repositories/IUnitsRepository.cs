@@ -1,10 +1,9 @@
 ﻿using RestaurantChain.Domain.Models;
 
-namespace RestaurantChain.Repository.Repositories
+namespace RestaurantChain.Repository.Repositories;
+
+public interface IUnitsRepository : IRepositoryBase<Units>
 {
-    public interface IUnitsRepository : IRepositoryBase<Units>
-    {
-        Units Get(string unitName);
-        IReadOnlyCollection<Units> List();
-    }
+    Units Get(string unitName);
+    IReadOnlyCollection<Units> List();
 }

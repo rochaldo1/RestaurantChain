@@ -1,18 +1,17 @@
-﻿namespace RestaurantChain.Infrastructure.Entities
+﻿namespace RestaurantChain.Infrastructure.Entities;
+
+/// <summary>
+/// Класс пользователя.
+/// </summary>
+internal class UsersDb : IdentityBaseDb
 {
     /// <summary>
-    /// Класс пользователя.
+    /// Логин пользователя.
     /// </summary>
-    internal class UsersDb : IdentityBaseDb
-    {
-        /// <summary>
-        /// Логин пользователя.
-        /// </summary>
-        public string Login { get; set; }
+    public string Login { get; set; }
 
-        /// <summary>
-        /// Пароль пользователя.
-        /// </summary>
-        public string Password { get; set; }
-    }
+    /// <summary>
+    /// Пароль пользователя.
+    /// </summary>
+    public string Password { get; set; }
 }

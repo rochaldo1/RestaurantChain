@@ -1,11 +1,10 @@
 ﻿using RestaurantChain.Domain.Models;
 using RestaurantChain.Domain.Models.View;
 
-namespace RestaurantChain.Repository.Repositories
+namespace RestaurantChain.Repository.Repositories;
+
+public interface ISuppliersRepository : IRepositoryBase<Suppliers>
 {
-    public interface ISuppliersRepository : IRepositoryBase<Suppliers>
-    {
-        Suppliers Get(string name);
-        IReadOnlyCollection<SuppliersView> List();
-    }
+    Suppliers Get(string name);
+    IReadOnlyCollection<SuppliersView> List();
 }

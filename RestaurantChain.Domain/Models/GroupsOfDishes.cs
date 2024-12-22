@@ -1,15 +1,14 @@
 ﻿using RestaurantChain.Domain.Models.Base;
 
-namespace RestaurantChain.Domain.Models
+namespace RestaurantChain.Domain.Models;
+
+/// <summary>
+/// Класс справочника групп блюд (их типов).
+/// </summary>
+public class GroupsOfDishes : IdentityBase
 {
     /// <summary>
-    /// Класс справочника групп блюд (их типов).
+    /// Название группы блюд.
     /// </summary>
-    public class GroupsOfDishes : IdentityBase
-    {
-        /// <summary>
-        /// Название группы блюд.
-        /// </summary>
-        public string GroupName { get; set; }
-    }
+    public string GroupName { get; set; }
 }

@@ -5,17 +5,17 @@ using RestaurantChain.Infrastructure.Converters;
 using RestaurantChain.Infrastructure.Entities;
 using RestaurantChain.Repository.Repositories;
 
-namespace RestaurantChain.Infrastructure.Repositories
-{
-    internal sealed class GroupsOfDishesRepository : RepositoryBase, IGroupsOfDishesRepository
-    {
-        public GroupsOfDishesRepository(NpgsqlConnection connection) : base(connection)
-        {
-        }
+namespace RestaurantChain.Infrastructure.Repositories;
 
-        public int Create(GroupsOfDishes entity)
-        {
-            const string query = @"
+internal sealed class GroupsOfDishesRepository : RepositoryBase, IGroupsOfDishesRepository
+{
+    public GroupsOfDishesRepository(NpgsqlConnection connection) : base(connection)
+    {
+    }
+
+    public int Create(GroupsOfDishes entity)
+    {
+        const string query = @"
     insert into groups_of_dishes (
                                     group_name
                                  ) 
@@ -24,78 +24,77 @@ namespace RestaurantChain.Infrastructure.Repositories
                       ) 
     returning Id;
     ";
-            var entityDb = entity.ToStorage();
-            var groupId = Connection.ExecuteScalar<int>(query, entityDb);
+        var entityDb = entity.ToStorage();
+        var groupId = Connection.ExecuteScalar<int>(query, entityDb);
 
-            return groupId;
-        }
+        return groupId;
+    }
 
-        public void Delete(int id)
-        {
-            const string query = @"
+    public void Delete(int id)
+    {
+        const string query = @"
     delete 
     from groups_of_dishes 
     where Id = @Id;
     ";
-            Connection.ExecuteScalar<int>(query, new
-            {
-                Id = id
-            });
-        }
-
-        public GroupsOfDishes Get(int id)
+        Connection.ExecuteScalar<int>(query, new
         {
-            const string query = @"
+            Id = id
+        });
+    }
+
+    public GroupsOfDishes Get(int id)
+    {
+        const string query = @"
     select  Id, 
             group_name as GroupName 
     from groups_of_dishes 
     where id = @id;
     ";
-            var groupsDb = Connection.QueryFirstOrDefault<GroupsOfDishesDb>(query, new
-            {
-                Id = id
-            });
-
-            return groupsDb?.ToDomain();
-        }
-
-        public GroupsOfDishes Get(string groupName)
+        var groupsDb = Connection.QueryFirstOrDefault<GroupsOfDishesDb>(query, new
         {
-            const string query = @"
+            Id = id
+        });
+
+        return groupsDb?.ToDomain();
+    }
+
+    public GroupsOfDishes Get(string groupName)
+    {
+        const string query = @"
     select  Id, 
             group_name as GroupName 
     from groups_of_dishes 
     where group_name = @name;
     ";
-            var groupsDb = Connection.QueryFirstOrDefault<GroupsOfDishesDb>(query, new
-            {
-                Name = groupName
-            });
-            return groupsDb?.ToDomain();
-        }
-
-        public IReadOnlyCollection<GroupsOfDishes> List()
+        var groupsDb = Connection.QueryFirstOrDefault<GroupsOfDishesDb>(query, new
         {
-            const string query = @"
+            Name = groupName
+        });
+        return groupsDb?.ToDomain();
+    }
+
+    public IReadOnlyCollection<GroupsOfDishes> List()
+    {
+        const string query = @"
     select  Id, 
             group_name as GroupName 
     from groups_of_dishes 
     order by group_name;
     ";
-            IEnumerable<GroupsOfDishesDb> entities = Connection.Query<GroupsOfDishesDb>(query);
+        IEnumerable<GroupsOfDishesDb> entities = Connection.Query<GroupsOfDishesDb>(query);
 
-            return entities.Select(x => x.ToDomain()).ToArray();
-        }
+        return entities.Select(x => x.ToDomain()).ToArray();
+    }
 
-        public void Update(GroupsOfDishes entity)
-        {
-            const string query = @"
+    public void Update(GroupsOfDishes entity)
+    {
+        const string query = @"
     update groups_of_dishes 
         set group_name = @GroupName 
     where Id = @Id;
     ";
-            var entityDb = entity.ToStorage();
-            Connection.ExecuteScalar(query, entityDb);
-        }
+        var entityDb = entity.ToStorage();
+        Connection.ExecuteScalar(query, entityDb);
     }
 }

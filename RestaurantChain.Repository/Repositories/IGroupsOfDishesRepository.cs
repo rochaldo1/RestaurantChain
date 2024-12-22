@@ -1,10 +1,9 @@
 ﻿using RestaurantChain.Domain.Models;
 
-namespace RestaurantChain.Repository.Repositories
+namespace RestaurantChain.Repository.Repositories;
+
+public interface IGroupsOfDishesRepository : IRepositoryBase<GroupsOfDishes>
 {
-    public interface IGroupsOfDishesRepository : IRepositoryBase<GroupsOfDishes>
-    {
-        GroupsOfDishes Get(string groupName);
-        IReadOnlyCollection<GroupsOfDishes> List();
-    }
+    GroupsOfDishes Get(string groupName);
+    IReadOnlyCollection<GroupsOfDishes> List();
 }

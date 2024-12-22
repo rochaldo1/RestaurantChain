@@ -6,7 +6,6 @@ using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 
 using RestaurantChain.DomainServices.Contracts;
-using RestaurantChain.Presentation.Classes.Helpers;
 using RestaurantChain.Presentation.ViewModel.SuppliersViewModel;
 
 namespace RestaurantChain.Presentation.View.SuppliersViews;

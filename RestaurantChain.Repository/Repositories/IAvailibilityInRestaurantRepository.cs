@@ -1,8 +1,10 @@
 ﻿using RestaurantChain.Domain.Models;
+using RestaurantChain.Domain.Models.View;
 
-namespace RestaurantChain.Repository.Repositories
+namespace RestaurantChain.Repository.Repositories;
+
+public interface IAvailibilityInRestaurantRepository : IRepositoryBase<AvailibilityInRestaurant>
 {
-    public interface IAvailibilityInRestaurantRepository : IRepositoryBase<AvailibilityInRestaurant>
-    {
-    }
+    IReadOnlyCollection<AvailibilityInRestaurantView> List(int? restaurantId);
+    AvailibilityInRestaurantView GetView(int id);
 }

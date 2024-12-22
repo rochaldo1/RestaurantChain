@@ -7,48 +7,52 @@ using RestaurantChain.Repository.Repositories;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace RestaurantChain.Infrastructure.Repositories
+namespace RestaurantChain.Infrastructure.Repositories;
+
+internal sealed class UsersRepository : RepositoryBase, IUsersRepository
 {
-    internal sealed class UsersRepository : RepositoryBase, IUsersRepository
+    public UsersRepository(NpgsqlConnection connection) : base(connection)
     {
-        public UsersRepository(NpgsqlConnection connection) : base(connection)
-        {
-        }
+    }
 
-        public void Delete(int id)
+    public void Delete(int id)
+    {
+        const string query = "delete from users where Id = @Id;";
+        Connection.ExecuteScalar(query, new
         {
-            throw new NotImplementedException();
-        }
+            Id = id,
+        });
+    }
 
-        public Users Get(int id)
-        {
-            var query = @"
+    public Users Get(int id)
+    {
+        var query = @"
     select * 
     from users 
     where id = @id;
     ";
-            var user = Connection.QueryFirstOrDefault<UsersDb>(query, new { Id = id });
-            return user?.ToDomain();
-        }
+        var user = Connection.QueryFirstOrDefault<UsersDb>(query, new { Id = id });
+        return user?.ToDomain();
+    }
 
-        public void Update(Users entity)
-        {
-            const string query = @"
+    public void Update(Users entity)
+    {
+        const string query = @"
     update users 
         set password = @password 
     where id = @id;
     ";
-            var hashPassword = GetPasswordHash(entity.Password);
-            Connection.ExecuteScalar(query, new
-            {
-                Id = entity.Id,
-                Password = hashPassword
-            });
-        }
-
-        public int Create(Users entity)
+        var hashPassword = GetPasswordHash(entity.Password);
+        Connection.ExecuteScalar(query, new
         {
-            const string query = @"
+            Id = entity.Id,
+            Password = hashPassword
+        });
+    }
+
+    public int Create(Users entity)
+    {
+        const string query = @"
     insert into users(
                         login, 
                         password
@@ -59,55 +63,54 @@ namespace RestaurantChain.Infrastructure.Repositories
                       ) 
     returning Id;
     ";
-            var hashPassword = GetPasswordHash(entity.Password);
-            var id = Connection.ExecuteScalar<int>(query, new
-            {
-                Login = entity.Login,
-                Password = hashPassword
-            });
-            return id;
-        }
-
-        public Users Get(string login, string password)
+        var hashPassword = GetPasswordHash(entity.Password);
+        var id = Connection.ExecuteScalar<int>(query, new
         {
-            const string query = @"
+            Login = entity.Login,
+            Password = hashPassword
+        });
+        return id;
+    }
+
+    public Users Get(string login, string password)
+    {
+        const string query = @"
     select * 
     from users 
     where login = @login and password = @password;
     ";
-            var hashPassword = GetPasswordHash(password);
-            var user = Connection.QueryFirstOrDefault<UsersDb>(query, new
-            {
-                Login = login,
-                Password = hashPassword
-            });
-            return user?.ToDomain();
-        }
-
-        public Users Get(string login)
+        var hashPassword = GetPasswordHash(password);
+        var user = Connection.QueryFirstOrDefault<UsersDb>(query, new
         {
-            const string query = @"
+            Login = login,
+            Password = hashPassword
+        });
+        return user?.ToDomain();
+    }
+
+    public Users Get(string login)
+    {
+        const string query = @"
     select * 
     from users 
     where login = @login;
     ";
-            var user = Connection.QueryFirstOrDefault<UsersDb>(query, new
-            {
-                Login = login
-            });
-            return user?.ToDomain();
-        }
-
-        /// <summary>
-        /// Метод конвертирования пароля в хэш код.
-        /// </summary>
-        /// <param name="value">Пароль.</param>
-        /// <returns>Хэшированный пароль.</returns>
-        private static string GetPasswordHash(string value)
+        var user = Connection.QueryFirstOrDefault<UsersDb>(query, new
         {
-            var messageBytes = Encoding.UTF8.GetBytes(value);
-            var hashValue = MD5.HashData(messageBytes);
-            return Convert.ToHexString(hashValue);
-        }
+            Login = login
+        });
+        return user?.ToDomain();
+    }
+
+    /// <summary>
+    /// Метод конвертирования пароля в хэш код.
+    /// </summary>
+    /// <param name="value">Пароль.</param>
+    /// <returns>Хэшированный пароль.</returns>
+    private static string GetPasswordHash(string value)
+    {
+        var messageBytes = Encoding.UTF8.GetBytes(value);
+        var hashValue = MD5.HashData(messageBytes);
+        return Convert.ToHexString(hashValue);
     }
 }

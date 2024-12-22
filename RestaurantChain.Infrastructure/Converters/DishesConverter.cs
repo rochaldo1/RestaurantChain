@@ -3,42 +3,41 @@ using RestaurantChain.Domain.Models.View;
 using RestaurantChain.Infrastructure.Entities;
 using RestaurantChain.Infrastructure.Entities.Views;
 
-namespace RestaurantChain.Infrastructure.Converters
+namespace RestaurantChain.Infrastructure.Converters;
+
+internal static class DishesConverter
 {
-    internal static class DishesConverter
+    public static Dishes ToDomain(this DishesDb dish)
     {
-        public static Dishes ToDomain(this DishesDb dish)
+        return new Dishes
         {
-            return new Dishes
-            {
-                Id = dish.Id,
-                GroupId = dish.GroupId,
-                DishName = dish.DishName,
-                Price = dish.Price
-            };
-        }
+            Id = dish.Id,
+            GroupId = dish.GroupId,
+            DishName = dish.DishName,
+            Price = dish.Price
+        };
+    }
 
-        public static DishesDb ToStorage(this Dishes dish)
+    public static DishesDb ToStorage(this Dishes dish)
+    {
+        return new DishesDb
         {
-            return new DishesDb
-            {
-                Id = dish.Id,
-                GroupId = dish.GroupId,
-                DishName = dish.DishName,
-                Price = dish.Price
-            };
-        }
+            Id = dish.Id,
+            GroupId = dish.GroupId,
+            DishName = dish.DishName,
+            Price = dish.Price
+        };
+    }
 
-        public static DishesView ToDomain(this DishesDbView dish)
+    public static DishesView ToDomain(this DishesDbView dish)
+    {
+        return new DishesView
         {
-            return new DishesView
-            {
-                Id = dish.Id,
-                GroupId = dish.GroupId,
-                DishName = dish.DishName,
-                Price = dish.Price,
-                GroupName = dish.GroupName
-            };
-        }
+            Id = dish.Id,
+            GroupId = dish.GroupId,
+            DishName = dish.DishName,
+            Price = dish.Price,
+            GroupName = dish.GroupName
+        };
     }
 }

@@ -13,8 +13,10 @@
             <MenuItem Header="Разное" x:Name="File" FontFamily="Segoe UI Variable Display Light" FontSize="16">
                 <MenuItem Header="Изменить пароль" x:Name="ChangePassword" Click="ChangePassword_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
                 <MenuItem Header="Настройка" x:Name="Settings" Click="Settings_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
+                <MenuItem Header="Запросы" x:Name="Queries" Click="Queries_OnClick" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
             </MenuItem>
             <MenuItem Header="Продукты" x:Name="Products" Click="Products_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
+            <MenuItem Header="Поставки" x:Name="Supplies" Click="Supplies_OnClick" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
             <MenuItem Header="Справочники" x:Name="Catalogues" FontFamily="Segoe UI Variable Display Light" FontSize="16">
                 <MenuItem Header="Банки" x:Name="Banks" Click="Banks_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>
                 <MenuItem Header="Блюда" x:Name="Dishes" Click="Dishes_Click" FontFamily="Segoe UI Variable Display Light" FontSize="16"/>

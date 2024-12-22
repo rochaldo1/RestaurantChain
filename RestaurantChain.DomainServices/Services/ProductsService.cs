@@ -1,59 +1,62 @@
 ﻿using RestaurantChain.Domain.Models;
+using RestaurantChain.Domain.Models.View;
 using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace RestaurantChain.DomainServices.Services
+namespace RestaurantChain.DomainServices.Services;
+
+internal class ProductsService : IProductsService
 {
-    internal class ProductsService : IProductsService
+    private readonly IUnitOfWork _unitOfWork;
+
+    public ProductsService(IUnitOfWork unitOfWork)
     {
-        private readonly IUnitOfWork _unitOfWork;
+        _unitOfWork = unitOfWork;
+    }
 
-        public ProductsService(IUnitOfWork unitOfWork)
+    public int Create(Products product)
+    {
+        Products? existProduct = _unitOfWork.ProductsRepository.Get(product.ProductName);
+
+        if (existProduct != null)
         {
-            _unitOfWork = unitOfWork;
+            return 0;
+        }
+        return _unitOfWork.ProductsRepository.Create(product);
+    }
+
+    public void Delete(int id)
+    {
+        _unitOfWork.ProductsRepository.Delete(id);
+    }
+
+    public Products Get(int id)
+    {
+        return _unitOfWork.ProductsRepository.Get(id);
+    }
+
+    public IReadOnlyCollection<ProductsView> List()
+    {
+        return _unitOfWork.ProductsRepository.List();
+    }
+
+    public void Update(Products product)
+    {
+        Products? existProduct = _unitOfWork.ProductsRepository.Get(product.Id);
+
+        if (existProduct == null)
+        {
+            throw new Exception($"Продукта с Id {product.Id} не найдено");
         }
 
-        public int Create(Products product)
-        {
-            Products? existProduct = _unitOfWork.ProductsRepository.Get(product.ProductName);
+        _unitOfWork.ProductsRepository.Update(product);
+    }
 
-            if (existProduct != null)
-            {
-                return 0;
-            }
-            return _unitOfWork.ProductsRepository.Create(product);
-        }
-
-        public void Delete(int id)
-        {
-            _unitOfWork.ProductsRepository.Delete(id);
-        }
-
-        public Products Get(int id)
-        {
-            return _unitOfWork.ProductsRepository.Get(id);
-        }
-
-        public IReadOnlyCollection<Products> List()
-        {
-            return _unitOfWork.ProductsRepository.List();
-        }
-
-        public void Update(Products product)
-        {
-            Products? existProduct = _unitOfWork.ProductsRepository.Get(product.Id);
-
-            if (existProduct == null)
-            {
-                throw new Exception($"Продукта с Id {product.Id} не найдено");
-            }
-
-            _unitOfWork.ProductsRepository.Update(product);
-        }
+    public void CalculateAndUpdateQuantity(int productId)
+    {
+        var suppliesCount = _unitOfWork.SuppliesRepository.CountByProduct(productId);
+        var applicationsForDistributionCount = _unitOfWork.ApplicationsForDistributionRepository.CountByProduct(productId);
+        var count = applicationsForDistributionCount + suppliesCount;
+        _unitOfWork.ProductsRepository.UpdateQuantity(productId, count);
     }
 }

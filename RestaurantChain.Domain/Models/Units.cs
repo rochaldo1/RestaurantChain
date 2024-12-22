@@ -1,15 +1,14 @@
 ﻿using RestaurantChain.Domain.Models.Base;
 
-namespace RestaurantChain.Domain.Models
+namespace RestaurantChain.Domain.Models;
+
+/// <summary>
+/// Класс справочника единиц измерения.
+/// </summary>
+public class Units : IdentityBase
 {
     /// <summary>
-    /// Класс справочника единиц измерения.
+    /// Единица измерения.
     /// </summary>
-    public class Units : IdentityBase
-    {
-        /// <summary>
-        /// Единица измерения.
-        /// </summary>
-        public string UnitName { get; set; }
-    }
+    public string UnitName { get; set; }
 }

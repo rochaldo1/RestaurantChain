@@ -1,15 +1,14 @@
 ﻿using RestaurantChain.Domain.Models.Base;
 
-namespace RestaurantChain.Domain.Models
+namespace RestaurantChain.Domain.Models;
+
+/// <summary>
+/// Класс справочника банков.
+/// </summary>
+public class Banks : IdentityBase
 {
     /// <summary>
-    /// Класс справочника банков.
+    /// Название банка.
     /// </summary>
-    public class Banks : IdentityBase
-    {
-        /// <summary>
-        /// Название банка.
-        /// </summary>
-        public string BankName { get; set; }
-    }
+    public string BankName { get; set; }
 }

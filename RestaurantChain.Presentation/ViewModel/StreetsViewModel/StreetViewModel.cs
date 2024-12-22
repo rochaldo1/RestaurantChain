@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.Windows;
+﻿using System.Windows;
 
 using RestaurantChain.Domain.Models;
 using RestaurantChain.DomainServices.Contracts;

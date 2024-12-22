@@ -5,17 +5,17 @@ using RestaurantChain.Infrastructure.Converters;
 using RestaurantChain.Infrastructure.Entities;
 using RestaurantChain.Repository.Repositories;
 
-namespace RestaurantChain.Infrastructure.Repositories
-{
-    internal sealed class UnitsRepository : RepositoryBase, IUnitsRepository
-    {
-        public UnitsRepository(NpgsqlConnection connection) : base(connection)
-        {
-        }
+namespace RestaurantChain.Infrastructure.Repositories;
 
-        public int Create(Units entity)
-        {
-            const string query = @"
+internal sealed class UnitsRepository : RepositoryBase, IUnitsRepository
+{
+    public UnitsRepository(NpgsqlConnection connection) : base(connection)
+    {
+    }
+
+    public int Create(Units entity)
+    {
+        const string query = @"
     insert into units (
                         unit_name
                       ) 
@@ -24,79 +24,78 @@ namespace RestaurantChain.Infrastructure.Repositories
                       ) 
     returning Id;
     ";
-            var entityDb = entity.ToStorage();
-            var unitId = Connection.ExecuteScalar<int>(query, entityDb);
+        var entityDb = entity.ToStorage();
+        var unitId = Connection.ExecuteScalar<int>(query, entityDb);
 
-            return unitId;
-        }
+        return unitId;
+    }
 
-        public void Delete(int id)
-        {
-            const string query = @"
+    public void Delete(int id)
+    {
+        const string query = @"
     delete 
     from units 
     where Id = @Id;
     ";
-            Connection.ExecuteScalar<int>(query, new
-            {
-                Id = id
-            });
-        }
-
-        public Units Get(int id)
+        Connection.ExecuteScalar<int>(query, new
         {
-            const string query = @"
+            Id = id
+        });
+    }
+
+    public Units Get(int id)
+    {
+        const string query = @"
     select  Id, 
             unit_name as UnitName 
     from units 
     where id = @id;
     ";
-            var unitsDb = Connection.QueryFirstOrDefault<UnitsDb>(query, new
-            {
-                Id = id
-            });
-
-            return unitsDb?.ToDomain();
-        }
-
-        public Units Get(string unitName)
+        var unitsDb = Connection.QueryFirstOrDefault<UnitsDb>(query, new
         {
-            const string query = @"
+            Id = id
+        });
+
+        return unitsDb?.ToDomain();
+    }
+
+    public Units Get(string unitName)
+    {
+        const string query = @"
     select  Id, 
             unit_name as UnitName 
-    from untis 
+    from units 
     where unit_name = @name;
     ";
-            var unitsDb = Connection.QueryFirstOrDefault<UnitsDb>(query, new
-            {
-                Name = unitName
-            });
-
-            return unitsDb?.ToDomain();
-        }
-
-        public IReadOnlyCollection<Units> List()
+        var unitsDb = Connection.QueryFirstOrDefault<UnitsDb>(query, new
         {
-            const string query = @"
+            Name = unitName
+        });
+
+        return unitsDb?.ToDomain();
+    }
+
+    public IReadOnlyCollection<Units> List()
+    {
+        const string query = @"
     select  Id, 
             unit_name as UnitName 
     from units 
     order by unit_name;
     ";
-            IEnumerable<UnitsDb> entities = Connection.Query<UnitsDb>(query);
+        IEnumerable<UnitsDb> entities = Connection.Query<UnitsDb>(query);
 
-            return entities.Select(x => x.ToDomain()).ToArray();
-        }
+        return entities.Select(x => x.ToDomain()).ToArray();
+    }
 
-        public void Update(Units entity)
-        {
-            const string query = @"
+    public void Update(Units entity)
+    {
+        const string query = @"
     update units 
         set unit_name = @UnitName 
     where Id = @Id;
     ";
-            var entityDb = entity.ToStorage();
-            Connection.ExecuteScalar(query, entityDb);
-        }
+        var entityDb = entity.ToStorage();
+        Connection.ExecuteScalar(query, entityDb);
     }
 }

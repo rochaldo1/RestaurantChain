@@ -1,10 +1,9 @@
 ﻿using RestaurantChain.Domain.Models;
 
-namespace RestaurantChain.Repository.Repositories
+namespace RestaurantChain.Repository.Repositories;
+
+public interface IStreetsRepository : IRepositoryBase<Streets>
 {
-    public interface IStreetsRepository : IRepositoryBase<Streets>
-    {
-        Streets Get(string streetName);
-        IReadOnlyCollection<Streets> List();
-    }
+    Streets Get(string streetName);
+    IReadOnlyCollection<Streets> List();
 }

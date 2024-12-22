@@ -9,77 +9,74 @@ using System.Windows.Input;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using RestaurantChain.Presentation.ViewModel.UnitsViewModel;
+namespace RestaurantChain.Presentation.View;
 
-namespace RestaurantChain.Presentation.View
+/// <summary>
+/// Логика взаимодействия для LogInWindow.xaml
+/// </summary>
+public partial class LogInWindow : Window
 {
-    /// <summary>
-    /// Логика взаимодействия для LogInWindow.xaml
-    /// </summary>
-    public partial class LogInWindow : Window
+    private readonly IServiceProvider _serviceProvider;
+
+    public LogInWindow(IServiceProvider serviceProvider)
     {
-        private readonly IServiceProvider _serviceProvider;
+        InitializeComponent();
+        _serviceProvider = serviceProvider;
+        var usersService = serviceProvider.GetRequiredService<IUsersService>();
 
-        public LogInWindow(IServiceProvider serviceProvider)
+        DataContext = new LogInViewModel(usersService);
+        if (DataContext is LogInViewModel loginViewModel)
         {
-            InitializeComponent();
-            _serviceProvider = serviceProvider;
-            var usersService = serviceProvider.GetRequiredService<IUsersService>();
-
-            DataContext = new LogInViewModel(usersService);
-            if (DataContext is LogInViewModel loginViewModel)
-            {
-                loginViewModel.OnLogInSuccess += LogInSuccess;
-            }
-            PreviewKeyDown += PreviewKeyDownHandle;
+            loginViewModel.OnLogInSuccess += LogInSuccess;
         }
+        PreviewKeyDown += PreviewKeyDownHandle;
+    }
         
-        public void LogInSuccess()
-        {
-            MainWindow window = new(_serviceProvider);
-            window.Show();
-            Close();
-        }
+    public void LogInSuccess()
+    {
+        MainWindow window = new(_serviceProvider);
+        window.Show();
+        Close();
+    }
 
-        private void WindowLoaded(object sender, RoutedEventArgs e)
-        {
-            TextBoxVersion.Text = "Версия " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
-        }
+    private void WindowLoaded(object sender, RoutedEventArgs e)
+    {
+        TextBoxVersion.Text = "Версия " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+    }
 
-        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+    private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+    {
+        if (this.DataContext != null)
         {
-            if (this.DataContext != null)
-            {
-                ((LogInViewModel)this.DataContext).Password = ((PasswordBox)sender).SecurePassword;
-            }
+            ((LogInViewModel)this.DataContext).Password = ((PasswordBox)sender).SecurePassword;
         }
+    }
 
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-        {
-            Login.Text = "";
-            Password.Password = "";
-        }
+    private void Cancel_Click(object sender, RoutedEventArgs e)
+    {
+        Login.Text = "";
+        Password.Password = "";
+    }
 
-        private void Registration_Click(object sender, RoutedEventArgs e)
-        {
-            RegistrationWindow registrationWindow = new(_serviceProvider);
-            registrationWindow.Owner = this;
-            registrationWindow.ShowDialog();
-        }
+    private void Registration_Click(object sender, RoutedEventArgs e)
+    {
+        RegistrationWindow registrationWindow = new(_serviceProvider);
+        registrationWindow.Owner = this;
+        registrationWindow.ShowDialog();
+    }
         
-        private void PreviewKeyDownHandle(object sender, KeyEventArgs e)
+    private void PreviewKeyDownHandle(object sender, KeyEventArgs e)
+    {
+        switch (e.Key)
         {
-            switch (e.Key)
-            {
-                case Key.Escape:
-                    Close();
+            case Key.Escape:
+                Close();
 
-                    break;
-                case Key.Enter:
-                    (DataContext as LogInViewModel)?.Enter(this);
+                break;
+            case Key.Enter:
+                (DataContext as LogInViewModel)?.Enter(this);
 
-                    break;
-            }
+                break;
         }
     }
 }

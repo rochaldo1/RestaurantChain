@@ -1,18 +1,13 @@
 ﻿using RestaurantChain.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RestaurantChain.Domain.Models.View;
 
-namespace RestaurantChain.DomainServices.Contracts
+namespace RestaurantChain.DomainServices.Contracts;
+
+public interface ISuppliersService
 {
-    public interface ISuppliersService
-    {
-        Suppliers Get(int id);
-        int Create(Suppliers supplier);
-        void Update(Suppliers supplier);
-        void Delete(int id);
-        IReadOnlyCollection<Suppliers> List();
-    }
+    Suppliers Get(int id);
+    int Create(Suppliers supplier);
+    void Update(Suppliers supplier);
+    void Delete(int id);
+    IReadOnlyCollection<SuppliersView> List();
 }

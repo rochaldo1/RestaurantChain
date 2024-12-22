@@ -1,8 +1,10 @@
 ﻿using RestaurantChain.Domain.Models;
+using RestaurantChain.Domain.Models.View;
 
-namespace RestaurantChain.Repository.Repositories
+namespace RestaurantChain.Repository.Repositories;
+
+public interface IUserRightsRepository : IRepositoryBase<UserRights>
 {
-    public interface IUserRightsRepository : IRepositoryBase<UserRights>
-    {
-    }
+    IReadOnlyCollection<UserRightsView> List(int userId);
+    UserRightsView GetView(int id);
 }

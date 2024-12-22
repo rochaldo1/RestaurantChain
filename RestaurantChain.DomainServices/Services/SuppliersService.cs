@@ -1,60 +1,55 @@
 ﻿using RestaurantChain.Domain.Models;
 using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RestaurantChain.Domain.Models.View;
 
-namespace RestaurantChain.DomainServices.Services
+namespace RestaurantChain.DomainServices.Services;
+
+internal class SuppliersService : ISuppliersService
 {
-    internal class SuppliersService : ISuppliersService
+    private readonly IUnitOfWork _unitOfWork;
+
+    public SuppliersService(IUnitOfWork unitOfWork)
     {
-        private readonly IUnitOfWork _unitOfWork;
+        _unitOfWork = unitOfWork;
+    }
 
-        public SuppliersService(IUnitOfWork unitOfWork)
+    public int Create(Suppliers supplier)
+    {
+        Suppliers? existSupplier = _unitOfWork.SuppliersRepository.Get(supplier.SupplierName);
+
+        if (existSupplier != null)
         {
-            _unitOfWork = unitOfWork;
+            return 0;
         }
 
-        public int Create(Suppliers supplier)
-        {
-            Suppliers? existSupplier = _unitOfWork.SuppliersRepository.Get(supplier.SupplierName);
+        return _unitOfWork.SuppliersRepository.Create(supplier);
+    }
 
-            if (existSupplier != null)
-            {
-                return 0;
-            }
+    public void Delete(int id)
+    {
+        _unitOfWork.SuppliersRepository.Delete(id);
+    }
 
-            return _unitOfWork.SuppliersRepository.Create(supplier);
-        }
+    public Suppliers Get(int id)
+    {
+        return _unitOfWork.SuppliersRepository.Get(id);
+    }
 
-        public void Delete(int id)
-        {
-            _unitOfWork.SuppliersRepository.Delete(id);
-        }
+    public IReadOnlyCollection<SuppliersView> List()
+    {
+        return _unitOfWork.SuppliersRepository.List();
+    }
 
-        public Suppliers Get(int id)
-        {
-            return _unitOfWork.SuppliersRepository.Get(id);
-        }
-
-        public IReadOnlyCollection<Suppliers> List()
-        {
-            return _unitOfWork.SuppliersRepository.List();
-        }
-
-        public void Update(Suppliers supplier)
-        {
-            Suppliers? existSupplier = _unitOfWork.SuppliersRepository.Get(supplier.Id);
+    public void Update(Suppliers supplier)
+    {
+        Suppliers? existSupplier = _unitOfWork.SuppliersRepository.Get(supplier.Id);
             
-            if (existSupplier == null)
-            {
-                throw new Exception($"Поставщика с Id {supplier.Id} не найдено");
-            }
-
-            _unitOfWork.SuppliersRepository.Update(supplier);
+        if (existSupplier == null)
+        {
+            throw new Exception($"Поставщика с Id {supplier.Id} не найдено");
         }
+
+        _unitOfWork.SuppliersRepository.Update(supplier);
     }
 }

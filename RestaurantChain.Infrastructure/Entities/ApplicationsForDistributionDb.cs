@@ -1,38 +1,37 @@
-﻿namespace RestaurantChain.Infrastructure.Entities
+﻿namespace RestaurantChain.Infrastructure.Entities;
+
+/// <summary>
+/// Класс заявок на распределение продуктов.
+/// </summary>
+internal class ApplicationsForDistributionDb : IdentityBaseDb
 {
     /// <summary>
-    /// Класс заявок на распределение продуктов.
+    /// Идентификатор ресторана, который подал заявку на распределение.
     /// </summary>
-    internal sealed class ApplicationsForDistributionDb : IdentityBaseDb
-    {
-        /// <summary>
-        /// Идентификатор ресторана, который подал заявку на распределение.
-        /// </summary>
-        public int RestaurantId { get; set; }
+    public int RestaurantId { get; set; }
 
-        /// <summary>
-        /// Идентификатор продукта.
-        /// </summary>
-        public int ProductId { get; set; }
+    /// <summary>
+    /// Идентификатор продукта.
+    /// </summary>
+    public int ProductId { get; set; }
 
-        /// <summary>
-        /// Идентификатор единицы измерения.
-        /// </summary>
-        public int UnitId { get; set; }
+    /// <summary>
+    /// Идентификатор единицы измерения.
+    /// </summary>
+    public int UnitId { get; set; }
 
-        /// <summary>
-        /// Дата оформления заявки в формате DD.MM.YYYY.
-        /// </summary>
-        public DateTime ApplicationDate { get; set; }
+    /// <summary>
+    /// Дата оформления заявки в формате DD.MM.YYYY.
+    /// </summary>
+    public DateTime ApplicationDate { get; set; }
 
-        /// <summary>
-        /// Количество продуктов в заявке.
-        /// </summary>
-        public int Quantity { get; set; }
+    /// <summary>
+    /// Количество продуктов в заявке.
+    /// </summary>
+    public int Quantity { get; set; }
 
-        /// <summary>
-        /// Стоимость продуктов в заявке (2 знака после запятой).В
-        /// </summary>
-        public decimal Price { get; set; }
-    }
+    /// <summary>
+    /// Стоимость продуктов в заявке (2 знака после запятой).В
+    /// </summary>
+    public decimal Price { get; set; }
 }

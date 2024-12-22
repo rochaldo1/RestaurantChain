@@ -1,21 +1,19 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using RestaurantChain.Presentation.View;
-
 using System.IO;
 
 using RestaurantChain.DomainServices;
 using RestaurantChain.Infrastructure;
 
-namespace RestaurantChain.Presentation
+namespace RestaurantChain.Presentation;
+
+public class Program
 {
-    public class Program
+    [STAThread]
+    public static void Main()
     {
-        [STAThread]
-        public static void Main()
-        {
-            var host = Host.CreateDefaultBuilder()
+        var host = Host.CreateDefaultBuilder()
             // внедряем сервисы
             .ConfigureServices((context, services) =>
             {
@@ -31,10 +29,9 @@ namespace RestaurantChain.Presentation
                 services.AddSingleton<App>();
             })
             .Build();
-            // получаем сервис - объект класса App
-            var app = host.Services.GetService<App>();
-            // запускаем приложения
-            app?.Run();
-        }
+        // получаем сервис - объект класса App
+        var app = host.Services.GetService<App>();
+        // запускаем приложения
+        app?.Run();
     }
 }

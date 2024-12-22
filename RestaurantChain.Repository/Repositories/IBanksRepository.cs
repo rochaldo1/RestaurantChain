@@ -1,10 +1,9 @@
 ﻿using RestaurantChain.Domain.Models;
 
-namespace RestaurantChain.Repository.Repositories
+namespace RestaurantChain.Repository.Repositories;
+
+public interface IBanksRepository : IRepositoryBase<Banks>
 {
-    public interface IBanksRepository : IRepositoryBase<Banks>
-    {
-        Banks Get(string bankName);
-        IReadOnlyCollection<Banks> List();
-    }
+    Banks Get(string bankName);
+    IReadOnlyCollection<Banks> List();
 }

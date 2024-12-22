@@ -1,14 +1,13 @@
 ﻿using Npgsql;
 
-namespace RestaurantChain.Infrastructure.Repositories
-{
-    internal abstract class RepositoryBase
-    {
-        protected NpgsqlConnection Connection { get; }
+namespace RestaurantChain.Infrastructure.Repositories;
 
-        protected RepositoryBase(NpgsqlConnection connection)
-        {
-            Connection = connection;
-        }
+internal abstract class RepositoryBase
+{
+    protected NpgsqlConnection Connection { get; }
+
+    protected RepositoryBase(NpgsqlConnection connection)
+    {
+        Connection = connection;
     }
 }
