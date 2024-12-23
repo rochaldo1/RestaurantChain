@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.ViewModel.RestaurantsViewModels;
-using RestaurantChain.Presentation.ViewModel.SuppliersViewModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -26,10 +25,10 @@ public partial class RestaurantWindow : UserControl
         InitializeComponent();
         DataContext = new RestaurantViewModel(restaurantsService, streetsService, restaurantId);
 
-        if (DataContext is SupplierViewModel supplierViewModel)
+        if (DataContext is RestaurantViewModel vw)
         {
-            supplierViewModel.OnSaveSuccess += SaveSuccess;
-            supplierViewModel.OnCancel += SaveError;
+            vw.OnSaveSuccess += SaveSuccess;
+            vw.OnCancel += SaveError;
         }
 
         PreviewKeyDown += PreviewKeyDownHandle;

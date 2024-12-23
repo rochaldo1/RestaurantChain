@@ -11,6 +11,10 @@
             <RowDefinition Height="25" />
             <RowDefinition />
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
         <Menu VerticalAlignment="Top" FontSize="16" FontFamily="Segoe UI Variable Display Light">
             <MenuItem Header="Создать" x:Name="CreateMenuItem" Command="{Binding CreateCommand}" Visibility="{Binding HasW}"/>
             <MenuItem Header="Редактировать" x:Name="EditMenuItem" Command="{Binding EditCommand}" Visibility="{Binding HasE}"/>
@@ -18,7 +22,7 @@
         </Menu>
 
         <DataGrid Grid.Row="1" Grid.Column="0" x:Name="Grid" AutoGenerateColumns="False" ItemsSource="{Binding DataSource}" SelectedItem="{Binding SelectedItem}"
-          HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" SelectionMode="Single"
+          HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" SelectionMode="Single" SelectionChanged="Grid_OnSelectionChanged"
           IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserReorderColumns="False"
           CanUserDeleteRows="False" RowBackground="White" AlternatingRowBackground="#E6E6E6" FontSize="16"
           FontFamily="Segoe UI Variable Display Light">
@@ -31,5 +35,7 @@
                 <DataGridTextColumn Header="Отчество директора" Binding="{Binding Path=DirectorSurname}"/>
             </DataGrid.Columns>
         </DataGrid>
+
+        <ContentControl Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" x:Name="mainView" />
     </Grid>
 </UserControl>

@@ -16,7 +16,8 @@ internal static class MenuConverter
             DLLName = menu.DLLName,
             ItemName = menu.ItemName,
             MethodName = menu.MethodName,
-            OrderNum = menu.OrderNum
+            OrderNum = menu.OrderNum,
+            IsMain = menu.IsMain,
         };
     }
 
@@ -29,7 +30,8 @@ internal static class MenuConverter
             DLLName = menu.DLLName,
             ItemName = menu.ItemName,
             MethodName = menu.MethodName,
-            OrderNum = menu.OrderNum
+            OrderNum = menu.OrderNum,
+            IsMain = menu.IsMain,
         };
     }
 
@@ -43,7 +45,8 @@ internal static class MenuConverter
             ItemName = menu.ItemName,
             MethodName = menu.MethodName,
             OrderNum = menu.OrderNum,
-            Level = menu.Level
+            Level = menu.Level,
+            IsMain = menu.IsMain,
         };
     }
 }

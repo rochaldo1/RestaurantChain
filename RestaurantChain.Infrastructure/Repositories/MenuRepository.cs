@@ -55,7 +55,8 @@ SELECT
 	m.item_name     as ItemName, 
 	m.dll_name      as DLLName, 
 	m.method_name   as MethodName, 
-	m.order_num     as OrderNum
+	m.order_num     as OrderNum,
+	m.is_main       as IsMain
 FROM menu m
 WHERE
     s.Id = @Id;
@@ -93,7 +94,8 @@ SELECT
 	m.item_name     as ItemName, 
 	m.dll_name      as DLLName, 
 	m.method_name   as MethodName, 
-	m.order_num     as OrderNum
+	m.order_num     as OrderNum,
+	m.is_main       as IsMain
 FROM menu m
 order by
     m.order_num

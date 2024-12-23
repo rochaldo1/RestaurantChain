@@ -29,4 +29,9 @@ internal class MenuDb : IdentityBaseDb
     /// Порядок.
     /// </summary>
     public int OrderNum { get; set; }
+    
+    /// <summary>
+    /// Главное меню
+    /// </summary>
+    public bool IsMain { set; get; }
 }

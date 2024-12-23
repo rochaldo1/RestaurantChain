@@ -3,107 +3,98 @@ using RestaurantChain.Domain.Models;
 using RestaurantChain.Domain.Models.View;
 using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.Commands;
-using RestaurantChain.Presentation.View.ApplicationsForDistributionViews;
 using RestaurantChain.Presentation.View.AvailibilityInRestaurantViews;
 using RestaurantChain.Presentation.ViewModel.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
-namespace RestaurantChain.Presentation.ViewModel.AvailibilityInRestaurantViewModel
+namespace RestaurantChain.Presentation.ViewModel.AvailibilityInRestaurantViewModel;
+
+internal class AvailibilityListViewModel : ListViewModelBase<AvailibilityInRestaurantView>
 {
-    internal class AvailibilityListViewModel : ListViewModelBase<AvailibilityInRestaurantView>
+    private readonly IAvailibilityInRestaurantService _availibilityInRestaurantService;
+
+    private int _selectedRestaurantId;
+    private IReadOnlyCollection<Restaurants> _restaurantsDataSource;
+
+    public int SelectedRestaurantId
     {
-        private readonly IAvailibilityInRestaurantService _availibilityInRestaurantService;
-        private readonly IProductsService _productsService;
-
-        private int _selectedRestaurantId;
-        private IReadOnlyCollection<Restaurants> _restaurantsDataSource;
-
-        public int SelectedRestaurantId
+        get => _selectedRestaurantId;
+        set
         {
-            get => _selectedRestaurantId;
-            set
-            {
-                _selectedRestaurantId = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public IReadOnlyCollection<Restaurants> RestaurantsDataSource
-        {
-            get => _restaurantsDataSource;
-            set
-            {
-                _restaurantsDataSource = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public AvailibilityListViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
-        {
-            _availibilityInRestaurantService = serviceProvider.GetRequiredService<IAvailibilityInRestaurantService>();
-            _productsService = serviceProvider.GetRequiredService<IProductsService>();
-
-            var restaurantsService = serviceProvider.GetRequiredService<IRestaurantsService>();
-            RestaurantsDataSource = restaurantsService.List();
-
+            _selectedRestaurantId = value;
             OnPropertyChanged();
-            DataBind();
         }
+    }
 
-        protected override void DataBind()
+    public IReadOnlyCollection<Restaurants> RestaurantsDataSource
+    {
+        get => _restaurantsDataSource;
+        set
         {
-            IReadOnlyCollection<AvailibilityInRestaurantView> entities = _availibilityInRestaurantService.List(SelectedRestaurantId);
-            SetEntities(entities);
+            _restaurantsDataSource = value;
+            OnPropertyChanged();
         }
+    }
 
-        protected override void SetCommands()
+    public AvailibilityListViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
+    {
+        _availibilityInRestaurantService = serviceProvider.GetRequiredService<IAvailibilityInRestaurantService>();
+
+        var restaurantsService = serviceProvider.GetRequiredService<IRestaurantsService>();
+        RestaurantsDataSource = restaurantsService.List();
+
+        OnPropertyChanged();
+        DataBind();
+    }
+
+    protected override void DataBind()
+    {
+        IReadOnlyCollection<AvailibilityInRestaurantView> entities = _availibilityInRestaurantService.List(SelectedRestaurantId);
+        SetEntities(entities);
+    }
+
+    protected override void SetCommands()
+    {
+        CreateCommand = new RelayCommand(CreateEntity);
+        EditCommand = new RelayCommand(EditEntity);
+        DeleteCommand = new RelayCommand(DeleteEntity);
+    }
+
+    private void CreateEntity(object sender)
+    {
+        var view = new AvailibilityInRestaurantWindow(ServiceProvider, availibilityId: null);
+        ShowDialog(view, "Создание записи", 500, 500);
+        DataBind();
+    }
+
+    private void EditEntity(object sender)
+    {
+        if (!HasSelectedItem())
         {
-            CreateCommand = new RelayCommand(CreateEntity);
-            EditCommand = new RelayCommand(EditEntity);
-            DeleteCommand = new RelayCommand(DeleteEntity);
+            return;
         }
 
-        private void CreateEntity(object sender)
+        var view = new AvailibilityInRestaurantWindow(ServiceProvider, SelectedItem.Id);
+        ShowDialog(view, "Редактирование записи", 500, 500);
+        DataBind();
+    }
+
+    private void DeleteEntity(object sender)
+    {
+        if (!HasSelectedItem())
         {
-            var view = new AvailibilityInRestaurantWindow(ServiceProvider, availibilityId: null);
-            ShowDialog(view, "Создание записи", 500, 500);
-            DataBind();
+            return;
         }
 
-        private void EditEntity(object sender)
+        if (MessageBox.Show($"Удалить заявку?", "Удаление записи", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
         {
-            if (!HasSelectedItem())
-            {
-                return;
-            }
-
-            var view = new AvailibilityInRestaurantWindow(ServiceProvider, SelectedItem.Id);
-            ShowDialog(view, "Редактирование записи", 500, 500);
-            DataBind();
+            _availibilityInRestaurantService.Delete(SelectedItem.Id);
         }
-
-        private void DeleteEntity(object sender)
+        else
         {
-            if (!HasSelectedItem())
-            {
-                return;
-            }
-
-            if (MessageBox.Show($"Удалить заявку?", "Удаление записи", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-            {
-                _availibilityInRestaurantService.Delete(SelectedItem.Id);
-            }
-            else
-            {
-                return;
-            }
-
-            DataBind();
+            return;
         }
+
+        DataBind();
     }
 }

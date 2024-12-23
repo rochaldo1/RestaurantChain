@@ -4,5 +4,5 @@ namespace RestaurantChain.DomainServices.Contracts;
 
 public interface IQueryService
 {
-    DataView ExecuteQuery(string query);
+    DataTable ExecuteQuery(string query);
 }

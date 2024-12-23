@@ -4,5 +4,5 @@ namespace RestaurantChain.Repository.Repositories;
 
 public interface IQueryRepository
 {
-    DataView GetResult(string query);
+    DataTable GetResult(string query);
 }

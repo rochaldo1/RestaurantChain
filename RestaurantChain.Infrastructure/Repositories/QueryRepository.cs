@@ -10,7 +10,7 @@ internal class QueryRepository : RepositoryBase, IQueryRepository
     {
     }
 
-    public DataView GetResult(string query)
+    public DataTable GetResult(string query)
     {
         if (Connection.State != ConnectionState.Open)
         {
@@ -25,6 +25,6 @@ internal class QueryRepository : RepositoryBase, IQueryRepository
             
         da.Fill(ds);
             
-        return ds.Tables[0].DefaultView;
+        return ds.Tables[0];
     }
 }

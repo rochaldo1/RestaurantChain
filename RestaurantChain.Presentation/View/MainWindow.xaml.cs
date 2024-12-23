@@ -28,7 +28,7 @@ public partial class MainWindow : Window
     {
         var menu = _menuService.List(CurrentState.CurrentUser.Id);
         CurrentState.Menu = menu;
-        foreach (var menuItem in menu.Where(x => x.ParentId == null))
+        foreach (var menuItem in menu.Where(x => x.ParentId == null && x.IsMain == true))
         {
             if (menuItem.R == false)
             {
@@ -45,7 +45,7 @@ public partial class MainWindow : Window
 
     private void RecursiveBuildMainMenu(IReadOnlyCollection<Domain.Models.Menu> menu, MenuItem parentMenuItem)
     {
-        foreach (var menuItem in menu)
+        foreach (var menuItem in menu.Where(x=> x.IsMain == true))
         {
             if (menuItem.R == false)
             { 
@@ -136,7 +136,7 @@ public partial class MainWindow : Window
                 break;
             case "Queries":
             {
-                var view = new QueriesWindow(_serviceProvider);
+                var view = new QueriesWindow(_serviceProvider, "Select 1 as q");
                 mainView.Content = view;
             }
                 break;

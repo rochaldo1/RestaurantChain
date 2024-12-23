@@ -39,15 +39,12 @@
             <Button Content="Выполнить" Style="{StaticResource BtnStyle}" Command="{Binding EnterCommand}" />
         </Grid>
         <Grid Grid.Row="3">
-            <DataGrid Grid.Column="0" x:Name="Grid" AutoGenerateColumns="True" ItemsSource="{Binding DataSource}"
+            <DataGrid Grid.Column="0" x:Name="Grid" AutoGenerateColumns="True" ItemsSource="{Binding DataSource, Mode=TwoWay}"
                       HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" SelectionMode="Single"
                       IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserReorderColumns="False"
                       CanUserDeleteRows="False" RowBackground="White" AlternatingRowBackground="#E6E6E6" FontSize="16"
-                      FontFamily="Segoe UI Variable Display Light" Height="350" Width="1200">
+                      FontFamily="Segoe UI Variable Display Light">
             </DataGrid>
         </Grid>
-
-
-
-        </Grid>
+    </Grid>
 </UserControl>

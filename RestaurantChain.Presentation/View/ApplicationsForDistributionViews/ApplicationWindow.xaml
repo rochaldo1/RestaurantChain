@@ -43,7 +43,7 @@
             <TextBlock Text="Продукт" Grid.Column="0" Style="{StaticResource LblStyle}" />
             <TextBlock Text="Количество" Grid.Column="0" Grid.Row="1" Style="{StaticResource LblStyle}"/>
             <TextBlock Text="Ресторан" Grid.Column="0" Grid.Row="2" Style="{StaticResource LblStyle}"/>
-            <TextBlock Text="Дата поставки" Grid.Column="0" Grid.Row="3" Style="{StaticResource LblStyle}"/>
+            <TextBlock Text="Дата заявки" Grid.Column="0" Grid.Row="3" Style="{StaticResource LblStyle}"/>
 
             <TextBlock Text="Стоимость за единицу, руб." Grid.Column="0" Grid.Row="4" Style="{StaticResource LblStyle}"/>
             <TextBlock Text="Единица измерения" Grid.Column="0" Grid.Row="5" Style="{StaticResource LblStyle}"/>

@@ -4,7 +4,6 @@ using RestaurantChain.Domain.Models.View;
 using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.Commands;
 using RestaurantChain.Presentation.View.ApplicationsForDistributionViews;
-using RestaurantChain.Presentation.View.SuppliesViews;
 using RestaurantChain.Presentation.ViewModel.Base;
 using System.Windows;
 

@@ -183,7 +183,12 @@ INSERT INTO public.user_rights (user_id, item_id, r, w, e, d)
   (@UserId, 19, false, false, false, false),
   (@UserId, 20, false, false, false, false),
   (@UserId, 21, true, true, true, true),
-  (@UserId, 22, true, true, true, true)";
+  (@UserId, 22, true, true, true, true), 
+  (@UserId, 23, false, false, false, false),
+  (@UserId, 24, false, false, false, false),
+  (@UserId, 25, false, false, false, false),
+  (@UserId, 26, false, false, false, false)
+  ";
         Connection.ExecuteScalar(query, new
         {
             UserId = userId,

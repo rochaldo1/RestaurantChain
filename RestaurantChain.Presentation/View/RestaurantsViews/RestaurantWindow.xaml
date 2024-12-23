@@ -39,9 +39,9 @@
             <TextBlock Text="Название" Grid.Column="0" Grid.Row="0" Style="{StaticResource LblStyle}"/>
             <TextBlock Text="Улица" Grid.Column="0" Grid.Row="1"  Style="{StaticResource LblStyle}"/>
             <TextBlock Text="Номер телефона" Grid.Column="0" Grid.Row="2"  Style="{StaticResource LblStyle}"/>
-            <TextBlock Text="Имя диерктора" Grid.Column="0" Grid.Row="3"  Style="{StaticResource LblStyle}"/>
-            <TextBlock Text="Фамилия диерктора" Grid.Column="0" Grid.Row="4"  Style="{StaticResource LblStyle}"/>
-            <TextBlock Text="Отчество диерктора" Grid.Column="0" Grid.Row="5"  Style="{StaticResource LblStyle}"/>
+            <TextBlock Text="Имя директора" Grid.Column="0" Grid.Row="3"  Style="{StaticResource LblStyle}"/>
+            <TextBlock Text="Фамилия директора" Grid.Column="0" Grid.Row="4"  Style="{StaticResource LblStyle}"/>
+            <TextBlock Text="Отчество директора" Grid.Column="0" Grid.Row="5"  Style="{StaticResource LblStyle}"/>
 
             <TextBox Grid.Column="1" Name="txtBox"  MaxLength="32" Grid.Row="0" Text="{Binding RestaurantName}" Style="{StaticResource TbStyle}" />
             <ComboBox Grid.Column="1" Grid.Row="1" DisplayMemberPath="StreetName" SelectedValuePath="Id" SelectedValue="{Binding SelectedStreetId}" ItemsSource="{Binding StreetsList}" Style="{StaticResource CmbStyle}"/>

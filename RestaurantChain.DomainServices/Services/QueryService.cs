@@ -14,7 +14,7 @@ internal class QueryService : IQueryService
     }
 
 
-    public DataView ExecuteQuery(string query)
+    public DataTable ExecuteQuery(string query)
     {
         return _unitOfWork.QueryRepository.GetResult(query);
     }

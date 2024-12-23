@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using RestaurantChain.Presentation.ViewModel.UsersViewModels.Users;
-using RestaurantChain.Presentation.ViewModel;
 
 namespace RestaurantChain.Presentation.View.Users;
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RestaurantChain.Presentation.View"
         mc:Ignorable="d"
-        Title="Сеть ресторанов" Height="720" Width="1280"
+        Title="Сеть ресторанов" Height="720" Width="1480"
         Icon="../Resources/main.png"
         MinHeight="720"
         MinWidth="1280"
@@ -20,7 +20,6 @@
     <Grid>
         <Menu Height="25" VerticalAlignment="Top" x:Name="menuControl">
         </Menu>
-        
         <ContentControl x:Name="mainView" Margin="0,25,0,0" />
     </Grid>
 </Window>

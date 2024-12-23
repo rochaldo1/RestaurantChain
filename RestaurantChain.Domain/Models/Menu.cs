@@ -41,4 +41,9 @@ public class Menu : IdentityBase
     public bool W { set; get; }
     public bool E { set; get; }
     public bool D { set; get; }
+    
+    /// <summary>
+    /// Главное меню
+    /// </summary>
+    public bool IsMain { set; get; }
 }

@@ -141,7 +141,7 @@ internal class RestaurantViewModel : EditViewModelBase
 
         if (id == 0)
         {
-            MessageBox.Show("Такой поставщик уже существует!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show("Такой ресторан уже существует!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
 
             return false;
         }

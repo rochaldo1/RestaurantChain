@@ -1,7 +1,5 @@
-﻿using System.Windows.Controls;
-using Microsoft.Extensions.DependencyInjection;
-using RestaurantChain.DomainServices.Contracts;
-using RestaurantChain.Presentation.ViewModel;
+﻿using RestaurantChain.Presentation.ViewModel;
+using System.Windows.Controls;
 
 namespace RestaurantChain.Presentation.View;
 
@@ -10,10 +8,9 @@ namespace RestaurantChain.Presentation.View;
 /// </summary>
 public partial class QueriesWindow : UserControl
 {
-    public QueriesWindow(IServiceProvider serviceProvider)
+    public QueriesWindow(IServiceProvider serviceProvider, string sql)
     {
         InitializeComponent();
-        var queryService = serviceProvider.GetRequiredService<IQueryService>();
-        DataContext = new QueriesViewModel(queryService);
+        DataContext = new QueriesViewModel(serviceProvider, sql, this);
     }
 }

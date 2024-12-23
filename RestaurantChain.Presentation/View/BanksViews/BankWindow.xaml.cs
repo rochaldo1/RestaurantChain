@@ -31,7 +31,7 @@ public partial class BankWindow : UserControl
             bankViewModel.OnCancel += SaveError;
         }
 
-        PreviewKeyDown += PreviewKeyDownHandle;
+        KeyDown += PreviewKeyDownHandle;
         Loaded += (sender, args) => { txtBox.Focus(); };
     }
 
@@ -61,6 +61,7 @@ public partial class BankWindow : UserControl
 
                 break;
             case Key.Enter:
+                (DataContext as BankViewModel).OnPropertyChanged();
                 btnOk.Command.Execute(null);
 
                 break;

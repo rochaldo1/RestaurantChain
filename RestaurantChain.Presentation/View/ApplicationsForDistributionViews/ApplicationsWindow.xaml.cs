@@ -1,5 +1,4 @@
 ﻿using RestaurantChain.Presentation.ViewModel.ApplicationsForDistributionViewModel;
-using RestaurantChain.Presentation.ViewModel.SuppliesViewModel;
 using System.Windows.Controls;
 
 namespace RestaurantChain.Presentation.View.ApplicationsForDistributionViews;
