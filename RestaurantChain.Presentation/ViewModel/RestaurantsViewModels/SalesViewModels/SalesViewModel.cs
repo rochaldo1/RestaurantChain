@@ -6,6 +6,7 @@ namespace RestaurantChain.Presentation.ViewModel.RestaurantsViewModels.SalesView
 internal sealed class SalesViewModel: EditViewModelBase
 {
     private readonly ISalesService _salesService;
+    private readonly IDishesService _dishesService;
 
     private readonly int _restaurantId;
 
