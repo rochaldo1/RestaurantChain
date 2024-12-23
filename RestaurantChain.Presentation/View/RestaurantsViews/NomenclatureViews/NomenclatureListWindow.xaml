@@ -25,6 +25,7 @@
                   FontFamily="Segoe UI Variable Display Light">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название" Binding="{Binding Path=DishName}"/>
+                <DataGridTextColumn Header="Группа" Binding="{Binding Path=GroupName}"/>
                 <DataGridTextColumn Header="Стоимость, руб." Binding="{Binding Path=Price}"/>
             </DataGrid.Columns>
         </DataGrid>

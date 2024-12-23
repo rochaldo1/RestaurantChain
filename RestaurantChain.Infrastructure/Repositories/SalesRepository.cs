@@ -99,7 +99,7 @@ SELECT
 	s.sale_date			as SaleDate,
 	r.restaurant_name 	as RestaurantName,
 	d.group_id 			as GroupId,
-	d.group_id 			as DishName,
+	d.dish_name 		as DishName,
 	god.group_name		as GroupName,
 	s.price * s.quantity as SumPrice
 FROM sales s
@@ -134,7 +134,7 @@ SELECT
 	s.sale_date			as SaleDate,
 	r.restaurant_name 	as RestaurantName,
 	d.group_id 			as GroupId,
-	d.group_id 			as DishName,
+	d.dish_name 		as DishName,
 	god.group_name		as GroupName,
 	s.price * s.quantity as SumPrice
 FROM sales s
