@@ -14,10 +14,10 @@
         </Menu>
 
         <DataGrid Grid.Row="1" Grid.Column="0" x:Name="Grid" AutoGenerateColumns="False" ItemsSource="{Binding DataSource}" SelectedItem="{Binding SelectedItem}"
-          HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" SelectionMode="Single"
-          IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserReorderColumns="False"
-          CanUserDeleteRows="False" RowBackground="White" AlternatingRowBackground="#E6E6E6" FontSize="16"
-          FontFamily="Segoe UI Variable Display Light">
+                  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" SelectionMode="Single"
+                  IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserReorderColumns="False"
+                  CanUserDeleteRows="False" RowBackground="White" AlternatingRowBackground="#E6E6E6" FontSize="16"
+                  FontFamily="Segoe UI Variable Display Light">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Продукт" Binding="{Binding Path=ProductName}"/>
                 <DataGridTextColumn Header="Количество" Binding="{Binding Path=Quantity}"/>
@@ -26,6 +26,5 @@
                 <DataGridTextColumn Header="Сумма, руб." Binding="{Binding Path=SumPrice}"/>
             </DataGrid.Columns>
         </DataGrid>
-
     </Grid>
 </UserControl>

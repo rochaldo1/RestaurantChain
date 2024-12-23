@@ -4,9 +4,44 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:RestaurantChain.Presentation.View.RestaurantsViews.NomenclatureViews"
+             xmlns:System="clr-namespace:System;assembly=System.Runtime"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="200" d:DesignWidth="550">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/StyleResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <TextBlock Style="{StaticResource LblHeaderStyle}" Text="Выберите блюдо"></TextBlock>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="11*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Блюдо" Grid.Column="0" Style="{StaticResource LblStyle}" />
+            <ComboBox Grid.Column="1" IsEnabled="{Binding Path=IsNew}" DisplayMemberPath="DishName" SelectedValuePath="Id" SelectedValue="{Binding SelectedDishId}" ItemsSource="{Binding DishesDataSource}" Style="{StaticResource CmbStyle}" />
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Content="Продолжить" Command="{Binding EnterCommand}" Style="{StaticResource BtnStyle}" />
+            <Button Content="Отмена" Click="CancelBtn_OnClick" Grid.Column="1" Style="{StaticResource BtnStyle}"/>
+        </Grid>
+
     </Grid>
 </UserControl>

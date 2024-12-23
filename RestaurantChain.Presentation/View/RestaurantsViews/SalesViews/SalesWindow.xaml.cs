@@ -1,3 +1,4 @@
+using System.Windows;
 using System.Windows.Controls;
 
 using RestaurantChain.Presentation.ViewModel.RestaurantsViewModels.SalesViewModels;
@@ -19,5 +20,22 @@ public partial class SalesWindow : UserControl
         
         InitializeComponent();
         DataContext = new SalesViewModel(serviceProvider, restaurantId, saleId);
+    }
+
+    private void CancelBtn_OnClick(object sender, RoutedEventArgs e)
+    {
+        ((Window)Parent).Close();
+    }
+
+    public void SaveSuccess()
+    {
+        IsSuccess = true;
+        ((Window)Parent).Close();
+    }
+
+    public void SaveError()
+    {
+        IsSuccess = false;
+        ((Window)Parent).Close();
     }
 }
