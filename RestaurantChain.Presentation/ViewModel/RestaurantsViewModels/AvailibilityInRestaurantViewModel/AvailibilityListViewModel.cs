@@ -39,7 +39,7 @@ internal class AvailibilityListViewModel : ListViewModelBase<AvailibilityInResta
 
     private void CreateEntity(object sender)
     {
-        var view = new AvailibilityInRestaurantWindow(ServiceProvider, availibilityId: null);
+        var view = new AvailibilityInRestaurantWindow(ServiceProvider, availibilityId: null, _restaurantId);
         ShowDialog(view, "Создание записи", width: 500, height: 500);
         DataBind();
     }
@@ -51,7 +51,7 @@ internal class AvailibilityListViewModel : ListViewModelBase<AvailibilityInResta
             return;
         }
 
-        var view = new AvailibilityInRestaurantWindow(ServiceProvider, SelectedItem.Id);
+        var view = new AvailibilityInRestaurantWindow(ServiceProvider, SelectedItem.Id, _restaurantId);
         ShowDialog(view, "Редактирование записи", width: 500, height: 500);
         DataBind();
     }

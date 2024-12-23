@@ -18,14 +18,13 @@ public partial class AvailibilityInRestaurantWindow : UserControl
     /// </summary>
     public bool IsSuccess { private set; get; }
 
-    public AvailibilityInRestaurantWindow(IServiceProvider serviceProvider, int? availibilityId)
+    public AvailibilityInRestaurantWindow(IServiceProvider serviceProvider, int? availibilityId, int restaurantId)
     {
         var availibilityInRestaurantService = serviceProvider.GetRequiredService<IAvailibilityInRestaurantService>();
         var productsService = serviceProvider.GetRequiredService<IProductsService>();
-        var restaurantsService = serviceProvider.GetRequiredService<IRestaurantsService>();
 
         InitializeComponent();
-        DataContext = new AvailibilityViewModel(availibilityInRestaurantService, productsService, restaurantsService, availibilityId);
+        DataContext = new AvailibilityViewModel(availibilityInRestaurantService, productsService, availibilityId, restaurantId);
         if (DataContext is AvailibilityViewModel vm)
         {
             vm.OnSaveSuccess += SaveSuccess;

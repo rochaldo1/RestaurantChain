@@ -12,32 +12,20 @@ internal class AvailibilityViewModel : EditViewModelBase
 {
     private readonly IAvailibilityInRestaurantService _availibilityInRestaurantService;
     private readonly IProductsService _productsService;
-    private readonly IRestaurantsService _restaurantsService;
 
+    private int _restaurantId;
     private IReadOnlyCollection<ProductsView> _productsDataSource;
-    private IReadOnlyCollection<Restaurants> _restaurantsDataSource;
     private int _selectedProductId;
-    private int _selectedRestaurantId;
     private int _quantity;
     private string _unit;
     private decimal _price;
-
+    
     public IReadOnlyCollection<ProductsView> ProductsDataSource
     {
         get => _productsDataSource;
         set
         {
             _productsDataSource = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public IReadOnlyCollection<Restaurants> RestaurantsDataSource
-    {
-        get => _restaurantsDataSource;
-        set
-        {
-            _restaurantsDataSource = value;
             OnPropertyChanged();
         }
     }
@@ -87,27 +75,17 @@ internal class AvailibilityViewModel : EditViewModelBase
         }
     }
 
-    public int SelectedRestaurantId
-    {
-        get => _selectedRestaurantId;
-        set
-        {
-            _selectedRestaurantId = value;
-            OnPropertyChanged();
-        }
-    }
-
     public AvailibilityViewModel
     (
         IAvailibilityInRestaurantService availibilityInRestaurantService, 
-        IProductsService productsService, 
-        IRestaurantsService restaurantsService, 
-        int? currentId
+        IProductsService productsService,
+        int? currentId,
+        int restaurantId
     ) : base(currentId)
     {
         _availibilityInRestaurantService = availibilityInRestaurantService;
         _productsService = productsService;
-        _restaurantsService = restaurantsService;
+        _restaurantId = restaurantId;
 
         if (!Validate())
         {
@@ -119,7 +97,6 @@ internal class AvailibilityViewModel : EditViewModelBase
 
     public override bool Validate()
     {
-        RestaurantsDataSource = _restaurantsService.List();
         ProductsDataSource = _productsService.List();
 
         if (CurrentId.HasValue)
@@ -131,9 +108,7 @@ internal class AvailibilityViewModel : EditViewModelBase
                 MessageBox.Show("Информации о наличии продукта не существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-
             SelectedProductId = availibility.ProductId;
-            SelectedRestaurantId = availibility.RestaurantId;
             Quantity = availibility.Quantity;
             Price = availibility.Price;
             Unit = availibility.UnitName;
@@ -189,20 +164,13 @@ internal class AvailibilityViewModel : EditViewModelBase
             return null;
         }
 
-        if (_selectedRestaurantId <= 0)
-        {
-            MessageBox.Show($"Ресторан не выбран", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
-
-            return null;
-        }
-
         var product = _productsDataSource.FirstOrDefault(x => x.Id == _selectedProductId);
 
         var availibility = new AvailibilityInRestaurant
         {
             Id = CurrentId ?? 0,
             ProductId = _selectedProductId,
-            RestaurantId = _selectedRestaurantId,
+            RestaurantId = _restaurantId,
             Quantity = _quantity,
             Price = product.Price,
             UnitId = product.UnitId

@@ -1,6 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using RestaurantChain.Presentation.ViewModel.RestaurantsViewModels.ApplicationsForDistributionViewModel;
+using System.Windows.Controls;
 
-using RestaurantChain.Presentation.ViewModel.ApplicationsForDistributionViewModel;
 
 namespace RestaurantChain.Presentation.View.RestaurantsViews.ApplicationsForDistributionViews;
 

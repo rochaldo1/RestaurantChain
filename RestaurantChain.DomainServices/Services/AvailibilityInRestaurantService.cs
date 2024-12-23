@@ -26,12 +26,34 @@ internal class AvailibilityInRestaurantService : IAvailibilityInRestaurantServic
 
     public int Create(AvailibilityInRestaurant availibilityInRestaurant)
     {
-        return _unitOfWork.AvailibilityInRestaurantRepository.Create(availibilityInRestaurant);
+        var availibility = _unitOfWork.AvailibilityInRestaurantRepository.Get(availibilityInRestaurant.ProductId, availibilityInRestaurant.RestaurantId, availibilityInRestaurant.Price);
+
+        if (availibility is null)
+        {
+            return _unitOfWork.AvailibilityInRestaurantRepository.Create(availibilityInRestaurant);
+        }
+
+        availibility.Quantity += availibilityInRestaurant.Quantity;
+        _unitOfWork.AvailibilityInRestaurantRepository.Update(availibility);
+        return availibility.Id;
     }
 
     public void Update(AvailibilityInRestaurant availibilityInRestaurant)
     {
-        _unitOfWork.AvailibilityInRestaurantRepository.Create(availibilityInRestaurant);
+        _unitOfWork.AvailibilityInRestaurantRepository.Update(availibilityInRestaurant);
+    }
+
+    public void UpdateCount(AvailibilityInRestaurant availibilityInRestaurant)
+    {
+        var availibility = _unitOfWork.AvailibilityInRestaurantRepository.Get(availibilityInRestaurant.ProductId, availibilityInRestaurant.RestaurantId, availibilityInRestaurant.Price);
+        if(availibility is null)
+        {
+            return;
+        }
+
+        availibility.Quantity -= availibilityInRestaurant.Quantity;
+
+        _unitOfWork.AvailibilityInRestaurantRepository.Update(availibility);
     }
 
     public void Delete(int id)

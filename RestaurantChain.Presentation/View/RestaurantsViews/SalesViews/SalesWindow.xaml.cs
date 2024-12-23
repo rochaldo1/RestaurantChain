@@ -4,10 +4,19 @@ using RestaurantChain.Presentation.ViewModel.RestaurantsViewModels.SalesViewMode
 
 namespace RestaurantChain.Presentation.View.RestaurantsViews.SalesViews;
 
+/// <summary>
+/// Логика взаимодействия для SalesWindow.xaml
+/// </summary>
 public partial class SalesWindow : UserControl
 {
-    public SalesWindow(IServiceProvider serviceProvider, int restaurantId, int? saleId)
+    /// <summary>
+    /// Результат сохранения данных.
+    /// </summary>
+    public bool IsSuccess { private set; get; }
+
+    public SalesWindow(IServiceProvider serviceProvider,  int restaurantId, int? saleId)
     {
+        
         InitializeComponent();
         DataContext = new SalesViewModel(serviceProvider, restaurantId, saleId);
     }

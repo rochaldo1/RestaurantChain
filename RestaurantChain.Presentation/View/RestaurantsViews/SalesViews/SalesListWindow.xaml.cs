@@ -4,6 +4,9 @@ using RestaurantChain.Presentation.ViewModel.RestaurantsViewModels.SalesViewMode
 
 namespace RestaurantChain.Presentation.View.RestaurantsViews.SalesViews;
 
+/// <summary>
+/// Логика взаимодействия для SalesListWindow.xaml
+/// </summary>
 public partial class SalesListWindow : UserControl
 {
     public SalesListWindow(IServiceProvider serviceProvider, int restaurantId)

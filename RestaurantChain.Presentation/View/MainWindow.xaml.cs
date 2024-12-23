@@ -84,22 +84,13 @@ public partial class MainWindow : Window
             case "Other":
                 break;
             case "Products":
-            {
-                var view = new ProductsViews.ProductsListWindow(_serviceProvider);
-                mainView.Content = view;
-            }
+                mainView.Content = new ProductsViews.ProductsListWindow(_serviceProvider);
                 break;
             case "Supplies":
-            {
-                var view = new SuppliesViews.SuppliesWindow(_serviceProvider);
-                mainView.Content = view;
-            }
+                mainView.Content = new SuppliesViews.SuppliesWindow(_serviceProvider);
                 break;
             case "Restaurants":
-            {
-                var view = new RestaurantsViews.RestaurantsListWindow(_serviceProvider);
-                mainView.Content = view;
-            }
+                mainView.Content = new RestaurantsViews.RestaurantsListWindow(_serviceProvider);
                 break;
             case "Sales":
                 break;
@@ -108,84 +99,50 @@ public partial class MainWindow : Window
             case "Doc":
                 break;
             case "Help":
-            {
-                var webBrowser = new WebBrowser();
-                webBrowser.Source = IconHelper.GetHelpUri();
-                mainView.Content = webBrowser;
-            }
                 break;
             case "ChangePassword":
-            {
-                ChangePasswordWindow changePasswordWindow = new(_serviceProvider);
-                changePasswordWindow.ShowDialog();
-            }
+                new ChangePasswordWindow(_serviceProvider).ShowDialog();
                 break;
             case "Setings":
                 break;
             case "Users":
-            {
-                var view = new UserListWindow(_serviceProvider);
-                mainView.Content = view;
-            }
+                mainView.Content = new UserListWindow(_serviceProvider);
                 break;
             case "UserRights":
-            {
-                var view = new UserRightsListWindow(_serviceProvider);
-                mainView.Content = view;
-            }
+                mainView.Content = new UserRightsListWindow(_serviceProvider);
                 break;
             case "Queries":
-            {
-                var view = new QueriesWindow(_serviceProvider, "Select 1 as q");
-                mainView.Content = view;
-            }
+                mainView.Content = new QueriesWindow(_serviceProvider, "Select 1 as q");
                 break;
             case "Dishes":
-            {
-                var view = new DishesViews.DishesListWindow(_serviceProvider);
-                mainView.Content = view;
-            }
+                mainView.Content = new DishesViews.DishesListWindow(_serviceProvider);
                 break;
             case "Streets":
-            {
-                var view = new StreetsViews.StreetsListWindow(_serviceProvider);
-                mainView.Content = view;
-            }
+                mainView.Content = new StreetsViews.StreetsListWindow(_serviceProvider);
                 break;
             case "Banks":
-            {
-                var view = new BanksViews.BanksListWindow(_serviceProvider);
-                mainView.Content = view;
-            }
+                mainView.Content = new BanksViews.BanksListWindow(_serviceProvider);
                 break;
             case "DishesGroups":
-            {
-                var view = new GroupsOfDishesViews.GroupsOfDishesListWindow(_serviceProvider);
-                mainView.Content = view;
-            }
+                mainView.Content = new GroupsOfDishesViews.GroupsOfDishesListWindow(_serviceProvider);
                 break;
             case "Suppliers":
-            {
-                var view = new SuppliersViews.SuppliersListWindow(_serviceProvider);
-                mainView.Content = view;
-            }
+                mainView.Content = new SuppliersViews.SuppliersListWindow(_serviceProvider);
                 break;
             case "Units":
-            {
-                var view = new UnitsViews.UnitsListWindow(_serviceProvider);
-                mainView.Content = view;
-            }
+                mainView.Content = new UnitsViews.UnitsListWindow(_serviceProvider);
                 break;
             case "DocRevenue":
                 break;
             case "DocHelp":
+                mainView.Content = new WebBrowser
+                {
+                    Source = IconHelper.GetHelpUri()
+                };
                 break;
             case "About":
-                AboutProgramWindow aboutProgramWindow = new();
-                aboutProgramWindow.ShowDialog();
-                break;
-            default:
-                throw new Exception("Меню {} не найдено");
+                new AboutProgramWindow().ShowDialog();
+                return;
         }
     }
 }

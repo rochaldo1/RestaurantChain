@@ -1,18 +1,19 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using RestaurantChain.Domain.Models;
 using RestaurantChain.Domain.Models.View;
 using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.Commands;
+using RestaurantChain.Presentation.View.RestaurantsViews.ApplicationsForDistributionViews;
 using RestaurantChain.Presentation.ViewModel.Base;
 using System.Windows;
 
-using ApplicationWindow = RestaurantChain.Presentation.View.RestaurantsViews.ApplicationsForDistributionViews.ApplicationWindow;
-
-namespace RestaurantChain.Presentation.ViewModel.ApplicationsForDistributionViewModel;
+namespace RestaurantChain.Presentation.ViewModel.RestaurantsViewModels.ApplicationsForDistributionViewModel;
 
 internal class ApplicationsListViewModel : ListViewModelBase<ApplicationsForDistributionView>
 {
     private readonly IApplicationsForDistributionService _applicationsForDistributionService;
     private readonly IProductsService _productsService;
+    private readonly IAvailibilityInRestaurantService _availibilityInRestaurantService;
 
     private int _restaurantId;
     private DateTime _from;
@@ -45,7 +46,7 @@ internal class ApplicationsListViewModel : ListViewModelBase<ApplicationsForDist
         _to = DateTime.Now;
         _applicationsForDistributionService = serviceProvider.GetRequiredService<IApplicationsForDistributionService>();
         _productsService = serviceProvider.GetRequiredService<IProductsService>();
-
+        _availibilityInRestaurantService = serviceProvider.GetRequiredService<IAvailibilityInRestaurantService>();
         OnPropertyChanged();
         DataBind();
     }
@@ -65,7 +66,7 @@ internal class ApplicationsListViewModel : ListViewModelBase<ApplicationsForDist
 
     private void CreateEntity(object sender)
     {
-        var view = new ApplicationWindow(ServiceProvider, applicationId: null);
+        var view = new ApplicationWindow(ServiceProvider, applicationId: null, _restaurantId);
         ShowDialog(view, "Создание записи", 500, 500);
         DataBind();
     }
@@ -77,7 +78,7 @@ internal class ApplicationsListViewModel : ListViewModelBase<ApplicationsForDist
             return;
         }
 
-        var view = new ApplicationWindow(ServiceProvider, SelectedItem.Id);
+        var view = new ApplicationWindow(ServiceProvider, SelectedItem.Id, _restaurantId);
         ShowDialog(view, "Редактирование записи", 500, 500);
         DataBind();
     }
@@ -91,9 +92,17 @@ internal class ApplicationsListViewModel : ListViewModelBase<ApplicationsForDist
 
         if (MessageBox.Show($"Удалить заявку?", "Удаление записи", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
         {
-            var supplies = _applicationsForDistributionService.Get(SelectedItem.Id);
+            var application = _applicationsForDistributionService.Get(SelectedItem.Id);
             _applicationsForDistributionService.Delete(SelectedItem.Id);
-            _productsService.CalculateAndUpdateQuantity(supplies.ProductId);
+            _availibilityInRestaurantService.UpdateCount(new AvailibilityInRestaurant
+            {
+                ProductId = application.ProductId,
+                Quantity = application.Quantity,
+                Price = application.Price,
+                RestaurantId = application.RestaurantId,
+                UnitId = application.UnitId,
+            });
+            _productsService.CalculateAndUpdateQuantity(application.ProductId);
         }
         else
         {

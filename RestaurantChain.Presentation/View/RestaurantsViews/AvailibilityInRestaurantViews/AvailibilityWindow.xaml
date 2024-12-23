@@ -34,14 +34,12 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition/>
             </Grid.RowDefinitions>
             <TextBlock Text="Продукт" Grid.Column="0" Style="{StaticResource LblStyle}" />
             <TextBlock Text="Количество" Grid.Column="0" Grid.Row="1" Style="{StaticResource LblStyle}"/>
-            <TextBlock Text="Ресторан" Grid.Column="0" Grid.Row="2" Style="{StaticResource LblStyle}"/>
 
-            <TextBlock Text="Стоимость за единицу, руб." Grid.Column="0" Grid.Row="3" Style="{StaticResource LblStyle}"/>
-            <TextBlock Text="Единица измерения" Grid.Column="0" Grid.Row="4" Style="{StaticResource LblStyle}"/>
+            <TextBlock Text="Стоимость за единицу, руб." Grid.Column="0" Grid.Row="2" Style="{StaticResource LblStyle}"/>
+            <TextBlock Text="Единица измерения" Grid.Column="0" Grid.Row="3" Style="{StaticResource LblStyle}"/>
 
             <ComboBox Grid.Column="1" Grid.Row="0" IsEnabled="{Binding Path=IsNew}" DisplayMemberPath="ProductName" SelectedValuePath="Id" SelectedValue="{Binding SelectedProductId}" ItemsSource="{Binding ProductsDataSource}" Style="{StaticResource CmbStyle}" />
             <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Quantity}" Style="{StaticResource TbStyle}">
@@ -49,9 +47,8 @@
                     <Behaviors:TextBoxInputBehavior InputMode="DigitInput"></Behaviors:TextBoxInputBehavior>
                 </i:Interaction.Behaviors>
             </TextBox>
-            <ComboBox Grid.Column="1" Grid.Row="2" IsEnabled="{Binding Path=IsNew}" DisplayMemberPath="RestaurantName" SelectedValuePath="Id" SelectedValue="{Binding SelectedRestaurantId}" ItemsSource="{Binding RestaurantsDataSource}" Style="{StaticResource CmbStyle}" />
-            <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Price}" Style="{StaticResource TbStyle}" IsEnabled="False"></TextBox>
-            <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Unit}" Style="{StaticResource TbStyle}" IsEnabled="False"></TextBox>
+            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Price}" Style="{StaticResource TbStyle}" IsEnabled="False"></TextBox>
+            <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Unit}" Style="{StaticResource TbStyle}" IsEnabled="False"></TextBox>
         </Grid>
         
         <Grid Grid.Row="2">

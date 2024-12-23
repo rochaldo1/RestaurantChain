@@ -7,4 +7,5 @@ public interface IAvailibilityInRestaurantRepository : IRepositoryBase<Availibil
 {
     IReadOnlyCollection<AvailibilityInRestaurantView> List(int? restaurantId);
     AvailibilityInRestaurantView GetView(int id);
+    AvailibilityInRestaurant Get(int productId, int restaurantId, decimal price);
 }

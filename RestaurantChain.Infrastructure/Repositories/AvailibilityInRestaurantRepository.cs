@@ -140,4 +140,30 @@ WHERE
 
         return entityDb?.ToDomain();
     }
+
+    public AvailibilityInRestaurant Get(int productId, int restaurantId, decimal price)
+    {
+        const string query = @"
+SELECT 
+	s.id, 
+	s.restaurant_id     as RestaurantId, 
+	s.product_id        as ProductId, 
+	s.unit_id           as UnitId, 
+	s.quantity          as Quantity, 
+	s.price             as Price
+FROM availibility_in_restaurant s
+WHERE
+    s.restaurant_id = @RestaurantId and
+    s.product_id = @ProductId and
+    s.price = @Price;
+    ";
+        var entityDb = Connection.QueryFirstOrDefault<AvailibilityInRestaurantDb>(query, new
+        {
+            RestaurantId = restaurantId,
+            Price = price,
+            ProductId = productId
+        });
+
+        return entityDb?.ToDomain();
+    }
 }

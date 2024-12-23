@@ -15,27 +15,26 @@
         </Grid.RowDefinitions>
         <Menu VerticalAlignment="Top" FontSize="16" FontFamily="Segoe UI Variable Display Light">
             <MenuItem Header="Создать" x:Name="CreateMenuItem" Command="{Binding CreateCommand}" Visibility="{Binding HasW}"/>
-            <MenuItem Header="Редактировать" x:Name="EditMenuItem" Command="{Binding EditCommand}" Visibility="{Binding HasE}" />
+            <MenuItem Header="Редактировать" x:Name="EditMenuItem" Command="{Binding EditCommand}" Visibility="Collapsed"/>
             <MenuItem Header="Удалить" x:Name="DeleteMenuItem" Command="{Binding DeleteCommand}" Visibility="{Binding HasD}" />
         </Menu>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="2*"/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Column="2" Content="Дата с:" Margin="10,0,10,0" VerticalAlignment="Center" FontSize="14" FontFamily="Segoe UI Variable Display Light"/>
-            <DatePicker Grid.Column="3" Margin="10,0,10,0" VerticalAlignment="Center" FontSize="14" FontFamily="Segoe UI Variable Display Light" SelectedDate="{Binding
+            <Label Grid.Column="1" Content="Дата с:" Margin="10,0,10,0" VerticalAlignment="Center" FontSize="14" FontFamily="Segoe UI Variable Display Light"/>
+            <DatePicker Grid.Column="2" Margin="10,0,10,0" VerticalAlignment="Center" FontSize="14" FontFamily="Segoe UI Variable Display Light" SelectedDate="{Binding
             Path=From,
             Mode=TwoWay,
             TargetNullValue={x:Static System:DateTime.Now}}"/>
-            <Label Grid.Column="4" Content="По:" Margin="10,0,10,0" VerticalAlignment="Center" FontSize="14" FontFamily="Segoe UI Variable Display Light"/>
-            <DatePicker Grid.Column="5" Margin="10,0,10,0" VerticalAlignment="Center" FontSize="14" FontFamily="Segoe UI Variable Display Light" SelectedDate="{Binding
+            <Label Grid.Column="3" Content="По:" Margin="10,0,10,0" VerticalAlignment="Center" FontSize="14" FontFamily="Segoe UI Variable Display Light"/>
+            <DatePicker Grid.Column="4" Margin="10,0,10,0" VerticalAlignment="Center" FontSize="14" FontFamily="Segoe UI Variable Display Light" SelectedDate="{Binding
             Path=To,
             Mode=TwoWay,
             TargetNullValue={x:Static System:DateTime.Now}}"/>

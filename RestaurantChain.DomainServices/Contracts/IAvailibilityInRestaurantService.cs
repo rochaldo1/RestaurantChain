@@ -10,4 +10,5 @@ public interface IAvailibilityInRestaurantService
     void Update(AvailibilityInRestaurant availibilityInRestaurant);
     void Delete(int id);
     AvailibilityInRestaurantView Get(int id);
+    void UpdateCount(AvailibilityInRestaurant availibilityInRestaurant);
 }

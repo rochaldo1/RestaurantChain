@@ -5,18 +5,17 @@ using RestaurantChain.Presentation.Commands;
 using RestaurantChain.Presentation.ViewModel.Base;
 using System.Windows;
 
-namespace RestaurantChain.Presentation.ViewModel.ApplicationsForDistributionViewModel;
+namespace RestaurantChain.Presentation.ViewModel.RestaurantsViewModels.ApplicationsForDistributionViewModel;
 
 internal class ApplicationViewModel : EditViewModelBase
 {
     private readonly IApplicationsForDistributionService _applicationsForDistributionService;
     private readonly IProductsService _productsService;
-    private readonly IRestaurantsService _restaurantsService;
+    private readonly IAvailibilityInRestaurantService _availibilityInRestaurantService;
 
+    private int _restaurantId;
     private IReadOnlyCollection<ProductsView> _productsDataSource;
-    private IReadOnlyCollection<Restaurants> _restaurantsDataSource;
     private int _selectedProductId;
-    private int _selectedRestaurantId;
     private DateTime _applicationDate;
     private int _quantity;
     private string _unit;
@@ -28,16 +27,6 @@ internal class ApplicationViewModel : EditViewModelBase
         set
         {
             _productsDataSource = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public IReadOnlyCollection<Restaurants> RestaurantsDataSource
-    {
-        get => _restaurantsDataSource;
-        set
-        {
-            _restaurantsDataSource = value;
             OnPropertyChanged();
         }
     }
@@ -97,27 +86,19 @@ internal class ApplicationViewModel : EditViewModelBase
         }
     }
 
-    public int SelectedRestaurantId
-    {
-        get => _selectedRestaurantId;
-        set
-        {
-            _selectedRestaurantId = value;
-            OnPropertyChanged();
-        }
-    }
-
     public ApplicationViewModel
     (
-        IApplicationsForDistributionService applicationsForDistributionService, 
-        IProductsService productsService, 
-        IRestaurantsService restaurantsService, 
-        int? currentId
+        IApplicationsForDistributionService applicationsForDistributionService,
+        IProductsService productsService,
+        IAvailibilityInRestaurantService availibilityInRestaurantService,
+        int? currentId,
+        int restaurantId
     ) : base(currentId)
     {
         _applicationsForDistributionService = applicationsForDistributionService;
         _productsService = productsService;
-        _restaurantsService = restaurantsService;
+        _availibilityInRestaurantService = availibilityInRestaurantService;
+        _restaurantId = restaurantId;
 
         if (!Validate())
         {
@@ -129,7 +110,6 @@ internal class ApplicationViewModel : EditViewModelBase
 
     public override bool Validate()
     {
-        RestaurantsDataSource = _restaurantsService.List();
         ProductsDataSource = _productsService.List();
 
         if (CurrentId.HasValue)
@@ -144,7 +124,6 @@ internal class ApplicationViewModel : EditViewModelBase
             }
 
             SelectedProductId = application.ProductId;
-            SelectedRestaurantId = application.RestaurantId;
             ApplicationDate = application.ApplicationDate;
             Quantity = application.Quantity;
             Price = application.Price;
@@ -154,7 +133,7 @@ internal class ApplicationViewModel : EditViewModelBase
         {
             ApplicationDate = DateTime.Now;
         }
-        
+
         return true;
     }
 
@@ -194,6 +173,16 @@ internal class ApplicationViewModel : EditViewModelBase
     private bool Create(ApplicationsForDistribution application)
     {
         _applicationsForDistributionService.Create(application);
+
+        _availibilityInRestaurantService.Create(new AvailibilityInRestaurant
+        {
+            ProductId = application.ProductId,
+            RestaurantId = application.RestaurantId,
+            Price = application.Price,
+            Quantity = application.Quantity,
+            UnitId = application.UnitId,
+        });
+        
         return true;
     }
 
@@ -206,20 +195,13 @@ internal class ApplicationViewModel : EditViewModelBase
             return null;
         }
 
-        if (_selectedRestaurantId <= 0)
-        {
-            MessageBox.Show($"Ресторан не выбран", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
-
-            return null;
-        }
-
         var product = _productsDataSource.FirstOrDefault(x => x.Id == _selectedProductId);
 
         var application = new ApplicationsForDistribution
         {
             Id = CurrentId ?? 0,
             ProductId = _selectedProductId,
-            RestaurantId = _selectedRestaurantId,
+            RestaurantId = _restaurantId,
             Quantity = _quantity,
             Price = product.Price,
             UnitId = product.UnitId,

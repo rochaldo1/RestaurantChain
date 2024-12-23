@@ -37,6 +37,8 @@ namespace RestaurantChain.Presentation.View.RestaurantsViews
 
                 menuControl.Items.Add(menuItemCtl);
             }
+            
+            OpenView(menu.Childrens.First().MethodName);
         }
 
         private MenuItem CreateItemMenu(Domain.Models.Menu menu)
@@ -56,39 +58,19 @@ namespace RestaurantChain.Presentation.View.RestaurantsViews
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             var tag = ((MenuItem)sender).Tag.ToString();
+            OpenView(tag);
+        }
 
-            switch (tag)
+        private void OpenView(string tag)
+        {
+            mainView.Content = tag switch
             {
-                case "available":
-                {
-                    var view = new AvailibilityInRestaurantViews.AvailibilityInRestaurantListWindow(_serviceProvider, _restaurantId);
-                    mainView.Content = view;
-                }
-
-                    break;
-                case "Sales":
-                {
-                    var view = new SalesViews.SalesListWindow(_serviceProvider, _restaurantId);
-                    mainView.Content = view;
-                }
-
-                    break;
-                case "menu":
-                {
-                    var view = new NomenclatureViews.NomenclatureListWindow(_serviceProvider, _restaurantId);
-                    mainView.Content = view;
-                }
-
-                    break;
-                
-                case "orders":
-                {
-                    var view = new ApplicationsForDistributionViews.ApplicationsWindow(_serviceProvider, _restaurantId);
-                    mainView.Content = view;
-                }
-
-                    break;
-            }
+                "available" => new AvailibilityInRestaurantViews.AvailibilityInRestaurantListWindow(_serviceProvider, _restaurantId),
+                "Sales" => new SalesViews.SalesListWindow(_serviceProvider, _restaurantId),
+                "menu" => new NomenclatureViews.NomenclatureListWindow(_serviceProvider, _restaurantId),
+                "orders" => new ApplicationsForDistributionViews.ApplicationsWindow(_serviceProvider, _restaurantId),
+                _ => mainView.Content
+            };
         }
     }
 }
