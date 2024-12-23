@@ -31,7 +31,7 @@
                 <ColumnDefinition Width="11*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="Блюдо" Grid.Column="0" Style="{StaticResource LblStyle}" />
-            <ComboBox Grid.Column="1" IsEnabled="{Binding Path=IsNew}" DisplayMemberPath="DishName" SelectedValuePath="Id" SelectedValue="{Binding SelectedDishId}" ItemsSource="{Binding DishesDataSource}" Style="{StaticResource CmbStyle}" />
+            <ComboBox Grid.Column="1" DisplayMemberPath="DishName" SelectedValuePath="Id" SelectedValue="{Binding SelectedDishId}" ItemsSource="{Binding DishesDataSource}" Style="{StaticResource CmbStyle}" />
         </Grid>
 
         <Grid Grid.Row="2">
