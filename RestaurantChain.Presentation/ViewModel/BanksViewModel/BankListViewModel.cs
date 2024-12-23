@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using RestaurantChain.Domain.Models;
 using RestaurantChain.DomainServices.Contracts;
+using RestaurantChain.Presentation.Classes.Helpers;
 using RestaurantChain.Presentation.Commands;
 using RestaurantChain.Presentation.View.BanksViews;
 using RestaurantChain.Presentation.ViewModel.Base;
@@ -34,7 +35,7 @@ internal class BankListViewModel : ListViewModelBase<Banks>
     private void CreateEntity(object sender)
     {
         var view = new BankWindow(ServiceProvider, bankId: null);
-        ShowDialog(view, "Создание записи");
+        WindowHelper.ShowDialog(view, "Создание записи");
         RefreshData(sender);
     }
 
@@ -46,7 +47,7 @@ internal class BankListViewModel : ListViewModelBase<Banks>
         }
             
         var view = new BankWindow(ServiceProvider, SelectedItem.Id);
-        ShowDialog(view, "Редактирование записи");
+        WindowHelper.ShowDialog(view, "Редактирование записи");
         RefreshData(sender);
     }
 

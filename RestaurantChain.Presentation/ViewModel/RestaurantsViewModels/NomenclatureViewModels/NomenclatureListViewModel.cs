@@ -6,6 +6,8 @@ using RestaurantChain.Presentation.View.RestaurantsViews.NomenclatureViews;
 using RestaurantChain.Presentation.ViewModel.Base;
 using System.Windows;
 
+using RestaurantChain.Presentation.Classes.Helpers;
+
 namespace RestaurantChain.Presentation.ViewModel.RestaurantsViewModels.NomenclatureViewModels;
 
 internal sealed class NomenclatureListViewModel : ListViewModelBase<NomenclatureView>
@@ -38,7 +40,7 @@ internal sealed class NomenclatureListViewModel : ListViewModelBase<Nomenclature
     private void CreateEntity(object sender)
     {
         var view = new NomenclatureWindow(ServiceProvider, _restaurantId, nomenclatureId: null);
-        ShowDialog(view, "Создание записи", width: 550, height: 200);
+        WindowHelper.ShowDialog(view, "Р”РѕР±Р°РІР»РµРЅРёРµ Р·Р°РїРёСЃРё", width: 550, height: 200);
         DataBind();
     }
 
@@ -50,7 +52,7 @@ internal sealed class NomenclatureListViewModel : ListViewModelBase<Nomenclature
         }
 
         var view = new NomenclatureWindow(ServiceProvider, _restaurantId, SelectedItem.Id);
-        ShowDialog(view, "Редактирование записи", width: 550, height: 200);
+        WindowHelper.ShowDialog(view, "Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ Р·Р°РїРёСЃРё", width: 550, height: 200);
         DataBind();
     }
 
@@ -61,7 +63,7 @@ internal sealed class NomenclatureListViewModel : ListViewModelBase<Nomenclature
             return;
         }
 
-        if (MessageBox.Show("Удалить позицию?", "Удаление записи", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+        if (MessageBox.Show("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ?", "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
         {
             _nomenclatureService.Delete(SelectedItem.Id);
         }

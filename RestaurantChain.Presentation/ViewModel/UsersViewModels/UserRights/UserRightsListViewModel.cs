@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using RestaurantChain.DomainServices.Contracts;
+using RestaurantChain.Presentation.Classes.Helpers;
 using RestaurantChain.Presentation.Commands;
 using RestaurantChain.Presentation.View.Users;
 using RestaurantChain.Presentation.ViewModel.Base;
@@ -60,7 +61,7 @@ internal class UserRightsListViewModel : ListViewModelBase<Domain.Models.View.Us
         }
 
         var view = new UserRightsWindow(ServiceProvider, SelectedItem.Id);
-        ShowDialog(view, "Редактирование записи");
+        WindowHelper.ShowDialog(view, "Редактирование записи");
         DataBind();
     }
 }

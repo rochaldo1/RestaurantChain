@@ -50,21 +50,6 @@ public abstract class ListViewModelBase<TEntity> : ViewModelBase
     protected abstract void DataBind();
     protected abstract void SetCommands();
 
-    protected static void ShowDialog(UserControl control, string title, int width = 300, int height = 200)
-    {
-        var window = new Window
-        {
-            Content = control,
-            WindowStartupLocation = WindowStartupLocation.CenterScreen,
-            ResizeMode = ResizeMode.NoResize,
-            Width = width,
-            Height = height,
-            Title = title,
-            Icon = IconHelper.GetEditIcon()
-        };
-        window.ShowDialog();
-    }
-
     protected bool HasSelectedItem()
     {
         return _selectedItem != null;

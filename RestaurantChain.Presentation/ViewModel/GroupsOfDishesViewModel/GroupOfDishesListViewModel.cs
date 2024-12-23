@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using RestaurantChain.Domain.Models;
 using RestaurantChain.DomainServices.Contracts;
+using RestaurantChain.Presentation.Classes.Helpers;
 using RestaurantChain.Presentation.Commands;
 using RestaurantChain.Presentation.View.GroupsOfDishesViews;
 using RestaurantChain.Presentation.ViewModel.Base;
@@ -33,7 +34,7 @@ internal class GroupOfDishesListViewModel : ListViewModelBase<GroupsOfDishes>
     private void CreateEntity(object sender)
     {
         var view = new GroupOfDishesWindow(ServiceProvider, groupId: null);
-        ShowDialog(view, "Создание записи");
+        WindowHelper.ShowDialog(view, "Создание записи");
         RefreshData(sender);
     }
 
@@ -45,7 +46,7 @@ internal class GroupOfDishesListViewModel : ListViewModelBase<GroupsOfDishes>
         }
             
         var view = new GroupOfDishesWindow(ServiceProvider, SelectedItem.Id);
-        ShowDialog(view, "Редактирование записи");
+        WindowHelper.ShowDialog(view, "Редактирование записи");
         RefreshData(sender);
     }
 

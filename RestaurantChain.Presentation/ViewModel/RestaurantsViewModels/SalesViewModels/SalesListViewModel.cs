@@ -8,6 +8,8 @@ using RestaurantChain.Presentation.View.RestaurantsViews.SalesViews;
 using RestaurantChain.Presentation.ViewModel.Base;
 using System.Windows;
 
+using RestaurantChain.Presentation.Classes.Helpers;
+
 namespace RestaurantChain.Presentation.ViewModel.RestaurantsViewModels.SalesViewModels;
 
 internal sealed class SalesListViewModel : ListViewModelBase<SalesView>
@@ -64,7 +66,7 @@ internal sealed class SalesListViewModel : ListViewModelBase<SalesView>
     private void CreateEntity(object sender)
     {
         var view = new SalesWindow(ServiceProvider, _restaurantId, saleId: null);
-        ShowDialog(view, "Создание записи", 500, 500);
+        WindowHelper.ShowDialog(view, "РЎРѕР·РґР°РЅРёРµ Р·Р°РїРёСЃРё", 500, 500);
         DataBind();
     }
 
@@ -76,7 +78,7 @@ internal sealed class SalesListViewModel : ListViewModelBase<SalesView>
         }
 
         var view = new SalesWindow(ServiceProvider, _restaurantId, SelectedItem.Id);
-        ShowDialog(view, "Редактирование записи", 500, 500);
+        WindowHelper.ShowDialog(view, "Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ Р·Р°РїРёСЃРё", 500, 500);
         DataBind();
     }
 
@@ -87,7 +89,7 @@ internal sealed class SalesListViewModel : ListViewModelBase<SalesView>
             return;
         }
 
-        if (MessageBox.Show($"Удалить заявку?", "Удаление записи", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+        if (MessageBox.Show($"пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ?", "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
         {
             _salesService.Delete(SelectedItem.Id);
         }

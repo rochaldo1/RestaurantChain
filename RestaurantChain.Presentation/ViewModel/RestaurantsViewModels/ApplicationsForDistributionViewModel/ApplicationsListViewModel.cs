@@ -7,6 +7,8 @@ using RestaurantChain.Presentation.View.RestaurantsViews.ApplicationsForDistribu
 using RestaurantChain.Presentation.ViewModel.Base;
 using System.Windows;
 
+using RestaurantChain.Presentation.Classes.Helpers;
+
 namespace RestaurantChain.Presentation.ViewModel.RestaurantsViewModels.ApplicationsForDistributionViewModel;
 
 internal class ApplicationsListViewModel : ListViewModelBase<ApplicationsForDistributionView>
@@ -67,7 +69,7 @@ internal class ApplicationsListViewModel : ListViewModelBase<ApplicationsForDist
     private void CreateEntity(object sender)
     {
         var view = new ApplicationWindow(ServiceProvider, applicationId: null, _restaurantId);
-        ShowDialog(view, "Создание записи", 500, 500);
+        WindowHelper.ShowDialog(view, "Создание записи", 500, 500);
         DataBind();
     }
 
@@ -79,7 +81,7 @@ internal class ApplicationsListViewModel : ListViewModelBase<ApplicationsForDist
         }
 
         var view = new ApplicationWindow(ServiceProvider, SelectedItem.Id, _restaurantId);
-        ShowDialog(view, "Редактирование записи", 500, 500);
+        WindowHelper.ShowDialog(view, "Редактирование записи", 500, 500);
         DataBind();
     }
 

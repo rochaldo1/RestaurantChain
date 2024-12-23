@@ -187,7 +187,8 @@ INSERT INTO public.user_rights (user_id, item_id, r, w, e, d)
   (@UserId, 23, false, false, false, false),
   (@UserId, 24, false, false, false, false),
   (@UserId, 25, false, false, false, false),
-  (@UserId, 26, false, false, false, false)
+  (@UserId, 26, false, false, false, false),
+  (@UserId, 27, false, false, false, false)
   ";
         Connection.ExecuteScalar(query, new
         {

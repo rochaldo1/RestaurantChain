@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using RestaurantChain.Domain.Models.View;
 using RestaurantChain.DomainServices.Contracts;
+using RestaurantChain.Presentation.Classes.Helpers;
 using RestaurantChain.Presentation.Commands;
 using RestaurantChain.Presentation.View.RestaurantsViews.AvailibilityInRestaurantViews;
 using RestaurantChain.Presentation.ViewModel.Base;
@@ -40,7 +41,7 @@ internal class AvailibilityListViewModel : ListViewModelBase<AvailibilityInResta
     private void CreateEntity(object sender)
     {
         var view = new AvailibilityInRestaurantWindow(ServiceProvider, availibilityId: null, _restaurantId);
-        ShowDialog(view, "Создание записи", width: 500, height: 500);
+        WindowHelper.ShowDialog(view, "Создание записи", width: 500, height: 500);
         DataBind();
     }
 
@@ -52,7 +53,7 @@ internal class AvailibilityListViewModel : ListViewModelBase<AvailibilityInResta
         }
 
         var view = new AvailibilityInRestaurantWindow(ServiceProvider, SelectedItem.Id, _restaurantId);
-        ShowDialog(view, "Редактирование записи", width: 500, height: 500);
+        WindowHelper.ShowDialog(view, "Редактирование записи", width: 500, height: 500);
         DataBind();
     }
 

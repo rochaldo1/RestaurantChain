@@ -4,6 +4,7 @@ using RestaurantChain.Presentation.Commands;
 using RestaurantChain.Presentation.ViewModel.Base;
 using System.Windows;
 using RestaurantChain.Presentation.Classes;
+using RestaurantChain.Presentation.Classes.Helpers;
 using RestaurantChain.Presentation.View.Users;
 
 namespace RestaurantChain.Presentation.ViewModel.UsersViewModels.Users;
@@ -34,7 +35,7 @@ internal class UsersListViewModel : ListViewModelBase<Domain.Models.Users>
     private void CreateEntity(object sender)
     {
         var view = new UserWindow(ServiceProvider, userId: null);
-        ShowDialog(view, "Создание записи", 400, 320);
+        WindowHelper.ShowDialog(view, "Создание записи", 400, 320);
         DataBind();
     }
 
@@ -46,7 +47,7 @@ internal class UsersListViewModel : ListViewModelBase<Domain.Models.Users>
         }
 
         var view = new UserWindow(ServiceProvider, SelectedItem.Id);
-        ShowDialog(view, "Редактирование записи");
+        WindowHelper.ShowDialog(view, "Редактирование записи");
         DataBind();
     }
 

@@ -7,6 +7,8 @@ using RestaurantChain.Domain.Models;
 using RestaurantChain.Presentation.View.SuppliesViews;
 using System.Windows;
 
+using RestaurantChain.Presentation.Classes.Helpers;
+
 namespace RestaurantChain.Presentation.ViewModel.SuppliesViewModel;
 
 internal class SuppliesListViewModel : ListViewModelBase<SuppliesView>
@@ -91,7 +93,7 @@ internal class SuppliesListViewModel : ListViewModelBase<SuppliesView>
     private void CreateEntity(object sender)
     {
         var view = new SupplyWindow(ServiceProvider, supplyId: null);
-        ShowDialog(view, "Создание записи", 500, 500);
+        WindowHelper.ShowDialog(view, "Создание записи", 500, 500);
         DataBind();
     }
 
@@ -103,7 +105,7 @@ internal class SuppliesListViewModel : ListViewModelBase<SuppliesView>
         }
 
         var view = new SupplyWindow(ServiceProvider, SelectedItem.Id);
-        ShowDialog(view, "Редактирование записи", 500, 500);
+        WindowHelper.ShowDialog(view, "Редактирование записи", 500, 500);
         DataBind();
     }
 

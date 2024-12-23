@@ -6,6 +6,8 @@ using RestaurantChain.Presentation.View.RestaurantsViews;
 using RestaurantChain.Presentation.ViewModel.Base;
 using System.Windows;
 
+using RestaurantChain.Presentation.Classes.Helpers;
+
 namespace RestaurantChain.Presentation.ViewModel.RestaurantsViewModels;
 
 public class RestaurantListViewModel : ListViewModelBase<Restaurants>
@@ -34,7 +36,7 @@ public class RestaurantListViewModel : ListViewModelBase<Restaurants>
     private void CreateEntity(object sender)
     {
         var view = new RestaurantWindow(ServiceProvider, restaurantId: null);
-        ShowDialog(view, "Создание записи", 500, 500);
+        WindowHelper.ShowDialog(view, "Создание записи", 500, 500);
         RefreshData(sender);
     }
 
@@ -46,7 +48,7 @@ public class RestaurantListViewModel : ListViewModelBase<Restaurants>
         }
 
         var view = new RestaurantWindow(ServiceProvider, SelectedItem.Id);
-        ShowDialog(view, "Редактирование записи", 500, 500);
+        WindowHelper.ShowDialog(view, "Редактирование записи", 500, 500);
         RefreshData(sender);
     }
 

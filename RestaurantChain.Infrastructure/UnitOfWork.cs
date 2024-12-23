@@ -26,6 +26,7 @@ internal sealed class UnitOfWork : IUnitOfWork, IDisposable
     private IUserRightsRepository _userRightsRepository;
     private IUsersRepository _usersRepository;
     private IQueryRepository _queryRepository;
+    private IReportsRepository _reportsRepository;
 
     public UnitOfWork (string connectionString)
     {
@@ -51,6 +52,7 @@ internal sealed class UnitOfWork : IUnitOfWork, IDisposable
     public IUserRightsRepository UserRightsRepository => _userRightsRepository ??= new UserRightsRepository(_connection);
     public IUsersRepository UsersRepository => _usersRepository ??= new UsersRepository(_connection);
     public IQueryRepository QueryRepository => _queryRepository ??= new QueryRepository(_connection);
+    public IReportsRepository ReportsRepository => _reportsRepository ??= new ReportsRepository(_connection);
 
     public void Dispose()
     {

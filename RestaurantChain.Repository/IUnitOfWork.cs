@@ -21,4 +21,5 @@ public interface IUnitOfWork
     IUserRightsRepository UserRightsRepository { get; }
     IUsersRepository UsersRepository { get; }
     IQueryRepository QueryRepository { get; }
+    IReportsRepository ReportsRepository { get; }
 }

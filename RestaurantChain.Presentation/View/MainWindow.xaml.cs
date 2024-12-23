@@ -92,13 +92,11 @@ public partial class MainWindow : Window
             case "Restaurants":
                 mainView.Content = new RestaurantsViews.RestaurantsListWindow(_serviceProvider);
                 break;
-            case "Sales":
+            case "GetRestaurantSumByPeriods":
+                WindowHelper.ShowDialog(new Reports.GetRestaurantSumByPeriodsWindow(_serviceProvider), "Выручка по ресторанам");
                 break;
-            case "References":
-                break;
-            case "Doc":
-                break;
-            case "Help":
+            case "GetDishesSumByPeriod":
+                WindowHelper.ShowDialog(new Reports.GetDishesSumByPeriodWindow(_serviceProvider), "Выручка по блюдам");
                 break;
             case "ChangePassword":
                 new ChangePasswordWindow(_serviceProvider).ShowDialog();

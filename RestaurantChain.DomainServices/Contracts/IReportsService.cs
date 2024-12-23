@@ -1,5 +1,7 @@
 ﻿namespace RestaurantChain.DomainServices.Contracts;
 
-internal interface IReportsService
+public interface IReportsService
 {
+    string GetDishesSumByPeriod(DateTime startDate, DateTime endDate);
+    string GetRestaurantSumByPeriods(DateTime startDate, DateTime endDate);
 }

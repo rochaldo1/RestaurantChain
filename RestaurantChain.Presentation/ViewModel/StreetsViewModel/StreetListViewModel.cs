@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using RestaurantChain.Domain.Models;
 using RestaurantChain.DomainServices.Contracts;
+using RestaurantChain.Presentation.Classes.Helpers;
 using RestaurantChain.Presentation.Commands;
 using RestaurantChain.Presentation.View.StreetsViews;
 using RestaurantChain.Presentation.ViewModel.Base;
@@ -36,7 +37,7 @@ public class StreetListViewModel : ListViewModelBase<Streets>
     private void CreateEntity(object sender)
     {
         var view = new StreetWindow(ServiceProvider, streetId: null);
-        ShowDialog(view, "Создание записи");
+        WindowHelper.ShowDialog(view, "Создание записи");
         RefreshData(sender);
     }
 
@@ -48,7 +49,7 @@ public class StreetListViewModel : ListViewModelBase<Streets>
         }
 
         var view = new StreetWindow(ServiceProvider, SelectedItem.Id);
-        ShowDialog(view, "Редактирование записи");
+        WindowHelper.ShowDialog(view, "Редактирование записи");
         RefreshData(sender);
     }
 
