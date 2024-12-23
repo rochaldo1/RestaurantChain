@@ -97,7 +97,7 @@ SELECT
 	p.product_name      as ProductName,
 	r.restaurant_name   as RestaurantName,
 	u.unit_name         as UnitName
-FROM applications_for_distribution s
+FROM availibility_in_restaurant s
 	inner join restaurants r on r.id = s.restaurant_id 
 	inner join units u on u.id = s.unit_id 
 	inner join products p on p.id = s.product_id 
@@ -126,7 +126,7 @@ SELECT
 	p.product_name      as ProductName,
 	r.restaurant_name   as RestaurantName,
 	u.unit_name         as UnitName
-FROM applications_for_distribution s
+FROM availibility_in_restaurant s
 	inner join restaurants r on r.id = s.restaurant_id 
 	inner join units u on u.id = s.unit_id 
 	inner join products p on p.id = s.product_id 
