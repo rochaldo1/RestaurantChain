@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Menu VerticalAlignment="Top" x:Name="menuControl">
+        <Menu VerticalAlignment="Top" x:Name="menuControl" FontSize="16" FontFamily="Segoe UI Variable Display Light">
         </Menu>
         <ContentControl x:Name="mainView" Margin="0,25,0,0" />
     </Grid>
