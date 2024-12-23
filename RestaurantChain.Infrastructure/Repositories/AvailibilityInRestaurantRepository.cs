@@ -96,7 +96,8 @@ SELECT
 	s.price             as Price,
 	p.product_name      as ProductName,
 	r.restaurant_name   as RestaurantName,
-	u.unit_name         as UnitName
+	u.unit_name         as UnitName,
+    s.quantity * s.price as SumPrice
 FROM availibility_in_restaurant s
 	inner join restaurants r on r.id = s.restaurant_id 
 	inner join units u on u.id = s.unit_id 
@@ -125,7 +126,8 @@ SELECT
 	s.price             as Price,
 	p.product_name      as ProductName,
 	r.restaurant_name   as RestaurantName,
-	u.unit_name         as UnitName
+	u.unit_name         as UnitName,
+    s.quantity * s.price as SumPrice
 FROM availibility_in_restaurant s
 	inner join restaurants r on r.id = s.restaurant_id 
 	inner join units u on u.id = s.unit_id 

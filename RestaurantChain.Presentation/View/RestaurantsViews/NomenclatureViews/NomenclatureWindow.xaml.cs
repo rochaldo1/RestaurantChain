@@ -17,7 +17,6 @@ public partial class NomenclatureWindow : UserControl
     public NomenclatureWindow(IServiceProvider serviceProvider, int restaurantId, int? nomenclatureId)
     {
         var nomenclatureService = serviceProvider.GetRequiredService<INomenclatureService>();
-        var dishesService = serviceProvider.GetRequiredService<IDishesService>();
 
         InitializeComponent();
         DataContext = new NomenclatureViewModel(serviceProvider, restaurantId, nomenclatureId);

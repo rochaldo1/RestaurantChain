@@ -10,7 +10,7 @@ internal sealed class GetDishesSumByPeriodViewModel : ReportsViewModelBase
 
     public override void Enter(object sender)
     {
-        var fileName = _reportsService.GetRestaurantSumByPeriods(From, To);
+        var fileName = _reportsService.GetDishesSumByPeriod(From, To);
         ExcelHelper.OpenExcel(fileName);
     }
 }

@@ -58,6 +58,7 @@ internal class ReportsService : IReportsService
         //Данные
         foreach (DishesSumByPeriod item in data)
         {
+            index++;
             row++;
             worksheet.Cells[$"A{row}"].Value = index;
             worksheet.Cells[$"B{row}"].Value = item.Date.ToString("dd.MM.yyyy");
@@ -65,17 +66,23 @@ internal class ReportsService : IReportsService
             worksheet.Cells[$"D{row}"].Value = item.DishName;
             worksheet.Cells[$"E{row}"].Value = item.SaleCount;
             worksheet.Cells[$"F{row}"].Value = item.Price;
-            index++;
         }
 
         //Таблицу нарисовать
         worksheet.Cells[$"A{startTableRow}:F{row}"].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+        worksheet.Cells[$"A{startTableRow}:F{row}"].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+        worksheet.Cells[$"A{startTableRow}:F{row}"].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+        worksheet.Cells[$"A{startTableRow}:F{row}"].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
 
         //Сумма
         row++;
         worksheet.Cells[$"B{row}"].Value = "Итог:";
         worksheet.Cells[$"E{row}"].Value = data.Sum(x => x.SaleCount);
         worksheet.Cells[$"F{row}"].Value = data.Sum(x => x.Price);
+
+        worksheet.Cells[$"A2:F{row}"].AutoFitColumns();
+        worksheet.Column(3).Width = 30;
+        worksheet.Column(4).Width = 30;
 
         xlPackage.Save();
 
@@ -121,23 +128,29 @@ internal class ReportsService : IReportsService
         //Данные
         foreach (RestaurantSumByPeriod item in data)
         {
+            index++;
             row++;
             worksheet.Cells[$"A{row}"].Value = index;
             worksheet.Cells[$"B{row}"].Value = item.Date.ToString("dd.MM.yyyy");
             worksheet.Cells[$"C{row}"].Value = item.RestaurantName;
             worksheet.Cells[$"D{row}"].Value = item.SaleCount;
             worksheet.Cells[$"E{row}"].Value = item.Price;
-            index++;
         }
 
         //Таблицу нарисовать
         worksheet.Cells[$"A{startTableRow}:E{row}"].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+        worksheet.Cells[$"A{startTableRow}:E{row}"].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+        worksheet.Cells[$"A{startTableRow}:E{row}"].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+        worksheet.Cells[$"A{startTableRow}:E{row}"].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
 
         //Сумма
         row++;
         worksheet.Cells[$"B{row}"].Value = "Итог:";
         worksheet.Cells[$"D{row}"].Value = data.Sum(x => x.SaleCount);
         worksheet.Cells[$"E{row}"].Value = data.Sum(x => x.Price);
+
+        worksheet.Cells[$"A2:E{row}"].AutoFitColumns();
+        worksheet.Column(3).Width = 70;
 
         xlPackage.Save();
 

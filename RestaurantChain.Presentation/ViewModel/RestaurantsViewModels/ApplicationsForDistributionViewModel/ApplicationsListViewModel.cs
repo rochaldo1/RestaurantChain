@@ -28,6 +28,7 @@ internal class ApplicationsListViewModel : ListViewModelBase<ApplicationsForDist
         {
             _from = value;
             OnPropertyChanged();
+            DataBind();
         }
     }
 
@@ -38,6 +39,7 @@ internal class ApplicationsListViewModel : ListViewModelBase<ApplicationsForDist
         {
             _to = value;
             OnPropertyChanged();
+            DataBind();
         }
     }
 

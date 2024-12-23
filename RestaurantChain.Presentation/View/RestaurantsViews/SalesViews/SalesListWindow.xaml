@@ -48,9 +48,9 @@
                       CanUserDeleteRows="False" RowBackground="White" AlternatingRowBackground="#E6E6E6" FontSize="16"
                       FontFamily="Segoe UI Variable Display Light">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Блюдо" Binding="{Binding Path=ProductName}"/>
-                    <DataGridTextColumn Header="Группа" Binding="{Binding Path=ProductName}"/>
-                    <DataGridTextColumn Header="Дата" Binding="{Binding Path=ApplicationDate}"/>
+                    <DataGridTextColumn Header="Блюдо" Binding="{Binding Path=DishName}"/>
+                    <DataGridTextColumn Header="Группа" Binding="{Binding Path=GroupName}"/>
+                    <DataGridTextColumn Header="Дата" Binding="{Binding Path=SaleDate}"/>
                     <DataGridTextColumn Header="Проданное количество" Binding="{Binding Path=Quantity}"/>
                     <DataGridTextColumn Header="Стоимость одного блюда, руб." Binding="{Binding Path=Price}"/>
                     <DataGridTextColumn Header="Сумма, руб." Binding="{Binding Path=SumPrice}"/>

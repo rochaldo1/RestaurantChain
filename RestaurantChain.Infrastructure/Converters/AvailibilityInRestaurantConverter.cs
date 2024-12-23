@@ -45,7 +45,8 @@ internal static class AvailibilityInRestaurantConverter
             Price = availibility.Price,
             UnitName = availibility.UnitName,
             ProductName = availibility.ProductName,
-            RestaurantName = availibility.RestaurantName
+            RestaurantName = availibility.RestaurantName,
+            SumPrice = availibility.SumPrice
         };
     }
 }

@@ -44,7 +44,7 @@
             <TextBlock Text="Дата продажи" Grid.Row="3" Grid.Column="0" Style="{StaticResource LblStyle}" />
             <TextBlock Text="Стоимость одного блюда, руб." Grid.Row="4" Grid.Column="0" Style="{StaticResource LblStyle}" />
 
-            <ComboBox Grid.Column="1" Grid.Row="0" IsEnabled="{Binding Path=IsNew}" DisplayMemberPath="DishName" SelectedValuePath="Id" SelectedValue="{Binding SelectedDishId}" ItemsSource="{Binding DishesDataSource}" Style="{StaticResource CmbStyle}" />
+            <ComboBox Grid.Column="1" Grid.Row="0" IsEnabled="{Binding Path=IsNew}" DisplayMemberPath="DishName" SelectedValuePath="DishId" SelectedValue="{Binding SelectedDishId}" ItemsSource="{Binding DishesDataSource}" Style="{StaticResource CmbStyle}" />
             <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding GroupName}" Style="{StaticResource TbStyle}" IsEnabled="False"/>
             <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Quantity}" Style="{StaticResource TbStyle}">
                 <i:Interaction.Behaviors>

@@ -1,6 +1,7 @@
 using System.Windows;
 using System.Windows.Controls;
-
+using Microsoft.Extensions.DependencyInjection;
+using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.ViewModel.RestaurantsViewModels.SalesViewModels;
 
 namespace RestaurantChain.Presentation.View.RestaurantsViews.SalesViews;
@@ -17,9 +18,15 @@ public partial class SalesWindow : UserControl
 
     public SalesWindow(IServiceProvider serviceProvider,  int restaurantId, int? saleId)
     {
-        
+        var salesService = serviceProvider.GetRequiredService<ISalesService>();
+
         InitializeComponent();
         DataContext = new SalesViewModel(serviceProvider, restaurantId, saleId);
+        if (DataContext is SalesViewModel vm)
+        {
+            vm.OnSaveSuccess += SaveSuccess;
+            vm.OnCancel += SaveError;
+        }
     }
 
     private void CancelBtn_OnClick(object sender, RoutedEventArgs e)

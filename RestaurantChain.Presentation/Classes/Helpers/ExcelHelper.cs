@@ -18,9 +18,9 @@ internal static class ExcelHelper
         p.Start();
 
         // Need to wait for excel to start
-        p.WaitForInputIdle();
+        //p.WaitForInputIdle();
 
-        IntPtr p1 = p.MainWindowHandle;
-        ShowWindow(p1, nCmdShow: 1);
+        //IntPtr p1 = p.MainWindowHandle;
+        //ShowWindow(p1, nCmdShow: 1);
     }
 }

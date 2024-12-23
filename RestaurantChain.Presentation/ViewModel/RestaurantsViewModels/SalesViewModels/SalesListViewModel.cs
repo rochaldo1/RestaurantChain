@@ -27,6 +27,7 @@ internal sealed class SalesListViewModel : ListViewModelBase<SalesView>
         {
             _from = value;
             OnPropertyChanged();
+            DataBind();
         }
     }
 
@@ -37,6 +38,7 @@ internal sealed class SalesListViewModel : ListViewModelBase<SalesView>
         {
             _to = value;
             OnPropertyChanged();
+            DataBind();
         }
     }
 
@@ -89,7 +91,7 @@ internal sealed class SalesListViewModel : ListViewModelBase<SalesView>
             return;
         }
 
-        if (MessageBox.Show($"������� ������?", "�������� ������", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+        if (MessageBox.Show($"Удалить запись?", "Удаление записи", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
         {
             _salesService.Delete(SelectedItem.Id);
         }
