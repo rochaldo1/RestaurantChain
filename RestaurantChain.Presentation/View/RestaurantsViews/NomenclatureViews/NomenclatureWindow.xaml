@@ -1,4 +1,4 @@
-<UserControl x:Class="RestaurantChain.Presentation.View.RestaurantsViews.NomenclatureViews.NomenclatureWindow"
+ï»¿<UserControl x:Class="RestaurantChain.Presentation.View.RestaurantsViews.NomenclatureViews.NomenclatureWindow"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <TextBlock Style="{StaticResource LblHeaderStyle}" Text="Âûáåðèòå áëþäî"></TextBlock>
+            <TextBlock Style="{StaticResource LblHeaderStyle}" Text="Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ð±Ð»ÑŽÐ´Ð¾"></TextBlock>
         </Grid>
 
         <Grid Grid.Row="1">
@@ -30,7 +30,7 @@
                 <ColumnDefinition Width="9*"/>
                 <ColumnDefinition Width="11*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Áëþäî" Grid.Column="0" Style="{StaticResource LblStyle}" />
+            <TextBlock Text="Ð‘Ð»ÑŽÐ´Ð¾" Grid.Column="0" Style="{StaticResource LblStyle}" />
             <ComboBox Grid.Column="1" IsEnabled="{Binding Path=IsNew}" DisplayMemberPath="DishName" SelectedValuePath="Id" SelectedValue="{Binding SelectedDishId}" ItemsSource="{Binding DishesDataSource}" Style="{StaticResource CmbStyle}" />
         </Grid>
 
@@ -39,8 +39,8 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Content="Ïðîäîëæèòü" Command="{Binding EnterCommand}" Style="{StaticResource BtnStyle}" />
-            <Button Content="Îòìåíà" Click="CancelBtn_OnClick" Grid.Column="1" Style="{StaticResource BtnStyle}"/>
+            <Button Content="ÐŸÑ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÑŒ" Command="{Binding EnterCommand}" Style="{StaticResource BtnStyle}" />
+            <Button Content="ÐžÑ‚Ð¼ÐµÐ½Ð°" Click="CancelBtn_OnClick" Grid.Column="1" Style="{StaticResource BtnStyle}"/>
         </Grid>
 
     </Grid>
