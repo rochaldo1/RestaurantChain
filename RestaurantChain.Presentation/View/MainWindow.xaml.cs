@@ -81,8 +81,6 @@ public partial class MainWindow : Window
         var tag = ((MenuItem) sender).Tag;
         switch (tag)
         {
-            case "Other":
-                break;
             case "Products":
                 mainView.Content = new ProductsViews.ProductsListWindow(_serviceProvider);
                 break;
@@ -93,15 +91,13 @@ public partial class MainWindow : Window
                 mainView.Content = new RestaurantsViews.RestaurantsListWindow(_serviceProvider);
                 break;
             case "GetRestaurantSumByPeriods":
-                WindowHelper.ShowDialog(new Reports.GetRestaurantSumByPeriodsWindow(_serviceProvider), "Выручка по ресторанам");
+                WindowHelper.ShowDialog(new Reports.GetRestaurantSumByPeriodsWindow(_serviceProvider), "Выручка по ресторанам", width: 400);
                 break;
             case "GetDishesSumByPeriod":
-                WindowHelper.ShowDialog(new Reports.GetDishesSumByPeriodWindow(_serviceProvider), "Выручка по блюдам");
+                WindowHelper.ShowDialog(new Reports.GetDishesSumByPeriodWindow(_serviceProvider), "Выручка по группам блюд", width: 400);
                 break;
             case "ChangePassword":
                 new ChangePasswordWindow(_serviceProvider).ShowDialog();
-                break;
-            case "Setings":
                 break;
             case "Users":
                 mainView.Content = new UserListWindow(_serviceProvider);
@@ -129,8 +125,6 @@ public partial class MainWindow : Window
                 break;
             case "Units":
                 mainView.Content = new UnitsViews.UnitsListWindow(_serviceProvider);
-                break;
-            case "DocRevenue":
                 break;
             case "DocHelp":
                 mainView.Content = new WebBrowser
