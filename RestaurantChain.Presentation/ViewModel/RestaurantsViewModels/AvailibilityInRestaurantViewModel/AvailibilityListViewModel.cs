@@ -1,55 +1,32 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using RestaurantChain.Domain.Models;
+﻿using System.Windows;
+
+using Microsoft.Extensions.DependencyInjection;
+
 using RestaurantChain.Domain.Models.View;
 using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.Commands;
-using RestaurantChain.Presentation.View.AvailibilityInRestaurantViews;
+using RestaurantChain.Presentation.View.RestaurantsViews.AvailibilityInRestaurantViews;
 using RestaurantChain.Presentation.ViewModel.Base;
-using System.Windows;
 
-namespace RestaurantChain.Presentation.ViewModel.AvailibilityInRestaurantViewModel;
+namespace RestaurantChain.Presentation.ViewModel.RestaurantsViewModels.AvailibilityInRestaurantViewModel;
 
 internal class AvailibilityListViewModel : ListViewModelBase<AvailibilityInRestaurantView>
 {
     private readonly IAvailibilityInRestaurantService _availibilityInRestaurantService;
 
-    private int _selectedRestaurantId;
-    private IReadOnlyCollection<Restaurants> _restaurantsDataSource;
+    private readonly int _restaurantId;
 
-    public int SelectedRestaurantId
+    public AvailibilityListViewModel(IServiceProvider serviceProvider, int restaurantId) : base(serviceProvider)
     {
-        get => _selectedRestaurantId;
-        set
-        {
-            _selectedRestaurantId = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public IReadOnlyCollection<Restaurants> RestaurantsDataSource
-    {
-        get => _restaurantsDataSource;
-        set
-        {
-            _restaurantsDataSource = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public AvailibilityListViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
-    {
+        _restaurantId = restaurantId;
         _availibilityInRestaurantService = serviceProvider.GetRequiredService<IAvailibilityInRestaurantService>();
-
-        var restaurantsService = serviceProvider.GetRequiredService<IRestaurantsService>();
-        RestaurantsDataSource = restaurantsService.List();
-
         OnPropertyChanged();
         DataBind();
     }
 
     protected override void DataBind()
     {
-        IReadOnlyCollection<AvailibilityInRestaurantView> entities = _availibilityInRestaurantService.List(SelectedRestaurantId);
+        IReadOnlyCollection<AvailibilityInRestaurantView> entities = _availibilityInRestaurantService.List(_restaurantId);
         SetEntities(entities);
     }
 
@@ -63,7 +40,7 @@ internal class AvailibilityListViewModel : ListViewModelBase<AvailibilityInResta
     private void CreateEntity(object sender)
     {
         var view = new AvailibilityInRestaurantWindow(ServiceProvider, availibilityId: null);
-        ShowDialog(view, "Создание записи", 500, 500);
+        ShowDialog(view, "Создание записи", width: 500, height: 500);
         DataBind();
     }
 
@@ -75,7 +52,7 @@ internal class AvailibilityListViewModel : ListViewModelBase<AvailibilityInResta
         }
 
         var view = new AvailibilityInRestaurantWindow(ServiceProvider, SelectedItem.Id);
-        ShowDialog(view, "Редактирование записи", 500, 500);
+        ShowDialog(view, "Редактирование записи", width: 500, height: 500);
         DataBind();
     }
 
@@ -86,7 +63,7 @@ internal class AvailibilityListViewModel : ListViewModelBase<AvailibilityInResta
             return;
         }
 
-        if (MessageBox.Show($"Удалить заявку?", "Удаление записи", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+        if (MessageBox.Show("Удалить заявку?", "Удаление записи", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
         {
             _availibilityInRestaurantService.Delete(SelectedItem.Id);
         }

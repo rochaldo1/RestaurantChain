@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using RestaurantChain.Domain.Models;
 using RestaurantChain.Domain.Models.View;
 using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.Commands;
-using RestaurantChain.Presentation.View.ApplicationsForDistributionViews;
 using RestaurantChain.Presentation.ViewModel.Base;
 using System.Windows;
+
+using ApplicationWindow = RestaurantChain.Presentation.View.RestaurantsViews.ApplicationsForDistributionViews.ApplicationWindow;
 
 namespace RestaurantChain.Presentation.ViewModel.ApplicationsForDistributionViewModel;
 
@@ -14,20 +14,9 @@ internal class ApplicationsListViewModel : ListViewModelBase<ApplicationsForDist
     private readonly IApplicationsForDistributionService _applicationsForDistributionService;
     private readonly IProductsService _productsService;
 
-    private int _selectedRestaurantId;
+    private int _restaurantId;
     private DateTime _from;
     private DateTime _to;
-    private IReadOnlyCollection<Restaurants> _restaurantsDataSource;
-
-    public int SelectedRestaurantId
-    {
-        get => _selectedRestaurantId;
-        set
-        {
-            _selectedRestaurantId = value;
-            OnPropertyChanged();
-        }
-    }
 
     public DateTime From
     {
@@ -49,25 +38,13 @@ internal class ApplicationsListViewModel : ListViewModelBase<ApplicationsForDist
         }
     }
 
-    public IReadOnlyCollection<Restaurants> RestaurantsDataSource
+    public ApplicationsListViewModel(IServiceProvider serviceProvider, int restaurantId) : base(serviceProvider)
     {
-        get => _restaurantsDataSource;
-        set
-        {
-            _restaurantsDataSource = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public ApplicationsListViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
-    {
+        _restaurantId = restaurantId;
         _from = DateTime.Now.AddMonths(-1);
         _to = DateTime.Now;
         _applicationsForDistributionService = serviceProvider.GetRequiredService<IApplicationsForDistributionService>();
         _productsService = serviceProvider.GetRequiredService<IProductsService>();
-
-        var restaurantsService = serviceProvider.GetRequiredService<IRestaurantsService>();
-        RestaurantsDataSource = restaurantsService.List();
 
         OnPropertyChanged();
         DataBind();
@@ -75,7 +52,7 @@ internal class ApplicationsListViewModel : ListViewModelBase<ApplicationsForDist
 
     protected override void DataBind()
     {
-        IReadOnlyCollection<ApplicationsForDistributionView> entities = _applicationsForDistributionService.List(SelectedRestaurantId, From, To);
+        IReadOnlyCollection<ApplicationsForDistributionView> entities = _applicationsForDistributionService.List(_restaurantId, From, To);
         SetEntities(entities);
     }
 

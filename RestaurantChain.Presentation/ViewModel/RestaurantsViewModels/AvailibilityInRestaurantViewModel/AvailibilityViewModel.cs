@@ -1,11 +1,12 @@
-﻿using RestaurantChain.Domain.Models.View;
-using RestaurantChain.Domain.Models;
-using RestaurantChain.DomainServices.Contracts;
-using RestaurantChain.Presentation.ViewModel.Base;
-using RestaurantChain.Presentation.Commands;
-using System.Windows;
+﻿using System.Windows;
 
-namespace RestaurantChain.Presentation.ViewModel.AvailibilityInRestaurantViewModel;
+using RestaurantChain.Domain.Models;
+using RestaurantChain.Domain.Models.View;
+using RestaurantChain.DomainServices.Contracts;
+using RestaurantChain.Presentation.Commands;
+using RestaurantChain.Presentation.ViewModel.Base;
+
+namespace RestaurantChain.Presentation.ViewModel.RestaurantsViewModels.AvailibilityInRestaurantViewModel;
 
 internal class AvailibilityViewModel : EditViewModelBase
 {

@@ -34,6 +34,18 @@
     <Page Remove="View\Resources\**" />
     <Page Remove="View\StreetsView\**" />
     <Page Remove="View\UnitsView\**" />
+    <Page Update="View\RestaurantsViews\AvailibilityInRestaurantViews\AvailibilityListWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="View\RestaurantsViews\AvailibilityInRestaurantViews\AvailibilityWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="View\RestaurantsViews\ApplicationsForDistributionViews\ApplicationsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="View\RestaurantsViews\ApplicationsForDistributionViews\ApplicationWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>

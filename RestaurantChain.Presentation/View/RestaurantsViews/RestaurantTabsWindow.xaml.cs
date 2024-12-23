@@ -11,11 +11,11 @@ namespace RestaurantChain.Presentation.View.RestaurantsViews
     public partial class RestaurantTabsWindow : UserControl
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly int _restId;
+        private readonly int _restaurantId;
 
         public RestaurantTabsWindow(IServiceProvider serviceProvider, int restaurantId)
         {
-            _restId = restaurantId;
+            _restaurantId = restaurantId;
             _serviceProvider = serviceProvider;
             InitializeComponent();
             BuildMainMenu();
@@ -61,21 +61,29 @@ namespace RestaurantChain.Presentation.View.RestaurantsViews
             {
                 case "available":
                 {
-                    var view = new ProductsViews.ProductsListWindow(_serviceProvider);
+                    var view = new AvailibilityInRestaurantViews.AvailibilityInRestaurantListWindow(_serviceProvider, _restaurantId);
                     mainView.Content = view;
                 }
 
                     break;
-                case "orders":
+                case "Sales":
                 {
-                    var view = new ProductsViews.ProductsListWindow(_serviceProvider);
+                    var view = new SalesViews.SalesListWindow(_serviceProvider, _restaurantId);
                     mainView.Content = view;
                 }
 
                     break;
                 case "menu":
                 {
-                    var view = new ProductsViews.ProductsListWindow(_serviceProvider);
+                    var view = new NomenclatureViews.NomenclatureListWindow(_serviceProvider, _restaurantId);
+                    mainView.Content = view;
+                }
+
+                    break;
+                
+                case "orders":
+                {
+                    var view = new ApplicationsForDistributionViews.ApplicationsWindow(_serviceProvider, _restaurantId);
                     mainView.Content = view;
                 }
 

@@ -1,10 +1,12 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using RestaurantChain.DomainServices.Contracts;
-using RestaurantChain.Presentation.ViewModel.AvailibilityInRestaurantViewModel;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace RestaurantChain.Presentation.View.AvailibilityInRestaurantViews;
+using Microsoft.Extensions.DependencyInjection;
+
+using RestaurantChain.DomainServices.Contracts;
+using RestaurantChain.Presentation.ViewModel.RestaurantsViewModels.AvailibilityInRestaurantViewModel;
+
+namespace RestaurantChain.Presentation.View.RestaurantsViews.AvailibilityInRestaurantViews;
 
 /// <summary>
 /// Логика взаимодействия для AvailibilityInRestaurantWindow.xaml

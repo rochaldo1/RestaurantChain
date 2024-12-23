@@ -1,9 +1,8 @@
-﻿<UserControl x:Class="RestaurantChain.Presentation.View.AvailibilityInRestaurantViews.AvailibilityInRestaurantWindow"
+﻿<UserControl x:Class="RestaurantChain.Presentation.View.RestaurantsViews.AvailibilityInRestaurantViews.AvailibilityInRestaurantWindow"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:RestaurantChain.Presentation.View.AvailibilityInRestaurantViews"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:System="clr-namespace:System;assembly=System.Runtime" xmlns:i="http://schemas.microsoft.com/xaml/behaviors" xmlns:Behaviors="clr-namespace:RestaurantChain.Presentation.Behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="550">

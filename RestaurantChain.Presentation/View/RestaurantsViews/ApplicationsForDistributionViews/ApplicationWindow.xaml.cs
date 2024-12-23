@@ -1,10 +1,12 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using RestaurantChain.DomainServices.Contracts;
-using RestaurantChain.Presentation.ViewModel.ApplicationsForDistributionViewModel;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace RestaurantChain.Presentation.View.ApplicationsForDistributionViews;
+using Microsoft.Extensions.DependencyInjection;
+
+using RestaurantChain.DomainServices.Contracts;
+using RestaurantChain.Presentation.ViewModel.ApplicationsForDistributionViewModel;
+
+namespace RestaurantChain.Presentation.View.RestaurantsViews.ApplicationsForDistributionViews;
 
 /// <summary>
 /// Логика взаимодействия для ApplicationWindow.xaml
