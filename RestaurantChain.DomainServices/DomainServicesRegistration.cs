@@ -7,6 +7,10 @@ namespace RestaurantChain.DomainServices;
 
 public static class DomainServicesRegistration
 {
+    /// <summary>
+    /// Регистрация сервисов, которые работают с БД и делают логику
+    /// </summary>
+    /// <param name="services"></param>
     public static void UseDomainServices(this IServiceCollection services)
     {
         services.AddSingleton<IUsersService, UsersService>();

@@ -2,6 +2,9 @@
 
 namespace RestaurantChain.DomainServices.Contracts;
 
+/// <summary>
+/// Сервис для работы с улицами
+/// </summary>
 public interface IStreetsService
 {
     Streets Get(int id);

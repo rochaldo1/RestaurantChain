@@ -1,9 +1,8 @@
 using Microsoft.Extensions.DependencyInjection;
-using RestaurantChain.Domain.Models;
+
 using RestaurantChain.Domain.Models.View;
 using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.Commands;
-using RestaurantChain.Presentation.View.RestaurantsViews.ApplicationsForDistributionViews;
 using RestaurantChain.Presentation.View.RestaurantsViews.SalesViews;
 using RestaurantChain.Presentation.ViewModel.Base;
 using System.Windows;

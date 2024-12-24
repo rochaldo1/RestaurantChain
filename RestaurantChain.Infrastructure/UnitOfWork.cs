@@ -56,6 +56,7 @@ internal sealed class UnitOfWork : IUnitOfWork, IDisposable
 
     public UnitOfWork(string connectionString)
     {
+        //инициализировать подключение к бд
         _connection = new NpgsqlConnection(connectionString);
     }
 

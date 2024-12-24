@@ -3,6 +3,9 @@ using RestaurantChain.Domain.Models.View;
 
 namespace RestaurantChain.DomainServices.Contracts;
 
+/// <summary>
+/// Сервис для работы с ролями
+/// </summary>
 public interface IRolesService
 {
     int Create(Roles role);

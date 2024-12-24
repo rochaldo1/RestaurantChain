@@ -3,6 +3,9 @@ using RestaurantChain.Domain.Models.View;
 
 namespace RestaurantChain.DomainServices.Contracts;
 
+/// <summary>
+/// Сервис для работы с продуктами на складе
+/// </summary>
 public interface IProductsService
 {
     Products Get(int id);

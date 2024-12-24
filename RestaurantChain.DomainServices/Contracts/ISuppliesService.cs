@@ -3,6 +3,9 @@ using RestaurantChain.Domain.Models.View;
 
 namespace RestaurantChain.DomainServices.Contracts;
 
+/// <summary>
+/// Сервис для работы с поставками
+/// </summary>
 public interface ISuppliesService
 {
     IReadOnlyCollection<SuppliesView> List(int? supplierId, DateTime? from, DateTime? to);

@@ -1,7 +1,4 @@
-﻿using System.Windows;
-
-using Microsoft.Extensions.DependencyInjection;
-using RestaurantChain.Presentation.ViewModel.RestaurantsViewModels;
+﻿using RestaurantChain.Presentation.ViewModel.RestaurantsViewModels;
 using System.Windows.Controls;
 
 using RestaurantChain.Presentation.Classes;

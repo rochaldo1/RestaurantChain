@@ -6,6 +6,9 @@ using System.Windows;
 
 namespace RestaurantChain.Presentation.Behaviors;
 
+/// <summary>
+/// Класс для ограничения int decimal полей (маска ввода)
+/// </summary>
 public class TextBoxInputBehavior : Behavior<TextBox>
 {
     const NumberStyles validNumberStyles = NumberStyles.AllowDecimalPoint |

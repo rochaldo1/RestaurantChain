@@ -3,6 +3,9 @@ using RestaurantChain.Domain.Models.View;
 
 namespace RestaurantChain.DomainServices.Contracts;
 
+/// <summary>
+/// Сервис для работы с поставщиками
+/// </summary>
 public interface ISuppliersService
 {
     Suppliers Get(int id);

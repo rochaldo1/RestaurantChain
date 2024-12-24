@@ -3,6 +3,9 @@ using RestaurantChain.Domain.Models;
 
 namespace RestaurantChain.DomainServices.Contracts;
 
+/// <summary>
+/// Сервис для работы с ресторанами
+/// </summary>
 public interface IRestaurantsService
 {
     Restaurants Get(int id);

@@ -2,6 +2,9 @@
 
 namespace RestaurantChain.DomainServices.Contracts;
 
+/// <summary>
+/// Сервис для работы с банками
+/// </summary>
 public interface IBanksService
 {
     Banks Get(int id);

@@ -5,7 +5,6 @@ using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.Commands;
 using RestaurantChain.Presentation.ViewModel.Base;
 using System.Windows;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace RestaurantChain.Presentation.ViewModel.RestaurantsViewModels.SalesViewModels;
 
@@ -113,7 +112,7 @@ internal sealed class SalesViewModel: EditViewModelBase
 
             if (sale == null)
             {
-                MessageBox.Show("Информации о продаже не существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!", "пїЅпїЅпїЅпїЅпїЅпїЅ", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             SelectedDishId = sale.DishId;
@@ -154,7 +153,7 @@ internal sealed class SalesViewModel: EditViewModelBase
         }
         catch (Exception e)
         {
-            MessageBox.Show(e.Message, "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(e.Message, "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ", MessageBoxButton.OK, MessageBoxImage.Error);
 
             return false;
         }
@@ -172,7 +171,7 @@ internal sealed class SalesViewModel: EditViewModelBase
     {
         if (_selectedDishId <= 0)
         {
-            MessageBox.Show($"Блюдо не выбрано", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show($"пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ", "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ", MessageBoxButton.OK, MessageBoxImage.Error);
 
             return null;
         }
@@ -193,17 +192,17 @@ internal sealed class SalesViewModel: EditViewModelBase
 
         if (sale.DishId <= 0)
         {
-            errors.Add("Блюдо");
+            errors.Add("пїЅпїЅпїЅпїЅпїЅ");
         }
 
         if (sale.Quantity < 0)
         {
-            errors.Add("Количество");
+            errors.Add("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
         }
 
         if (errors.Count > 0)
         {
-            MessageBox.Show($"Поля не заполнены: {string.Join(",", errors)}", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show($"пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: {string.Join(",", errors)}", "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ", MessageBoxButton.OK, MessageBoxImage.Error);
 
             return null;
         }

@@ -20,8 +20,6 @@ using RestaurantChain.Presentation.View.SuppliesViews;
 using RestaurantChain.Presentation.View.UnitsViews;
 using RestaurantChain.Presentation.View.Users;
 
-using Menu = RestaurantChain.Domain.Models.Menu;
-
 namespace RestaurantChain.Presentation.View;
 
 /// <summary>

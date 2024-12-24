@@ -4,7 +4,6 @@ using System.Windows.Input;
 
 using Microsoft.Extensions.DependencyInjection;
 using RestaurantChain.DomainServices.Contracts;
-using RestaurantChain.Presentation.ViewModel.RestaurantsViewModels.AvailibilityInRestaurantViewModel;
 using RestaurantChain.Presentation.ViewModel.RestaurantsViewModels.NomenclatureViewModels;
 
 namespace RestaurantChain.Presentation.View.RestaurantsViews.NomenclatureViews;

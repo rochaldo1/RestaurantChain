@@ -2,6 +2,9 @@
 
 namespace RestaurantChain.DomainServices.Contracts;
 
+/// <summary>
+/// Сервис для работы с единицами измерения
+/// </summary>
 public interface IUnitsService
 {
     Units Get(int id);

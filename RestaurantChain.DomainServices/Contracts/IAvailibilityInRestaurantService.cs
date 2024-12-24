@@ -3,6 +3,9 @@ using RestaurantChain.Domain.Models;
 
 namespace RestaurantChain.DomainServices.Contracts;
 
+/// <summary>
+/// Сервис для работы с доступностью продуктов в ресторане
+/// </summary>
 public interface IAvailibilityInRestaurantService
 {
     IReadOnlyCollection<AvailibilityInRestaurantView> List(int? restaurantId);

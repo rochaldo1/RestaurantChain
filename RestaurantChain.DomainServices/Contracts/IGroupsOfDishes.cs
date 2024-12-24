@@ -2,6 +2,9 @@
 
 namespace RestaurantChain.DomainServices.Contracts;
 
+/// <summary>
+/// Сервис для работы с группами блюд
+/// </summary>
 public interface IGroupsOfDishesService
 {
     GroupsOfDishes Get(int id);

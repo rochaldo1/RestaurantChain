@@ -3,7 +3,6 @@ using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.ViewModel.GroupsOfDishesViewModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
 namespace RestaurantChain.Presentation.View.GroupsOfDishesViews;

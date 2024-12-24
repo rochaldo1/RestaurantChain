@@ -104,31 +104,4 @@ WHERE
 
         return entities.Select(x => x.ToDomain()).ToArray();
     }
-
-    public NomenclatureView GetView(int id)
-    {
-        const string query = @"
-SELECT 
-    n.id              AS Id, 
-    n.restaurant_id   AS RestaurantId, 
-    n.dish_id         AS DishId,
-    r.restaurant_name as RestaurantName,
-    d.dish_name		  as DishName,
-    d.group_id 		  as GroupId,
-    d.price 		  as Price,
-    god.group_name    as GroupName
-FROM nomenclature n
-	inner join restaurants r on r.id = n.restaurant_id 
-	inner join dishes d on d.id = n.dish_id 
-	inner join groups_of_dishes god on god.id = d.group_id 
-WHERE
-    n.id = @Id;
-    ";
-        var entityDb = Connection.QueryFirstOrDefault<NomenclatureDbView>(query, new
-        {
-            Id = id
-        });
-
-        return entityDb?.ToDomain();
-    }
 }

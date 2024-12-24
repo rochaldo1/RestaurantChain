@@ -3,6 +3,9 @@ using System.Runtime.InteropServices;
 
 namespace RestaurantChain.Presentation.Classes.Helpers;
 
+/// <summary>
+/// Хэлпер для открытия экселя
+/// </summary>
 internal static class ExcelHelper
 {
     [DllImport("user32.dll")]

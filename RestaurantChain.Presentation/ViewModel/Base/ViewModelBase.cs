@@ -2,7 +2,6 @@
 using System.Runtime.CompilerServices;
 using System.Windows;
 
-using RestaurantChain.Domain.Models;
 using RestaurantChain.Domain.Models.View;
 using RestaurantChain.Presentation.Classes;
 

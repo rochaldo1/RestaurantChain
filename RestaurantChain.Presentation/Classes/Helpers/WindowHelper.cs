@@ -3,6 +3,9 @@ using System.Windows.Controls;
 
 namespace RestaurantChain.Presentation.Classes.Helpers;
 
+/// <summary>
+/// Хэлпер открытия окон
+/// </summary>
 internal static class WindowHelper
 {
     public static void ShowDialog(UserControl control, string title, int width = 300, int height = 200)
