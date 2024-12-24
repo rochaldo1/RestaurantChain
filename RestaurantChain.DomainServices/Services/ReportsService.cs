@@ -37,7 +37,7 @@ internal class ReportsService : IReportsService
         worksheet.Cells["A1:F1"].Merge = true;//Объединить
         worksheet.Cells["A1"].Style.Font.Bold = true;
         worksheet.Cells["A1"].Style.Font.Size = 14;
-        worksheet.Cells["A1"].Value = $"Выручка по группам блюд за период {startDate:dd.MM.yyyy} - {endDate:dd.MM.yyyy}";
+        worksheet.Cells["A1"].Value = $"Выручка по блюдам за период {startDate:dd.MM.yyyy} - {endDate:dd.MM.yyyy}";
 
         //Шапка
         row++;

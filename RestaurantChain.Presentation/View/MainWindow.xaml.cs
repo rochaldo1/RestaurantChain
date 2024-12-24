@@ -116,7 +116,7 @@ public partial class MainWindow : Window
 
                 break;
             case "GetDishesSumByPeriod":
-                WindowHelper.ShowDialog(new GetDishesSumByPeriodWindow(_serviceProvider), "Выручка по группам блюд", width: 450);
+                WindowHelper.ShowDialog(new GetDishesSumByPeriodWindow(_serviceProvider), "Выручка по блюдам", width: 450);
 
                 break;
             case "ChangePassword":

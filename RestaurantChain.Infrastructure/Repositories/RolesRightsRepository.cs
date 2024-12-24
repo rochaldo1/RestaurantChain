@@ -28,7 +28,7 @@ values
     @R,
     @E,
     @D
-);
+)
     returning Id;
     ";
 
