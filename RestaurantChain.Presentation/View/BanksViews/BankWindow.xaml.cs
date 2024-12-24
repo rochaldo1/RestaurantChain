@@ -58,12 +58,6 @@ public partial class BankWindow : UserControl
         {
             case Key.Escape:
                 ((Window)Parent).Close();
-
-                break;
-            case Key.Enter:
-                (DataContext as BankViewModel).OnPropertyChanged();
-                btnOk.Command.Execute(null);
-
                 break;
         }
     }

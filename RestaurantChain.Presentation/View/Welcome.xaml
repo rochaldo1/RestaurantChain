@@ -1,0 +1,16 @@
+<UserControl x:Class="RestaurantChain.Presentation.View.Welcome"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:RestaurantChain.Presentation.View"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.15*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Background="#D3D3D3" Grid.Row="0" TextAlignment="Center" FontSize="28" Margin="10,5,10,5" FontFamily="Segoe UI Variable Display Light"><Run Language="ru-ru" Text="Сеть ресторанов"/></TextBlock>
+    </Grid>
+</UserControl>

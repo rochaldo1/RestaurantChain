@@ -1,4 +1,5 @@
-﻿using RestaurantChain.Presentation.ViewModel.ProductsViewModel;
+﻿using RestaurantChain.Presentation.Classes;
+using RestaurantChain.Presentation.ViewModel.ProductsViewModel;
 using System.Windows.Controls;
 
 namespace RestaurantChain.Presentation.View.ProductsViews;
@@ -12,5 +13,6 @@ public partial class ProductsListWindow : UserControl
     {
         InitializeComponent();
         DataContext = new ProductListViewModel(serviceProvider);
+        CurrentState.MainWindow.Title = "Сеть ресторанов - Продукты";
     }
 }

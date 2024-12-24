@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -30,6 +31,8 @@ public partial class AvailibilityInRestaurantWindow : UserControl
             vm.OnSaveSuccess += SaveSuccess;
             vm.OnCancel += SaveError;
         }
+
+        KeyDown += PreviewKeyDownHandle;
     }
 
     private void CancelBtn_OnClick(object sender, RoutedEventArgs e)
@@ -47,5 +50,15 @@ public partial class AvailibilityInRestaurantWindow : UserControl
     {
         IsSuccess = false;
         ((Window)Parent).Close();
+    }
+    
+    private void PreviewKeyDownHandle(object sender, KeyEventArgs e)
+    {
+        switch (e.Key)
+        {
+            case Key.Escape:
+                ((Window)Parent).Close();
+                break;
+        }
     }
 }

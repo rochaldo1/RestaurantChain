@@ -62,7 +62,14 @@ public class DishListViewModel : ListViewModelBase<Dishes>
         Dishes dish = _dishesService.Get(SelectedItem.Id);
         if (MessageBox.Show($"Удалить блюдо '{dish.DishName}'?", "Удаление записи", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
         {
-            _dishesService.Delete(SelectedItem.Id);
+            try
+            {
+                _dishesService.Delete(SelectedItem.Id);
+            }
+            catch (Exception e)
+            {
+                IsFkError(e);
+            }
         }
         else
         {

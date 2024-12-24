@@ -22,6 +22,7 @@ public partial class MainWindow : Window
         _menuService = serviceProvider.GetRequiredService<IMenuService>();
         InitializeComponent();
         BuildMainMenu();
+        mainView.Content = new Welcome();
     }
 
     private void BuildMainMenu()
@@ -91,10 +92,10 @@ public partial class MainWindow : Window
                 mainView.Content = new RestaurantsViews.RestaurantsListWindow(_serviceProvider);
                 break;
             case "GetRestaurantSumByPeriods":
-                WindowHelper.ShowDialog(new Reports.GetRestaurantSumByPeriodsWindow(_serviceProvider), "Выручка по ресторанам", width: 400);
+                WindowHelper.ShowDialog(new Reports.GetRestaurantSumByPeriodsWindow(_serviceProvider), "Выручка по ресторанам", 450);
                 break;
             case "GetDishesSumByPeriod":
-                WindowHelper.ShowDialog(new Reports.GetDishesSumByPeriodWindow(_serviceProvider), "Выручка по группам блюд", width: 400);
+                WindowHelper.ShowDialog(new Reports.GetDishesSumByPeriodWindow(_serviceProvider), "Выручка по группам блюд", 450);
                 break;
             case "ChangePassword":
                 new ChangePasswordWindow(_serviceProvider).ShowDialog();
@@ -131,6 +132,7 @@ public partial class MainWindow : Window
                 {
                     Source = IconHelper.GetHelpUri()
                 };
+                CurrentState.MainWindow.Title = "Сеть ресторанов - Справка - Содержание";
                 break;
             case "About":
                 new AboutProgramWindow().ShowDialog();

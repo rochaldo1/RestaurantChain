@@ -64,7 +64,14 @@ public class StreetListViewModel : ListViewModelBase<Streets>
 
         if (MessageBox.Show($"Удалить улицу '{street.StreetName}'?", "Удаление записи", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
         {
-            _streetsService.Delete(SelectedItem.Id);
+            try
+            {
+                _streetsService.Delete(SelectedItem.Id);
+            }
+            catch (Exception e)
+            {
+                IsFkError(e);
+            }
         }
         else
         {

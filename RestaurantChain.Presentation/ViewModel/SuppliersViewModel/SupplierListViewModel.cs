@@ -62,7 +62,14 @@ public class SupplierListViewModel : ListViewModelBase<Suppliers>
         Suppliers supplier = _suppliersService.Get(SelectedItem.Id);
         if (MessageBox.Show($"Удалить поставщика '{supplier.SupplierName}'?", "Удаление записи", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
         {
-            _suppliersService.Delete(SelectedItem.Id);
+            try
+            {
+                _suppliersService.Delete(SelectedItem.Id);
+            }
+            catch (Exception e)
+            {
+                IsFkError(e);
+            }
         }
         else
         {

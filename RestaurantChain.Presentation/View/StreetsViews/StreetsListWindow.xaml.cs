@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using RestaurantChain.Presentation.Classes;
 using RestaurantChain.Presentation.ViewModel.StreetsViewModel;
 
 namespace RestaurantChain.Presentation.View.StreetsViews;
@@ -12,5 +13,6 @@ public partial class StreetsListWindow : UserControl
     {
         InitializeComponent();
         DataContext = new StreetListViewModel(serviceProvider);
+        CurrentState.MainWindow.Title = "Сеть ресторанов - Справочники - Улицы";
     }
 }

@@ -1,4 +1,5 @@
-﻿using RestaurantChain.Presentation.ViewModel.DishesViewModel;
+﻿using RestaurantChain.Presentation.Classes;
+using RestaurantChain.Presentation.ViewModel.DishesViewModel;
 using System.Windows.Controls;
 
 namespace RestaurantChain.Presentation.View.DishesViews;
@@ -12,5 +13,6 @@ public partial class DishesListWindow : UserControl
     {
         InitializeComponent();
         DataContext = new DishListViewModel(serviceProvider);
+        CurrentState.MainWindow.Title = "Сеть ресторанов - Блюда";
     }
 }

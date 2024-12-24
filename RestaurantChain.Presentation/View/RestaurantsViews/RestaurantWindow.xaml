@@ -43,7 +43,7 @@
             <TextBlock Text="Фамилия директора" Grid.Column="0" Grid.Row="4"  Style="{StaticResource LblStyle}"/>
             <TextBlock Text="Отчество директора" Grid.Column="0" Grid.Row="5"  Style="{StaticResource LblStyle}"/>
 
-            <TextBox Grid.Column="1" Name="txtBox"  MaxLength="32" Grid.Row="0" Text="{Binding RestaurantName}" Style="{StaticResource TbStyle}" />
+            <TextBox Grid.Column="1" Name="txtBox" MaxLength="32" Grid.Row="0" Text="{Binding RestaurantName}" Style="{StaticResource TbStyle}" />
             <ComboBox Grid.Column="1" Grid.Row="1" DisplayMemberPath="StreetName" SelectedValuePath="Id" SelectedValue="{Binding SelectedStreetId}" ItemsSource="{Binding StreetsList}" Style="{StaticResource CmbStyle}"/>
             <TextBox Grid.Column="1" MaxLength="11" Grid.Row="2" Text="{Binding PhoneNumber}" Style="{StaticResource TbStyle}">
                 <i:Interaction.Behaviors>

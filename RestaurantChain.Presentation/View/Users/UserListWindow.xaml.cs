@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using RestaurantChain.Presentation.Classes;
 using RestaurantChain.Presentation.ViewModel.UsersViewModels.Users;
 
 namespace RestaurantChain.Presentation.View.Users;
@@ -12,5 +13,6 @@ public partial class UserListWindow : UserControl
     {
         InitializeComponent();
         DataContext = new UsersListViewModel(serviceProvider);
+        CurrentState.MainWindow.Title = "Сеть ресторанов - Разное - Настройки - Пользователи";
     }
 }

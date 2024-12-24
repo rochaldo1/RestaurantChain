@@ -62,7 +62,14 @@ public class ProductListViewModel : ListViewModelBase<Products>
         Products product = _productsService.Get(SelectedItem.Id);
         if (MessageBox.Show($"Удалить продукт '{product.ProductName}'?", "Удаление записи", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
         {
-            _productsService.Delete(SelectedItem.Id);
+            try
+            {
+                _productsService.Delete(SelectedItem.Id);
+            }
+            catch (Exception e)
+            {
+                IsFkError(e);
+            }
         }
         else
         {

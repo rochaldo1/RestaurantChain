@@ -1,4 +1,5 @@
-﻿using RestaurantChain.Presentation.ViewModel.UnitsViewModel;
+﻿using RestaurantChain.Presentation.Classes;
+using RestaurantChain.Presentation.ViewModel.UnitsViewModel;
 using System.Windows.Controls;
 
 namespace RestaurantChain.Presentation.View.UnitsViews;
@@ -12,5 +13,6 @@ public partial class UnitsListWindow : UserControl
     {
         InitializeComponent();
         DataContext = new UnitListViewModel(serviceProvider);
+        CurrentState.MainWindow.Title = "Сеть ресторанов - Справочники - Единицы измерения";
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using RestaurantChain.Presentation.Classes;
 using RestaurantChain.Presentation.ViewModel.SuppliersViewModel;
 
 namespace RestaurantChain.Presentation.View.SuppliersViews;
@@ -12,5 +13,6 @@ public partial class SuppliersListWindow : UserControl
     {
         InitializeComponent();
         DataContext = new SupplierListViewModel(serviceProvider);
+        CurrentState.MainWindow.Title = "Сеть ресторанов - Справочники - Поставщики";
     }
 }

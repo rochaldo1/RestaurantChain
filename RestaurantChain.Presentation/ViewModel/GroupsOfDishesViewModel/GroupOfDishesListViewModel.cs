@@ -61,7 +61,14 @@ internal class GroupOfDishesListViewModel : ListViewModelBase<GroupsOfDishes>
 
         if (MessageBox.Show($"Удалить группу блюд '{group.GroupName}'?", "Удаление записи", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
         {
-            _groupsOfDishesService.Delete(SelectedItem.Id);
+            try
+            {
+                _groupsOfDishesService.Delete(SelectedItem.Id);
+            }
+            catch (Exception e)
+            {
+                IsFkError(e);
+            }
         }
         else
         {

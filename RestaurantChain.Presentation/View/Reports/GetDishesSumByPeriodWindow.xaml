@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:RestaurantChain.Presentation.View.Reports"
              xmlns:System="clr-namespace:System;assembly=System.Runtime"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="450">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -19,17 +19,26 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Content="Дата с:" Margin="0,10,0,10" Style="{StaticResource LStyle}"/>
-        <DatePicker Grid.Row="0" Margin="50,10,0,10" VerticalAlignment="Center" Style="{StaticResource DStyle}" SelectedDate="{Binding
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Дата с:" Style="{StaticResource LStyle}"/>
+            <DatePicker Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource DStyle}" SelectedDate="{Binding
             Path=From,
             Mode=TwoWay,
-            TargetNullValue={x:Static System:DateTime.Now}}" Width="100"/>
-        <Label Grid.Row="0" Margin="150,10,0,10" Content="По:" Style="{StaticResource LStyle}" />
-        <DatePicker Grid.Row="0" Margin="170,10,0,10" VerticalAlignment="Center" Style="{StaticResource DStyle}" SelectedDate="{Binding
+            TargetNullValue={x:Static System:DateTime.Now}}" Width="110"/>
+            <Label Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Content="По:" Style="{StaticResource LStyle}" />
+            <DatePicker Grid.Column="3" HorizontalAlignment="Center" Style="{StaticResource DStyle}" SelectedDate="{Binding
             Path=To,
             Mode=TwoWay,
-            TargetNullValue={x:Static System:DateTime.Now}}"  Width="100"/>
+            TargetNullValue={x:Static System:DateTime.Now}}" Width="110"/>
+        </Grid>
         
-        <Button Grid.Row="1" x:Name="btnOk"  Content="Сфоормировать" Command="{Binding EnterCommand}" Style="{StaticResource BtnStyle}" />
+        <Button Grid.Row="1" x:Name="btnOk"  Content="Сфоормировать" Command="{Binding EnterCommand}" Style="{StaticResource BtnStyle}" Width="140" />
     </Grid>
 </UserControl>

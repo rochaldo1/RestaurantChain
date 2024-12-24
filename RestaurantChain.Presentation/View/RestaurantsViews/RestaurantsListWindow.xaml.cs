@@ -19,6 +19,7 @@ public partial class RestaurantsListWindow : UserControl
         _serviceProvider = serviceProvider;
         InitializeComponent();
         DataContext = new RestaurantListViewModel(serviceProvider);
+        CurrentState.MainWindow.Title = "Сеть ресторанов - Рестораны";
     }
 
     private void Grid_OnSelectionChanged(object sender, SelectionChangedEventArgs e)

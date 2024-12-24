@@ -16,8 +16,16 @@
             <MenuItem Header="Редактировать" x:Name="EditMenuItem" Command="{Binding EditCommand}" Visibility="{Binding HasE}" />
         </Menu>
 
-        <Label Grid.Row="1" Content="Пользователь" Margin="0,0,703,0" />
-        <ComboBox DisplayMemberPath="Login" SelectedValuePath="Id" SelectedValue="{Binding SelectedUserId}" ItemsSource="{Binding UsersDataSource}" Margin="125,0,249,0" Grid.Row="1"  />
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="0.7*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" VerticalAlignment="Center" Content="Пользователь" Margin="10,0,0,0" FontSize="14" FontFamily="Segoe UI Variable Display Light"/>
+            <ComboBox Grid.Column="1" VerticalAlignment="Center" DisplayMemberPath="Login" SelectedValuePath="Id" SelectedValue="{Binding SelectedUserId}" ItemsSource="{Binding UsersDataSource}" FontSize="14" FontFamily="Segoe UI Variable Display Light" Margin="10,0,10,0"/>
+        </Grid>
+        
         <DataGrid Grid.Row="2" Grid.Column="0" x:Name="Grid" AutoGenerateColumns="False" ItemsSource="{Binding DataSource}" SelectedItem="{Binding SelectedItem}"
                   HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" SelectionMode="Single"
                   IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserReorderColumns="False"

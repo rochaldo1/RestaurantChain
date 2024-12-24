@@ -30,7 +30,6 @@ public partial class UserRightsWindow : UserControl
         }
 
         PreviewKeyDown += PreviewKeyDownHandle;
-        //Loaded += (sender, args) => { txtBox.Focus(); };
     }
 
     private void CancelBtn_OnClick(object sender, RoutedEventArgs e)
@@ -56,10 +55,6 @@ public partial class UserRightsWindow : UserControl
         {
             case Key.Escape:
                 ((Window)Parent).Close();
-
-                break;
-            case Key.Enter:
-                //btnOk.Command.Execute(null);
 
                 break;
         }

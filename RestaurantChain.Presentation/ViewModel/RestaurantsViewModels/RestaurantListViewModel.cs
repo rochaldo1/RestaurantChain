@@ -62,7 +62,14 @@ public class RestaurantListViewModel : ListViewModelBase<Restaurants>
         Restaurants retstaurant = _restaurantService.Get(SelectedItem.Id);
         if (MessageBox.Show($"Удалить поставщика '{retstaurant.RestaurantName}'?", "Удаление записи", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
         {
-            _restaurantService.Delete(SelectedItem.Id);
+            try
+            {
+                _restaurantService.Delete(SelectedItem.Id);
+            }
+            catch (Exception e)
+            {
+                IsFkError(e);
+            }
         }
         else
         {

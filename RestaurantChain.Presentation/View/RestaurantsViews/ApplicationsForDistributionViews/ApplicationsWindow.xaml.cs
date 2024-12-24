@@ -1,4 +1,5 @@
-﻿using RestaurantChain.Presentation.ViewModel.RestaurantsViewModels.ApplicationsForDistributionViewModel;
+﻿using RestaurantChain.Presentation.Classes;
+using RestaurantChain.Presentation.ViewModel.RestaurantsViewModels.ApplicationsForDistributionViewModel;
 using System.Windows.Controls;
 
 
@@ -13,5 +14,6 @@ public partial class ApplicationsWindow : UserControl
     {
         InitializeComponent();
         DataContext = new ApplicationsListViewModel(serviceProvider, restaurantId);
+        CurrentState.MainWindow.Title = "Сеть ресторанов - Рестораны - Заявки на распределение";
     }
 }

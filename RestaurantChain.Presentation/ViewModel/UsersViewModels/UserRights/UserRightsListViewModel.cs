@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using RestaurantChain.Domain.Models.View;
 using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.Classes.Helpers;
 using RestaurantChain.Presentation.Commands;
@@ -7,7 +8,7 @@ using RestaurantChain.Presentation.ViewModel.Base;
 
 namespace RestaurantChain.Presentation.ViewModel.UsersViewModels.UserRights;
 
-internal class UserRightsListViewModel : ListViewModelBase<Domain.Models.View.UserRightsView>
+internal class UserRightsListViewModel : ListViewModelBase<UserRightsView>
 {
     private readonly IUsersService _usersService;
 
@@ -44,7 +45,7 @@ internal class UserRightsListViewModel : ListViewModelBase<Domain.Models.View.Us
 
     protected override void DataBind()
     {
-        IReadOnlyCollection<Domain.Models.View.UserRightsView> entities = _usersService.ListUserRights(SelectedUserId);
+        IReadOnlyCollection<UserRightsView> entities = _usersService.ListUserRights(SelectedUserId);
         SetEntities(entities);
     }
 
@@ -61,7 +62,7 @@ internal class UserRightsListViewModel : ListViewModelBase<Domain.Models.View.Us
         }
 
         var view = new UserRightsWindow(ServiceProvider, SelectedItem.Id);
-        WindowHelper.ShowDialog(view, "Редактирование записи");
+        WindowHelper.ShowDialog(view, "Редактирование записи", 350, 300);
         DataBind();
     }
 }

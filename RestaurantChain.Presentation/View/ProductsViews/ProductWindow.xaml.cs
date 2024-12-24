@@ -3,6 +3,7 @@ using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.ViewModel.ProductsViewModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace RestaurantChain.Presentation.View.ProductsViews;
 
@@ -27,6 +28,8 @@ public partial class ProductWindow : UserControl
             productViewModel.OnSaveSuccess += SaveSuccess;
             productViewModel.OnCancel += SaveError;
         }
+        Loaded += (sender, args) => { txtBox.Focus(); };
+        KeyDown += PreviewKeyDownHandle;
     }
 
     private void CancelBtn_OnClick(object sender, RoutedEventArgs e)
@@ -44,5 +47,15 @@ public partial class ProductWindow : UserControl
     {
         IsSuccess = false;
         ((Window)Parent).Close();
+    }
+    
+    private void PreviewKeyDownHandle(object sender, KeyEventArgs e)
+    {
+        switch (e.Key)
+        {
+            case Key.Escape:
+                ((Window)Parent).Close();
+                break;
+        }
     }
 }

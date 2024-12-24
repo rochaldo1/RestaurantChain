@@ -9,6 +9,8 @@ using System.Windows.Input;
 
 using Microsoft.Extensions.DependencyInjection;
 
+using RestaurantChain.Presentation.Classes;
+
 namespace RestaurantChain.Presentation.View;
 
 /// <summary>
@@ -34,8 +36,8 @@ public partial class LogInWindow : Window
         
     public void LogInSuccess()
     {
-        MainWindow window = new(_serviceProvider);
-        window.Show();
+        CurrentState.MainWindow = new(_serviceProvider);
+        CurrentState.MainWindow.Show();
         Close();
     }
 

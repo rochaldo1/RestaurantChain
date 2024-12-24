@@ -60,10 +60,6 @@ public partial class RestaurantWindow : UserControl
                 ((Window)Parent).Close();
 
                 break;
-            case Key.Enter:
-                btnOk.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-
-                break;
         }
     }
 }

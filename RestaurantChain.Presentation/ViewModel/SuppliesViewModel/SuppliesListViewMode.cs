@@ -119,7 +119,16 @@ internal class SuppliesListViewModel : ListViewModelBase<SuppliesView>
         if (MessageBox.Show($"Удалить поставку?", "Удаление записи", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
         {
             var supplies = _suppliesService.Get(SelectedItem.Id);
-            _suppliesService.Delete(SelectedItem.Id);
+
+            try
+            {
+                _suppliesService.Delete(SelectedItem.Id);
+            }
+            catch (Exception e)
+            {
+                IsFkError(e);
+            }
+
             _productsService.CalculateAndUpdateQuantity(supplies.ProductId);
         }
         else

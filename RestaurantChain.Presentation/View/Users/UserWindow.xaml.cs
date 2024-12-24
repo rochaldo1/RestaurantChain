@@ -30,7 +30,7 @@ public partial class UserWindow : UserControl
         }
 
         PreviewKeyDown += PreviewKeyDownHandle;
-        //Loaded += (sender, args) => { txtBox.Focus(); };
+        Loaded += (sender, args) => { Login.Focus(); };
     }
 
     private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
@@ -72,11 +72,6 @@ public partial class UserWindow : UserControl
         {
             case Key.Escape:
                 ((Window) Parent).Close();
-
-                break;
-            case Key.Enter:
-                //btnOk.Command.Execute(null);
-
                 break;
         }
     }

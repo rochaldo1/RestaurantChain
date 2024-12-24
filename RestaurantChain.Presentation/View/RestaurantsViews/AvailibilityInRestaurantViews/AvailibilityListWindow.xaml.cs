@@ -1,5 +1,5 @@
 ﻿using System.Windows.Controls;
-
+using RestaurantChain.Presentation.Classes;
 using RestaurantChain.Presentation.ViewModel.RestaurantsViewModels.AvailibilityInRestaurantViewModel;
 
 namespace RestaurantChain.Presentation.View.RestaurantsViews.AvailibilityInRestaurantViews;
@@ -13,5 +13,6 @@ public partial class AvailibilityInRestaurantListWindow : UserControl
     {
         InitializeComponent();
         DataContext = new AvailibilityListViewModel(serviceProvider, restaurantId);
+        CurrentState.MainWindow.Title = "Сеть ресторанов - Рестораны - Доступность продуктов";
     }
 }

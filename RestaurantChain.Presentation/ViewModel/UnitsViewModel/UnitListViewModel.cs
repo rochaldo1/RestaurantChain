@@ -62,7 +62,14 @@ internal class UnitListViewModel : ListViewModelBase<Units>
 
         if (MessageBox.Show($"Удалить единицу измерения '{unit.UnitName}'?", "Удаление записи", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
         {
-            _unitsService.Delete(SelectedItem.Id);
+            try
+            {
+                _unitsService.Delete(SelectedItem.Id);
+            }
+            catch (Exception e)
+            {
+                IsFkError(e);
+            }
         }
         else
         {

@@ -62,7 +62,14 @@ internal class BankListViewModel : ListViewModelBase<Banks>
 
         if (MessageBox.Show($"Удалить банк '{bank.BankName}'?", "Удаление записи", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
         {
-            _banksService.Delete(SelectedItem.Id);
+            try
+            {
+                _banksService.Delete(SelectedItem.Id);
+            }
+            catch (Exception e)
+            {
+                IsFkError(e);
+            }
         }
         else
         {

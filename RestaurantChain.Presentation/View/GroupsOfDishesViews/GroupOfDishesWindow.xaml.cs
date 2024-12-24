@@ -28,7 +28,7 @@ public partial class GroupOfDishesWindow : UserControl
             groupOfDishesViewModel.OnSaveSuccess += SaveSuccess;
             groupOfDishesViewModel.OnCancel += SaveError;
         }
-        PreviewKeyDown += PreviewKeyDownHandle;
+        KeyDown += PreviewKeyDownHandle;
         Loaded += (sender, args) => { txtBox.Focus(); };
     }
 
@@ -55,11 +55,6 @@ public partial class GroupOfDishesWindow : UserControl
         {
             case Key.Escape:
                 ((Window)Parent).Close();
-
-                break;
-            case Key.Enter:
-                btnOk.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-
                 break;
         }
     }

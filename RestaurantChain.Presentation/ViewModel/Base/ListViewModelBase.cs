@@ -54,4 +54,16 @@ public abstract class ListViewModelBase<TEntity> : ViewModelBase
     {
         return _selectedItem != null;
     }
+
+    public void IsFkError(Exception exception)
+    {
+        if (exception.Message.Contains("violates foreign key constraint"))
+        {
+            MessageBox.Show("Данная запись используется в другой таблице, удалить ее невозможно", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        else
+        {
+            MessageBox.Show($"Произошла ошибка {exception.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
 }

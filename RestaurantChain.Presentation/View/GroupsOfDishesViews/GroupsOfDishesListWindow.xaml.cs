@@ -1,4 +1,5 @@
-﻿using RestaurantChain.Presentation.ViewModel.GroupsOfDishesViewModel;
+﻿using RestaurantChain.Presentation.Classes;
+using RestaurantChain.Presentation.ViewModel.GroupsOfDishesViewModel;
 using System.Windows.Controls;
 
 namespace RestaurantChain.Presentation.View.GroupsOfDishesViews;
@@ -12,5 +13,6 @@ public partial class GroupsOfDishesListWindow : UserControl
     {
         InitializeComponent();
         DataContext = new GroupOfDishesListViewModel(serviceProvider);
+        CurrentState.MainWindow.Title = "Сеть ресторанов - Справочники - Группы блюд";
     }
 }

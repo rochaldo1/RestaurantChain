@@ -59,11 +59,6 @@ public partial class UnitWindow : UserControl
         {
             case Key.Escape:
                 ((Window)Parent).Close();
-
-                break;
-            case Key.Enter:
-                btnOk.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-
                 break;
         }
     }

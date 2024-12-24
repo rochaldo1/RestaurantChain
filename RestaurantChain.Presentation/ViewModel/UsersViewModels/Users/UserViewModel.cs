@@ -5,6 +5,8 @@ using System.Net;
 using System.Security;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace RestaurantChain.Presentation.ViewModel.UsersViewModels.Users;
 
@@ -15,6 +17,10 @@ internal class UserViewModel : EditViewModelBase
     private string _login;
     private SecureString _password;
     private SecureString _verificationPassword;
+    private string _keyboardLayout;
+    private string _capsLockStatus;
+
+    private readonly DispatcherTimer _timerForWindow = new DispatcherTimer();
 
     public string Login
     {
@@ -46,6 +52,25 @@ internal class UserViewModel : EditViewModelBase
         }
     }
 
+    public string KeyboardLayoutText
+    {
+        get => _keyboardLayout;
+        set
+        {
+            _keyboardLayout = value;
+            OnPropertyChanged("KeyboardLayoutText");
+        }
+    }
+
+    public string CapsLockStatusText
+    {
+        get => _capsLockStatus;
+        set
+        {
+            _capsLockStatus = value;
+            OnPropertyChanged("CapsLockStatusText");
+        }
+    }
 
     public UserViewModel(IUsersService usersService, int? currentId) : base(currentId)
     {
@@ -57,6 +82,37 @@ internal class UserViewModel : EditViewModelBase
         }
 
         EnterCommand = new RelayCommand(Enter);
+        StartTimer(100);
+    }
+
+    private string ParseLanguage(string language)
+    {
+        int startIndex = language.IndexOf('(');
+        int count = language.Length - startIndex;
+        language = language.Remove(startIndex, count);
+
+        return char.ToUpper(language[0]) + language.Substring(1);
+    }
+
+    private void TimerTick(object sender, EventArgs e)
+    {
+        if (Console.CapsLock)
+        {
+            CapsLockStatusText = "Клавиша CapsLock нажата";
+        }
+        else
+        {
+            CapsLockStatusText = "";
+        }
+
+        KeyboardLayoutText = "Язык ввода " + ParseLanguage(InputLanguageManager.Current.CurrentInputLanguage.DisplayName);
+    }
+
+    private void StartTimer(long interval)
+    {
+        _timerForWindow.Interval = new TimeSpan(interval);
+        _timerForWindow.Start();
+        _timerForWindow.Tick += TimerTick;
     }
 
     private Domain.Models.Users ValidateAndGetModel()
