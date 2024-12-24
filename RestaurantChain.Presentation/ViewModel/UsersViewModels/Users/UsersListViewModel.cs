@@ -35,7 +35,7 @@ internal class UsersListViewModel : ListViewModelBase<Domain.Models.Users>
     private void CreateEntity(object sender)
     {
         var view = new UserWindow(ServiceProvider, userId: null);
-        WindowHelper.ShowDialog(view, "Создание записи", 400, 320);
+        WindowHelper.ShowDialog(view, "Создание записи", 400, 400);
         DataBind();
     }
 
@@ -47,7 +47,7 @@ internal class UsersListViewModel : ListViewModelBase<Domain.Models.Users>
         }
 
         var view = new UserWindow(ServiceProvider, SelectedItem.Id);
-        WindowHelper.ShowDialog(view, "Редактирование записи");
+        WindowHelper.ShowDialog(view, "Редактирование записи", 400, 400);
         DataBind();
     }
 

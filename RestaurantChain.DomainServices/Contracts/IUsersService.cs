@@ -9,9 +9,6 @@ public interface IUsersService
     Users Get(int id);
     int Registration(Users user);
     bool ChangePassword (Users user);
-    UserRights GetUserRights(int id);
-    void UpdateUserRights(UserRights userRights);
-    IReadOnlyCollection<Users> List();
-    IReadOnlyCollection<UserRightsView> ListUserRights(int userId);
+    IReadOnlyCollection<UsersView> List();
     void Delete(int id);
 }

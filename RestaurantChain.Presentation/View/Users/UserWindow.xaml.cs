@@ -1,14 +1,16 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using RestaurantChain.DomainServices.Contracts;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+
+using Microsoft.Extensions.DependencyInjection;
+
+using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.ViewModel.UsersViewModels.Users;
 
 namespace RestaurantChain.Presentation.View.Users;
 
 /// <summary>
-/// Interaction logic for UserWindow.xaml
+///     Interaction logic for UserWindow.xaml
 /// </summary>
 public partial class UserWindow : UserControl
 {
@@ -20,8 +22,9 @@ public partial class UserWindow : UserControl
     public UserWindow(IServiceProvider serviceProvider, int? userId)
     {
         var usersService = serviceProvider.GetRequiredService<IUsersService>();
+        var rolesService = serviceProvider.GetRequiredService<IRolesService>();
         InitializeComponent();
-        DataContext = new UserViewModel(usersService, userId);
+        DataContext = new UserViewModel(usersService, rolesService, userId);
 
         if (DataContext is UserViewModel vm)
         {
@@ -35,35 +38,35 @@ public partial class UserWindow : UserControl
 
     private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
     {
-        if (this.DataContext != null)
+        if (DataContext != null)
         {
-            ((UserViewModel)this.DataContext).Password = ((PasswordBox)sender).SecurePassword;
+            ((UserViewModel)DataContext).Password = ((PasswordBox)sender).SecurePassword;
         }
     }
 
     private void PasswordBox_VerificationPasswordChanged(object sender, RoutedEventArgs e)
     {
-        if (this.DataContext != null)
+        if (DataContext != null)
         {
-            ((UserViewModel)this.DataContext).VerificationPassword = ((PasswordBox)sender).SecurePassword;
+            ((UserViewModel)DataContext).VerificationPassword = ((PasswordBox)sender).SecurePassword;
         }
     }
 
     private void CancelBtn_OnClick(object sender, RoutedEventArgs e)
     {
-        ((Window) Parent).Close();
+        ((Window)Parent).Close();
     }
 
     public void SaveSuccess()
     {
         IsSuccess = true;
-        ((Window) Parent).Close();
+        ((Window)Parent).Close();
     }
 
     public void SaveError()
     {
         IsSuccess = false;
-        ((Window) Parent).Close();
+        ((Window)Parent).Close();
     }
 
     private void PreviewKeyDownHandle(object sender, KeyEventArgs e)
@@ -71,7 +74,8 @@ public partial class UserWindow : UserControl
         switch (e.Key)
         {
             case Key.Escape:
-                ((Window) Parent).Close();
+                ((Window)Parent).Close();
+
                 break;
         }
     }

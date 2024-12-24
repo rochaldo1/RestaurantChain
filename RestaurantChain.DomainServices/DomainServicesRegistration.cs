@@ -26,5 +26,6 @@ public static class DomainServicesRegistration
         services.AddSingleton<ISalesService, SalesService>();
         services.AddSingleton<IReportsService, ReportsService>();
         services.AddSingleton<IMenuService, MenuService>();
+        services.AddSingleton<IRolesService, RolesService>();
     }
 }

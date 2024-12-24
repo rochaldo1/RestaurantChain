@@ -1,15 +1,31 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+
 using Microsoft.Extensions.DependencyInjection;
+
+using RestaurantChain.Domain.Models.View;
 using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.Classes;
 using RestaurantChain.Presentation.Classes.Helpers;
+using RestaurantChain.Presentation.View.BanksViews;
+using RestaurantChain.Presentation.View.DishesViews;
+using RestaurantChain.Presentation.View.GroupsOfDishesViews;
+using RestaurantChain.Presentation.View.ProductsViews;
+using RestaurantChain.Presentation.View.Reports;
+using RestaurantChain.Presentation.View.RestaurantsViews;
+using RestaurantChain.Presentation.View.Roles;
+using RestaurantChain.Presentation.View.StreetsViews;
+using RestaurantChain.Presentation.View.SuppliersViews;
+using RestaurantChain.Presentation.View.SuppliesViews;
+using RestaurantChain.Presentation.View.UnitsViews;
 using RestaurantChain.Presentation.View.Users;
+
+using Menu = RestaurantChain.Domain.Models.Menu;
 
 namespace RestaurantChain.Presentation.View;
 
 /// <summary>
-/// Логика взаимодействия для MainWindow.xaml
+///     Логика взаимодействия для MainWindow.xaml
 /// </summary>
 public partial class MainWindow : Window
 {
@@ -27,9 +43,10 @@ public partial class MainWindow : Window
 
     private void BuildMainMenu()
     {
-        var menu = _menuService.List(CurrentState.CurrentUser.Id);
+        IReadOnlyCollection<UserRoleRight> menu = _menuService.List(CurrentState.CurrentUser.Id);
         CurrentState.Menu = menu;
-        foreach (var menuItem in menu.Where(x => x.ParentId == null && x.IsMain == true))
+
+        foreach (UserRoleRight menuItem in menu.Where(x => x.ParentId == null && x.IsMain))
         {
             if (menuItem.R == false)
             {
@@ -37,35 +54,34 @@ public partial class MainWindow : Window
                 continue;
             }
 
-            var menuItemCtl = CreateItemMenu(menuItem);
+            MenuItem menuItemCtl = CreateItemMenu(menuItem);
 
             RecursiveBuildMainMenu(menuItem.Childrens, menuItemCtl);
             menuControl.Items.Add(menuItemCtl);
         }
     }
 
-    private void RecursiveBuildMainMenu(IReadOnlyCollection<Domain.Models.Menu> menu, MenuItem parentMenuItem)
+    private void RecursiveBuildMainMenu(IReadOnlyCollection<UserRoleRight> menu, MenuItem parentMenuItem)
     {
-        foreach (var menuItem in menu.Where(x=> x.IsMain == true))
+        foreach (UserRoleRight menuItem in menu.Where(x => x.IsMain))
         {
             if (menuItem.R == false)
-            { 
+            {
                 //Нет прав на просмотр
                 continue;
             }
 
-            var menuItemCtl = CreateItemMenu(menuItem);
+            MenuItem menuItemCtl = CreateItemMenu(menuItem);
 
             RecursiveBuildMainMenu(menuItem.Childrens, menuItemCtl);
 
             parentMenuItem.Items.Add(menuItemCtl);
         }
-
     }
 
-    private MenuItem CreateItemMenu(Domain.Models.Menu menu)
+    private MenuItem CreateItemMenu(UserRoleRight menu)
     {
-        MenuItem menuItem = new MenuItem
+        var menuItem = new MenuItem
         {
             Header = menu.ItemName,
             Tag = menu.MethodName,
@@ -79,53 +95,73 @@ public partial class MainWindow : Window
 
     private void MenuItem_Click(object sender, RoutedEventArgs e)
     {
-        var tag = ((MenuItem) sender).Tag;
+        object? tag = ((MenuItem)sender).Tag;
+
         switch (tag)
         {
             case "Products":
-                mainView.Content = new ProductsViews.ProductsListWindow(_serviceProvider);
+                mainView.Content = new ProductsListWindow(_serviceProvider);
+
                 break;
             case "Supplies":
-                mainView.Content = new SuppliesViews.SuppliesWindow(_serviceProvider);
+                mainView.Content = new SuppliesWindow(_serviceProvider);
+
                 break;
             case "Restaurants":
-                mainView.Content = new RestaurantsViews.RestaurantsListWindow(_serviceProvider);
+                mainView.Content = new RestaurantsListWindow(_serviceProvider);
+
                 break;
             case "GetRestaurantSumByPeriods":
-                WindowHelper.ShowDialog(new Reports.GetRestaurantSumByPeriodsWindow(_serviceProvider), "Выручка по ресторанам", 450);
+                WindowHelper.ShowDialog(new GetRestaurantSumByPeriodsWindow(_serviceProvider), "Выручка по ресторанам", width: 450);
+
                 break;
             case "GetDishesSumByPeriod":
-                WindowHelper.ShowDialog(new Reports.GetDishesSumByPeriodWindow(_serviceProvider), "Выручка по группам блюд", 450);
+                WindowHelper.ShowDialog(new GetDishesSumByPeriodWindow(_serviceProvider), "Выручка по группам блюд", width: 450);
+
                 break;
             case "ChangePassword":
                 new ChangePasswordWindow(_serviceProvider).ShowDialog();
+
                 break;
             case "Users":
                 mainView.Content = new UserListWindow(_serviceProvider);
+
                 break;
-            case "UserRights":
-                mainView.Content = new UserRightsListWindow(_serviceProvider);
+            case "Roles":
+                mainView.Content = new RolesWindow(_serviceProvider);
+
+                break;
+            case "RoleRights":
+                mainView.Content = new RoleRightsWindow(_serviceProvider);
+
                 break;
             case "Queries":
                 mainView.Content = new QueriesWindow(_serviceProvider, "Select 1 as q");
+
                 break;
             case "Dishes":
-                mainView.Content = new DishesViews.DishesListWindow(_serviceProvider);
+                mainView.Content = new DishesListWindow(_serviceProvider);
+
                 break;
             case "Streets":
-                mainView.Content = new StreetsViews.StreetsListWindow(_serviceProvider);
+                mainView.Content = new StreetsListWindow(_serviceProvider);
+
                 break;
             case "Banks":
-                mainView.Content = new BanksViews.BanksListWindow(_serviceProvider);
+                mainView.Content = new BanksListWindow(_serviceProvider);
+
                 break;
             case "DishesGroups":
-                mainView.Content = new GroupsOfDishesViews.GroupsOfDishesListWindow(_serviceProvider);
+                mainView.Content = new GroupsOfDishesListWindow(_serviceProvider);
+
                 break;
             case "Suppliers":
-                mainView.Content = new SuppliersViews.SuppliersListWindow(_serviceProvider);
+                mainView.Content = new SuppliersListWindow(_serviceProvider);
+
                 break;
             case "Units":
-                mainView.Content = new UnitsViews.UnitsListWindow(_serviceProvider);
+                mainView.Content = new UnitsListWindow(_serviceProvider);
+
                 break;
             case "DocHelp":
                 mainView.Content = new WebBrowser
@@ -133,9 +169,11 @@ public partial class MainWindow : Window
                     Source = IconHelper.GetHelpUri()
                 };
                 CurrentState.MainWindow.Title = "Сеть ресторанов - Справка - Содержание";
+
                 break;
             case "About":
                 new AboutProgramWindow().ShowDialog();
+
                 return;
         }
     }

@@ -1,37 +1,37 @@
 ﻿namespace RestaurantChain.Infrastructure.Entities;
 
 /// <summary>
-/// Класс меню приложения.
+///     Класс меню приложения.
 /// </summary>
 internal class MenuDb : IdentityBaseDb
 {
     /// <summary>
-    /// Идентификатор родительского пункта.
+    ///     Идентификатор родительского пункта.
     /// </summary>
     public int? ParentId { get; set; }
 
     /// <summary>
-    /// Имя пункта/подпункта.
+    ///     Имя пункта/подпункта.
     /// </summary>
     public string ItemName { get; set; }
 
     /// <summary>
-    /// Имя DLL.
+    ///     Имя DLL.
     /// </summary>
     public string DLLName { get; set; }
 
     /// <summary>
-    /// Имя функции (метода).
+    ///     Имя функции (метода).
     /// </summary>
     public string MethodName { get; set; }
 
     /// <summary>
-    /// Порядок.
+    ///     Порядок.
     /// </summary>
     public int OrderNum { get; set; }
-    
+
     /// <summary>
-    /// Главное меню
+    ///     Главное меню
     /// </summary>
     public bool IsMain { set; get; }
 }

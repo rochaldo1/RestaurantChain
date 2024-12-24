@@ -1,26 +1,96 @@
-﻿using RestaurantChain.DomainServices.Contracts;
-using RestaurantChain.Presentation.Commands;
-using RestaurantChain.Presentation.ViewModel.Base;
-using System.Net;
+﻿using System.Net;
 using System.Security;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 
+using RestaurantChain.Domain.Models;
+using RestaurantChain.DomainServices.Contracts;
+using RestaurantChain.Presentation.Commands;
+using RestaurantChain.Presentation.ViewModel.Base;
+
 namespace RestaurantChain.Presentation.ViewModel.UsersViewModels.Users;
 
 internal class UserViewModel : EditViewModelBase
 {
     private readonly IUsersService _usersService;
+    private readonly IRolesService _rolesService;
+
+    private readonly DispatcherTimer _timerForWindow = new DispatcherTimer();
 
     private string _login;
+    private string _firstName;
+    private string _lastName;
+    private string _middleName;
+    private string _jobTitle;
+    private int _selectedRoleId;
     private SecureString _password;
     private SecureString _verificationPassword;
     private string _keyboardLayout;
     private string _capsLockStatus;
 
-    private readonly DispatcherTimer _timerForWindow = new DispatcherTimer();
+    private IReadOnlyCollection<Domain.Models.Roles> _rolesDataSource;
+
+    public IReadOnlyCollection<Domain.Models.Roles> RolesDataSource
+    {
+        get => _rolesDataSource;
+        set
+        {
+            _rolesDataSource = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public int SelectedRoleId
+    {
+        get => _selectedRoleId;
+        set
+        {
+            _selectedRoleId = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public string LastName
+    {
+        get => _lastName;
+        set
+        {
+            _lastName = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public string FirstName
+    {
+        get => _firstName;
+        set
+        {
+            _firstName = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public string MiddleName
+    {
+        get => _middleName;
+        set
+        {
+            _middleName = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public string JobTitle
+    {
+        get => _jobTitle;
+        set
+        {
+            _jobTitle = value;
+            OnPropertyChanged();
+        }
+    }
 
     public string Login
     {
@@ -58,7 +128,7 @@ internal class UserViewModel : EditViewModelBase
         set
         {
             _keyboardLayout = value;
-            OnPropertyChanged("KeyboardLayoutText");
+            OnPropertyChanged();
         }
     }
 
@@ -68,13 +138,14 @@ internal class UserViewModel : EditViewModelBase
         set
         {
             _capsLockStatus = value;
-            OnPropertyChanged("CapsLockStatusText");
+            OnPropertyChanged();
         }
     }
 
-    public UserViewModel(IUsersService usersService, int? currentId) : base(currentId)
+    public UserViewModel(IUsersService usersService, IRolesService rolesService, int? currentId) : base(currentId)
     {
         _usersService = usersService;
+        _rolesService = rolesService;
 
         if (!Validate())
         {
@@ -91,7 +162,7 @@ internal class UserViewModel : EditViewModelBase
         int count = language.Length - startIndex;
         language = language.Remove(startIndex, count);
 
-        return Char.ToUpper(language[0]) + language.Substring(1);
+        return char.ToUpper(language[0]) + language.Substring(1);
     }
 
     private void TimerTick(object sender, EventArgs e)
@@ -124,10 +195,45 @@ internal class UserViewModel : EditViewModelBase
             return null;
         }
 
-        var password = new NetworkCredential(string.Empty, _password).Password;
-        var verificationPassword = new NetworkCredential(string.Empty, _verificationPassword).Password;
+        if (string.IsNullOrWhiteSpace(FirstName))
+        {
+            MessageBox.Show("Введите имя!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
 
-        if (!CurrentId.HasValue || CurrentId.HasValue && !string.IsNullOrWhiteSpace(password))
+            return null;
+        }
+
+        if (string.IsNullOrWhiteSpace(LastName))
+        {
+            MessageBox.Show("Введите фамлия!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            return null;
+        }
+
+        if (string.IsNullOrWhiteSpace(MiddleName))
+        {
+            MessageBox.Show("Введите отчество!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            return null;
+        }
+
+        if (string.IsNullOrWhiteSpace(JobTitle))
+        {
+            MessageBox.Show("Введите должность!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            return null;
+        }
+
+        if (SelectedRoleId <= 0)
+        {
+            MessageBox.Show("Выберите роль!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            return null;
+        }
+
+        string password = new NetworkCredential(string.Empty, _password).Password;
+        string verificationPassword = new NetworkCredential(string.Empty, _verificationPassword).Password;
+
+        if (!CurrentId.HasValue || (CurrentId.HasValue && !string.IsNullOrWhiteSpace(password)))
         {
             if (string.IsNullOrWhiteSpace(password))
             {
@@ -168,7 +274,12 @@ internal class UserViewModel : EditViewModelBase
         var user = new Domain.Models.Users
         {
             Password = password,
-            Login = Login
+            Login = Login,
+            FirstName = FirstName,
+            LastName = LastName,
+            MiddleName = MiddleName,
+            RoleId = SelectedRoleId,
+            JobTitle = JobTitle
         };
 
         if (CurrentId.HasValue)
@@ -181,14 +292,15 @@ internal class UserViewModel : EditViewModelBase
 
     public void Enter(object sender)
     {
-        var user = ValidateAndGetModel();
+        Domain.Models.Users? user = ValidateAndGetModel();
+
         if (user == null)
         {
             return;
         }
 
         // Сохранить или обновить.
-        var result = CurrentId.HasValue ? Update(user) : Create(user);
+        bool result = CurrentId.HasValue ? Update(user) : Create(user);
 
         if (result) // Если успех - закрыть окно.
         {
@@ -197,7 +309,7 @@ internal class UserViewModel : EditViewModelBase
     }
 
     /// <summary>
-    /// Действие обновить.
+    ///     Действие обновить.
     /// </summary>
     /// <returns>Успех операции.</returns>
     private bool Update(Domain.Models.Users user)
@@ -205,6 +317,7 @@ internal class UserViewModel : EditViewModelBase
         if (!_usersService.ChangePassword(user))
         {
             MessageBox.Show("ОШИБКА!", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+
             return false;
         }
 
@@ -212,26 +325,30 @@ internal class UserViewModel : EditViewModelBase
     }
 
     /// <summary>
-    /// Действие создать.
+    ///     Действие создать.
     /// </summary>
     /// <returns>Успех операции.</returns>
     private bool Create(Domain.Models.Users user)
     {
-        var userId = _usersService.Registration(user);
+        int userId = _usersService.Registration(user);
+
         if (userId == 0)
         {
             MessageBox.Show("Такой пользователь уже существует!", "Ошибка регистрации", MessageBoxButton.OK, MessageBoxImage.Error);
 
             return false;
         }
+
         return true;
     }
 
     public override bool Validate()
     {
+        RolesDataSource = _rolesService.List();
+
         if (CurrentId.HasValue)
         {
-            var user = _usersService.Get(CurrentId.Value);
+            Domain.Models.Users? user = _usersService.Get(CurrentId.Value);
 
             if (user == null)
             {
@@ -241,6 +358,11 @@ internal class UserViewModel : EditViewModelBase
             }
 
             Login = user.Login;
+            LastName = user.LastName;
+            MiddleName = user.MiddleName;
+            FirstName = user.FirstName;
+            JobTitle = user.JobTitle;
+            SelectedRoleId = user.RoleId;
 
             return true;
         }

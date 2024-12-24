@@ -1,20 +1,18 @@
-﻿using RestaurantChain.Presentation.ViewModel;
-
+﻿using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-
-using RestaurantChain.DomainServices.Contracts;
-using System.Reflection;
 using System.Windows.Input;
 
 using Microsoft.Extensions.DependencyInjection;
 
+using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.Classes;
+using RestaurantChain.Presentation.ViewModel;
 
 namespace RestaurantChain.Presentation.View;
 
 /// <summary>
-/// Логика взаимодействия для LogInWindow.xaml
+///     Логика взаимодействия для LogInWindow.xaml
 /// </summary>
 public partial class LogInWindow : Window
 {
@@ -27,30 +25,32 @@ public partial class LogInWindow : Window
         var usersService = serviceProvider.GetRequiredService<IUsersService>();
 
         DataContext = new LogInViewModel(usersService);
+
         if (DataContext is LogInViewModel loginViewModel)
         {
             loginViewModel.OnLogInSuccess += LogInSuccess;
         }
+
         PreviewKeyDown += PreviewKeyDownHandle;
     }
-        
+
     public void LogInSuccess()
     {
-        CurrentState.MainWindow = new(_serviceProvider);
+        CurrentState.MainWindow = new MainWindow(_serviceProvider);
         CurrentState.MainWindow.Show();
         Close();
     }
 
     private void WindowLoaded(object sender, RoutedEventArgs e)
     {
-        TextBoxVersion.Text = "Версия " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        TextBoxVersion.Text = "Версия " + Assembly.GetExecutingAssembly().GetName().Version;
     }
 
     private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
     {
-        if (this.DataContext != null)
+        if (DataContext != null)
         {
-            ((LogInViewModel)this.DataContext).Password = ((PasswordBox)sender).SecurePassword;
+            ((LogInViewModel)DataContext).Password = ((PasswordBox)sender).SecurePassword;
         }
     }
 
@@ -62,11 +62,11 @@ public partial class LogInWindow : Window
 
     private void Registration_Click(object sender, RoutedEventArgs e)
     {
-        RegistrationWindow registrationWindow = new(_serviceProvider);
+        var registrationWindow = new RegistrationWindow(_serviceProvider);
         registrationWindow.Owner = this;
         registrationWindow.ShowDialog();
     }
-        
+
     private void PreviewKeyDownHandle(object sender, KeyEventArgs e)
     {
         switch (e.Key)

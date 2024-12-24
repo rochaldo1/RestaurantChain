@@ -3,6 +3,8 @@
 using System.Windows;
 using System.Windows.Controls;
 
+using RestaurantChain.Domain.Models.View;
+
 namespace RestaurantChain.Presentation.View.RestaurantsViews
 {
     /// <summary>
@@ -41,7 +43,7 @@ namespace RestaurantChain.Presentation.View.RestaurantsViews
             OpenView(menu.Childrens.First().MethodName);
         }
 
-        private MenuItem CreateItemMenu(Domain.Models.Menu menu)
+        private MenuItem CreateItemMenu(UserRoleRight menu)
         {
             MenuItem menuItem = new MenuItem
             {

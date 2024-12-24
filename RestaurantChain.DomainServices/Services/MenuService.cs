@@ -1,4 +1,5 @@
 ﻿using RestaurantChain.Domain.Models;
+using RestaurantChain.Domain.Models.View;
 using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Repository;
 
@@ -13,29 +14,13 @@ internal class MenuService : IMenuService
         _unitOfWork = unitOfWork;
     }
 
-    public IReadOnlyCollection<Menu> List(int userId)
+    public IReadOnlyCollection<Menu> List()
     {
-        var menuTree = _unitOfWork.MenuRepository.List();
-        var rights = _unitOfWork.UserRightsRepository.List(userId);
-        SetRights(menuTree, rights);
-
-        return menuTree;
+        return _unitOfWork.MenuRepository.List();
     }
 
-    private void SetRights(IReadOnlyCollection<Menu> menuList, IReadOnlyCollection<UserRights> rights)
+    public IReadOnlyCollection<UserRoleRight> List(int userId)
     {
-        foreach (var menu in menuList)
-        {
-            var right = rights.FirstOrDefault(x => x.ItemId == menu.Id);
-            if (right != null)
-            {
-                menu.D = right.D;
-                menu.R = right.R;
-                menu.E = right.E;
-                menu.W = right.W;
-            }
-
-            SetRights(menu.Childrens, rights);
-        }
+        return _unitOfWork.RolesRightsRepository.ListUserRoleRights(userId);
     }
 }

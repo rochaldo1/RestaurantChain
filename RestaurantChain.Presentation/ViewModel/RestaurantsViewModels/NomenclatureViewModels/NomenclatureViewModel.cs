@@ -76,7 +76,7 @@ internal sealed class NomenclatureViewModel : EditViewModelBase
 
             if (nomenclature == null)
             {
-                MessageBox.Show("Информации о номенклатуре не существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("РќРѕРјРµРЅРєР»Р°С‚СѓСЂР° РЅРµ РЅР°Р№РґРµРЅР°!", "РћС€РёР±РєР°", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             SelectedDishId = nomenclature.DishId;
@@ -110,7 +110,7 @@ internal sealed class NomenclatureViewModel : EditViewModelBase
         }
         catch (Exception e)
         {
-            MessageBox.Show(e.Message, "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(e.Message, "РћС€РёР±РєР° РІРІРѕРґР°", MessageBoxButton.OK, MessageBoxImage.Error);
 
             return false;
         }
@@ -128,12 +128,10 @@ internal sealed class NomenclatureViewModel : EditViewModelBase
     {
         if (_selectedDishId <= 0)
         {
-            MessageBox.Show($"Блюдо не выбрано", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show($"Р‘Р»СЋРґРѕ РЅРµ РІС‹Р±СЂР°РЅРѕ", "Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ Р·Р°РїРёСЃРё", MessageBoxButton.OK, MessageBoxImage.Error);
 
             return null;
         }
-
-        var dish = _dishesDataSource.FirstOrDefault(x => x.Id == _selectedDishId);
 
         var nomenclature = new Nomenclature
         {
@@ -146,12 +144,12 @@ internal sealed class NomenclatureViewModel : EditViewModelBase
 
         if (nomenclature.DishId <= 0)
         {
-            errors.Add("Блюдо");
+            errors.Add("Р±Р»СЋРґРѕ");
         }
 
         if (errors.Count > 0)
         {
-            MessageBox.Show($"Поля не заполнены: {string.Join(",", errors)}", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show($"РћС€РёР±РєРё: {string.Join(",", errors)}", "РћС€РёР±РєРё РІРІРѕРґР°", MessageBoxButton.OK, MessageBoxImage.Error);
 
             return null;
         }

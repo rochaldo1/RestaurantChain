@@ -1,29 +1,29 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using RestaurantChain.DomainServices.Contracts;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using RestaurantChain.Presentation.ViewModel.UsersViewModels.UserRights;
 
-namespace RestaurantChain.Presentation.View.Users;
+using Microsoft.Extensions.DependencyInjection;
 
-/// <summary>
-/// Interaction logic for UserRightsWindow.xaml
-/// </summary>
-public partial class UserRightsWindow : UserControl
+using RestaurantChain.DomainServices.Contracts;
+using RestaurantChain.Presentation.ViewModel.UsersViewModels.RoleRights;
+
+namespace RestaurantChain.Presentation.View.Roles;
+
+public partial class RoleRightWindow : UserControl
 {
     /// <summary>
     ///     Результат сохранения данных.
     /// </summary>
     public bool IsSuccess { private set; get; }
 
-    public UserRightsWindow(IServiceProvider serviceProvider, int? userId)
+    public RoleRightWindow(IServiceProvider serviceProvider, int? entityId, int roleId)
     {
-        var usersService = serviceProvider.GetRequiredService<IUsersService>();
         InitializeComponent();
-        DataContext = new UserRightsViewModel(usersService, userId);
+        var roleService = serviceProvider.GetRequiredService<IRolesService>();
+        var menuService = serviceProvider.GetRequiredService<IMenuService>();
+        DataContext = new RoleRightsViewModel(roleService, menuService, entityId, roleId);
 
-        if (DataContext is UserRightsViewModel vm)
+        if (DataContext is RoleRightsViewModel vm)
         {
             vm.OnSaveSuccess += SaveSuccess;
             vm.OnCancel += SaveError;
@@ -58,10 +58,5 @@ public partial class UserRightsWindow : UserControl
 
                 break;
         }
-    }
-
-    private void BtnOk_OnClick(object sender, RoutedEventArgs e)
-    {
-        (DataContext as UserRightsViewModel).EnterCommand.Execute(sender);
     }
 }

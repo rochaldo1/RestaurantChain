@@ -22,11 +22,16 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <TextBlock Background="#E6E6E6" Height="24" TextAlignment="Center" FontSize="14" Margin="10,4,10,3" FontFamily="Segoe UI Variable Display Light"><Run Text="Введите логин, пароль, и под"/><Run Language="ru-ru" Text="т"/><Run Text="вердите его"/></TextBlock>
+            <TextBlock Style="{StaticResource LblHeaderStyle}" Text="Введите данные пользователя" />
         </Grid>
 
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -35,12 +40,25 @@
                 <ColumnDefinition Width="7*"/>
                 <ColumnDefinition Width="9*"/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="Login" TabIndex="0" Grid.Column="1" Grid.Row="0" Background="White" Canvas.Top="10" Text="{Binding Login}" FontSize="16" Margin="32,15,10,15" FontFamily="Segoe UI Variable Display Light"/>
-            <PasswordBox x:Name="Password"  TabIndex="1" Grid.Column="1" PasswordChanged="PasswordBox_PasswordChanged" Grid.Row="1" Background="White" Canvas.Bottom="10" FontSize="16" Margin="32,15,10,15" FontFamily="Segoe UI Variable Display Light"/>
-            <PasswordBox x:Name="VerificationPassword"  TabIndex="2" Grid.Column="1" PasswordChanged="PasswordBox_VerificationPasswordChanged" Grid.Row="2" Background="White" Canvas.Bottom="10" FontSize="16" Margin="32,15,10,15" FontFamily="Segoe UI Variable Display Light"/>
-            <TextBlock Grid.Column="0" FontSize="16" VerticalAlignment="Center" Margin="10,0,10,0" FontFamily="Segoe UI Variable Display Light" Height="21"><Run Language="ru-ru" Text="Логин"/></TextBlock>
-            <TextBlock Grid.Column="0" Grid.Row="1" FontSize="16" VerticalAlignment="Center" Margin="10,0,10,0" FontFamily="Segoe UI Variable Display Light" Height="21"><Run Language="ru-ru" Text="Пароль"/></TextBlock>
-            <TextBlock Text="Подтвердите пароль" Grid.Column="0" Grid.Row="2" FontSize="16" VerticalAlignment="Center" Margin="10,0,10,0" FontFamily="Segoe UI Variable Display Light" Height="22"/>
+            <TextBox x:Name="Login" MaxLength="32" TabIndex="0" Grid.Column="1" Grid.Row="0" Text="{Binding Login}" Style="{StaticResource TbStyle}"/>
+            <PasswordBox x:Name="Password" Grid.Column="1" PasswordChanged="PasswordBox_PasswordChanged" Grid.Row="1" Style="{StaticResource PwStyle}" />
+            <PasswordBox x:Name="VerificationPassword" Grid.Column="1" PasswordChanged="PasswordBox_VerificationPasswordChanged" Grid.Row="2" Style="{StaticResource PwStyle}" />
+            <TextBlock Grid.Column="0" Text="Логин" Style="{StaticResource LblStyle}"></TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="1" Text="Пароль" Style="{StaticResource LblStyle}"></TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="2" Text="Подтвердите пароль" Style="{StaticResource LblStyle}"/>
+
+            <TextBlock Grid.Column="0" Grid.Row="3" Text="Роль" Style="{StaticResource LblStyle}"/>
+            <TextBlock Grid.Column="0" Grid.Row="4" Text="Фамилия" Style="{StaticResource LblStyle}"/>
+            <TextBlock Grid.Column="0" Grid.Row="5" Text="Имя" Style="{StaticResource LblStyle}"/>
+            <TextBlock Grid.Column="0" Grid.Row="6" Text="Отчество" Style="{StaticResource LblStyle}"/>
+            <TextBlock Grid.Column="0" Grid.Row="7" Text="Должность" Style="{StaticResource LblStyle}"/>
+
+            
+            <ComboBox Grid.Column="1" Grid.Row="3" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding SelectedRoleId}" ItemsSource="{Binding RolesDataSource}" Style="{StaticResource CmbStyle}" />
+            <TextBox Grid.Column="1" Grid.Row="4"  MaxLength="50" Text="{Binding LastName}"   Style="{StaticResource TbStyle}"/>
+            <TextBox Grid.Column="1" Grid.Row="5"  MaxLength="50" Text="{Binding FirstName}"  Style="{StaticResource TbStyle}"/>
+            <TextBox Grid.Column="1" Grid.Row="6"  MaxLength="50" Text="{Binding MiddleName}" Style="{StaticResource TbStyle}"/>
+            <TextBox Grid.Column="1" Grid.Row="7"  MaxLength="50" Text="{Binding JobTitle}"   Style="{StaticResource TbStyle}"/>
         </Grid>
 
         <Grid Grid.Row="2">
@@ -48,8 +66,8 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="Enter"  TabIndex="3" Grid.Column="0" Content="Продолжить" Command="{Binding EnterCommand}" Style="{StaticResource BtnStyle}" />
-            <Button x:Name="Cancel"  TabIndex="4" Grid.Column="1" Content="Отмена"  Style="{StaticResource BtnStyle}" Click="CancelBtn_OnClick"/>
+            <Button Grid.Column="0" Content="Продолжить" Command="{Binding EnterCommand}" Style="{StaticResource BtnStyle}" />
+            <Button Grid.Column="1" Content="Отмена"  Style="{StaticResource BtnStyle}" Click="CancelBtn_OnClick"/>
         </Grid>
 
         <Grid Grid.Row="3">
@@ -57,8 +75,8 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <TextBlock x:Name="Language" Grid.Column="0" Text="{Binding KeyboardLayoutText}" FontSize="14" FontFamily="Segoe UI Variable Display Light" Margin="10,0,0,0"/>
-            <TextBlock x:Name="CapsStatus" Grid.Column="1" Text="{Binding CapsLockStatusText}" FontSize="14" FontFamily="Segoe UI Variable Display Light" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+            <TextBlock x:Name="Language" Grid.Column="0" Text="{Binding KeyboardLayoutText}" Style="{StaticResource LblStyle}"/>
+            <TextBlock x:Name="CapsStatus" Grid.Column="1" Text="{Binding CapsLockStatusText}" Style="{StaticResource LblStyle}" />
         </Grid>
     </Grid>
 </UserControl>

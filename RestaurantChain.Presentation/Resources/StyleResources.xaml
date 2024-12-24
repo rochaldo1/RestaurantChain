@@ -8,6 +8,20 @@
         <Setter Property="FontSize" Value="16" />
     </Style>
     
+    <Style TargetType="{x:Type CheckBox}" x:Key="ChBox">
+        <Setter Property="FontFamily" Value="Segoe UI Variable Display Light" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="20,0,00,0" />
+        <Setter Property="FontSize" Value="16" />
+    </Style>
+    
+    <Style TargetType="{x:Type PasswordBox}" x:Key="PwStyle">
+        <Setter Property="FontFamily" Value="Segoe UI Variable Display Light" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="10,0,10,0" />
+        <Setter Property="FontSize" Value="16" />
+    </Style>
+    
     <Style TargetType="{x:Type ComboBox}" x:Key="CmbStyle">
         <Setter Property="FontFamily" Value="Segoe UI Variable Display Light" />
         <Setter Property="VerticalAlignment" Value="Center" />

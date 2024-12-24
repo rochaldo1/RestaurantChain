@@ -1,31 +1,24 @@
-﻿using RestaurantChain.Presentation.Classes;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+
 using RestaurantChain.Domain.Models;
+using RestaurantChain.Domain.Models.View;
+using RestaurantChain.Presentation.Classes;
 
 namespace RestaurantChain.Presentation.ViewModel.Base;
 
 public abstract class ViewModelBase : INotifyPropertyChanged
 {
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    public void OnPropertyChanged([CallerMemberName] string propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-
-    protected ViewModelBase()
-    {
-        _dllName = GetType().Name;
-    }
+    private readonly string _dllName;
 
     public Visibility HasW
     {
         get
         {
-            var menu = GetByAction(CurrentState.Menu);
-            return (menu == null || menu.W) ? Visibility.Visible : Visibility.Hidden;
+            UserRoleRight? menu = GetByAction(CurrentState.Menu);
+
+            return menu == null || menu.W ? Visibility.Visible : Visibility.Hidden;
         }
     }
 
@@ -33,8 +26,9 @@ public abstract class ViewModelBase : INotifyPropertyChanged
     {
         get
         {
-            var menu = GetByAction(CurrentState.Menu);
-            return (menu == null || menu.E) ? Visibility.Visible : Visibility.Hidden;
+            UserRoleRight? menu = GetByAction(CurrentState.Menu);
+
+            return menu == null || menu.E ? Visibility.Visible : Visibility.Hidden;
         }
     }
 
@@ -42,23 +36,35 @@ public abstract class ViewModelBase : INotifyPropertyChanged
     {
         get
         {
-            var menu = GetByAction(CurrentState.Menu);
-            return (menu == null || menu.D) ? Visibility.Visible : Visibility.Hidden;
+            UserRoleRight? menu = GetByAction(CurrentState.Menu);
+
+            return menu == null || menu.D ? Visibility.Visible : Visibility.Hidden;
         }
     }
 
-    private readonly string _dllName;
-
-    private Menu GetByAction(IReadOnlyCollection<Menu> items)
+    protected ViewModelBase()
     {
-        foreach (var item in items)
+        _dllName = GetType().Name;
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    private UserRoleRight GetByAction(IReadOnlyCollection<UserRoleRight> items)
+    {
+        foreach (UserRoleRight item in items)
         {
-            if (string.Equals(item.DLLName, _dllName, StringComparison.InvariantCultureIgnoreCase))
+            if (string.Equals(item.DllName, _dllName, StringComparison.InvariantCultureIgnoreCase))
             {
                 return item;
             }
 
-            var menu = GetByAction(item.Childrens);
+            UserRoleRight? menu = GetByAction(item.Childrens);
+
             if (menu != null)
             {
                 return menu;

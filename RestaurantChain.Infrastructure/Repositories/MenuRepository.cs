@@ -1,5 +1,7 @@
 ﻿using Dapper;
+
 using Npgsql;
+
 using RestaurantChain.Domain.Models;
 using RestaurantChain.Infrastructure.Converters;
 using RestaurantChain.Infrastructure.Entities;
@@ -33,17 +35,20 @@ VALUES
     @OrderNum
 );
  returning Id;";
-        var entityDb = entity.ToStorage();
+        MenuDb entityDb = entity.ToStorage();
+
         return Connection.ExecuteScalar<int>(query, entityDb);
     }
 
     public void Delete(int id)
     {
         const string query = "delete from menu where Id = @Id;";
-        Connection.ExecuteScalar(query, new
-        {
-            Id = id,
-        });
+        Connection.ExecuteScalar(
+            query,
+            new
+            {
+                Id = id
+            });
     }
 
     public Menu Get(int id)
@@ -61,10 +66,12 @@ FROM menu m
 WHERE
     s.Id = @Id;
     ";
-        var entityDb = Connection.QueryFirstOrDefault<MenuDb>(query, new
-        {
-            Id = id
-        });
+        var entityDb = Connection.QueryFirstOrDefault<MenuDb>(
+            query,
+            new
+            {
+                Id = id
+            });
 
         return entityDb?.ToDomain();
     }
@@ -81,7 +88,7 @@ UPDATE menu SET
 WHERE 
     id=@Id
 ";
-        var entityDb = entity.ToStorage();
+        MenuDb entityDb = entity.ToStorage();
         Connection.ExecuteScalar(query, entityDb);
     }
 
@@ -103,26 +110,8 @@ order by
 
         IEnumerable<MenuDb> entities = Connection.Query<MenuDb>(query);
 
-        var menu = entities.Select(x => x.ToDomain()).ToArray();
-        var result = GetTree(menu, null);
-        return result
-            .OrderBy(x => x.OrderNum)
-            .ToArray();
-    }
-
-    private static IReadOnlyCollection<Menu> GetTree(IReadOnlyCollection<Menu> menu, int? parentId)
-    {
-        var result = new List<Menu>();
-
-        var childs = menu.Where(x => x.ParentId == parentId).ToArray();
-        foreach (var child in childs)
-        {
-            child.Childrens = GetTree(menu, child.Id);
-            result.Add(child);
-        }
-
-        return result
-            .OrderBy(x => x.OrderNum)
+        return entities.Select(x => x.ToDomain())
+            .OrderBy(x => x.ItemName)
             .ToArray();
     }
 }

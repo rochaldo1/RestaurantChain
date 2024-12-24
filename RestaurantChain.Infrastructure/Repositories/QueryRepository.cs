@@ -1,6 +1,8 @@
-﻿using RestaurantChain.Repository.Repositories;
-using System.Data;
+﻿using System.Data;
+
 using Npgsql;
+
+using RestaurantChain.Repository.Repositories;
 
 namespace RestaurantChain.Infrastructure.Repositories;
 
@@ -22,9 +24,9 @@ internal class QueryRepository : RepositoryBase, IQueryRepository
 
         var da = new NpgsqlDataAdapter(cmd);
         var ds = new DataSet();
-            
+
         da.Fill(ds);
-            
+
         return ds.Tables[0];
     }
 }

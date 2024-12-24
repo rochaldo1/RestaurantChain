@@ -1,0 +1,64 @@
+<UserControl x:Class="RestaurantChain.Presentation.View.Roles.RoleRightWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:RestaurantChain.Presentation.View.Roles"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/StyleResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Grid.ColumnSpan="2">
+            <TextBlock Style="{StaticResource LblHeaderStyle}" Text="Права роли" />
+        </Grid>
+        
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Label Grid.Column="0" Content="Меню" Style="{StaticResource LStyle}"/>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <ComboBox Grid.Column="1" DisplayMemberPath="ItemName" SelectedValuePath="Id" SelectedValue="{Binding SelectedMenuId}" ItemsSource="{Binding MenuDataSource}"  Style="{StaticResource CmbStyle}"/>
+        </Grid>
+        
+        <Grid Grid.Row="2" Grid.ColumnSpan="2">
+            <CheckBox IsChecked="{Binding W}" Style="{StaticResource ChBox}">Создание</CheckBox>
+        </Grid>
+        <Grid Grid.Row="3" Grid.ColumnSpan="2">
+            <CheckBox IsChecked="{Binding E}" Style="{StaticResource ChBox}">Редактирование</CheckBox>
+        </Grid>
+        <Grid Grid.Row="4" Grid.ColumnSpan="2">
+            <CheckBox IsChecked="{Binding R}" Style="{StaticResource ChBox}">Чтение</CheckBox>
+        </Grid>
+        <Grid Grid.Row="5" Grid.ColumnSpan="2">
+            <CheckBox IsChecked="{Binding D}" Style="{StaticResource ChBox}">Удаление</CheckBox>
+        </Grid>
+
+        <Grid Grid.Row="6" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnOk" Content="Продолжить" Command="{Binding EnterCommand}" Style="{StaticResource BtnStyle}" />
+            <Button Content="Отмена" Click="CancelBtn_OnClick" Grid.Column="1" Style="{StaticResource BtnStyle}"/>
+        </Grid>
+    </Grid>
+</UserControl>

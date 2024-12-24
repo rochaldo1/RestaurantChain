@@ -12,17 +12,22 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Menu VerticalAlignment="Top" FontSize="16" FontFamily="Segoe UI Variable Display Light">
-            <MenuItem Header="Создать" x:Name="CreateMenuItem" Command="{Binding CreateCommand}"  Visibility="{Binding HasW}"/>
-            <MenuItem Header="Редактировать" x:Name="EditMenuItem" Command="{Binding EditCommand}"  Visibility="{Binding HasE}"/>
-            <MenuItem Header="Удалить" x:Name="DeleteMenuItem" Command="{Binding DeleteCommand}" Visibility="{Binding HasD}" />
+            <MenuItem Header="Создать" Command="{Binding CreateCommand}"  Visibility="{Binding HasW}"/>
+            <MenuItem Header="Редактировать" Command="{Binding EditCommand}"  Visibility="{Binding HasE}"/>
+            <MenuItem Header="Удалить"  Command="{Binding DeleteCommand}" Visibility="{Binding HasD}" />
         </Menu>
-        <DataGrid Grid.Row="1" Grid.Column="0" x:Name="Grid" AutoGenerateColumns="False" ItemsSource="{Binding DataSource}" SelectedItem="{Binding SelectedItem}"
+        <DataGrid Grid.Row="1" Grid.Column="0" AutoGenerateColumns="False" ItemsSource="{Binding DataSource}" SelectedItem="{Binding SelectedItem}"
                   HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" SelectionMode="Single"
                   IsReadOnly="True" CanUserSortColumns="False" CanUserAddRows="False" CanUserReorderColumns="False"
                   CanUserDeleteRows="False" RowBackground="White" AlternatingRowBackground="#E6E6E6" FontSize="16"
                   FontFamily="Segoe UI Variable Display Light">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Пользователь" Binding="{Binding Path=Login}"/>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding Path=LastName}"/>
+                <DataGridTextColumn Header="Имя" Binding="{Binding Path=FirstName}"/>
+                <DataGridTextColumn Header="Отчество" Binding="{Binding Path=MiddleName}"/>
+                <DataGridTextColumn Header="Должность" Binding="{Binding Path=JobTitle}"/>
+                <DataGridTextColumn Header="Роль" Binding="{Binding Path=RoleName}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

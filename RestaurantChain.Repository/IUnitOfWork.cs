@@ -18,8 +18,9 @@ public interface IUnitOfWork
     ISuppliersRepository SuppliersRepository { get; }
     ISuppliesRepository SuppliesRepository { get; }
     IUnitsRepository UnitsRepository { get; }
-    IUserRightsRepository UserRightsRepository { get; }
     IUsersRepository UsersRepository { get; }
     IQueryRepository QueryRepository { get; }
     IReportsRepository ReportsRepository { get; }
+    IRolesRepository RolesRepository { get; }
+    IRolesRightsRepository RolesRightsRepository { get; }
 }
