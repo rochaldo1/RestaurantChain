@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using RestaurantChain.DomainServices.Contracts;
 using RestaurantChain.Presentation.Commands;
 using RestaurantChain.Presentation.View;
+using RestaurantChain.Presentation.ViewModel.Base;
 
 namespace RestaurantChain.Presentation.ViewModel;
 

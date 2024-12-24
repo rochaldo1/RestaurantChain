@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Threading;
 using System.Text.RegularExpressions;
 using RestaurantChain.Presentation.Classes;
+using RestaurantChain.Presentation.ViewModel.Base;
 
 namespace RestaurantChain.Presentation.ViewModel;
 

@@ -91,7 +91,7 @@ internal class UserViewModel : EditViewModelBase
         int count = language.Length - startIndex;
         language = language.Remove(startIndex, count);
 
-        return char.ToUpper(language[0]) + language.Substring(1);
+        return Char.ToUpper(language[0]) + language.Substring(1);
     }
 
     private void TimerTick(object sender, EventArgs e)
