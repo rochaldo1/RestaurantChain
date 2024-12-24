@@ -34,7 +34,7 @@ internal class ReportsService : IReportsService
 
         //Заголовок
         var row = 1;
-        worksheet.Cells["A1:F1"].Merge = true;//Объединить
+        worksheet.Cells["A1:G1"].Merge = true;//Объединить
         worksheet.Cells["A1"].Style.Font.Bold = true;
         worksheet.Cells["A1"].Style.Font.Size = 14;
         worksheet.Cells["A1"].Value = $"Выручка по блюдам за период {startDate:dd.MM.yyyy} - {endDate:dd.MM.yyyy}";
@@ -46,14 +46,15 @@ internal class ReportsService : IReportsService
         var index = 0;
 
         //Жирное
-        worksheet.Cells[$"A{row}:F{row}"].Style.Font.Bold = true;
+        worksheet.Cells[$"A{row}:G{row}"].Style.Font.Bold = true;
 
         worksheet.Cells[$"A{row}"].Value = "№";
         worksheet.Cells[$"B{row}"].Value = "Дата";
-        worksheet.Cells[$"C{row}"].Value = "Группа блюд";
-        worksheet.Cells[$"D{row}"].Value = "Блюдо";
-        worksheet.Cells[$"E{row}"].Value = "Количество";
-        worksheet.Cells[$"F{row}"].Value = "Стоимость";
+        worksheet.Cells[$"C{row}"].Value = "Ресторан";
+        worksheet.Cells[$"D{row}"].Value = "Группа блюд";
+        worksheet.Cells[$"E{row}"].Value = "Блюдо";
+        worksheet.Cells[$"F{row}"].Value = "Количество";
+        worksheet.Cells[$"G{row}"].Value = "Стоимость";
 
         //Данные
         foreach (DishesSumByPeriod item in data)
@@ -62,25 +63,26 @@ internal class ReportsService : IReportsService
             row++;
             worksheet.Cells[$"A{row}"].Value = index;
             worksheet.Cells[$"B{row}"].Value = item.Date.ToString("dd.MM.yyyy");
-            worksheet.Cells[$"C{row}"].Value = item.GroupName;
-            worksheet.Cells[$"D{row}"].Value = item.DishName;
-            worksheet.Cells[$"E{row}"].Value = item.SaleCount;
-            worksheet.Cells[$"F{row}"].Value = item.Price;
+            worksheet.Cells[$"C{row}"].Value = item.RestaurantName;
+            worksheet.Cells[$"D{row}"].Value = item.GroupName;
+            worksheet.Cells[$"E{row}"].Value = item.DishName;
+            worksheet.Cells[$"F{row}"].Value = item.SaleCount;
+            worksheet.Cells[$"G{row}"].Value = item.Price;
         }
 
         //Таблицу нарисовать
-        worksheet.Cells[$"A{startTableRow}:F{row}"].Style.Border.Top.Style = ExcelBorderStyle.Thin;
-        worksheet.Cells[$"A{startTableRow}:F{row}"].Style.Border.Left.Style = ExcelBorderStyle.Thin;
-        worksheet.Cells[$"A{startTableRow}:F{row}"].Style.Border.Right.Style = ExcelBorderStyle.Thin;
-        worksheet.Cells[$"A{startTableRow}:F{row}"].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+        worksheet.Cells[$"A{startTableRow}:G{row}"].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+        worksheet.Cells[$"A{startTableRow}:G{row}"].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+        worksheet.Cells[$"A{startTableRow}:G{row}"].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+        worksheet.Cells[$"A{startTableRow}:G{row}"].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
 
         //Сумма
         row++;
         worksheet.Cells[$"B{row}"].Value = "Итог:";
-        worksheet.Cells[$"E{row}"].Value = data.Sum(x => x.SaleCount);
-        worksheet.Cells[$"F{row}"].Value = data.Sum(x => x.Price);
+        worksheet.Cells[$"F{row}"].Value = data.Sum(x => x.SaleCount);
+        worksheet.Cells[$"G{row}"].Value = data.Sum(x => x.Price);
 
-        worksheet.Cells[$"A2:F{row}"].AutoFitColumns();
+        worksheet.Cells[$"A2:G{row}"].AutoFitColumns();
         worksheet.Column(3).Width = 30;
         worksheet.Column(4).Width = 30;
 

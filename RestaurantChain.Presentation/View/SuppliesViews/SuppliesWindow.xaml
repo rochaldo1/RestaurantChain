@@ -50,7 +50,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Поставщик" Binding="{Binding Path=SupplierName}"/>
                 <DataGridTextColumn Header="Продукт" Binding="{Binding Path=ProductName}"/>
-                <DataGridTextColumn Header="Дата" Binding="{Binding Path=SupplyDate}"/>
+                <DataGridTextColumn Header="Дата" Binding="{Binding Path=SupplyDate, StringFormat={}{0:dd.MM.yyyy}}"/>
                 <DataGridTextColumn Header="Количество" Binding="{Binding Path=Quantity}"/>
                 <DataGridTextColumn Header="Стоимость за единицу, руб." Binding="{Binding Path=Price}"/>
                 <DataGridTextColumn Header="Единица изм." Binding="{Binding Path=UnitName}"/>

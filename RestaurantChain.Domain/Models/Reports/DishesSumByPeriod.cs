@@ -7,4 +7,5 @@ public sealed class DishesSumByPeriod
     public DateTime Date { get; set; }
     public decimal Price { get; set; }
     public int SaleCount { get; set; }
+    public string RestaurantName { set; get; }
 }

@@ -13,7 +13,8 @@ internal static class ReportsConverter
             Price = db.Price,
             Date = db.Date,
             GroupName = db.GroupName,
-            DishName = db.DishName
+            DishName = db.DishName,
+            RestaurantName = db.RestaurantName,
         };
     }
 

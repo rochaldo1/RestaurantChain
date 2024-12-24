@@ -50,7 +50,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Блюдо" Binding="{Binding Path=DishName}"/>
                     <DataGridTextColumn Header="Группа" Binding="{Binding Path=GroupName}"/>
-                    <DataGridTextColumn Header="Дата" Binding="{Binding Path=SaleDate}"/>
+                    <DataGridTextColumn Header="Дата" Binding="{Binding Path=SaleDate, StringFormat={}{0:dd.MM.yyyy}}"/>
                     <DataGridTextColumn Header="Проданное количество" Binding="{Binding Path=Quantity}"/>
                     <DataGridTextColumn Header="Стоимость одного блюда, руб." Binding="{Binding Path=Price}"/>
                     <DataGridTextColumn Header="Сумма, руб." Binding="{Binding Path=SumPrice}"/>

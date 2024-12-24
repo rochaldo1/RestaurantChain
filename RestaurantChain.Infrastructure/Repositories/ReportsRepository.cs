@@ -19,6 +19,7 @@ internal sealed class ReportsRepository : RepositoryBase, IReportsRepository
     {
         const string query = @"
 select
+   r.restaurant_name as RestaurantName,
    date_trunc('day', s.sale_date) as Date,
    god.group_name as GroupName,
    d.dish_name as DishName,
@@ -27,14 +28,17 @@ select
 from sales s
    inner join public.dishes d on d.id = s.dish_id
    inner join public.groups_of_dishes god on god.id = d.group_id
+   inner join restaurants r on r.id = s.restaurant_id
 where
     s.sale_date >= @From AND
     s.sale_date <= @To
 group by
+   r.restaurant_name,
    date_trunc('day', s.sale_date),
    god.group_name,
    d.dish_name
 order by
+   r.restaurant_name, 
    date_trunc('day', s.sale_date),
    god.group_name,
    d.dish_name";
