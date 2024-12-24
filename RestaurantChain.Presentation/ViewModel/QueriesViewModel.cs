@@ -78,7 +78,5 @@ internal class QueriesViewModel : ViewModelBase
         {
             MessageBox.Show($"Ошибка запроса! {e.Message}", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
         }
-
-        (_queriesWindow.Parent as ContentControl).Content = new QueriesWindow(_serviceProvider, _query);
     }
 }

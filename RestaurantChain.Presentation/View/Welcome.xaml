@@ -11,6 +11,6 @@
             <RowDefinition Height="0.15*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Background="#D3D3D3" Grid.Row="0" TextAlignment="Center" FontSize="28" Margin="10,5,10,5" FontFamily="Segoe UI Variable Display Light"><Run Language="ru-ru" Text="Сеть ресторанов"/></TextBlock>
+        <TextBlock Background="#D3D3D3" Grid.Row="0" VerticalAlignment="Center" TextAlignment="Center" FontSize="28" Margin="10,5,10,5" FontFamily="Segoe UI Variable Display Light"><Run Language="ru-ru" Text="Сеть ресторанов"/></TextBlock>
     </Grid>
 </UserControl>

@@ -54,7 +54,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <TextBlock x:Name="Language" Grid.Column="0" Text="{Binding KeyboardLayoutText}" FontSize="14" FontFamily="Segoe UI Variable Display Light" Margin="10,0,0,0"/>
-            <TextBlock x:Name="CapsStatus" Grid.Column="1" Text="{Binding CapsLockStatusText}" FontSize="14" FontFamily="Segoe UI Variable Display Light" Width="0" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+            <TextBlock x:Name="CapsStatus" Grid.Column="1" Text="{Binding CapsLockStatusText}" FontSize="14" FontFamily="Segoe UI Variable Display Light" HorizontalAlignment="Right" Margin="0,0,10,0"/>
         </Grid>
     </Grid>
 </Window>
