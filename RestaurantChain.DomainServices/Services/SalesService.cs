@@ -43,9 +43,4 @@ internal class SalesService : ISalesService
     {
         return _unitOfWork.SalesRepository.Get(id);
     }
-
-    public SalesView GetView(int id)
-    {
-        return _unitOfWork.SalesRepository.GetView(id);
-    }
 }

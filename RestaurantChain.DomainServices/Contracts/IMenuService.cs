@@ -8,6 +8,16 @@ namespace RestaurantChain.DomainServices.Contracts;
 /// </summary>
 public interface IMenuService
 {
+    /// <summary>
+    /// Получить список прав
+    /// </summary>
+    /// <param name="userId"></param>
+    /// <returns></returns>
     public IReadOnlyCollection<UserRoleRight> List(int userId);
+    
+    /// <summary>
+    /// Получить список
+    /// </summary>
+    /// <returns></returns>
     public IReadOnlyCollection<Menu> List();
 }

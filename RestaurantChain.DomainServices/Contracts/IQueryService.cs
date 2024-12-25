@@ -7,5 +7,10 @@ namespace RestaurantChain.DomainServices.Contracts;
 /// </summary>
 public interface IQueryService
 {
+    /// <summary>
+    /// Выполнить запрос
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns></returns>
     DataTable ExecuteQuery(string query);
 }
