@@ -22,6 +22,9 @@ internal sealed class SalesViewModel: EditViewModelBase
     private string _price;
     private string _groupName;
 
+    /// <summary>
+    /// Модель данных. Список блюд
+    /// </summary>
     public IReadOnlyCollection<NomenclatureView> DishesDataSource
     {
         get => _dishesDataSource;
@@ -32,6 +35,9 @@ internal sealed class SalesViewModel: EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Дата продажи
+    /// </summary>
     public DateTime SaleDate
     {
         get => _saleDate;
@@ -42,6 +48,9 @@ internal sealed class SalesViewModel: EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Количество
+    /// </summary>
     public int Quantity
     {
         get => _quantity;
@@ -52,6 +61,9 @@ internal sealed class SalesViewModel: EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Цена
+    /// </summary>
     public string Price
     {
         get => _price;
@@ -62,6 +74,9 @@ internal sealed class SalesViewModel: EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Выбранное блюдо
+    /// </summary>
     public int SelectedDishId
     {
         get => _selectedDishId;
@@ -77,6 +92,9 @@ internal sealed class SalesViewModel: EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. группа блюд
+    /// </summary>
     public string GroupName
     {
         get => _groupName;
@@ -102,6 +120,10 @@ internal sealed class SalesViewModel: EditViewModelBase
         EnterCommand = new RelayCommand(Enter);
     }
 
+    /// <summary>
+    /// Валидация при загрузке и заполнение полей
+    /// </summary>
+    /// <returns></returns>
     public override bool Validate()
     {
         DishesDataSource = _nomenclatureService.List(_restaurantId);
@@ -129,6 +151,10 @@ internal sealed class SalesViewModel: EditViewModelBase
         return true;
     }
 
+    /// <summary>
+    /// Обработка команды нажатия кнопки сохранения данных
+    /// </summary>
+    /// <param name="sender"></param>
     private void Enter(object sender)
     {
         var sale = ValidateAndGetModelOnSave();
@@ -145,6 +171,10 @@ internal sealed class SalesViewModel: EditViewModelBase
         }
     }
 
+    /// <summary>
+    ///  Действие обновить.
+    /// </summary>
+    /// <returns>Успех операции.</returns>
     private bool Update(Sales sale)
     {
         try
@@ -161,12 +191,20 @@ internal sealed class SalesViewModel: EditViewModelBase
         return true;
     }
 
+    /// <summary>
+    ///  Действие создать.
+    /// </summary>
+    /// <returns>Успех операции.</returns>
     private bool Create(Sales sale)
     {
         _salesService.Create(sale);
         return true;
     }
 
+    /// <summary>
+    /// Провалидировать и получить модель для сохранения
+    /// </summary>
+    /// <returns></returns>
     private Sales ValidateAndGetModelOnSave()
     {
         if (_selectedDishId <= 0)

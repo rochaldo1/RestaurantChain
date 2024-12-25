@@ -18,6 +18,9 @@ internal sealed class NomenclatureViewModel : EditViewModelBase
     private int _selectedDishId;
     private decimal _price;
 
+    /// <summary>
+    /// Модель данных. Список блюд
+    /// </summary>
     public IReadOnlyCollection<DishesView> DishesDataSource
     {
         get => _dishesDataSource;
@@ -28,6 +31,9 @@ internal sealed class NomenclatureViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Выбранное блюдо
+    /// </summary>
     public int SelectedDishId
     {
         get => _selectedDishId;
@@ -42,6 +48,9 @@ internal sealed class NomenclatureViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Стоимость
+    /// </summary>
     public decimal Price
     {
         get => _price;
@@ -66,6 +75,10 @@ internal sealed class NomenclatureViewModel : EditViewModelBase
         EnterCommand = new RelayCommand(Enter);
     }
 
+    /// <summary>
+    /// Валидация при загрузке и заполнение полей
+    /// </summary>
+    /// <returns></returns>
     public override bool Validate()
     {
         DishesDataSource = _dihesService.List();
@@ -86,6 +99,10 @@ internal sealed class NomenclatureViewModel : EditViewModelBase
         return true;
     }
 
+    /// <summary>
+    /// Обработка команды нажатия кнопки сохранения данных
+    /// </summary>
+    /// <param name="sender"></param>
     private void Enter(object sender)
     {
         var nomenclature = ValidateAndGetModelOnSave();
@@ -102,6 +119,10 @@ internal sealed class NomenclatureViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    ///  Действие обновить.
+    /// </summary>
+    /// <returns>Успех операции.</returns>
     private bool Update(Nomenclature nomenclature)
     {
         try
@@ -118,12 +139,20 @@ internal sealed class NomenclatureViewModel : EditViewModelBase
         return true;
     }
 
+    /// <summary>
+    ///  Действие создать.
+    /// </summary>
+    /// <returns>Успех операции.</returns>
     private bool Create(Nomenclature nomenclature)
     {
         _nomenclatureService.Create(nomenclature);
         return true;
     }
 
+    /// <summary>
+    /// Провалидировать и получить модель для сохранения
+    /// </summary>
+    /// <returns></returns>
     private Nomenclature ValidateAndGetModelOnSave()
     {
         if (_selectedDishId <= 0)

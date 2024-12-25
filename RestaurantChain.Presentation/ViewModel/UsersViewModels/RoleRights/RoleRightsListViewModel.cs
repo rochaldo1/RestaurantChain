@@ -19,6 +19,9 @@ internal sealed class RoleRightsListViewModel : ListViewModelBase<RolesRightsVie
 
     private int _selectedRoleId;
 
+    /// <summary>
+    /// Модель данных. Список ролей
+    /// </summary>
     public IReadOnlyCollection<Domain.Models.Roles> RolesDataSource
     {
         get => _rolesDataSource;
@@ -30,6 +33,9 @@ internal sealed class RoleRightsListViewModel : ListViewModelBase<RolesRightsVie
         }
     }
 
+    /// <summary>
+    /// Модель данных. Выбранная роль
+    /// </summary>
     public int SelectedRoleId
     {
         get => _selectedRoleId;
@@ -48,12 +54,18 @@ internal sealed class RoleRightsListViewModel : ListViewModelBase<RolesRightsVie
         RolesDataSource = _rolesService.List();
     }
 
+    /// <summary>
+    /// Обновить таблицу
+    /// </summary>
     protected override void DataBind()
     {
         IReadOnlyCollection<RolesRightsView> entities = _rolesService.ListRights(SelectedRoleId);
         SetEntities(entities);
     }
-
+    
+    /// <summary>
+    /// Установить команды CRUD кнопкам
+    /// </summary>
     protected override void SetCommands()
     {
         CreateCommand = new RelayCommand(CreateEntity);
@@ -61,6 +73,10 @@ internal sealed class RoleRightsListViewModel : ListViewModelBase<RolesRightsVie
         DeleteCommand = new RelayCommand(DeleteEntity);
     }
 
+    /// <summary>
+    /// Вызов команды создания записи из окна таблицы
+    /// </summary>
+    /// <param name="sender"></param>
     private void CreateEntity(object sender)
     {
         var view = new RoleRightWindow(ServiceProvider, entityId: null, SelectedRoleId);
@@ -68,6 +84,10 @@ internal sealed class RoleRightsListViewModel : ListViewModelBase<RolesRightsVie
         DataBind();
     }
 
+    /// <summary>
+    /// Вызов команды редактирования выбранной записи из таблицы
+    /// </summary>
+    /// <param name="sender"></param>
     private void EditEntity(object sender)
     {
         if (!HasSelectedItem())
@@ -80,6 +100,10 @@ internal sealed class RoleRightsListViewModel : ListViewModelBase<RolesRightsVie
         DataBind();
     }
 
+    /// <summary>
+    /// Вызов команды удаления записи
+    /// </summary>
+    /// <param name="sender"></param>
     private void DeleteEntity(object sender)
     {
         if (!HasSelectedItem())

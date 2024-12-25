@@ -31,6 +31,9 @@ internal class UserViewModel : EditViewModelBase
 
     private IReadOnlyCollection<Domain.Models.Roles> _rolesDataSource;
 
+    /// <summary>
+    /// Модель данных. Роли
+    /// </summary>
     public IReadOnlyCollection<Domain.Models.Roles> RolesDataSource
     {
         get => _rolesDataSource;
@@ -41,6 +44,9 @@ internal class UserViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Выбранная роль
+    /// </summary>
     public int SelectedRoleId
     {
         get => _selectedRoleId;
@@ -51,6 +57,9 @@ internal class UserViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Фамилия
+    /// </summary>
     public string LastName
     {
         get => _lastName;
@@ -61,6 +70,9 @@ internal class UserViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Имя
+    /// </summary>
     public string FirstName
     {
         get => _firstName;
@@ -71,6 +83,9 @@ internal class UserViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Отчество
+    /// </summary>
     public string MiddleName
     {
         get => _middleName;
@@ -81,6 +96,9 @@ internal class UserViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Должность
+    /// </summary>
     public string JobTitle
     {
         get => _jobTitle;
@@ -91,6 +109,9 @@ internal class UserViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Логин
+    /// </summary>
     public string Login
     {
         get => _login;
@@ -101,6 +122,9 @@ internal class UserViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Пароль
+    /// </summary>
     public SecureString Password
     {
         get => _password;
@@ -110,7 +134,10 @@ internal class UserViewModel : EditViewModelBase
             OnPropertyChanged();
         }
     }
-
+    
+    /// <summary>
+    /// Модель данных. Подтверждение пароля
+    /// </summary>
     public SecureString VerificationPassword
     {
         get => _verificationPassword;
@@ -121,6 +148,9 @@ internal class UserViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Текст для языка
+    /// </summary>
     public string KeyboardLayoutText
     {
         get => _keyboardLayout;
@@ -131,6 +161,9 @@ internal class UserViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Текст для CapsLock
+    /// </summary>
     public string CapsLockStatusText
     {
         get => _capsLockStatus;
@@ -155,6 +188,11 @@ internal class UserViewModel : EditViewModelBase
         StartTimer(100);
     }
 
+    /// <summary>
+    /// Парсинг языка
+    /// </summary>
+    /// <param name="language"></param>
+    /// <returns></returns>
     private string ParseLanguage(string language)
     {
         int startIndex = language.IndexOf('(');
@@ -164,6 +202,11 @@ internal class UserViewModel : EditViewModelBase
         return char.ToUpper(language[0]) + language.Substring(1);
     }
 
+    /// <summary>
+    /// Отслеживание капслок и языка ввода
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void TimerTick(object sender, EventArgs e)
     {
         if (Console.CapsLock)
@@ -178,6 +221,10 @@ internal class UserViewModel : EditViewModelBase
         KeyboardLayoutText = "Язык ввода " + ParseLanguage(InputLanguageManager.Current.CurrentInputLanguage.DisplayName);
     }
 
+    /// <summary>
+    /// Старт таймера
+    /// </summary>
+    /// <param name="interval"></param>
     private void StartTimer(long interval)
     {
         _timerForWindow.Interval = new TimeSpan(interval);
@@ -185,6 +232,10 @@ internal class UserViewModel : EditViewModelBase
         _timerForWindow.Tick += TimerTick;
     }
 
+    /// <summary>
+    /// Провалидировать и получить модель для сохранения
+    /// </summary>
+    /// <returns></returns>
     private Domain.Models.Users ValidateAndGetModel()
     {
         if (string.IsNullOrWhiteSpace(Login))
@@ -289,6 +340,10 @@ internal class UserViewModel : EditViewModelBase
         return user;
     }
 
+    /// <summary>
+    /// Обработка кнопки сохранить
+    /// </summary>
+    /// <param name="sender"></param>
     public void Enter(object sender)
     {
         Domain.Models.Users? user = ValidateAndGetModel();
@@ -324,7 +379,7 @@ internal class UserViewModel : EditViewModelBase
     }
 
     /// <summary>
-    ///     Действие создать.
+    ///  Действие создать.
     /// </summary>
     /// <returns>Успех операции.</returns>
     private bool Create(Domain.Models.Users user)
@@ -341,6 +396,10 @@ internal class UserViewModel : EditViewModelBase
         return true;
     }
 
+    /// <summary>
+    /// Валидация при загрузке и заполнение полей
+    /// </summary>
+    /// <returns></returns>
     public override bool Validate()
     {
         RolesDataSource = _rolesService.List();

@@ -21,6 +21,9 @@ internal class ApplicationsListViewModel : ListViewModelBase<ApplicationsForDist
     private DateTime _from;
     private DateTime _to;
 
+    /// <summary>
+    /// Дата с
+    /// </summary>
     public DateTime From
     {
         get => _from;
@@ -32,6 +35,9 @@ internal class ApplicationsListViewModel : ListViewModelBase<ApplicationsForDist
         }
     }
 
+    /// <summary>
+    /// Дата по
+    /// </summary>
     public DateTime To
     {
         get => _to;
@@ -55,12 +61,18 @@ internal class ApplicationsListViewModel : ListViewModelBase<ApplicationsForDist
         DataBind();
     }
 
+    /// <summary>
+    /// Обновить таблицу
+    /// </summary>
     protected override void DataBind()
     {
         IReadOnlyCollection<ApplicationsForDistributionView> entities = _applicationsForDistributionService.List(_restaurantId, From, To);
         SetEntities(entities);
     }
 
+    /// <summary>
+    /// Установить команды CRUD кнопкам
+    /// </summary>
     protected override void SetCommands()
     {
         CreateCommand = new RelayCommand(CreateEntity);
@@ -68,6 +80,10 @@ internal class ApplicationsListViewModel : ListViewModelBase<ApplicationsForDist
         DeleteCommand = new RelayCommand(DeleteEntity);
     }
 
+    /// <summary>
+    /// Вызов команды создания записи из окна таблицы
+    /// </summary>
+    /// <param name="sender"></param>
     private void CreateEntity(object sender)
     {
         var view = new ApplicationWindow(ServiceProvider, applicationId: null, _restaurantId);
@@ -75,6 +91,10 @@ internal class ApplicationsListViewModel : ListViewModelBase<ApplicationsForDist
         DataBind();
     }
 
+    /// <summary>
+    /// Вызов команды редактирования выбранной записи из таблицы
+    /// </summary>
+    /// <param name="sender"></param>
     private void EditEntity(object sender)
     {
         if (!HasSelectedItem())
@@ -87,6 +107,10 @@ internal class ApplicationsListViewModel : ListViewModelBase<ApplicationsForDist
         DataBind();
     }
 
+    /// <summary>
+    /// Удалить выбранную запись
+    /// </summary>
+    /// <param name="sender"></param>
     private void DeleteEntity(object sender)
     {
         if (!HasSelectedItem())

@@ -11,6 +11,9 @@ internal sealed class RoleViewModel : EditViewModelBase
     private readonly IRolesService _rolesService;
     private string _name;
 
+    /// <summary>
+    /// Модель данных. Имя
+    /// </summary>
     public string Name
     {
         get => _name;
@@ -33,6 +36,10 @@ internal sealed class RoleViewModel : EditViewModelBase
         EnterCommand = new RelayCommand(Enter);
     }
 
+    /// <summary>
+    /// Обработка команды нажатия кнопки сохранения данных
+    /// </summary>
+    /// <param name="sender"></param>
     public void Enter(object sender)
     {
         Domain.Models.Roles? role = ValidateAndGet();
@@ -50,6 +57,10 @@ internal sealed class RoleViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Валидация данных и вернуть модель
+    /// </summary>
+    /// <returns></returns>
     private Domain.Models.Roles ValidateAndGet()
     {
         if (string.IsNullOrEmpty(Name))
@@ -65,7 +76,11 @@ internal sealed class RoleViewModel : EditViewModelBase
             Name = Name
         };
     }
-
+    
+    /// <summary>
+    ///  Действие создать.
+    /// </summary>
+    /// <returns>Успех операции.</returns>
     private bool Create(Domain.Models.Roles roles)
     {
         _rolesService.Create(roles);
@@ -83,7 +98,11 @@ internal sealed class RoleViewModel : EditViewModelBase
 
         return true;
     }
-
+    
+    /// <summary>
+    /// Валидация при загрузке и заполнение полей
+    /// </summary>
+    /// <returns></returns>
     public override bool Validate()
     {
         if (CurrentId.HasValue)

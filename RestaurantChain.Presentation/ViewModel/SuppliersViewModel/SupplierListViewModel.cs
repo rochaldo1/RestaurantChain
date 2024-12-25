@@ -20,12 +20,18 @@ public class SupplierListViewModel : ListViewModelBase<Suppliers>
         DataBind();
     }
 
+    /// <summary>
+    /// Обновить таблицу
+    /// </summary>
     protected override void DataBind()
     {
         IReadOnlyCollection<Suppliers> entities = _suppliersService.List();
         SetEntities(entities);
     }
 
+    /// <summary>
+    /// Установить команды CRUD кнопкам
+    /// </summary>
     protected override void SetCommands()
     {
         CreateCommand = new RelayCommand(CreateEntity);
@@ -33,13 +39,21 @@ public class SupplierListViewModel : ListViewModelBase<Suppliers>
         DeleteCommand = new RelayCommand(DeleteEntity);
     }
 
+    /// <summary>
+    /// Вызов команды создания записи из окна таблицы
+    /// </summary>
+    /// <param name="sender"></param>
     private void CreateEntity(object sender)
     {
         var view = new SupplierWindow(ServiceProvider, supplierId: null);
         WindowHelper.ShowDialog(view, "Создание записи", 500, 500);
-        RefreshData(sender);
+        DataBind();
     }
 
+    /// <summary>
+    /// Вызов команды редактирования выбранной записи из таблицы
+    /// </summary>
+    /// <param name="sender"></param>
     private void EditEntity(object sender)
     {
         if (!HasSelectedItem())
@@ -49,7 +63,7 @@ public class SupplierListViewModel : ListViewModelBase<Suppliers>
 
         var view = new SupplierWindow(ServiceProvider, SelectedItem.Id);
         WindowHelper.ShowDialog(view, "Редактирование записи", 500, 500);
-        RefreshData(sender);
+        DataBind();
     }
 
     private void DeleteEntity(object sender)
@@ -75,12 +89,7 @@ public class SupplierListViewModel : ListViewModelBase<Suppliers>
         {
             return;
         }
-
-        RefreshData(sender);
-    }
-
-    private void RefreshData(object sender)
-    {
+        
         DataBind();
     }
 }

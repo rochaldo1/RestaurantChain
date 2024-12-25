@@ -13,6 +13,9 @@ internal class StreetViewModel : EditViewModelBase
 
     private string _streetName;
 
+    /// <summary>
+    /// Модель данных. Имя
+    /// </summary>
     public string StreetName
     {
         get => _streetName;
@@ -35,6 +38,10 @@ internal class StreetViewModel : EditViewModelBase
         EnterCommand = new RelayCommand(Enter);
     }
 
+    /// <summary>
+    /// Обработка команды нажатия кнопки сохранения данных
+    /// </summary>
+    /// <param name="sender"></param>
     public void Enter(object sender)
     {
         if (string.IsNullOrWhiteSpace(_streetName))
@@ -102,6 +109,10 @@ internal class StreetViewModel : EditViewModelBase
         return true;
     }
 
+    /// <summary>
+    /// Валидация при загрузке и заполнение полей
+    /// </summary>
+    /// <returns></returns>
     public override bool Validate()
     {
         if (CurrentId.HasValue)

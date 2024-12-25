@@ -21,12 +21,18 @@ public class StreetListViewModel : ListViewModelBase<Streets>
         DataBind();
     }
 
+    /// <summary>
+    /// Обновить таблицу
+    /// </summary>
     protected override void DataBind()
     {
         IReadOnlyCollection<Streets> entities = _streetsService.List();
         SetEntities(entities);
     }
 
+    /// <summary>
+    /// Установить команды CRUD кнопкам
+    /// </summary>
     protected override void SetCommands()
     {
         CreateCommand = new RelayCommand(CreateEntity);
@@ -34,13 +40,21 @@ public class StreetListViewModel : ListViewModelBase<Streets>
         DeleteCommand = new RelayCommand(DeleteEntity);
     }
 
+    /// <summary>
+    /// Вызов команды создания записи из окна таблицы
+    /// </summary>
+    /// <param name="sender"></param>
     private void CreateEntity(object sender)
     {
         var view = new StreetWindow(ServiceProvider, streetId: null);
         WindowHelper.ShowDialog(view, "Создание записи");
-        RefreshData(sender);
+        DataBind();
     }
 
+    /// <summary>
+    /// Вызов команды редактирования выбранной записи из таблицы
+    /// </summary>
+    /// <param name="sender"></param>
     private void EditEntity(object sender)
     {
         if (!HasSelectedItem())
@@ -50,9 +64,13 @@ public class StreetListViewModel : ListViewModelBase<Streets>
 
         var view = new StreetWindow(ServiceProvider, SelectedItem.Id);
         WindowHelper.ShowDialog(view, "Редактирование записи");
-        RefreshData(sender);
+        DataBind();
     }
 
+    /// <summary>
+    /// Удалить выбранную запись
+    /// </summary>
+    /// <param name="sender"></param>
     private void DeleteEntity(object sender)
     {
         if (!HasSelectedItem())
@@ -78,11 +96,6 @@ public class StreetListViewModel : ListViewModelBase<Streets>
             return;
         }
 
-        RefreshData(sender);
-    }
-
-    private void RefreshData(object sender)
-    {
         DataBind();
     }
 }

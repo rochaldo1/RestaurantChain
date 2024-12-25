@@ -21,7 +21,10 @@ internal class SupplyViewModel : EditViewModelBase
     private int _quantity;
     private string _unit;
     private decimal _price;
-
+    
+    /// <summary>
+    /// Модель данных. Поставщики
+    /// </summary>
     public IReadOnlyCollection<Suppliers> SuppliersDataSource
     {
         get => _suppliersDataSource;
@@ -32,6 +35,9 @@ internal class SupplyViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Список продуктов
+    /// </summary>
     public IReadOnlyCollection<ProductsView> ProductsDataSource
     {
         get => _productsDataSource;
@@ -42,6 +48,9 @@ internal class SupplyViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Дата поставки
+    /// </summary>
     public DateTime SupplyDate
     {
         get => _supplyDate;
@@ -52,6 +61,9 @@ internal class SupplyViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Единица измерения
+    /// </summary>
     public string Unit
     {
         get => _unit;
@@ -62,6 +74,9 @@ internal class SupplyViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Количество
+    /// </summary>
     public int Quantity
     {
         get => _quantity;
@@ -72,6 +87,9 @@ internal class SupplyViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Цена
+    /// </summary>
     public decimal Price
     {
         get => _price;
@@ -82,6 +100,9 @@ internal class SupplyViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Выбранный продукт
+    /// </summary>
     public int SelectedProductId
     {
         get => _selectedProductId;
@@ -100,6 +121,9 @@ internal class SupplyViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Выбранный поставщик
+    /// </summary>
     public int SelectedSupplierId
     {
         get => _selectedSupplierId;
@@ -130,6 +154,10 @@ internal class SupplyViewModel : EditViewModelBase
         EnterCommand = new RelayCommand(Enter);
     }
 
+    /// <summary>
+    /// Валидация при загрузке и заполнение полей
+    /// </summary>
+    /// <returns></returns>
     public override bool Validate()
     {
         SuppliersDataSource = _suppliersService.List();
@@ -161,6 +189,10 @@ internal class SupplyViewModel : EditViewModelBase
         return true;
     }
 
+    /// <summary>
+    /// Обработка команды нажатия кнопки сохранения данных
+    /// </summary>
+    /// <param name="sender"></param>
     private void Enter(object sender)
     {
         var supply = ValidateAndGetModelOnSave();
@@ -179,6 +211,10 @@ internal class SupplyViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    ///  Действие обновить.
+    /// </summary>
+    /// <returns>Успех операции.</returns>
     private bool Update(Supplies supply)
     {
         try
@@ -195,12 +231,20 @@ internal class SupplyViewModel : EditViewModelBase
         return true;
     }
 
+    /// <summary>
+    ///  Действие создать.
+    /// </summary>
+    /// <returns>Успех операции.</returns>
     private bool Create(Supplies product)
     {
         _suppliesService.Create(product);
         return true;
     }
 
+    /// <summary>
+    /// Провалидировать и получить модель для сохранения
+    /// </summary>
+    /// <returns></returns>
     private Supplies ValidateAndGetModelOnSave()
     {
         if (_selectedProductId <= 0)

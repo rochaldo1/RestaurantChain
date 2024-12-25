@@ -21,6 +21,9 @@ internal class ApplicationViewModel : EditViewModelBase
     private string _unit;
     private decimal _price;
 
+    /// <summary>
+    /// Модель данных. Продукты
+    /// </summary>
     public IReadOnlyCollection<ProductsView> ProductsDataSource
     {
         get => _productsDataSource;
@@ -31,6 +34,9 @@ internal class ApplicationViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Дата заявки
+    /// </summary>
     public DateTime ApplicationDate
     {
         get => _applicationDate;
@@ -41,6 +47,9 @@ internal class ApplicationViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Единица измерения
+    /// </summary>
     public string Unit
     {
         get => _unit;
@@ -51,6 +60,9 @@ internal class ApplicationViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Количество
+    /// </summary>
     public int Quantity
     {
         get => _quantity;
@@ -61,6 +73,9 @@ internal class ApplicationViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Цена
+    /// </summary>
     public decimal Price
     {
         get => _price;
@@ -71,6 +86,9 @@ internal class ApplicationViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Выбранный продукт
+    /// </summary>
     public int SelectedProductId
     {
         get => _selectedProductId;
@@ -108,6 +126,10 @@ internal class ApplicationViewModel : EditViewModelBase
         EnterCommand = new RelayCommand(Enter);
     }
 
+    /// <summary>
+    /// Валидация при загрузке и заполнение полей
+    /// </summary>
+    /// <returns></returns>
     public override bool Validate()
     {
         ProductsDataSource = _productsService.List();
@@ -137,6 +159,10 @@ internal class ApplicationViewModel : EditViewModelBase
         return true;
     }
 
+    /// <summary>
+    /// Обработка команды нажатия кнопки сохранения данных
+    /// </summary>
+    /// <param name="sender"></param>
     private void Enter(object sender)
     {
         var application = ValidateAndGetModelOnSave();
@@ -154,6 +180,10 @@ internal class ApplicationViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    ///  Действие обновить.
+    /// </summary>
+    /// <returns>Успех операции.</returns>
     private bool Update(ApplicationsForDistribution application)
     {
         try
@@ -170,6 +200,10 @@ internal class ApplicationViewModel : EditViewModelBase
         return true;
     }
 
+    /// <summary>
+    ///  Действие создать.
+    /// </summary>
+    /// <returns>Успех операции.</returns>
     private bool Create(ApplicationsForDistribution application)
     {
         _applicationsForDistributionService.Create(application);
@@ -186,6 +220,10 @@ internal class ApplicationViewModel : EditViewModelBase
         return true;
     }
 
+    /// <summary>
+    /// Провалидировать и получить модель для сохранения
+    /// </summary>
+    /// <returns></returns>
     private ApplicationsForDistribution ValidateAndGetModelOnSave()
     {
         if (_selectedProductId <= 0)

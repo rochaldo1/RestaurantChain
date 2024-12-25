@@ -16,6 +16,9 @@ internal class DishViewModel : EditViewModelBase
     private int _selectedGroupId;
     private decimal _price;
 
+    /// <summary>
+    /// Модель данных. Имя
+    /// </summary>
     public string DishName
     {
         get => _dishName;
@@ -26,6 +29,9 @@ internal class DishViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Группы блюд
+    /// </summary>
     public IReadOnlyCollection<GroupsOfDishes> GroupsList
     {
         get => _groupsList;
@@ -36,6 +42,10 @@ internal class DishViewModel : EditViewModelBase
         }
     }
 
+    
+    /// <summary>
+    /// Модель данных. Выбранная группа блюд
+    /// </summary>
     public int SelectedGroupId
     {
         get => _selectedGroupId;
@@ -46,6 +56,10 @@ internal class DishViewModel : EditViewModelBase
         }
     }
 
+    
+    /// <summary>
+    /// Модель данных. Стоимость блюда
+    /// </summary>
     public decimal Price
     {
         get => _price;
@@ -68,7 +82,11 @@ internal class DishViewModel : EditViewModelBase
 
         EnterCommand = new RelayCommand(Enter);
     }
-
+    
+    /// <summary>
+    /// Обработка команды нажатия кнопки сохранения данных
+    /// </summary>
+    /// <param name="sender"></param>
     private void Enter(object sender)
     {
         Dishes dish = ValidateAndGetModelOnSave();
@@ -85,7 +103,11 @@ internal class DishViewModel : EditViewModelBase
             OnSaveSuccess?.Invoke();
         }
     }
-
+    
+    /// <summary>
+    ///  Действие обновить.
+    /// </summary>
+    /// <returns>Успех операции.</returns>
     private bool Update(Dishes dish)
     {
         try
@@ -116,6 +138,10 @@ internal class DishViewModel : EditViewModelBase
         return true;
     }
 
+    /// <summary>
+    /// Провалидировать и получить модель для сохранения
+    /// </summary>
+    /// <returns></returns>
     private Dishes ValidateAndGetModelOnSave()
     {
         var dish = new Dishes
@@ -153,6 +179,10 @@ internal class DishViewModel : EditViewModelBase
         return dish;
     }
 
+    /// <summary>
+    /// Валидация при загрузке и заполнение полей
+    /// </summary>
+    /// <returns></returns>
     public override bool Validate()
     {
         if (CurrentId.HasValue)

@@ -12,6 +12,9 @@ namespace RestaurantChain.Presentation.ViewModel;
 internal class QueriesViewModel : ViewModelBase
 {
     private string _query;
+    /// <summary>
+    /// Модель данных. Запрос
+    /// </summary>
     public string Query
     {
         get => _query;
@@ -23,6 +26,9 @@ internal class QueriesViewModel : ViewModelBase
     }
 
     private DataTable _dataSource;
+    /// <summary>
+    /// Модель данных. Даные для таблицы
+    /// </summary>
     public DataTable DataSource
     {
         get => _dataSource;
@@ -44,22 +50,25 @@ internal class QueriesViewModel : ViewModelBase
             MessageBox.Show($"Ошибка запроса! {e.Message}", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
-
+    
+    /// <summary>
+    /// Команда Выполнить запрос
+    /// </summary>
     public ICommand EnterCommand { get; }
     private readonly IQueryService _queryService;
-    private readonly QueriesWindow _queriesWindow;
-    private readonly IServiceProvider _serviceProvider;
 
-    public QueriesViewModel(IServiceProvider serviceProvider, string sql, QueriesWindow queriesWindow)
+    public QueriesViewModel(IServiceProvider serviceProvider, string sql)
     {
-        _serviceProvider = serviceProvider;
-        _queriesWindow = queriesWindow;
         EnterCommand = new RelayCommand(Enter);
         _queryService = serviceProvider.GetRequiredService<IQueryService>();
         Query = sql;
         DataBind();
     }
 
+    /// <summary>
+    /// Операция ввода, нажатие кнопки ОК
+    /// </summary>
+    /// <param name="sender"></param>
     public void Enter(object sender)
     {
         if (string.IsNullOrWhiteSpace(_query))

@@ -2,13 +2,13 @@ using RestaurantChain.Presentation.Classes.Helpers;
 
 namespace RestaurantChain.Presentation.ViewModel.Reports;
 
-internal sealed class GetRestaurantSumByPeriodsViewModel : ReportsViewModelBase
+internal sealed class GetRestaurantSumByPeriodsViewModel(IServiceProvider serviceProvider) : ReportsViewModelBase(serviceProvider)
 {
-    public GetRestaurantSumByPeriodsViewModel(IServiceProvider serviceProvider) : base(serviceProvider)
-    {
-    }
-
-    public override void Enter(object sender)
+    /// <summary>
+    /// Операция ввода, выгрузить данные в эксель
+    /// </summary>
+    /// <param name="sender"></param>
+    protected override void Enter(object sender)
     {
         var fileName = _reportsService.GetRestaurantSumByPeriods(From, To);
         ExcelHelper.OpenExcel(fileName);

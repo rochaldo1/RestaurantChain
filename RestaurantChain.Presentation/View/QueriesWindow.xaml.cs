@@ -12,7 +12,7 @@ public partial class QueriesWindow : UserControl
     public QueriesWindow(IServiceProvider serviceProvider, string sql)
     {
         InitializeComponent();
-        DataContext = new QueriesViewModel(serviceProvider, sql, this);
+        DataContext = new QueriesViewModel(serviceProvider, sql);
         CurrentState.MainWindow.Title = "Сеть ресторанов - Разное - Запросы";
     }
 }

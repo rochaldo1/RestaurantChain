@@ -18,6 +18,9 @@ internal sealed class RoleRightsViewModel : EditViewModelBase
     private readonly int _selectedRoleId;
     private IReadOnlyCollection<Menu> _menuDataSource;
 
+    /// <summary>
+    /// Модель данных. Выбранное меню
+    /// </summary>
     public int SelectedMenuId
     {
         get => _selectedMenuId;
@@ -28,6 +31,9 @@ internal sealed class RoleRightsViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Список меню
+    /// </summary>
     public IReadOnlyCollection<Menu> MenuDataSource
     {
         get => _menuDataSource;
@@ -37,7 +43,10 @@ internal sealed class RoleRightsViewModel : EditViewModelBase
             OnPropertyChanged();
         }
     }
-
+    
+    /// <summary>
+    /// Модель данных. Права на запись
+    /// </summary>
     public bool W
     {
         get => _w;
@@ -48,6 +57,9 @@ internal sealed class RoleRightsViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Права на чтение
+    /// </summary>
     public bool R
     {
         get => _r;
@@ -58,6 +70,9 @@ internal sealed class RoleRightsViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Права на редактирование
+    /// </summary>
     public bool E
     {
         get => _e;
@@ -68,6 +83,9 @@ internal sealed class RoleRightsViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Права на удаление
+    /// </summary>
     public bool D
     {
         get => _d;
@@ -92,6 +110,10 @@ internal sealed class RoleRightsViewModel : EditViewModelBase
         EnterCommand = new RelayCommand(Enter);
     }
 
+    /// <summary>
+    /// Обработка команды нажатия кнопки сохранения данных
+    /// </summary>
+    /// <param name="sender"></param>
     public void Enter(object sender)
     {
         RolesRights? rolesRights = ValidateAndGet();
@@ -108,7 +130,11 @@ internal sealed class RoleRightsViewModel : EditViewModelBase
             OnSaveSuccess?.Invoke();
         }
     }
-
+    
+    /// <summary>
+    /// Валидация данных и вернуть модель
+    /// </summary>
+    /// <returns></returns>
     private RolesRights ValidateAndGet()
     {
         if (SelectedMenuId <= 0)
@@ -130,6 +156,10 @@ internal sealed class RoleRightsViewModel : EditViewModelBase
         };
     }
 
+    /// <summary>
+    ///  Действие создать.
+    /// </summary>
+    /// <returns>Успех операции.</returns>
     private bool Create(RolesRights rolesRights)
     {
         _rolesService.CreateRight(rolesRights);
@@ -148,6 +178,10 @@ internal sealed class RoleRightsViewModel : EditViewModelBase
         return true;
     }
 
+    /// <summary>
+    /// Валидация при загрузке и заполнение полей
+    /// </summary>
+    /// <returns></returns>
     public override bool Validate()
     {
         if (CurrentId.HasValue)

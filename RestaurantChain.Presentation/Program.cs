@@ -13,19 +13,24 @@ public class Program
     [STAThread]
     public static void Main()
     {
+        //конфигурация приложения
         var host = Host.CreateDefaultBuilder()
             // внедряем сервисы
             .ConfigureServices((context, services) =>
             {
+                //подключить файл с конфигурацией
                 var configuration = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json")
                     .Build();
+                //и получить из него строку подключения
                 var connectionString = configuration.GetConnectionString("DefaultConnection");
-                //string connectionString = "server=localhost;database=restaurant_chain;userid=postgres;password=228420;";
+                
+                //Подключить сервис работы с БД UnitOfWork
                 services.UseStorage(connectionString);
-
+                //Зарегистрировать серсиы приложения
                 services.UseDomainServices();
+                
                 services.AddSingleton<App>();
             })
             .Build();

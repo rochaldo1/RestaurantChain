@@ -19,12 +19,18 @@ internal class UsersListViewModel : ListViewModelBase<Domain.Models.Users>
         DataBind();
     }
 
+    /// <summary>
+    /// Обновить таблицу
+    /// </summary>
     protected override void DataBind()
     {
         IReadOnlyCollection<Domain.Models.Users> entities = _usersService.List();
         SetEntities(entities);
     }
 
+    /// <summary>
+    /// Установить команды CRUD кнопкам
+    /// </summary>
     protected override void SetCommands()
     {
         CreateCommand = new RelayCommand(CreateEntity);
@@ -32,6 +38,10 @@ internal class UsersListViewModel : ListViewModelBase<Domain.Models.Users>
         DeleteCommand = new RelayCommand(DeleteEntity);
     }
 
+    /// <summary>
+    /// Вызов команды создания записи из окна таблицы
+    /// </summary>
+    /// <param name="sender"></param>
     private void CreateEntity(object sender)
     {
         var view = new UserWindow(ServiceProvider, userId: null);
@@ -39,6 +49,10 @@ internal class UsersListViewModel : ListViewModelBase<Domain.Models.Users>
         DataBind();
     }
 
+    /// <summary>
+    /// Вызов команды редактирования выбранной записи из таблицы
+    /// </summary>
+    /// <param name="sender"></param>
     private void EditEntity(object sender)
     {
         if (!HasSelectedItem())
@@ -51,6 +65,10 @@ internal class UsersListViewModel : ListViewModelBase<Domain.Models.Users>
         DataBind();
     }
 
+    /// <summary>
+    /// Удалить выбранную запись
+    /// </summary>
+    /// <param name="sender"></param>
     private void DeleteEntity(object sender)
     {
         if (!HasSelectedItem())

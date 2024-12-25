@@ -20,6 +20,9 @@ internal class AvailibilityViewModel : EditViewModelBase
     private string _unit;
     private decimal _price;
     
+    /// <summary>
+    /// Модель данных. Список продуктов
+    /// </summary>
     public IReadOnlyCollection<ProductsView> ProductsDataSource
     {
         get => _productsDataSource;
@@ -30,6 +33,9 @@ internal class AvailibilityViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Единица измерения
+    /// </summary>
     public string Unit
     {
         get => _unit;
@@ -40,6 +46,9 @@ internal class AvailibilityViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Количество
+    /// </summary>
     public int Quantity
     {
         get => _quantity;
@@ -50,6 +59,9 @@ internal class AvailibilityViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Цена
+    /// </summary>
     public decimal Price
     {
         get => _price;
@@ -60,6 +72,9 @@ internal class AvailibilityViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Выбранный продукт
+    /// </summary>
     public int SelectedProductId
     {
         get => _selectedProductId;
@@ -94,7 +109,11 @@ internal class AvailibilityViewModel : EditViewModelBase
 
         EnterCommand = new RelayCommand(Enter);
     }
-
+    
+    /// <summary>
+    /// Валидация при загрузке и заполнение полей
+    /// </summary>
+    /// <returns></returns>
     public override bool Validate()
     {
         ProductsDataSource = _productsService.List();
@@ -117,6 +136,10 @@ internal class AvailibilityViewModel : EditViewModelBase
         return true;
     }
 
+    /// <summary>
+    /// Обработка команды нажатия кнопки сохранения данных
+    /// </summary>
+    /// <param name="sender"></param>
     private void Enter(object sender)
     {
         var availibility = ValidateAndGetModelOnSave();
@@ -133,6 +156,10 @@ internal class AvailibilityViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    ///  Действие обновить.
+    /// </summary>
+    /// <returns>Успех операции.</returns>
     private bool Update(AvailibilityInRestaurant availibility)
     {
         try
@@ -149,12 +176,20 @@ internal class AvailibilityViewModel : EditViewModelBase
         return true;
     }
 
+    /// <summary>
+    ///  Действие создать.
+    /// </summary>
+    /// <returns>Успех операции.</returns>
     private bool Create(AvailibilityInRestaurant availibility)
     {
         _availibilityInRestaurantService.Create(availibility);
         return true;
     }
 
+    /// <summary>
+    /// Провалидировать и получить модель для сохранения
+    /// </summary>
+    /// <returns></returns>
     private AvailibilityInRestaurant ValidateAndGetModelOnSave()
     {
         if (_selectedProductId <= 0)

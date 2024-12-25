@@ -8,15 +8,27 @@ using RestaurantChain.Presentation.ViewModel.Base;
 
 namespace RestaurantChain.Presentation.ViewModel.Reports;
 
+/// <summary>
+/// Базовый класс для VM отчетов
+/// У нас всегда в отчетах есть дата с и дата по
+/// а так же сервис отчетов обязателен
+/// И кнопка ОК - сформировать документ
+/// </summary>
 internal abstract class ReportsViewModelBase : ViewModelBase
 {
     protected readonly IReportsService _reportsService;
-
     private DateTime _from;
     private DateTime _to;
+    
+    /// <summary>
+    /// Обработчик команды кнопки ОК
+    /// </summary>
     public ICommand EnterCommand { get; set; }
 
-    public DateTime From
+    /// <summary>
+    /// Дата с
+    /// </summary>
+    protected DateTime From
     {
         get => _from;
         set
@@ -26,7 +38,10 @@ internal abstract class ReportsViewModelBase : ViewModelBase
         }
     }
 
-    public DateTime To
+    /// <summary>
+    /// Дата по
+    /// </summary>
+    protected DateTime To
     {
         get => _to;
         set
@@ -36,7 +51,7 @@ internal abstract class ReportsViewModelBase : ViewModelBase
         }
     }
 
-    public ReportsViewModelBase(IServiceProvider serviceProvider)
+    protected ReportsViewModelBase(IServiceProvider serviceProvider)
     {
         _reportsService = serviceProvider.GetRequiredService<IReportsService>();
 
@@ -45,5 +60,9 @@ internal abstract class ReportsViewModelBase : ViewModelBase
         EnterCommand = new RelayCommand(Enter);
     }
 
-    public abstract void Enter(object sender);
+    /// <summary>
+    /// Обработчик команды ОК
+    /// </summary>
+    /// <param name="sender"></param>
+    protected abstract void Enter(object sender);
 }

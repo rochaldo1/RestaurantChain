@@ -25,6 +25,9 @@ internal class SupplierViewModel : EditViewModelBase
     private string _currentAccount;
     private string _tin;
 
+    /// <summary>
+    /// Модель данных. Имя
+    /// </summary>
     public string SupplierName
     {
         get => _supplierName;
@@ -35,6 +38,9 @@ internal class SupplierViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Список улиц
+    /// </summary>
     public IReadOnlyCollection<Streets> StreetsList
     {
         get => _streetsList;
@@ -45,6 +51,9 @@ internal class SupplierViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Выбранная улица
+    /// </summary>
     public int SelectedStreetId
     {
         get => _selectedStreetId;
@@ -55,6 +64,9 @@ internal class SupplierViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Имя поставщика
+    /// </summary>
     public string SupervisorName
     {
         get => _supervisorName;
@@ -65,6 +77,9 @@ internal class SupplierViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Фамилия поставщика
+    /// </summary>
     public string SupervisorLastName
     {
         get => _supervisorLastName;
@@ -75,6 +90,9 @@ internal class SupplierViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Отчество поставщика
+    /// </summary>
     public string SupervisorSurname
     {
         get => _supervisorSurname;
@@ -85,6 +103,9 @@ internal class SupplierViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Телефон поставщика
+    /// </summary>
     public string PhoneNumber
     {
         get => _phoneNumber;
@@ -95,6 +116,9 @@ internal class SupplierViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Список банков
+    /// </summary>
     public IReadOnlyCollection<Banks> BanksList
     {
         get => _banksList;
@@ -105,6 +129,9 @@ internal class SupplierViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Выбранный банк
+    /// </summary>
     public int SelectedBankId
     {
         get => _selectedBankId;
@@ -115,6 +142,9 @@ internal class SupplierViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Банковский счет
+    /// </summary>
     public string CurrentAccount
     {
         get => _currentAccount;
@@ -125,6 +155,9 @@ internal class SupplierViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. ИНН
+    /// </summary>
     public string TIN
     {
         get => _tin;
@@ -149,6 +182,10 @@ internal class SupplierViewModel : EditViewModelBase
         EnterCommand = new RelayCommand(Enter);
     }
 
+    /// <summary>
+    /// Обработка команды нажатия кнопки сохранения данных
+    /// </summary>
+    /// <param name="sender"></param>
     public void Enter(object sender)
     {
         Suppliers supplier = ValidateAndGetModelOnSave();
@@ -181,7 +218,11 @@ internal class SupplierViewModel : EditViewModelBase
 
         return true;
     }
-
+    
+    /// <summary>
+    /// Создать сущность
+    /// </summary>
+    /// <returns></returns>
     private bool Create(Suppliers supplier)
     {
         int id = _suppliersService.Create(supplier);
@@ -196,6 +237,10 @@ internal class SupplierViewModel : EditViewModelBase
         return true;
     }
 
+    /// <summary>
+    /// Провалидировать и получить модель для сохранения
+    /// </summary>
+    /// <returns></returns>
     private Suppliers ValidateAndGetModelOnSave()
     {
         var supplier = new Suppliers
@@ -290,6 +335,10 @@ internal class SupplierViewModel : EditViewModelBase
         return supplier;
     }
 
+    /// <summary>
+    /// Валидация при загрузке и заполнение полей
+    /// </summary>
+    /// <returns></returns>
     public override bool Validate()
     {
         if (CurrentId.HasValue)

@@ -13,6 +13,9 @@ internal class GroupOfDishesViewModel : EditViewModelBase
 
     private string _groupName;
 
+    /// <summary>
+    /// Модель данных. Имя
+    /// </summary>
     public string GroupName
     {
         get => _groupName;
@@ -35,6 +38,10 @@ internal class GroupOfDishesViewModel : EditViewModelBase
         EnterCommand = new RelayCommand(Enter);
     }
 
+    /// <summary>
+    /// Обработка команды нажатия кнопки сохранения данных
+    /// </summary>
+    /// <param name="sender"></param>
     public void Enter(object sender)
     {
         if (string.IsNullOrWhiteSpace(_groupName))
@@ -52,6 +59,10 @@ internal class GroupOfDishesViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    ///  Действие обновить.
+    /// </summary>
+    /// <returns>Успех операции.</returns>
     private bool Update()
     {
         var group = new GroupsOfDishes
@@ -74,6 +85,10 @@ internal class GroupOfDishesViewModel : EditViewModelBase
         return true;
     }
 
+    /// <summary>
+    ///  Действие создать.
+    /// </summary>
+    /// <returns>Успех операции.</returns>
     private bool Create()
     {
         var group = new GroupsOfDishes
@@ -93,6 +108,10 @@ internal class GroupOfDishesViewModel : EditViewModelBase
         return true;
     }
 
+    /// <summary>
+    /// Валидация при загрузке и заполнение полей
+    /// </summary>
+    /// <returns></returns>
     public override bool Validate()
     {
         if (CurrentId.HasValue)

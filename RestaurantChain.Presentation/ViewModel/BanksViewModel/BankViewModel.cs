@@ -13,6 +13,9 @@ internal class BankViewModel : EditViewModelBase
 
     private string _bankName;
 
+    /// <summary>
+    /// Модель данных. Имя
+    /// </summary>
     public string BankName
     {
         get => _bankName;
@@ -35,6 +38,10 @@ internal class BankViewModel : EditViewModelBase
         EnterCommand = new RelayCommand(Enter);
     }
 
+    /// <summary>
+    /// Обработка команды нажатия кнопки сохранения данных
+    /// </summary>
+    /// <param name="sender"></param>
     public void Enter(object sender)
     {
         OnPropertyChanged();
@@ -53,6 +60,10 @@ internal class BankViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    ///  Действие создать.
+    /// </summary>
+    /// <returns>Успех операции.</returns>
     private bool Create()
     {
         var bank = new Banks
@@ -72,6 +83,10 @@ internal class BankViewModel : EditViewModelBase
         return true;
     }
 
+    /// <summary>
+    ///  Действие обновить.
+    /// </summary>
+    /// <returns>Успех операции.</returns>
     private bool Update()
     {
         var bank = new Banks
@@ -94,6 +109,10 @@ internal class BankViewModel : EditViewModelBase
         return true;
     }
 
+    /// <summary>
+    /// Валидация при загрузке и заполнение полей
+    /// </summary>
+    /// <returns></returns>
     public override bool Validate()
     {
         if (CurrentId.HasValue)

@@ -19,12 +19,18 @@ internal class BankListViewModel : ListViewModelBase<Banks>
         DataBind();
     }
 
+    /// <summary>
+    /// Обновить таблицу
+    /// </summary>
     protected override void DataBind()
     {
         IReadOnlyCollection<Banks> entities = _banksService.List();
         SetEntities(entities);
     }
 
+    /// <summary>
+    /// Установить команды CRUD кнопкам
+    /// </summary>
     protected override void SetCommands()
     {
         CreateCommand = new RelayCommand(CreateEntity);
@@ -32,13 +38,21 @@ internal class BankListViewModel : ListViewModelBase<Banks>
         DeleteCommand = new RelayCommand(DeleteEntity);
     }
 
+    /// <summary>
+    /// Вызов команды создания записи из окна таблицы
+    /// </summary>
+    /// <param name="sender"></param>
     private void CreateEntity(object sender)
     {
         var view = new BankWindow(ServiceProvider, bankId: null);
         WindowHelper.ShowDialog(view, "Создание записи");
-        RefreshData(sender);
+        DataBind();
     }
 
+    /// <summary>
+    /// Вызов команды редактирования выбранной записи из таблицы
+    /// </summary>
+    /// <param name="sender"></param>
     private void EditEntity(object sender)
     {
         if (!HasSelectedItem())
@@ -48,9 +62,13 @@ internal class BankListViewModel : ListViewModelBase<Banks>
             
         var view = new BankWindow(ServiceProvider, SelectedItem.Id);
         WindowHelper.ShowDialog(view, "Редактирование записи");
-        RefreshData(sender);
+        DataBind();
     }
 
+    /// <summary>
+    /// Удалить выбранную запись
+    /// </summary>
+    /// <param name="sender"></param>
     private void DeleteEntity(object sender)
     {
         if (!HasSelectedItem())
@@ -76,11 +94,6 @@ internal class BankListViewModel : ListViewModelBase<Banks>
             return;
         }
 
-        RefreshData(sender);
-    }
-
-    private void RefreshData(object sender)
-    {
         DataBind();
     }
 }

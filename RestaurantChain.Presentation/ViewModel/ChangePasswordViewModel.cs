@@ -23,6 +23,9 @@ public class ChangePasswordViewModel : ViewModelBase
 
     public Action OnChangePasswordSuccess;
 
+    /// <summary>
+    /// Модель данных. Новый пароль
+    /// </summary>
     public SecureString NewPassword
     {
         get => _newPassword;
@@ -33,6 +36,9 @@ public class ChangePasswordViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Старый пароль
+    /// </summary>
     public SecureString OldPassword
     {
         get => _oldPassword;
@@ -43,6 +49,9 @@ public class ChangePasswordViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Пароль для подтверждения
+    /// </summary>
     public SecureString VerificationPassword
     {
         get => _verificationPassword;
@@ -53,6 +62,9 @@ public class ChangePasswordViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Текст языка
+    /// </summary>
     public string KeyboardLayoutText
     {
         get => _keyboardLayout;
@@ -63,6 +75,9 @@ public class ChangePasswordViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Текст capsLock
+    /// </summary>
     public string CapsLockStatusText
     {
         get => _capsLockStatus;
@@ -80,6 +95,11 @@ public class ChangePasswordViewModel : ViewModelBase
         StartTimer(100);
     }
 
+    /// <summary>
+    /// Парсинг языка
+    /// </summary>
+    /// <param name="language"></param>
+    /// <returns></returns>
     private string ParseLanguage(string language)
     {
         int startIndex = language.IndexOf('(');
@@ -89,6 +109,11 @@ public class ChangePasswordViewModel : ViewModelBase
         return Char.ToUpper(language[0]) + language.Substring(1);
     }
 
+    /// <summary>
+    /// Отслеживание капслок и языка ввода
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void TimerTick(object sender, EventArgs e)
     {
         if (Console.CapsLock)
@@ -99,12 +124,20 @@ public class ChangePasswordViewModel : ViewModelBase
         KeyboardLayoutText = "Язык ввода " + ParseLanguage(InputLanguageManager.Current.CurrentInputLanguage.DisplayName);
     }
 
+    /// <summary>
+    /// старт таймера
+    /// </summary>
     private void StartTimer(long interval)
     {
         _timerForWindow.Interval = new TimeSpan(interval);
         _timerForWindow.Start();
         _timerForWindow.Tick += TimerTick;
     }
+    
+    /// <summary>
+    /// Обработка комманды кнопки ОК
+    /// </summary>
+    /// <param name="sender"></param>
     public void Enter(object sender)
     {
         string oldPassword = new System.Net.NetworkCredential(string.Empty, _oldPassword).Password;
@@ -168,5 +201,8 @@ public class ChangePasswordViewModel : ViewModelBase
         OnChangePasswordSuccess?.Invoke();
     }
 
+    /// <summary>
+    /// Команда кнопки ок
+    /// </summary>
     public ICommand EnterCommand { get; set; }
 }

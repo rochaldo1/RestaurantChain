@@ -17,6 +17,9 @@ internal class ProductViewModel : EditViewModelBase
     private int _quantity;
     private decimal _price;
 
+    /// <summary>
+    /// Модель данных. Имя
+    /// </summary>
     public string ProductName
     {
         get => _productName;
@@ -26,7 +29,10 @@ internal class ProductViewModel : EditViewModelBase
             OnPropertyChanged();
         }
     }
-
+    
+    /// <summary>
+    /// Модель данных. Единицы измерения
+    /// </summary>
     public IReadOnlyCollection<Units> UnitsList
     {
         get => _unitsList;
@@ -36,7 +42,10 @@ internal class ProductViewModel : EditViewModelBase
             OnPropertyChanged();
         }
     }
-
+    
+    /// <summary>
+    /// Модель данных. Выбранная единица измерения
+    /// </summary>
     public int SelectedUnitId
     {
         get => _selectedUnitId;
@@ -47,6 +56,9 @@ internal class ProductViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Количество
+    /// </summary>
     public int Quantity
     {
         get => _quantity;
@@ -57,6 +69,9 @@ internal class ProductViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Стоимость
+    /// </summary>
     public decimal Price
     {
         get => _price;
@@ -79,6 +94,10 @@ internal class ProductViewModel : EditViewModelBase
         EnterCommand = new RelayCommand(Enter);
     }
 
+    /// <summary>
+    /// Обработка команды нажатия кнопки сохранения данных
+    /// </summary>
+    /// <param name="sender"></param>
     private void Enter(object sender)
     {
         Products product = ValidateAndGetModelOnSave();
@@ -96,6 +115,10 @@ internal class ProductViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    ///  Действие обновить.
+    /// </summary>
+    /// <returns>Успех операции.</returns>
     private bool Update(Products product)
     {
         try
@@ -112,6 +135,10 @@ internal class ProductViewModel : EditViewModelBase
         return true;
     }
 
+    /// <summary>
+    ///  Действие создать.
+    /// </summary>
+    /// <returns>Успех операции.</returns>
     private bool Create(Products product)
     {
         int id = _productsService.Create(product);
@@ -126,6 +153,10 @@ internal class ProductViewModel : EditViewModelBase
         return true;
     }
 
+    /// <summary>
+    /// Провалидировать и получить модель для сохранения
+    /// </summary>
+    /// <returns></returns>
     private Products ValidateAndGetModelOnSave()
     {
         var product = new Products
@@ -168,6 +199,10 @@ internal class ProductViewModel : EditViewModelBase
         return product;
     }
 
+    /// <summary>
+    /// Валидация при загрузке и заполнение полей
+    /// </summary>
+    /// <returns></returns>
     public override bool Validate()
     {
         if (CurrentId.HasValue)

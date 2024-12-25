@@ -19,6 +19,9 @@ internal class RestaurantViewModel : EditViewModelBase
     private string _directorLastName;
     private string _directorSurname;
 
+    /// <summary>
+    /// Модель данных. Имя
+    /// </summary>
     public string RestaurantName
     {
         get => _restaurantName;
@@ -29,6 +32,9 @@ internal class RestaurantViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Список улиц
+    /// </summary>
     public IReadOnlyCollection<Streets> StreetsList
     {
         get => _streetsList;
@@ -39,6 +45,9 @@ internal class RestaurantViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Выбранная улица
+    /// </summary>
     public int SelectedStreetId
     {
         get => _selectedStreetId;
@@ -49,6 +58,9 @@ internal class RestaurantViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Телефон
+    /// </summary>
     public string PhoneNumber
     {
         get => _phoneNumber;
@@ -59,6 +71,9 @@ internal class RestaurantViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Директор.Имя
+    /// </summary>
     public string DirectorName
     {
         get => _directorName;
@@ -68,7 +83,10 @@ internal class RestaurantViewModel : EditViewModelBase
             OnPropertyChanged();
         }
     }
-
+    
+    /// <summary>
+    /// Модель данных. Директор. Фамилия
+    /// </summary>
     public string DirectorLastName
     {
         get => _directorLastName;
@@ -79,6 +97,9 @@ internal class RestaurantViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Отчество
+    /// </summary>
     public string DirectorSurname
     {
         get => _directorSurname;
@@ -102,6 +123,10 @@ internal class RestaurantViewModel : EditViewModelBase
         EnterCommand = new RelayCommand(Enter);
     }
 
+    /// <summary>
+    /// Обработка команды нажатия кнопки сохранения данных
+    /// </summary>
+    /// <param name="sender"></param>
     private void Enter(object sender)
     {
         Restaurants restaurant = ValidateAndGetModelOnSave();
@@ -119,6 +144,10 @@ internal class RestaurantViewModel : EditViewModelBase
         }
     }
 
+    /// <summary>
+    ///  Действие обновить.
+    /// </summary>
+    /// <returns>Успех операции.</returns>
     private bool Update(Restaurants restaurant)
     {
         try
@@ -135,6 +164,10 @@ internal class RestaurantViewModel : EditViewModelBase
         return true;
     }
 
+    /// <summary>
+    ///  Действие создать.
+    /// </summary>
+    /// <returns>Успех операции.</returns>
     private bool Create(Restaurants restaurant)
     {
         int id = _restaurantsService.Create(restaurant);
@@ -148,7 +181,11 @@ internal class RestaurantViewModel : EditViewModelBase
 
         return true;
     }
-
+    
+    /// <summary>
+    /// Провалидировать и получить модель для сохранения
+    /// </summary>
+    /// <returns></returns>
     private Restaurants ValidateAndGetModelOnSave()
     {
         var restaurant = new Restaurants
@@ -211,6 +248,10 @@ internal class RestaurantViewModel : EditViewModelBase
         return restaurant;
     }
 
+    /// <summary>
+    /// Валидация при загрузке и заполнение полей
+    /// </summary>
+    /// <returns></returns>
     public override bool Validate()
     {
         if (CurrentId.HasValue)

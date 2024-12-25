@@ -25,12 +25,18 @@ internal class AvailibilityListViewModel : ListViewModelBase<AvailibilityInResta
         DataBind();
     }
 
+    /// <summary>
+    /// Обновить таблицу
+    /// </summary>
     protected override void DataBind()
     {
         IReadOnlyCollection<AvailibilityInRestaurantView> entities = _availibilityInRestaurantService.List(_restaurantId);
         SetEntities(entities);
     }
 
+    /// <summary>
+    /// Установить команды CRUD кнопкам
+    /// </summary>
     protected override void SetCommands()
     {
         CreateCommand = new RelayCommand(CreateEntity);
@@ -38,6 +44,10 @@ internal class AvailibilityListViewModel : ListViewModelBase<AvailibilityInResta
         DeleteCommand = new RelayCommand(DeleteEntity);
     }
 
+    /// <summary>
+    /// Вызов команды создания записи из окна таблицы
+    /// </summary>
+    /// <param name="sender"></param>
     private void CreateEntity(object sender)
     {
         var view = new AvailibilityInRestaurantWindow(ServiceProvider, availibilityId: null, _restaurantId);
@@ -45,6 +55,10 @@ internal class AvailibilityListViewModel : ListViewModelBase<AvailibilityInResta
         DataBind();
     }
 
+    /// <summary>
+    /// Вызов команды редактирования выбранной записи из таблицы
+    /// </summary>
+    /// <param name="sender"></param>
     private void EditEntity(object sender)
     {
         if (!HasSelectedItem())
@@ -57,6 +71,10 @@ internal class AvailibilityListViewModel : ListViewModelBase<AvailibilityInResta
         DataBind();
     }
 
+    /// <summary>
+    /// Удалить выбранную запись
+    /// </summary>
+    /// <param name="sender"></param>
     private void DeleteEntity(object sender)
     {
         if (!HasSelectedItem())

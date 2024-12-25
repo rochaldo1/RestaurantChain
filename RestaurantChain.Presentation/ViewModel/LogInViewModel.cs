@@ -22,8 +22,10 @@ public class LogInViewModel : ViewModelBase
     private DispatcherTimer _timerForWindow = new();
     public Action OnLogInSuccess;
 
-    public SecureString SecurePassword { private get; set; }
 
+    /// <summary>
+    /// Модель данных. Логин
+    /// </summary>
     public string Login
     {
         get => _login;
@@ -34,6 +36,9 @@ public class LogInViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Пароль
+    /// </summary>
     public SecureString Password
     {
         get => _password;
@@ -44,16 +49,9 @@ public class LogInViewModel : ViewModelBase
         }
     }
 
-    public SecureString VerificationPassword
-    {
-        get => _verificationPassword;
-        set
-        {
-            _verificationPassword = value;
-            OnPropertyChanged("VerificationPassword");
-        }
-    }
-
+    /// <summary>
+    /// Модель данных. Текст для раскладки
+    /// </summary>
     public string KeyboardLayoutText
     {
         get => _keyboardLayout;
@@ -64,6 +62,9 @@ public class LogInViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// Модель данных. Текст для CapsLock
+    /// </summary>
     public string CapsLockStatusText
     {
         get => _capsLockStatus;
@@ -81,6 +82,11 @@ public class LogInViewModel : ViewModelBase
         StartTimer(100);
     }
 
+    /// <summary>
+    /// Парсинг языка
+    /// </summary>
+    /// <param name="language"></param>
+    /// <returns></returns>
     private string ParseLanguage(string language)
     {
         int startIndex = language.IndexOf('(');
@@ -90,6 +96,11 @@ public class LogInViewModel : ViewModelBase
         return Char.ToUpper(language[0]) + language.Substring(1);
     }
 
+    /// <summary>
+    /// Отслеживание капслок и языка ввода
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void TimerTick(object sender, EventArgs e)
     {
         if (Console.CapsLock)
@@ -100,12 +111,21 @@ public class LogInViewModel : ViewModelBase
         KeyboardLayoutText = "Язык ввода " + ParseLanguage(InputLanguageManager.Current.CurrentInputLanguage.DisplayName);
     }
 
+    /// <summary>
+    /// Старт таймера
+    /// </summary>
+    /// <param name="interval"></param>
     private void StartTimer(long interval)
     {
         _timerForWindow.Interval = new TimeSpan(interval);
         _timerForWindow.Start();
         _timerForWindow.Tick += TimerTick;
     }
+    
+    /// <summary>
+    /// Операция ввода, нажатие кнопки ОК
+    /// </summary>
+    /// <param name="sender"></param>
     public void Enter(object sender)
     {
         string password = new System.Net.NetworkCredential(string.Empty, _password).Password;
@@ -132,5 +152,8 @@ public class LogInViewModel : ViewModelBase
         OnLogInSuccess?.Invoke();
     }
 
+    /// <summary>
+    /// Команда кнопки ОК
+    /// </summary>
     public ICommand EnterCommand { get; set; }
 }
