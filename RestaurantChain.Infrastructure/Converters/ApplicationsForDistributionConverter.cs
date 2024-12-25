@@ -7,6 +7,10 @@ namespace RestaurantChain.Infrastructure.Converters;
 
 internal static class ApplicationsForDistributionConverter
 {
+    /// <summary>
+    /// Преобразовать сущность БД в доменную модель
+    /// </summary>
+    /// <returns>Доменная модель</returns>
     public static ApplicationsForDistribution ToDomain(this ApplicationsForDistributionDb application)
     {
         return new ApplicationsForDistribution
@@ -21,6 +25,10 @@ internal static class ApplicationsForDistributionConverter
         };
     }
 
+    /// <summary>
+    /// Преобразовать доменную модель в сущность БД
+    /// </summary>
+    /// <returns>Сущность БД</returns>
     public static ApplicationsForDistributionDb ToStorage(this ApplicationsForDistribution application)
     {
         return new ApplicationsForDistributionDb
@@ -35,6 +43,10 @@ internal static class ApplicationsForDistributionConverter
         };
     }
 
+    /// <summary>
+    /// Преобразовать сущность БД в доменную модель
+    /// </summary>
+    /// <returns>Доменная модель</returns>
     public static ApplicationsForDistributionView ToDomain(this ApplicationsForDistributionDbView application)
     {
         return new ApplicationsForDistributionView

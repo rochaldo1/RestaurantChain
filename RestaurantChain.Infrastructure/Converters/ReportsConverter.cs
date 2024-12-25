@@ -5,6 +5,10 @@ namespace RestaurantChain.Infrastructure.Converters;
 
 internal static class ReportsConverter
 {
+    /// <summary>
+    /// Преобразовать сущность БД в доменную модель
+    /// </summary>
+    /// <returns>Доменная модель</returns>
     public static DishesSumByPeriod ToDomain(this DishesSumByPeriodDb db)
     {
         return new DishesSumByPeriod
@@ -18,6 +22,10 @@ internal static class ReportsConverter
         };
     }
 
+    /// <summary>
+    /// Преобразовать сущность БД в доменную модель
+    /// </summary>
+    /// <returns>Доменная модель</returns>
     public static RestaurantSumByPeriod ToDomain(this RestaurantSumByPeriodDb db)
     {
         return new RestaurantSumByPeriod

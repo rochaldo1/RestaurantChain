@@ -7,6 +7,10 @@ namespace RestaurantChain.Infrastructure.Converters;
 
 internal static class DishesConverter
 {
+    /// <summary>
+    /// Преобразовать сущность БД в доменную модель
+    /// </summary>
+    /// <returns>Доменная модель</returns>
     public static Dishes ToDomain(this DishesDb dish)
     {
         return new Dishes
@@ -18,6 +22,10 @@ internal static class DishesConverter
         };
     }
 
+    /// <summary>
+    /// Преобразовать доменную модель в сущность БД
+    /// </summary>
+    /// <returns>Сущность БД</returns>
     public static DishesDb ToStorage(this Dishes dish)
     {
         return new DishesDb
@@ -28,7 +36,11 @@ internal static class DishesConverter
             Price = dish.Price
         };
     }
-
+    
+    /// <summary>
+    /// Преобразовать сущность БД в доменную модель
+    /// </summary>
+    /// <returns>Доменная модель</returns>
     public static DishesView ToDomain(this DishesDbView dish)
     {
         return new DishesView

@@ -5,6 +5,10 @@ namespace RestaurantChain.Infrastructure.Converters;
 
 internal static class StreetsConverter
 {
+    /// <summary>
+    /// Преобразовать сущность БД в доменную модель
+    /// </summary>
+    /// <returns>Доменная модель</returns>
     public static Streets ToDomain(this StreetsDb street)
     {
         return new Streets
@@ -14,6 +18,10 @@ internal static class StreetsConverter
         };
     }
 
+    /// <summary>
+    /// Преобразовать доменную модель в сущность БД
+    /// </summary>
+    /// <returns>Сущность БД</returns>
     public static StreetsDb ToStorage(this Streets street)
     {
         return new StreetsDb

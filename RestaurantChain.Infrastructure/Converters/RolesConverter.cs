@@ -7,6 +7,10 @@ namespace RestaurantChain.Infrastructure.Converters;
 
 internal static class RolesConverter
 {
+    /// <summary>
+    /// Преобразовать сущность БД в доменную модель
+    /// </summary>
+    /// <returns>Доменная модель</returns>
     public static Roles ToDomain(this RolesDb model)
     {
         return new Roles
@@ -16,6 +20,10 @@ internal static class RolesConverter
         };
     }
 
+    /// <summary>
+    /// Преобразовать доменную модель в сущность БД
+    /// </summary>
+    /// <returns>Сущность БД</returns>
     public static RolesDb ToStorage(this Roles model)
     {
         return new RolesDb
@@ -25,6 +33,10 @@ internal static class RolesConverter
         };
     }
 
+    /// <summary>
+    /// Преобразовать сущность БД в доменную модель
+    /// </summary>
+    /// <returns>Доменная модель</returns>
     public static RolesRights ToDomain(this RolesRightsDb model)
     {
         return new RolesRights
@@ -39,6 +51,10 @@ internal static class RolesConverter
         };
     }
 
+    /// <summary>
+    /// Преобразовать доменную модель в сущность БД
+    /// </summary>
+    /// <returns>Сущность БД</returns>
     public static RolesRightsDb ToStorage(this RolesRights model)
     {
         return new RolesRightsDb
@@ -53,6 +69,10 @@ internal static class RolesConverter
         };
     }
 
+    /// <summary>
+    /// Преобразовать сущность БД в доменную модель
+    /// </summary>
+    /// <returns>Доменная модель</returns>
     public static RolesRightsView ToDomain(this RolesRightsDbView model)
     {
         return new RolesRightsView
@@ -68,7 +88,11 @@ internal static class RolesConverter
             RoleName = model.RoleName
         };
     }
-
+    
+    /// <summary>
+    /// Преобразовать сущность БД в доменную модель
+    /// </summary>
+    /// <returns>Доменная модель</returns>
     public static UserRoleRight ToDomain(this UserRoleRightDb model)
     {
         return new UserRoleRight

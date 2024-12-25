@@ -1,7 +1,7 @@
 ﻿namespace RestaurantChain.Domain.Models.Base;
 
 /// <summary>
-/// Базовый класс для идентификаторов.
+/// Базовый класс для всех моделей
 /// </summary>
 public abstract class IdentityBase
 {

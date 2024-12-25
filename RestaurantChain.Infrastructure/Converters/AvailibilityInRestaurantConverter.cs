@@ -7,6 +7,10 @@ namespace RestaurantChain.Infrastructure.Converters;
 
 internal static class AvailibilityInRestaurantConverter
 {
+    /// <summary>
+    /// Преобразовать сущность БД в доменную модель
+    /// </summary>
+    /// <returns>Доменная модель</returns>
     public static AvailibilityInRestaurant ToDomain(this AvailibilityInRestaurantDb availibility)
     {
         return new AvailibilityInRestaurant
@@ -20,6 +24,10 @@ internal static class AvailibilityInRestaurantConverter
         };
     }
 
+    /// <summary>
+    /// Преобразовать доменную модель в сущность БД
+    /// </summary>
+    /// <returns>Сущность БД</returns>
     public static AvailibilityInRestaurantDb ToStorage(this AvailibilityInRestaurant availibility)
     {
         return new AvailibilityInRestaurantDb
@@ -33,6 +41,10 @@ internal static class AvailibilityInRestaurantConverter
         };
     }
 
+    /// <summary>
+    /// Преобразовать сущность БД в доменную модель
+    /// </summary>
+    /// <returns>Доменная модель</returns>
     public static AvailibilityInRestaurantView ToDomain(this AvailibilityInRestaurantDbView availibility)
     {
         return new AvailibilityInRestaurantView

@@ -7,6 +7,10 @@ namespace RestaurantChain.Infrastructure.Converters;
 
 internal static class SuppliersConverter
 {
+    /// <summary>
+    /// Преобразовать сущность БД в доменную модель
+    /// </summary>
+    /// <returns>Доменная модель</returns>
     public static Suppliers ToDomain(this SuppliersDb supplier)
     {
         return new Suppliers
@@ -24,6 +28,10 @@ internal static class SuppliersConverter
         };
     }
 
+    /// <summary>
+    /// Преобразовать доменную модель в сущность БД
+    /// </summary>
+    /// <returns>Сущность БД</returns>
     public static SuppliersDb ToStorage(this Suppliers supplier)
     {
         return new SuppliersDb
@@ -40,7 +48,11 @@ internal static class SuppliersConverter
             TIN = supplier.TIN
         };
     }
-        
+    
+    /// <summary>
+    /// Преобразовать сущность БД в доменную модель
+    /// </summary>
+    /// <returns>Доменная модель</returns>
     public static SuppliersView ToDomain(this SuppliersDbView supplier)
     {
         return new SuppliersView()

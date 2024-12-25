@@ -7,6 +7,10 @@ namespace RestaurantChain.Infrastructure.Converters;
 
 internal static class MenuConverter
 {
+    /// <summary>
+    /// Преобразовать сущность БД в доменную модель
+    /// </summary>
+    /// <returns>Доменная модель</returns>
     public static Menu ToDomain(this MenuDb menu)
     {
         return new Menu
@@ -21,6 +25,10 @@ internal static class MenuConverter
         };
     }
 
+    /// <summary>
+    /// Преобразовать доменную модель в сущность БД
+    /// </summary>
+    /// <returns>Сущность БД</returns>
     public static MenuDb ToStorage(this Menu menu)
     {
         return new MenuDb
@@ -31,21 +39,6 @@ internal static class MenuConverter
             ItemName = menu.ItemName,
             MethodName = menu.MethodName,
             OrderNum = menu.OrderNum,
-            IsMain = menu.IsMain,
-        };
-    }
-
-    public static MenuView ToDomain(this MenuDbView menu)
-    {
-        return new MenuView
-        {
-            Id = menu.Id,
-            ParentId = menu.ParentId,
-            DLLName = menu.DLLName,
-            ItemName = menu.ItemName,
-            MethodName = menu.MethodName,
-            OrderNum = menu.OrderNum,
-            Level = menu.Level,
             IsMain = menu.IsMain,
         };
     }

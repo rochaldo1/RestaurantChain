@@ -7,6 +7,10 @@ namespace RestaurantChain.Infrastructure.Converters;
 
 internal static class NomenclatureConverter
 {
+    /// <summary>
+    /// Преобразовать сущность БД в доменную модель
+    /// </summary>
+    /// <returns>Доменная модель</returns>
     public static Nomenclature ToDomain(this NomenclatureDb nomenclature)
     {
         return new Nomenclature
@@ -17,6 +21,10 @@ internal static class NomenclatureConverter
         };
     }
 
+    /// <summary>
+    /// Преобразовать доменную модель в сущность БД
+    /// </summary>
+    /// <returns>Сущность БД</returns>
     public static NomenclatureDb ToStorage(this Nomenclature nomenclature)
     {
         return new NomenclatureDb
@@ -27,6 +35,10 @@ internal static class NomenclatureConverter
         };
     }
 
+    /// <summary>
+    /// Преобразовать сущность БД в доменную модель
+    /// </summary>
+    /// <returns>Доменная модель</returns>
     public static NomenclatureView ToDomain(this NomenclatureDbView nomenclature)
     {
         return new NomenclatureView
