@@ -1,5 +1,8 @@
 ﻿namespace RestaurantChain.Infrastructure.Entities.Views;
 
+/// <summary>
+/// Сушность расширенная для поставок
+/// </summary>
 internal class SuppliesDbView : SuppliesDb
 {
     /// <summary>

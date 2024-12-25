@@ -3,6 +3,9 @@ using RestaurantChain.Infrastructure.Entities;
 
 namespace RestaurantChain.Infrastructure.Converters;
 
+/// <summary>
+/// Конвертер моделей для улиц
+/// </summary>
 internal static class StreetsConverter
 {
     /// <summary>

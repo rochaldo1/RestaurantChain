@@ -5,6 +5,9 @@ using RestaurantChain.Infrastructure.Entities.Views;
 
 namespace RestaurantChain.Infrastructure.Converters;
 
+/// <summary>
+/// Конвертер моделей для заявок на распределение
+/// </summary>
 internal static class ApplicationsForDistributionConverter
 {
     /// <summary>

@@ -1,5 +1,8 @@
 ﻿namespace RestaurantChain.Infrastructure.Entities.Views;
 
+/// <summary>
+/// Сушность расширенная для доступности продуктов в ресторанах
+/// </summary>
 internal class AvailibilityInRestaurantDbView : AvailibilityInRestaurantDb
 {
     /// <summary>

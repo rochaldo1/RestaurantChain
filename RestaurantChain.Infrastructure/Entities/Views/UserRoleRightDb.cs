@@ -2,6 +2,9 @@ using RestaurantChain.Domain.Models.Base;
 
 namespace RestaurantChain.Infrastructure.Entities.Views;
 
+/// <summary>
+/// Сушность для прав пользователя
+/// </summary>
 internal sealed class UserRoleRightDb : IdentityBase
 {
     /// <summary>

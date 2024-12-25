@@ -3,6 +3,9 @@ using RestaurantChain.Infrastructure.Entities.Reports;
 
 namespace RestaurantChain.Infrastructure.Converters;
 
+/// <summary>
+/// Конвертер моделей для отчетов
+/// </summary>
 internal static class ReportsConverter
 {
     /// <summary>

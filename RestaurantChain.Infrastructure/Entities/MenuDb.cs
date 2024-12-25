@@ -1,4 +1,6 @@
-﻿namespace RestaurantChain.Infrastructure.Entities;
+﻿using RestaurantChain.Infrastructure.Entities.Base;
+
+namespace RestaurantChain.Infrastructure.Entities;
 
 /// <summary>
 ///     Класс меню приложения.

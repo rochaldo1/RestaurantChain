@@ -3,6 +3,9 @@ using RestaurantChain.Infrastructure.Entities;
 
 namespace RestaurantChain.Infrastructure.Converters;
 
+/// <summary>
+/// Конвертер моделей для групп блюд
+/// </summary>
 internal static class GroupsOfDishesConverter
 {
     /// <summary>

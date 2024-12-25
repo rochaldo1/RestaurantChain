@@ -3,6 +3,9 @@ using RestaurantChain.Infrastructure.Entities;
 
 namespace RestaurantChain.Infrastructure.Converters;
 
+/// <summary>
+/// Конвертер моделей для единиц измерения
+/// </summary>
 internal static class UnitsConverter
 {
     /// <summary>

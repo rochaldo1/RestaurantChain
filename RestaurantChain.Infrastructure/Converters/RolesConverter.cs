@@ -5,6 +5,9 @@ using RestaurantChain.Infrastructure.Entities.Views;
 
 namespace RestaurantChain.Infrastructure.Converters;
 
+/// <summary>
+/// Конвертер моделей для ролей и их прав
+/// </summary>
 internal static class RolesConverter
 {
     /// <summary>

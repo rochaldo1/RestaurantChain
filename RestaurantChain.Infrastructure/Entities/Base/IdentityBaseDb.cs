@@ -1,4 +1,4 @@
-﻿namespace RestaurantChain.Infrastructure.Entities;
+﻿namespace RestaurantChain.Infrastructure.Entities.Base;
 
 /// <summary>
 /// Базовый класс для идентификаторов.

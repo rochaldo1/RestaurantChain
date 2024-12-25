@@ -5,6 +5,9 @@ using RestaurantChain.Infrastructure.Entities.Views;
 
 namespace RestaurantChain.Infrastructure.Converters;
 
+/// <summary>
+/// Конвертер моделей для Доступности продуктов в ресторане
+/// </summary>
 internal static class AvailibilityInRestaurantConverter
 {
     /// <summary>

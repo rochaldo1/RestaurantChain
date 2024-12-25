@@ -1,6 +1,9 @@
 namespace RestaurantChain.Infrastructure.Entities.Views;
 
-public sealed class RolesRightsDbView : RolesRightsDb
+/// <summary>
+/// Сушность расширенная для прав ролей
+/// </summary>
+internal sealed class RolesRightsDbView : RolesRightsDb
 {
     /// <summary>
     /// Имя роли

@@ -1,5 +1,8 @@
 ﻿namespace RestaurantChain.Infrastructure.Entities.Views;
 
+/// <summary>
+/// Сушность расширенная для меню ресторана
+/// </summary>
 internal class NomenclatureDbView : NomenclatureDb
 {
     /// <summary>

@@ -1,5 +1,8 @@
 namespace RestaurantChain.Infrastructure.Entities.Reports;
 
+/// <summary>
+/// Сущность отчета по ресторанам
+/// </summary>
 internal sealed class RestaurantSumByPeriodDb
 {
     /// <summary>

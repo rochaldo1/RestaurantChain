@@ -1,8 +1,11 @@
-using RestaurantChain.Domain.Models.Base;
+using RestaurantChain.Infrastructure.Entities.Base;
 
 namespace RestaurantChain.Infrastructure.Entities;
 
-public sealed class RolesDb : IdentityBase
+internal sealed class RolesDb : IdentityBaseDb
 {
+    /// <summary>
+    /// Имя роли
+    /// </summary>
     public string Name { get; set; }
 }

@@ -1,5 +1,8 @@
 ﻿namespace RestaurantChain.Infrastructure.Entities.Views;
 
+/// <summary>
+/// Сушность расширенная для заявок на распределение
+/// </summary>
 internal class ApplicationsForDistributionDbView : ApplicationsForDistributionDb
 {
     /// <summary>

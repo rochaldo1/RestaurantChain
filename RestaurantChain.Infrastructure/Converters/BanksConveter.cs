@@ -3,6 +3,9 @@ using RestaurantChain.Infrastructure.Entities;
 
 namespace RestaurantChain.Infrastructure.Converters;
 
+/// <summary>
+/// Конвертер моделей для банков
+/// </summary>
 internal static class BanksConverter
 {
     /// <summary>
