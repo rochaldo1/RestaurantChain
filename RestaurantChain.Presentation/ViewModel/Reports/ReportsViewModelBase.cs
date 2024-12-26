@@ -28,7 +28,7 @@ internal abstract class ReportsViewModelBase : ViewModelBase
     /// <summary>
     /// Дата с
     /// </summary>
-    protected DateTime From
+    public DateTime From
     {
         get => _from;
         set
@@ -41,7 +41,7 @@ internal abstract class ReportsViewModelBase : ViewModelBase
     /// <summary>
     /// Дата по
     /// </summary>
-    protected DateTime To
+    public DateTime To
     {
         get => _to;
         set
